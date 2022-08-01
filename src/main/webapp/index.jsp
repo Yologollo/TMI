@@ -9,10 +9,24 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <!-- 
-	생성 : 김용민
-	작업 : 김용민
+	생성 : 김용민, 최윤서
+	작업 : 김용민, 최윤서
  -->
-	<h1>인찬씨는 바보</h1>
-	<h2>테스트 커밋</h2>
+ 	<br />
+ 	<br />
+ 	<br />
+ 	<br />
+ 	<br />
+ 	
+	<h1 class="section_title">인찬씨는 바보</h1>
+	<h2 class="section_subtitle">테스트 커밋</h2>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
