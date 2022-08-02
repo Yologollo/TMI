@@ -137,9 +137,7 @@ body{
 }
 
 /* 메뉴바 그림자 */
-.scroll-header{
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
-}
+
 
 
 /*==================== NAV ====================*/
@@ -155,9 +153,7 @@ body{
   display: none;
 }
 
-.nav_logo,
-.nav_toggle{
-  color: #fff;
+.nav_logo{
   font-weight: 500;
   font-size: 2rem;
 }
@@ -171,14 +167,7 @@ body{
   column-gap: 2rem;
 }
 
-.nav_link{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1rem;
-  color: #fff;
-  font-weight: 500;
-}
+
 
 .nav_link:hover{
   color: #039be5;

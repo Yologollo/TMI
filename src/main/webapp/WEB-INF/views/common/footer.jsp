@@ -55,8 +55,5 @@
 	</div>
 	
 </div>
-<!-- 작업 : 최윤서 -->
-<!-- HEADER MENU BAR JS -->
-<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 </body>
 </html>

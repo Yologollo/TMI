@@ -26,7 +26,25 @@
     <script src="https://kit.fontawesome.com/ebc38c8460.js" crossorigin="anonymous"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	
 </head>
+<style>
+.scroll-header{
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
+  background-color:white;
+  font-color:black;
+  color:black;
+  border:1px solid black;
+  font-size:20px;
+}
+.nav_link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+</style>
 <body>	
 <div id="container">
 	<!-- header코드 들어갈 부분 -->
@@ -63,5 +81,19 @@
                     </ul>
                 </div>
             </nav>
-        </header>
+	</header>
+	<script>
+	function scrollHeader(){
+    const header = document.getElementById('header')
+    if(this.scrollY >= 40) {
+
+        header.classList.add('scroll-header'); 
+        $('.nav_link').css('color', 'black')
+    } else{
+        header.classList.remove('scroll-header');
+        $('.nav_link').css('color', 'white')
+    } 
+}
+window.addEventListener('scroll', scrollHeader)
+	</script>
 <section id="content">
