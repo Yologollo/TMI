@@ -36,27 +36,27 @@
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
                         <li class="nav_item">
-                            <a href="#" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/planner" class="nav_link">
                                 <i class="nav_icon"></i> 플래너
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="#" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/aboutus" class="nav_link">
                                 <i class="nav_icon"></i> 이용방법
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="#" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/board" class="nav_link">
                                 <i class="nav_icon"></i> 게시판
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="#" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/mypage" class="nav_link">
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="#" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/login" class="nav_link">
                                 <i class=" nav_icon"></i> 로그인
                             </a>
                         </li>
