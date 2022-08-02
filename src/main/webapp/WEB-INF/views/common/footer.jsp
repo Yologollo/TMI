@@ -8,37 +8,31 @@
 	<!-- footer -->
 		</section>
 	</main>
-	
 	<style>
 	#footer {
-		 background-color: blue;
-		 height: 500px;
-		 width: 100%;
-		 color: white;
-		 padding-top:40px;
-		 text-align: center;
-		 vertical-align: middle;
-	}
-	#footer2 {
-		 background-color: lightblue;
-		 height: 130px;
-		 width: 100%;
-		 color: white;
-		 text-align: center;
-		 vertical-align: middle;
+		background: #c2e59c; 
+		background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);  
+		background: linear-gradient(to right, #64b3f4, #c2e59c);
+		height: 200px;
+		width: 100%;
+		color: white;
+		padding-top:40px;
+		text-align:center;
 	}
 	#home, #github, #youtube {
-		margin-top:15px;
-		height: 100px;
-	 	width: 100px;
+		height: 50px;
+	 	width: 50px;
 	}
 	#logo {
-		height: 230px;
-	 	width: 240px;
+		height: 150px;
+	 	width: 160px;
 	}
 	#home {
-		margin-left: 150px;
-		margin-right: 150px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	#github {
+		margin-left: 5%;
 	}
  	#line {
 		width:800px;
@@ -47,17 +41,17 @@
 		height:10px;
 		margin:0 auto;
 	}
+	#title {
+		font-size : 40px;
+		margin-left : 5%;
+	}
 	</style>
-	<div id="footer2">
+	<div id="footer">
+		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" id="logo"/>
+		<span id="title">Travel Making Imagine</span>
 		<img src="${pageContext.request.contextPath}/resources/images/github.png" alt="" id="github"/>
 		<img src="${pageContext.request.contextPath}/resources/images/home.png" alt="" id="home"/>
 		<img src="${pageContext.request.contextPath}/resources/images/youtube.png" alt="" id="youtube"/>
-	</div>
-	<div id="footer">
-		<h6 style="font-size : 60px;">Travel Making Imagine</h6>
-		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" id="logo"/>
-		<h6>서울특별시 강남구 테헤란로</h6>
-		<h6>010-0000-0000</h6>
 	</div>
 	
 </div>
