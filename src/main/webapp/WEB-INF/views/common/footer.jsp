@@ -8,18 +8,36 @@
 	</main>
 	<style>
 	#footer {
-	  background-color: rgb(5, 42, 120);
-	  height: 500px;
-	  width: 100%;
-	  color: white;
-	  text-align: center;
-	  padding-top:40px;
+		 background-color: blue;
+		 height: 500px;
+		 width: 100%;
+		 color: white;
+		 padding-top:40px;
+		 text-align: center;
+	}
+	#footer2 {
+		 background-color: lightblue;
+		 height: 130px;
+		 width: 100%;
+		 color: white;
+		 text-align: center;
+	}
+	#home, #github, #youtube {
+		height: 100px;
+	 	width: 100px;
+	}
+	#home {
+		margin-left: 100px;
+		margin-right: 100px;
 	}
 	</style>
+	<div id="footer2">
+		<img src="${pageContext.request.contextPath}/resources/images/github.png" alt="" id="github"/>
+		<img src="${pageContext.request.contextPath}/resources/images/home.png" alt="" id="home"/>
+		<img src="${pageContext.request.contextPath}/resources/images/youtube.png" alt="" id="youtube"/>
+	</div>
 	<div id="footer">
-		<div id="footer_uni_name">
-			<h6>Sensual University</h6>
-		</div>
+		<h6 style="font-size : 60px;">Travel Making Imagine</h6>
 	</div>
 	
 </div>
