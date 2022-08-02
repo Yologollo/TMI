@@ -7,32 +7,31 @@
 
 <style>
 #video_area{
-	width:25%;
-	border: 1px solid red;
+    width:25%;
+    border: 1px solid red;
 }
 #background_video {
-	max-width:100%;
-	height: auto;
-	border: 1px solid black;
+    max-width:100%;
+    height: auto;
+    border: 1px solid black;
 }
 </style>
 
-	<div id="video_area">
-    	<video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
-	</div>
-	
+    <div id="video_area">
+        <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
+    </div>
+    
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="Travel Making Imagine" name="title" />
+    <jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <!-- 
-	생성 : 김용민, 최윤서
-	작업 : 김용민, 최윤서
+    생성 : 김용민, 최윤서
+    작업 : 김용민, 최윤서
  -->
- 	<div style="width:auto; height:100vh; border:1px solid blue; display:flex; margin:auto 0;"></div>
-	<div>
-	<h1 class="section_title">인찬씨는 바보</h1>
-	<h2 class="section_subtitle">테스트 커밋</h2>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+     <div style="width:auto; height:100vh; border:1px solid blue; display:flex; margin:auto 0;"></div>
+    <div>
+    <h1 class="section_title">인찬씨는 바보</h1>
+    <h2 class="section_subtitle">테스트 커밋</h2>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -40,6 +39,7 @@
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</div>
-	
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
