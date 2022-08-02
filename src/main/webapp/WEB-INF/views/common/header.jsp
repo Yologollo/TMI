@@ -50,7 +50,9 @@
 	<!-- header코드 들어갈 부분 -->
 	<header class="header" id="header">
             <nav class="nav container">
-                <a href="${pageContext.request.contextPath}" class="nav_logo">TMI</a>
+                <a href="${pageContext.request.contextPath}" class="nav_logo">
+                	<img src="${pageContext.request.contextPath}/resources/images/title_white.png" id="title_img"/>
+                </a>
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
                         <li class="nav_item">
@@ -85,15 +87,18 @@
 	<script>
 	function scrollHeader(){
     const header = document.getElementById('header')
-    if(this.scrollY >= 40) {
-
-        header.classList.add('scroll-header'); 
-        $('.nav_link').css('color', 'black')
-    } else{
-        header.classList.remove('scroll-header');
-        $('.nav_link').css('color', 'white')
-    } 
-}
-window.addEventListener('scroll', scrollHeader)
+	    if(this.scrollY >= 40) {
+	        header.classList.add('scroll-header'); 
+	        $('.nav_link').css('color', '#4a4a4a')
+	        $('.nav_logo').css('color', '#4a4a4a')
+	        $('#title_img').attr('src','${pageContext.request.contextPath}/resources/images/title_blue.png')
+	    } else{
+	        header.classList.remove('scroll-header');
+	        $('.nav_link').css('color', 'white')
+	        $('.nav_logo').css('color', 'white')
+	        $('#title_img').attr('src','${pageContext.request.contextPath}/resources/images/title_white.png')
+	    } 
+	}
+	window.addEventListener('scroll', scrollHeader)
 	</script>
 <section id="content">
