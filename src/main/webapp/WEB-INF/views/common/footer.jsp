@@ -4,8 +4,11 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
+ 	<!-- 작업 : 이경석 -->
+	<!-- footer -->
 		</section>
 	</main>
+	
 	<style>
 	#footer {
 		 background-color: blue;
@@ -14,6 +17,7 @@
 		 color: white;
 		 padding-top:40px;
 		 text-align: center;
+		 vertical-align: middle;
 	}
 	#footer2 {
 		 background-color: lightblue;
@@ -21,14 +25,23 @@
 		 width: 100%;
 		 color: white;
 		 text-align: center;
+		 vertical-align: middle;
 	}
 	#home, #github, #youtube {
+		margin-top:15px;
 		height: 100px;
 	 	width: 100px;
 	}
 	#home {
-		margin-left: 100px;
-		margin-right: 100px;
+		margin-left: 150px;
+		margin-right: 150px;
+	}
+ 	#line {
+		width:800px;
+		border:none; 
+		border:0px;
+		height:10px;
+		margin:0 auto;
 	}
 	</style>
 	<div id="footer2">
@@ -38,6 +51,9 @@
 	</div>
 	<div id="footer">
 		<h6 style="font-size : 60px;">Travel Making Imagine</h6>
+		<hr id="line">
+		<h6>서울특별시 강남구 테헤란로</h6>
+		<h6>010-0000-0000</h6>
 	</div>
 	
 </div>
