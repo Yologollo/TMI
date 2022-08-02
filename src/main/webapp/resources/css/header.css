@@ -1,60 +1,20 @@
-/*==================== GOOGLE FONTS ====================*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
+/* 
+	생성 : 최윤서 
+	작업 : 김용민
+*/
 /*==================== VARIABLES CSS ====================*/
 :root {
     --header-height: 3rem;
 
     /*========== Colors ==========*/
     /* 메인 색상 */
-    --hue-color: 210; /*Purple 250 - Green 142 - Blue 230 - Pink 340 - green 142*/
+    /*Purple 250 - Green 142 - Blue 230 - Pink 340 - green 142*/
+    --hue-color: 210; 
 
     /* HSL color mode */
-    --first-color: hsl(var(--hue-color), 69%, 61%);
-    --first-color-second: hsl(var(--hue-color), 69%, 61%);
-    --first-color-alt: hsl(var(--hue-color), 57%, 53%);
-    --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
-    --title-color: hsl(var(--hue-color), 69%, 100%);
-    --text-color: hsl(var(--hue-color), 8%, 45%);
-    --text-color-light: hsl(var(--hue-color), 8%, 65%);
-    --input-color: hsl(var(--hue-color), 70%, 96%);
-    --body-color: hsl(var(--hue-color), 60%, 99%);
-    --container-color: #fff;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
 
-    /*========== Font and typography ==========*/
-    --body-font: 'Poppins', sans-serif;
-
-    /* .5rem = 8px, 1rem = 16px, 1.5rem = 24px ... */
-    --big-font-size: 2rem;
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1.125rem;
-    --nav-title-font-size: 2.3rem;
-    --normal-font-size: .938rem;
-    --small-font-size: 1rem;
-    --smaller-font-size: .75rem;
-
-    /*========== Font weight ==========*/
-    --font-medium: 500;
-    --font-semi-bold: 600;
-
-    /*========== Margenes Bottom ==========*/
-    /* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
-    --mb-0-25: .25rem;
-    --mb-0-5: .5rem;
-    --mb-0-75: .75rem;
-    --mb-1: 1rem;
-    --mb-1-5: 1.5rem;
-    --mb-2: 2rem;
-    --mb-2-5: 2.5rem;
-    --mb-3: 3rem;
-
-    /*========== z index ==========*/
-    --z-tooltip: 10;
-    --z-fixed: 100;
-    --z-modal: 1000;
 }
 
 /*==================== BASE ====================*/
@@ -69,16 +29,15 @@ html {
 }
 
 body {
-  margin: 0 0 var(--header-height) 0;
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
-  background-color: var(--body-color);
+  margin: 0 0 3rem 0;
+  font-size: 1rem;
+  background-color: #fff;
   color: var(--text-color);
 }
 
 h1, h2, h3, h4 {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
+  color: #fff;
+  font-weight: 600;
 }
 
 ul {
@@ -100,14 +59,14 @@ img {
 }
 
 .section_title {
-  font-size: var(--h1-font-size);
-  color: var(--title-color);
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .section_subtitle {
   display: block;
-  font-size: var(--small-font-size);
-  margin-bottom: var(--mb-3);
+  font-size: 1rem;
+  margin-bottom: 3rem;
 }
 
 .section_title, 
@@ -150,7 +109,7 @@ body{
   column-gap: 1.5rem;
 }
 .nav{
-  height: calc(var(--header-height) + 1.5rem);
+  height: 4.5rem;
   column-gap: 1rem;
 }
 
@@ -158,13 +117,13 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: var(--small-font-size);
-  color: var(--title-color);
-  font-weight: var(--font-medium);
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
 }
 
 .nav_link:hover{
-  color: var(--first-color);
+  color: #039be5;
 }
 
 .nav_icon{
@@ -186,7 +145,7 @@ body{
 /*==================== NAV ====================*/
 .nav{
   max-width: 1800px;
-  height: calc(var(--header-height) + 1.5rem);
+  height: 4.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -198,22 +157,13 @@ body{
 
 .nav_logo,
 .nav_toggle{
-  color: var(--title-color);
-  font-weight: var(--font-medium);
-  font-size: var(--big-font-size);
+  color: #fff;
+  font-weight: 500;
+  font-size: 2rem;
 }
 
 .nav_logo:hover{
-  color: var(--first-color);
-}
-
-.nav_toggle{
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.nav_toggle:hover{
-  color: var(--first-color);
+  color: #039be5;
 }
 
 .nav_list{
@@ -225,13 +175,13 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: var(--small-font-size);
-  color: var(--title-color);
-  font-weight: var(--font-medium);
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
 }
 
 .nav_link:hover{
-  color: var(--first-color);
+  color: #039be5;
 }
 
 .nav_icon{
