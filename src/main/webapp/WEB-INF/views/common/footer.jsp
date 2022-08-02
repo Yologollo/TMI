@@ -13,26 +13,28 @@
 		background: #c2e59c; 
 		background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);  
 		background: linear-gradient(to right, #64b3f4, #c2e59c);
-		height: 200px;
+		height: 250px;
 		width: 100%;
 		color: white;
-		padding-top:40px;
+		padding-top: 2.5%;
 		text-align:center;
 	}
-	#home, #github, #youtube {
-		height: 50px;
-	 	width: 50px;
+	#notion, #github, #youtube {
+		height: 80px;
+	 	width: 80px;
 	}
 	#logo {
+		margin-left : -2%;
+		margin-bottom : 1%;
 		height: 150px;
 	 	width: 160px;
 	}
-	#home {
-		margin-left: 10px;
-		margin-right: 10px;
+	#notion {
+		margin-left: 25px;
+		margin-right: 25px;
 	}
 	#github {
-		margin-left: 5%;
+		margin-left: 12%;
 	}
  	#line {
 		width:800px;
@@ -42,18 +44,28 @@
 		margin:0 auto;
 	}
 	#title {
-		font-size : 40px;
-		margin-left : 5%;
+		font-size : 50px;
+		
+	}
+	#title2 {
+		margin-top : 5vh;
+		margin-left : 12%;
 	}
 	</style>
 	<div id="footer">
 		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" id="logo"/>
-		<span id="title">Travel Making Imagine</span>
+		<span id="title">TMI</span>
+		<span>Travel Making Imagine</span>
+		<span id="title2"> &#169; 2022. FINAL TEAM PROJECT : YOLO-GOLO</span>
 		<img src="${pageContext.request.contextPath}/resources/images/github.png" alt="" id="github"/>
-		<img src="${pageContext.request.contextPath}/resources/images/home.png" alt="" id="home"/>
+		<img src="${pageContext.request.contextPath}/resources/images/notion.png" alt="" id="notion"/>
 		<img src="${pageContext.request.contextPath}/resources/images/youtube.png" alt="" id="youtube"/>
+		
 	</div>
 	
 </div>
+<!-- 작업 : 최윤서 -->
+<!-- HEADER MENU BAR JS -->
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 </body>
 </html>
