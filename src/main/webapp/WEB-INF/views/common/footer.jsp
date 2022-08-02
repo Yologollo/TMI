@@ -6,10 +6,21 @@
  -->
 		</section>
 	</main>
-	
-	<footer>
-		<p>푸터푸터푸터</p>
-	</footer>
+	<style>
+	#footer {
+	  background-color: rgb(5, 42, 120);
+	  height: 500px;
+	  width: 100%;
+	  color: white;
+	  text-align: center;
+	  padding-top:40px;
+	}
+	</style>
+	<div id="footer">
+		<div id="footer_uni_name">
+			<h6>Sensual University</h6>
+		</div>
+	</div>
 	
 </div>
 <!-- 작업 : 최윤서 -->
