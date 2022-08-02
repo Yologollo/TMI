@@ -10,6 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
+
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
@@ -17,5 +18,5 @@
  	<h1>이용방법</h1>
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
- 
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

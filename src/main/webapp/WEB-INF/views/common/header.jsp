@@ -26,6 +26,8 @@
     <script src="https://kit.fontawesome.com/ebc38c8460.js" crossorigin="anonymous"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+	
 	
 </head>
 <style>

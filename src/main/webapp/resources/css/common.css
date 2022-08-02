@@ -3,3 +3,10 @@
 	작업 : 김용민
 */
 
+.content {
+	border: 1px solid red; 
+	width:70%; 
+	hegiht:100%; 
+	margin: auto; 
+	margin-top:4.5rem;
+}
