@@ -6,8 +6,8 @@ create table tmi_member (
     m_password varchar2(512) not null,
     m_name varchar2(256) not null,
     m_phone char(11) not null,
-    m_socialtype varchar2(256) not null,
-    m_created_at date not null,
+    m_socialtype varchar2(256),
+    m_created_at date default sysdate,
     
     constraint pk_m_nickname primary key(m_nickname)
 );
