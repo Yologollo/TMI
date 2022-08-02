@@ -30,9 +30,6 @@
 <body>	
 <div id="container">
 	<!-- header코드 들어갈 부분 -->
-	<div id="video_area">
-    	<video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
-	</div>
 	<header class="header" id="header">
             <nav class="nav container">
                 <a href="${pageContext.request.contextPath}" class="nav_logo">TMI</a>
@@ -67,5 +64,4 @@
                 </div>
             </nav>
         </header>
-    <main class="main">
 <section id="content">

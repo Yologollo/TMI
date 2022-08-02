@@ -5,6 +5,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
 
+<style>
+#video_area{
+	width:25%;
+	border: 1px solid red;
+}
+#background_video {
+	max-width:100%;
+	height: auto;
+	border: 1px solid black;
+}
+</style>
+
+	<div id="video_area">
+    	<video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
+	</div>
+	
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
@@ -12,6 +28,8 @@
 	생성 : 김용민, 최윤서
 	작업 : 김용민, 최윤서
  -->
+ 	dsada
+ 	<div style="width:80%; height:200px; border:1px solid blue; display:flex; margin:auto 0;"></div>
  	<br />
  	<br />
  	<br />
