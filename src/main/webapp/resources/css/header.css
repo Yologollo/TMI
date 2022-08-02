@@ -32,11 +32,11 @@ body {
   margin: 0 0 3rem 0;
   font-size: 1rem;
   background-color: #fff;
-  color: var(--text-color);
+  color: #000;
 }
 
 h1, h2, h3, h4 {
-  color: #fff;
+  color: #000;
   font-weight: 600;
 }
 
@@ -60,7 +60,7 @@ img {
 
 .section_title {
   font-size: 1.5rem;
-  color: #fff;
+  color: #000;
 }
 
 .section_subtitle {
@@ -200,6 +200,7 @@ body{
     width: 100vw;
     position: absolute;
 }
+
 /*============ GIF ============*/
 @media (max-aspect-ratio: 16/9){
 	.back-video{

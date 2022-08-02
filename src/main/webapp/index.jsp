@@ -28,14 +28,8 @@
 	생성 : 김용민, 최윤서
 	작업 : 김용민, 최윤서
  -->
- 	dsada
- 	<div style="width:80%; height:200px; border:1px solid blue; display:flex; margin:auto 0;"></div>
- 	<br />
- 	<br />
- 	<br />
- 	<br />
- 	<br />
- 	
+ 	<div style="width:auto; height:100vh; border:1px solid blue; display:flex; margin:auto 0;"></div>
+
 	<h1 class="section_title">인찬씨는 바보</h1>
 	<h2 class="section_subtitle">테스트 커밋</h2>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
