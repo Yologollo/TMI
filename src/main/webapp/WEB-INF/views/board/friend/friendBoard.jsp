@@ -14,7 +14,7 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
- 
+ 	<h1>여행 친구 구하기 게시판</h1>
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
  
