@@ -10,6 +10,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<div id="commonMain">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
@@ -17,5 +19,5 @@
  	<h1>메인 게시판</h1>
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
- 
+ </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
