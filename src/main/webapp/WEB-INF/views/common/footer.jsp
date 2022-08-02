@@ -32,6 +32,10 @@
 		height: 100px;
 	 	width: 100px;
 	}
+	#logo {
+		height: 230px;
+	 	width: 240px;
+	}
 	#home {
 		margin-left: 150px;
 		margin-right: 150px;
@@ -51,7 +55,7 @@
 	</div>
 	<div id="footer">
 		<h6 style="font-size : 60px;">Travel Making Imagine</h6>
-		<hr id="line">
+		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" id="logo"/>
 		<h6>서울특별시 강남구 테헤란로</h6>
 		<h6>010-0000-0000</h6>
 	</div>
