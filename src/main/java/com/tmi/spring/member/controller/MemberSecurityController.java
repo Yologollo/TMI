@@ -17,9 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberSecurityController {
 	
 	@GetMapping("/login")
-	public String index() {
+	public String login() {
 		log.info("GET / 요청!");
 		return "/member/login/login";
+	}
+	
+	@GetMapping("/login/email")
+	public String eamilLogin() {
+		log.info("GET / 요청!");
+		return "/member/login/email";
 	}
 	
 }
