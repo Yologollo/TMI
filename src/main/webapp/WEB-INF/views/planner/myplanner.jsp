@@ -11,13 +11,29 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css">
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
- 	<h1>플래너</h1>
- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="bannder">배너</div>
+	<div id="wrapper">
+		<div id="menuContainer">
+			<ul>
+				<li>
+					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+				</li>
+				<li>
+					<a href="${pageContext.request.contextPath}/planner/sharePlanner">공유 플래너</a>
+				</li>
+				<li>
+					<a href="${pageContext.request.contextPath}/planner/lovePlanner">좋아요 플래너</a>
+				</li>
+			</ul>
+		</div>
+		<div id="plannerContainer">플래너</div>
+	</div>
+	
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
