@@ -12,31 +12,9 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css">
 <style>
-.createPlannerModalForm {
-	width : 100%;
-	height : 100%;
-	position : fixed;
-	background : rgba(0,0,0,0.5);
-	z-index : 5;
-	padding: 30px;
-	visibility: hidden;
-	opacity: 0;
-	transition: all 1s;
-}
 
-.show-modal {
-	visibility: visible;
-	opacity: 1;
-}
-
-#createPlannerModal {
-	width : 50%;
-	height : 50%;
-	margin-left: 25%;
-	margin-right: 25%;
-	text-align: center;
-}
 </style>
 <div class="createPlannerModalForm">
 	<div class="modal-dialog-centered" id="createPlannerModal">
@@ -46,11 +24,28 @@
 				<button type="button" class="btn-close" id="btnModalCloseUp" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<p>Modal body text goes here.</p>
+				<div class="modalInfo" id="travelTitleWrapper">
+					<label for="travelTitle">여행 제목</label>
+					<input type="text" class="form-control" id="travelTitle" placeholder="여행 제목">
+				</div>
+				<div class="modalInfo" id="travelTimeWrapper">
+					<div id="travelTimeStartWrapper">
+						<label for="travelTime">여행 기간</label>
+						<input type="date" class="travelTimeClass form-control" id="travelTimeStart" placeholder="출발">					
+					</div>
+					<div id="travelTimeEndWrapper">				
+						<span> ~</span>
+						<input type="date" class="travelTimeClass form-control" id="travelTimeEnd" placeholder="도착">
+					</div>
+				</div>
+				<div class="modalInfo" id="travelMemoWrapper">
+					<label for="travelMemo">설명</label>
+					<input type="text" class="form-control"id="travelMemo" placeholder="설명">
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/planner/createPlanner.do'">플래너 작성</button>
-				<button type="button" class="btn btn-secondary" id="btnModalCloseDown" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-primary btn-lg" id="btnModalCreateModal" onclick="location.href='${pageContext.request.contextPath}/planner/createPlanner.do'">플래너 작성</button>
+				<button type="button" class="btn btn-danger btn-lg" id="btnModalCloseDown" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -128,8 +123,6 @@
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
-
-
 document.querySelector('.createPlannerModalForm').addEventListener('click', function(e) {
 	if (e.target == document.querySelector('.createPlannerModalForm')) {
 		document.querySelector('.createPlannerModalForm').classList.remove('show-modal');
@@ -137,19 +130,15 @@ document.querySelector('.createPlannerModalForm').addEventListener('click', func
 });
 
 $('#createPlannerModalbtn').on('click', function() {
-	console.log('123');
 	$('.createPlannerModalForm').addClass('show-modal');
 });
 
 $('#btnModalCloseUp').on('click', function() {
-	console.log('1234');
     $('.createPlannerModalForm').removeClass('show-modal');
 });
 
 $('#btnModalCloseDown').on('click', function() {
-	console.log('1234');
     $('.createPlannerModalForm').removeClass('show-modal');
 });
-  
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
