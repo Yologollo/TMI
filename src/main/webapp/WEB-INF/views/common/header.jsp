@@ -42,27 +42,27 @@
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/planner" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/planner" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 플래너
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/aboutus" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/aboutus" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 이용방법
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/board" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/board" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 게시판
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/mypage" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/mypage" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/login" class="nav_link">
+                            <a href="${pageContext.request.contextPath}/login" class="nav_link" id="nav_color">
                                 <i class=" nav_icon"></i> 로그인
                             </a>
                         </li>
@@ -72,16 +72,13 @@
 	</header>
 	<script>
 	function scrollHeader(){
-    const header = document.getElementById('header')
 	    if(this.scrollY >= 40) {
-	        header.classList.add('scroll-header'); 
-	        $('.nav_link').css('color', '#4a4a4a')
-	        $('.nav_logo').css('color', '#4a4a4a')
+	        $('#header').addClass('scroll-header');
+	        $('.nav_link').addClass('nav_color_b');
 	        $('#title_img').attr('src','${pageContext.request.contextPath}/resources/images/title_blue.png')
 	    } else{
-	        header.classList.remove('scroll-header');
-	        $('.nav_link').css('color', 'white')
-	        $('.nav_logo').css('color', 'white')
+	    	$('#header').removeClass('scroll-header');
+	    	$('.nav_link').removeClass('nav_color_b');
 	        $('#title_img').attr('src','${pageContext.request.contextPath}/resources/images/title_white.png')
 	    } 
 	}

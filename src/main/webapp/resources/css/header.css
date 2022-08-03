@@ -183,6 +183,21 @@ body{
   font-size: 1.2rem;
 }
 
+
+.nav_link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.nav_link:hover{
+  color: #70B9E9;
+}
+.nav_color_b{
+  color: #4a4a4a;
+}
+
 .scroll-header{
   box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
   background-color:white;
@@ -192,16 +207,6 @@ body{
   font-size:20px;
 }
 .scroll-header:hover{
-  color: #70B9E9;
-}
-.nav_link{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.nav_link:hover{
   color: #70B9E9;
 }
 
