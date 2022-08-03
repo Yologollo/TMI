@@ -2,3 +2,85 @@
 	생성 : 전인찬
 	작업 : 전인찬
 */
+#commonMain2{
+	border: 2px solid black;
+	margin-bottom: 5%;
+}
+
+#info-box{
+	border: 2px solid black;
+	border-radius: 30px;
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#info-top{
+	margin-top: 3%;
+	margin-bottom: 3%;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#slide-box_big-img{
+	border: 2px solid black;
+	width: 30%;
+	float: left;
+}
+
+#big-img{
+}
+
+#slide-box_slide{
+	margin-top: 5%;
+	
+}
+
+#slide-box_prew{
+	display: inline-block;
+	float: left;
+}
+
+#slide-box_list{
+	margin: auto;
+	text-align : center;
+	display: inline-block;
+}
+
+#slide-box_next{
+	display: inline-block;
+	float: right;
+}
+
+#tourism-info{
+	border: 2px solid black;
+	margin-left: 3%;
+	width: 66%;
+	display: inline-block;
+}
+
+#tourism-info_tag-box{
+	margin: auto;
+	wifth: 100%;
+}
+
+#tab-content1_on{
+	clear: both;
+}
+
+#info-bot{
+	border: 2px solid black;
+	clear: both;
+}
+
+#mainlist{
+	margin-top: 3%;
+}
+
+#mainlist-button{
+	float: right;
+	border: 2px solid black;
+	border-radius: 30px;
+	width: 10%;
+	text-align : center;
+}
