@@ -17,22 +17,67 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
-	<div id="bannder">배너</div>
+	<div id="bannder">배너 / My플래너</div>
 	<div id="wrapper">
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
 				</li>
+				<hr />
 				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/sharePlanner">공유 플래너</a>
 				</li>
+				<hr />
 				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/lovePlanner">좋아요 플래너</a>
 				</li>
+				<hr />
 			</ul>
 		</div>
-		<div id="plannerContainer">플래너</div>
+		<div id="plannerContainer">
+			<div id="plannerInfo">
+				<button type="button" class="btn btn-primary btn-lg">플래너 생성</button>
+			</div>
+			<div id="cardWrapper">
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<p class="card-text">플래너</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 </div>
