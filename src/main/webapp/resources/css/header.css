@@ -223,6 +223,13 @@ body{
     width: 100vw;
     position: absolute;
 }
+.scroll-container{
+	overflow: auto;
+  	scroll-snap-type: y mandatory;
+}
+.scroll-area {
+  scroll-snap-align: start; 
+}
 
 /*============ GIF ============*/
 @media (max-aspect-ratio: 16/9){
