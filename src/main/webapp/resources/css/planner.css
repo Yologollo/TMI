@@ -1,0 +1,36 @@
+#bannder {
+	border: 1px solid purple;
+	height:300px;
+}
+
+#wrapper{
+	border: 1px solid green;
+	position: relative;
+	height: 800px;
+}
+
+#menuContainer{
+	border: 1px solid blue;
+	float: left;
+	width: 20%;
+	height: 600px;
+	font-size: 30px;
+	text-align: center;
+	font-color: white;
+	background-color: pink;
+}
+#menuContainer > ul, #menuContainer > li {
+	list-style:none;
+	padding-left: 0px;
+}
+
+#menuContainer > li > a {
+	color: white;
+}
+
+#plannerContainer{
+	border: 1px solid pink;
+	float: right;
+	width: 80%;
+	height: 800px;
+}

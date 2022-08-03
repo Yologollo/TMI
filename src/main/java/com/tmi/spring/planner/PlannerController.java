@@ -16,10 +16,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PlannerController {
 
-	@GetMapping("/planner")
-	public String index() {
+	@GetMapping("/planner/myPlanner")
+	public String myPlanner() {
 		log.info("GET / 요청!");
-		return "/planner/planner";
+		return "/planner/myplanner";
 	}
+	
+	@GetMapping("/planner/sharePlanner")
+	public String sharePlanner() {
+		log.info("GET / 요청!");
+		return "/planner/shareplanner";
+	}
+	
+	@GetMapping("/planner/lovePlanner")
+	public String lovePlanner() {
+		log.info("GET / 요청!");
+		return "/planner/loveplanner";
+	}
+	
+	
 	
 }

@@ -42,7 +42,7 @@
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/planner" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/planner/myPlanner" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 플래너
                             </a>
                         </li>

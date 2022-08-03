@@ -120,6 +120,7 @@ body{
   position: fixed;
   width: 100%;
   background-color: transparent;
+  z-index:999;
 }
 
 .nav_list{
