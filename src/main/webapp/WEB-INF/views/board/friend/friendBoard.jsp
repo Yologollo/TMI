@@ -24,7 +24,7 @@
  	
  	<h1>여행 친구 게시판</h1>
 	<section id="board-container" class="container">
-		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'"/>
+		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'"/>
 		<table id="tbl-board" class="table table-striped table-hover text-center">
 			<tr>
 				<th>번호</th>
