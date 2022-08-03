@@ -29,21 +29,7 @@
 	
 </head>
 <style>
-.scroll-header{
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
-  background-color:white;
-  font-color:black;
-  color:black;
-  border:1px solid black;
-  font-size:20px;
-}
-.nav_link{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 500;
-}
+
 </style>
 <body>	
 <div id="container">

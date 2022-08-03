@@ -140,10 +140,6 @@ body{
   font-weight: 500;
 }
 
-.nav_link:hover{
-  color: #70B9E9;
-}
-
 .nav_icon{
   font-size: 1.2rem;
 }
@@ -185,6 +181,28 @@ body{
 
 .nav_icon{
   font-size: 1.2rem;
+}
+
+.scroll-header{
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
+  background-color:white;
+  font-color:black;
+  color:black;
+  border:1px solid black;
+  font-size:20px;
+}
+.scroll-header:hover{
+  color: #70B9E9;
+}
+.nav_link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.nav_link:hover{
+  color: #70B9E9;
 }
 
 #video_area {
