@@ -12,11 +12,11 @@
 #menuContainer{
 	border: 1px solid blue;
 	float: left;
-	width: 20%;
+	width: 15%;
 	height: 600px;
 	font-size: 30px;
 	text-align: center;
-	background-color: pink;
+	background-color: #F6F6F6;
 }
 
 #menuContainer > ul, #menuContainer > li {
@@ -34,8 +34,39 @@
 }
 
 #plannerContainer{
-	border: 1px solid pink;
+	border: 1px solid yellow;
 	float: right;
 	width: 80%;
 	height: 800px;
+}
+
+#plannerInfo{
+	border: 1px solid black;
+	width: 100%;
+	height: 80px;
+	
+}
+
+#plannerInfo .btn{
+	height: 60px;
+	width: 200px;
+	float: right;
+	margin: auto 0;
+	margin-top: 10px;
+	margin-right: 5%
+}
+
+#cardWrapper {
+	border: 1px solid green;
+	justify-content: center;
+	margin: auto 0;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#plannerContainer .card{
+	display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin: 5%;
 }
