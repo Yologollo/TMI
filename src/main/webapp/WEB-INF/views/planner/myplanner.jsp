@@ -21,13 +21,13 @@
 	<div id="wrapper">
 		<div id="menuContainer">
 			<ul>
-				<li>
+				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
 				</li>
-				<li>
+				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/sharePlanner">공유 플래너</a>
 				</li>
-				<li>
+				<li class="plannerMenuli">
 					<a href="${pageContext.request.contextPath}/planner/lovePlanner">좋아요 플래너</a>
 				</li>
 			</ul>
@@ -36,4 +36,5 @@
 	</div>
 	
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

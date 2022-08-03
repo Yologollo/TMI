@@ -16,15 +16,20 @@
 	height: 600px;
 	font-size: 30px;
 	text-align: center;
-	font-color: white;
 	background-color: pink;
 }
+
 #menuContainer > ul, #menuContainer > li {
 	list-style:none;
 	padding-left: 0px;
 }
 
 #menuContainer > li > a {
+	color: white;
+}
+
+.plannerMenuli {
+	margin-top:20px;
 	color: white;
 }
 
