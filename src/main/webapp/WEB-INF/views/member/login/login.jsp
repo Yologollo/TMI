@@ -20,11 +20,5 @@
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
-<script>
-window.onload = function(){
-     $('.nav_link').css('color', '#4a4a4a');
-     $('.nav_logo').css('color', '#4a4a4a');
-     $('#title_img').attr('src','${pageContext.request.contextPath}/resources/images/title_blue.png');
-}
-</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
