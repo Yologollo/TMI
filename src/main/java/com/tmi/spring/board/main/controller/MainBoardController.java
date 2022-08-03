@@ -22,4 +22,29 @@ public class MainBoardController {
 		return "/board/main/mainBoard";
 	}
 	
+	@GetMapping("/board/planner/plannerBoard.do")
+	public void plannerBoard() {
+		log.info("GET / 요청!");
+	}
+	
+	@GetMapping("/board/review/reviewBoard.do")
+	public void reviewBoard() {
+		log.info("GET / 요청!");
+	}
+	
+	@GetMapping("/board/friend/friendBoard.do")
+	public void friendBoard() {
+		log.info("GET / 요청!");
+	}
+	
+	@GetMapping("/board/bestreview/bestReview.do")
+	public void bestReview() {
+		log.info("GET / 요청!");
+	}
+	
+	@GetMapping("/board/bestplanner/bestPlanner.do")
+	public void bestPlanner() {
+		log.info("GET / 요청!");
+	}
+	
 }
