@@ -22,4 +22,6 @@ public class FriendBoardController {
 		return "/board/friend/friendBoard";
 	}
 	
+	@GetMapping("/board/friend/friendBoardForm.do")
+	public void BoardForm() {}
 }
