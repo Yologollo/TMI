@@ -11,9 +11,6 @@
 	<jsp:param value="글 작성" name="title" />
 </jsp:include>
 <!-- include libraries(jQuery, bootstrap) -->
-<!-- include summernote css/js -->
-<!--     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <style>
