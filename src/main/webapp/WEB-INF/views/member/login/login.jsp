@@ -22,8 +22,8 @@
  			<div class="login_title">
  				<img src="${pageContext.request.contextPath}/resources/images/title_blue.png" id="title_img"/>
 		 		<h1>로그인</h1>
-		 		<input type="button" value="카카오로 1초만에 시작하기" onClick="location.href='${pageContext.request.contextPath}/'" class="kakao_login_btn">
-		 		<input type="button" value="이메일로 시작하기" onClick="location.href='${pageContext.request.contextPath}/login/email'" class="email_login_btn">
+		 		<input type="button" value="카카오로 1초만에 시작하기" onclick="location.href='${pageContext.request.contextPath}/'" class="kakao_login_btn">
+		 		<input type="button" value="이메일로 시작하기" onclick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'" class="email_login_btn">
  			</div>
  		</div>
  	</div>
