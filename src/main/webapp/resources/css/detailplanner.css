@@ -56,18 +56,3 @@
 	margin-top: 10px;
 	margin-right: 5%
 }
-
-#cardWrapper {
-	border: 1px solid green;
-	justify-content: center;
-	margin: auto 0;
-	padding-left: 5%;
-	padding-right: 5%;
-}
-
-#plannerContainer .card{
-	display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    margin: 5%;
-}

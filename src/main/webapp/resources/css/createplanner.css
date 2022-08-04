@@ -30,8 +30,9 @@
 }
 
 #palnnerInfo {
-	border: 1px solid orange;
-	height:90vh;
+	border: 2px solid orange;
+	margin-top: 10vh;
+	height: 90vh;
 }
 
 #palnnerDate {

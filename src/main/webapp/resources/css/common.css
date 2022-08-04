@@ -9,5 +9,7 @@
 	hegiht:100%; 
 	margin: auto; 
 	margin-top:4.5rem;
+	overflow: hidden;
+	position: relative;
 }
 

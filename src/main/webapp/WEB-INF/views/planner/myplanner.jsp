@@ -11,7 +11,7 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css">
 <style>
 

@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
