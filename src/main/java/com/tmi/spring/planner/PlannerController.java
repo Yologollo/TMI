@@ -40,6 +40,12 @@ public class PlannerController {
 		return "/planner/createplanner";
 	}
 	
+	@GetMapping("/planner/detailPlanner.do")
+	public String detailPlanner() {
+		log.info("GET / 요청!");
+		return "/planner/detailplanner";
+	}
+	
 	
 	
 }
