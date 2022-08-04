@@ -27,5 +27,10 @@ public class MemberSecurityController {
 		log.info("GET / 요청!");
 		return "/member/login/email";
 	}
+	@GetMapping("/login/signUp")
+	public String eamilSignUp() {
+		log.info("GET / 요청!");
+		return "/member/login/signUp";
+	}
 	
 }

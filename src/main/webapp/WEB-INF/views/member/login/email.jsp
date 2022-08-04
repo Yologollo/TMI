@@ -25,8 +25,8 @@
 		 		<form:form method="post">
 		 			<div class="form-box">
 			            <div class="input-box">
-			                <input id="username" type="text" name="username" placeholder="아이디">
-			                <label for="username">아이디</label>
+			                <input id="email" type="text" name="email" placeholder="이메일">
+			                <label for="email">이메일</label>
 			            </div>
 			            <div class="input-box">
 			                <input id="password" type="password" name="password" placeholder="비밀번호">
@@ -34,25 +34,20 @@
 			            </div>
 						<div class="checks small">
 						  <input type="checkbox" id="ex_chk2"> 
-						  <label for="ex_chk2">아이디저장</label> 
+						  <label for="ex_chk2">이메일저장</label> 
 						</div>
-			            <a href="${pageContext.request.contextPath}/" id="forgot">비밀번호 찾기</a>
+			            <a href="${pageContext.request.contextPath}/" class="find_pw">비밀번호 찾기</a>
 
 			            <input type="submit" value="이메일로 시작하기">
 			            <div class="sign_up_box">
 			            	<p>아직 계정이 없으신가요?</p>
-				            <a href="${pageContext.request.contextPath}/" class="sign_up">간편 가입하기</a>
+				            <a href="${pageContext.request.contextPath}/login/signUp" class="sign_up">간편 가입하기</a>
 			            </div>
 		 			</div>
 		 		</form:form>
  			</div>
  		</div>
  	</div>
-	<script>
-	/*  $("input:checkbox[id='ex_chk2']").prop("checked", true);  */ 
-
-	</script>
-
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
