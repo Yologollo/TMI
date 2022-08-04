@@ -112,7 +112,7 @@ create table tmi_planner_board_love (
 -- 후기 게시판
 create table tmi_review_board (
     rb_no number,
-    rb_p_no number not null,
+    rb_p_no number,
     rb_m_nickname varchar2(256) not null,
     rb_title varchar2(2000),
     rb_content varchar2(4000),
@@ -173,7 +173,7 @@ create sequence seq_rbc_no;
 -- 여행 친구 게시판
 Create table tmi_friend_board (
     fb_no number,
-    fb_p_no number not null,
+    fb_p_no number,
     fb_m_nickname varchar2(256) not null,
     fb_title varchar2(256),
     fb_content varchar2(256),
