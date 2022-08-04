@@ -29,11 +29,12 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
-	
 </head>
-<style>
-
-</style>
+<script>
+	<c:if test="${!empty msg}">
+		alert('${msg}');
+	</c:if>
+</script>
 <body>	
 <div id="container">
 	<!-- header코드 들어갈 부분 -->
@@ -45,11 +46,6 @@
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/planner/myPlanner" class="nav_link" id="nav_color">
-                                <i class="nav_icon"></i> 플래너
-                            </a>
-                        </li>
-                        <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/aboutus" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 이용방법
                             </a>
@@ -59,19 +55,45 @@
                                 <i class="nav_icon"></i> 게시판
                             </a>
                         </li>
+                        
+                        <!-- 로그인 후 -->
+						<c:if test="${!empty loginMember}">
+                        <li class="nav_item">
+                            <a href="${pageContext.request.contextPath}/planner/myPlanner" class="nav_link" id="nav_color">
+                                <i class="nav_icon"></i> 플래너
+                            </a>
+                        </li>
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/mypage" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/login" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/login/memberLogout.do" class="nav_link" id="nav_color">
+                                <i class=" nav_icon"></i> 로그아웃
+                            </a>
+                        </li>
+						</c:if>
+                        
+                        <!-- 로그인 전 -->
+						<c:if test="${empty loginMember}">
+                        <li class="nav_item">
+                            <a href="${pageContext.request.contextPath}/login/login" class="nav_link" id="nav_color">
                                 <i class=" nav_icon"></i> 로그인
                             </a>
                         </li>
+						</c:if>
                     </ul>
                 </div>
             </nav>
+            <!-- 로그인 후 -->
+            <c:if test="${!empty loginMember}">
+            
+            </c:if>
+            <!-- 로그인 전 -->
+            <c:if test="${empty loginMember}">
+            
+            </c:if>
 	</header>
 	<script>
 	function scrollHeader(){
