@@ -4,60 +4,25 @@
 	height: 800px;
 	text-align: center;
 }
-.login_container{
+.signup_container{
 	border: 1px solid #e3e3e3;
 	border-radius:0.6rem;
 	width: 40%;
-	height: 42%;
+	height: 95%;
 	font-size: 30px;
 	display: inline-block;
-	margin-top: 5%;
+	margin-top: 1.5%;
 }
-.email_container{
-	border: 1px solid #e3e3e3;
-	border-radius:0.6rem;
-	width: 40%;
-	height: 55%;
-	font-size: 30px;
-	display: inline-block;
-	margin-top: 5%;
-}
-
-.login_title > img {
+.signup_title > img {
 	width: 8%;
 	margin-right:5px;
 }
-.login_title > h1 {
+.signup_title > h1 {
 	color: #4a4a4a;
 	font-weight: 600;
 	font-size: 2rem;
 	margin-top: 5%;
 	font-family: 'Nanum+Gothic';
-}
-
-.kakao_login_btn{
-	background-color: #FEE500;
-    border:none;
-    color:#4a4a4a;
-    border-radius: 5px;
-    width:80%;
-    height:42px;
-    font-size: 12pt;
-    margin-top:50px;
-    font-family: 'Nanum+Gothic';
-    font-weight: 600;
-}
-.email_login_btn{
-	background-color: #E0E0E0;
-    border:none;
-    color:#4a4a4a;
-    border-radius: 5px;
-    width:80%;
-    height:42px;
-    font-size: 12pt;
-    margin-top:10px;
-    font-family: 'Nanum+Gothic';
-    font-weight: 600;
 }
 .form-box{
 	margin-left: 10%;
@@ -71,7 +36,7 @@
     background:transparent;
     border:none;
     border-bottom: solid 1px #7c7c7c;
-    padding:20px 0px 5px 0px;
+    padding:15px 0px 5px 0px;
     font-size:14pt;
     width:100%;
     font-family: 'Nanum+Gothic';
@@ -118,22 +83,17 @@ input[type=submit]{
 input[type=submit]:hover{
     background-color: #70B9E9;
 }
-.find_pw{
-    text-align: right;
-    font-size:10pt;
-    color:#7c7c7c;
-    margin:10px 0px;
-    float:right;
+.footer_policy {
+	height:20px;
+    letter-spacing: -.3px;
+    font-size: 10px;
+    font-weight: 400;
+    margin-bottom: 0px;
+    color: #858a8d;
     font-family: 'Nanum+Gothic';
-    font-weight: 600;
-    cursor: pointer;
-}
-.find_pw:hover {
-	color:#70B9E9;
 }
 .checks {
 	position: relative;
-	float:left;
 }
 
 .checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
@@ -198,27 +158,47 @@ input[id="ex_chk2"] + label {
 	pointer-events: auto;
 	color:#7c7c7c;
 }
-.sign_up_box{
-	text-align: center;
-	margin:20px 0px 10px 106px;
-	width:50%;
+.signup_kakao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
-.sign_up_box > p {
-	float:left;
-	font-size:10px;
-	color:#7c7c7c;
-	margin-top: 5px;
-	font-family: 'Nanum+Gothic';
-    font-weight: 600;
+hr {
+    border: none;
+    display: block;
+    height: 2px;
+    margin: 1.5rem 0;
 }
-.sign_up{
-    font-size:15px;
+.kakao_line:not(.kakao_line--mobile) {
+    position: relative;
+    top: 7.5px;
+}
+.kakao_title {
+    font-weight: 400;
+    margin-bottom: 15px;
+    padding: 0 8px;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -.3px;
     color:#7c7c7c;
-    float:right;
-    font-weight: bold;
+    z-index: 1;
+    background: #fff;
     font-family: 'Nanum+Gothic';
-    font-weight: 600;
 }
-.sign_up:hover {
-	color:#70B9E9;
+.kakao_line {
+    margin: 0!important;
+    width: 100%;
+    height: 1px;
+    background-color: #7c7c7c;
+}
+.kakao_login_btn{
+	background-color: #FEE500;
+    border:none;
+    color:#7c7c7c;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-size: 14pt;
+    font-family: 'Nanum+Gothic';
 }
