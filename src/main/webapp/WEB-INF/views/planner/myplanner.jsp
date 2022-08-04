@@ -83,7 +83,7 @@
 				<div class="card" style="width: 18rem;">
 					<img src="..." class="card-img-top" alt="...">
 					<div class="card-body">
-						<p class="card-text">플래너</p>
+						<a href="${pageContext.request.contextPath}/planner/detailPlanner.do"><p class="card-text">디테일 플래너 임시페이지 이동</p></a>
 					</div>
 				</div>
 				<div class="card" style="width: 18rem;">
