@@ -31,9 +31,28 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>첨부파일</th>
 				<th>조회수</th>
 			</tr>
+			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
+				<tr>
+					<td>${friendBoard.fb_no}</td>
+					<td>${friendBoard.fb_title}</td>
+					<td>${friendBoard.fb_m_email}</td>
+					<td>
+						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:formatDate value="${createAt}" pattern="MM-dd HH:mm"/>
+					</td>
+					<td>
+						<c:if test="${friendBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resource/images/board/file.png" width="16px" />
+						</c:if>
+					</td>
+					<td>${friendBoard.fb_read_count}</td>
+				</tr>
+			</c:forEach>
 		</table>
+		<nav>${pagebar}</nav>
 	</section> 
  	
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

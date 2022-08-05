@@ -17,10 +17,15 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	
 	@Override
 	public List<FriendBoard> selectFriendBoardList(int cPage, int numPerPage) {
-		int offset = (cPage - 1) * numPerPage;
+		int offset = (cPage -1) * numPerPage;
 		int limit = numPerPage;
-		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return friendBoardDao.selectFriendBoardList(rowBounds);
 	}
+	
+	@Override
+	public int selectTotalContent() {
+		return friendBoardDao.selectTotalContent();
+	}
+	
 }
