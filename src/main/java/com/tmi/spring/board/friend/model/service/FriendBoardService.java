@@ -8,4 +8,6 @@ public interface FriendBoardService {
 
 	List<FriendBoard> selectFriendBoardList(int cPage, int numPerPage);
 
+	int selectTotalContent();
+
 }
