@@ -50,6 +50,7 @@
  	</div>
 </div>
 <script>
+
 document.memberLoginFrm.addEventListener('submit', (e) => {
 	const mEmail = document.querySelector("#mEmail");
 	const mPassword = document.querySelector("#mPassword");

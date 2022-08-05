@@ -71,6 +71,24 @@
 
 </div>
 <script>
+document.querySelector("#mEmail").addEventListener('keyup', (e) => {
+	const mEmailVal = e.target.value;
+	if(mEmailVal.length < 5) return;
+	console.log(mEmailVal);
+	$.ajax({
+		url : '${pageContext.request.contextPath}/login/checkEmail.do',
+		date : {
+			mEmail : mEmailVal
+		},
+		success(response) {
+			console.log(response);
+		}, 
+		error : console.log
+		
+	})
+})
+
+
 document.memberSignUpFrm.addEventListener('submit', (e) => {
 	const mNickName = document.querySelector("#mNickName");
 	const mName = document.querySelector("#mName");

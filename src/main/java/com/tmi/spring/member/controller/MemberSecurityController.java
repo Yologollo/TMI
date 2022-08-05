@@ -75,50 +75,20 @@ public class MemberSecurityController {
 		}
 		return "redirect:/login";
 	}
-	/*
-	@PostMapping("/memberLogin.do")
-	public String memberLogin(
-			@RequestParam String mEmail,
-			@RequestParam String mPassword,
-			RedirectAttributes redirectAttr,
-			@SessionAttribute(required = false) String next, 
-			HttpSession session,
-			Model model) {
-			log.info("memberId = {}, password = {}", mEmail, mPassword);
+
+	@GetMapping("/checkEmail")
+	public String checkEmail(@RequestParam String mEmail, Model model) {
+		try {
+			Member member = memberService.selectOneMember(mEmail);
+			boolean available = member == null;
 			
-			try {
-				Member member = memberService.selectOneMember(mEmail);
-				log.info("member = {}", member);
-				
-				if(member != null && bcryptPasswordEncoder.matches(mPassword, member.getMPassword())) {
-					
-					model.addAttribute("loginMember",member);
-					log.info("next = {}", next);
-					
-					String location = next != null ? next : "/";
-					return "redirect:" + location;
-				}
-				else {
-					redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-					return "redirect:/login/memberLogin.do";
-				}
-			} 
-			catch(Exception e) {
-				e.printStackTrace();
-				throw e;
-			}
-	}
-	
-	@GetMapping("/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus, ModelMap modelMap) {
-		// modelMap 속성 완전 제거
-		modelMap.clear();
+			model.addAttribute("mEmail", mEmail);
+			model.addAttribute("available", available);
+			
+		}catch (Exception e) {
+			log.debug("중복 이메일 체크오류");
+		}
 		
-		// 사용완료 마킹처리 (세션객체 자체를 폐기하지 않는다.)
-		if(!sessionStatus.isComplete())
-			sessionStatus.setComplete();
-		
-		return "redirect:/";
+		return "jsonView";
 	}
-	*/
 }
