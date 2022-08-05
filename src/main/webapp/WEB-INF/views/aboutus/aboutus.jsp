@@ -15,8 +15,8 @@
 <div id="commonMain">
 
 <!-- 
-	생성 : 김용민
-	작업 : 김용민
+	생성 : 김용민 권민지
+	작업 : 김용민 권민지
  -->
  	<h1>이용방법</h1>
  	 <h3>Travel Making Imagine </h3>
