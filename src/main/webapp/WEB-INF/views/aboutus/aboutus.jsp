@@ -19,7 +19,7 @@
 	작업 : 김용민
  -->
  	<h1>이용방법</h1>
- 	 tmi / 이용 방법 안내하는 사이트
+ 	 <h3>Travel Making Imagine </h3>
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
