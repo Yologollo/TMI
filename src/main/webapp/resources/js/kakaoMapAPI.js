@@ -1,123 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<fmt:requestEncoding value="utf-8" />
-
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="Travel Making Imagine" name="title" />
-</jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민
- -->
-
-<div id="createPlannerMain">
-	<div id=topBar>
-		<div id="topBarBtnWrapper">
-			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave">저장</button>
-			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose">닫기</button>
-		</div>
-	</div>
-	
-	<div id=palnnerInfo>
-		<div id="palnnerDate">
-			<div id="palnnerDateInfoFirstId">
-				<span>일정</span>
-			</div>
-			<div class="plannerDateInfo">
-				<span class="palnnerDateInfoSpanClass">DAY 1</span><br />
-				<span>08.04</span>
-			</div>
-			<div class="plannerDateInfo">
-				<span class="palnnerDateInfoSpanClass">DAY 2</span><br />
-				<span>08.05</span>
-			</div>
-		</div>
-		<div id="plannerDetailDate">
-			<div id="plannerDetailDateInfoFirstId">
-				<span>DAY 1 | 08.04 목요일</span>
-			</div>
-			<div class="plannerDetailDateInfo">
-			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
-				<div class="plannerDetailDateInfoTitle">
-					<span>1.</span>				
-					<span>KH정보교육원</span>
-				</div>
-				<div class="plannerDetailDateInfoTime">
-					<label for="">시간</label>
-					<input type="time" class="form-control" placeholder="시간">
-				</div>
-				<div class="plannerDetailDateInfoMemo">
-					<label for="">메모</label>
-					<input type="text" class="form-control" placeholder="메모">				
-				</div>
-			</div>
-			<div class="plannerDetailDateInfo">
-			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
-				<div class="plannerDetailDateInfoTitle">
-					<span>2.</span>				
-					<span>야호</span>
-				</div>
-				<div class="plannerDetailDateInfoTime">
-					<label for="">시간</label>
-					<input type="time" class="form-control" placeholder="시간">
-				</div>
-				<div class="plannerDetailDateInfoMemo">
-					<label for="">메모</label>
-					<input type="text" class="form-control" placeholder="메모">				
-				</div>
-			</div>
-		</div>
-		<div id="plannerDetailPlace">
-			<div class="map_wrap">
-				<div id="map"
-					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-
-				<div id="menu_wrap" class="bg_white">
-					<div id="plannerDetailPlaceFirstId">
-						<div id="plannerDetailPlaceFirstIdWrapper">
-							<div class="option">
-								<div>
-									<form onsubmit="searchPlaces(); return false;">
-										<input type="text" class="form-control" value="KH정보교육원" id="keyword">
-										<button type="submit" id="keywordSearchBtn" class="btn btn-primary">검색</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="plannerDetailPlaceInfo">
-						<div class="plannerDetailPlaceInfoAddress">
-							<hr>
-							<ul id="placesList"></ul>
-							<div id="pagination"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div id="palnneKakaoAPI">
-			<!-- 카카오 API -->
-		</div>
-	</div>
-	
-</div>
-<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
-<script>
 //마커를 담을 배열입니다
 var markers = [];
 
 var mapContainer = document.getElementById('palnneKakaoAPI'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -135,8 +22,10 @@ searchPlaces();
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
+	console.log("123");
+	
     var keyword = document.getElementById('keyword').value;
-
+	
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         alert('키워드를 입력해주세요!');
         return false;
@@ -234,18 +123,17 @@ function getListItem(index, places) {
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
-                '   <h3>' + places.place_name + '</h3>';
+                '   <h5>' + places.place_name + '</h5>';
 
     if (places.road_address_name) {
-        itemStr +=  '   <span class="gray">' +  places.address_name  + '</span>';
+        itemStr += '    <span>' + places.road_address_name + '</span>' +
+                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
     } else {
         itemStr += '    <span>' +  places.address_name  + '</span>'; 
     }
                  
       itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';   
-                
-	  itemStr += '<div class="placelistDiv"><button class="btn btn-primary placelistDivBtn" onclick="planInsert(\'' + places.place_name + '\',\'' + places.y + '\',\'' + places.x +  '\')">+</button></div>';
+                '</div>';           
 
     el.innerHTML = itemStr;
     el.className = 'item';
@@ -316,7 +204,7 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;font-size:12px;">' + title + '</div>';
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -328,7 +216,3 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-</script>
-
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
