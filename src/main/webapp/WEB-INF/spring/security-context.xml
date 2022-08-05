@@ -21,11 +21,14 @@
 	<!-- permitAll 모든 경우 출력 <-> denyAll 모든 경우 출력하지 않음 -->
 	
 	<http auto-config="true">
+		<!-- 비회원 추후 변경해야하는 url경로 -->
+		<intercept-url pattern="/board/**" access="permitAll"/>
 		<!-- 비회원 -->
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/login/login" access="permitAll"/>
 		<intercept-url pattern="/login/memberEnroll.do" access="isAnonymous()"/>
+		<intercept-url pattern="/login/checkEmail.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/memberLogin.do" access="isAnonymous()"/>
 		
 		<!-- 관리자영역 -->
