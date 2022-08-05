@@ -19,8 +19,7 @@
 	작업 : 김용민
  -->
  	<h1>이용방법</h1>
- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ 	 tmi / 이용 방법 안내하는 사이트
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
