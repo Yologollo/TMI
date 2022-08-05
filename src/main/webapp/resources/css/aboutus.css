@@ -5,10 +5,10 @@
 	line-height:28px;
 	text-shadow: 0 10px 3px #58afed;
 	font-family: 'RokkittRegular';
-	margin:75px 0 20px 29px;
+	margin:75px 0 20px 300px;
 	width:360px;
-	padding:10px 0px 30px;
-	} 
+	
+		} 
 
 /*중간버튼*/
 .body div div#featured a{
@@ -36,7 +36,7 @@
 }
 
 .body div ul.blog li{
-	margin:0 0 0 170px;
+	margin:0 0 0 495px;
 	height:auto;
 	padding:0;
 	text-align:center;
