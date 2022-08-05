@@ -1,20 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/tourism.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
 
 <div id="commonMain">
 	<!-- 
@@ -22,47 +18,46 @@
 	작업 : 전인찬
  -->
  <div id="commonMain2">
-	<div id="info-box">
+	<div id="infoBox">
 		<!-- 
 		<p id="info-box title">고사포해수욕장</p>
 		 -->
-		<div id="info-top">
-			<div id="slide-box">
-				<div id="slide-box_big-img">
+		<div id="infoTop">
+			<div id="slideBox">
+				<div id="slideBoxBigImg">
 					<img
 						src="${pageContext.request.contextPath}/resources/images/tourism/topimg1.jpg"
-						alt="" id="big-img" />
-					<div id="slide-box_slide">
-						<button type="button" data-role="none" id="slide-box_prew"
+						alt="" id="bigImg" />
+					<div id="slideBoxSlide">
+						<button type="button" data-role="none" id="slideBoxPrew"
 							style="display: block;">Previous</button>
-						<div id="slide-box_list">사진 슬라이드쇼 위치</div>
-						<button type="button" data-role="none" id="slide-box_next"
+						<div id="slideBoxList">사진 슬라이드쇼 위치</div>
+						<button type="button" data-role="none" id="slideBoxNext"
 							style="display: block;">next</button>
 					</div>
 				</div>
 			</div>
-			<div id="tourism-info">
-				<p id="tourism-info title">고사포해수욕장</p>
-				<div id="tourism-info_tag-box">
-					<ul id="tourism-info_three-tab">
-						<li id="on"><button type="button">기본정보</button></li>
-						<li id=""><button type="button">이용안내</button></li>
-						<li id=""><button type="button">상세정보</button></li>
-						<li id="on-back"></li>
+			<div id="tourismInfo">
+				<p id="tourismInfoTitle">고사포해수욕장</p>
+				<div id="tourismInfoTagBox">
+					<ul id="tourismInfoThreeTab">
+						<li><button type="button" id="tagBox1">기본정보</button></li>
+						<li><button type="button" id="tagBox2">이용안내</button></li>
+						<li><button type="button" id="tagBox3">상세정보</button></li>
 					</ul>
 				</div>
-				<div id="tab-content1_on">
-					<table id="tab-content1 table">
+				<div id="tabContent1">
+					<table id="tabContent1Table" class="table table-bordered">
 						<caption>관광데이터 기본정보</caption>
 						<tbody>
 							<tr>
-								<th id="content1 table-th">우편번호</th>
+								<th id="content1TableTh">우편번호</th>
 								<td>56339</td>
 							</tr>
 							<tr>
 								<th>홈페이지</th>
 								<td>
-									<div id="content1 table-homepage">
+									<div id="content1TableHomepage">
 										<a href="http://www.buan.go.kr/tour">
 											http://www.buan.go.kr/tour </a>
 									</div>
@@ -77,10 +72,10 @@
 						</tbody>
 					</table>
 				</div>
-				<div id="tab-content2">
-					<strong id="tab-content2 strong">관광지</strong>
+				<div id="tabContent2">
+					<strong id="tabContent2Strong">관광지</strong>
 					<div id="scrolldown">
-						<table id="tab-content2 table">
+						<table id="tabContent2Table" class="table table-bordered">
 							<caption>관광데이터 이용안내</caption>
 							<tbody>
 								<tr>
@@ -117,19 +112,19 @@
 						</table>
 					</div>
 				</div>
-				<div id="tab-content3">
+				<div id="tabContent3">
 					<div id="scrolldown">
-						<table id="tab-content3 table">
+						<table id="tabContent3Table" class="table table-bordered">
 							<caption>관광데이터 상세정보</caption>
 							<tbody>
 								<tr>
-									<th id="content3 table-th">화장실</th>
+									<th id="content3TableTh">화장실</th>
 									<td>
 										<div style="text-align: initial;">있음</div>
 									</td>
 								</tr>
 								<tr>
-									<th id="content3 table-th">이용가능시설</th>
+									<th id="content3TableTh">이용가능시설</th>
 									<td>
 										<div style="text-align: initial;">음수대, 샤워장(해수욕장 개장기간만 이용
 											가능)</div>
@@ -142,7 +137,7 @@
 			</div>
 		</div>
 
-		<div id="info-bot">
+		<div id="infoBot">
 			<ul>
 				<li><strong>개요</strong>
 					<p>
@@ -156,11 +151,33 @@
 		</div>
 	</div>
 	<div id="mainlist">
-		<a id="mainlist-button"
+		<a id="mainlistButton"
 			href="https://api.visitkorea.or.kr/#/hubTourSearch">목록</a>
 	</div>
 	</div>
 </div>
-<script
-	src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+$('#tagBox1').on('click', function(){
+	console.log('1번박스클릭');
+	$('#tabContent1').css('display', 'block');
+	$('#tabContent2').css('display', 'none');
+	$('#tabContent3').css('display', 'none');	
+});
+
+$('#tagBox2').on('click', function(){
+	console.log('2번박스클릭');
+	$('#tabContent1').css('display', 'none');
+	$('#tabContent2').css('display', 'block');
+	$('#tabContent3').css('display', 'none');	
+});
+
+$('#tagBox3').on('click', function(){
+	console.log('3번박스클릭');
+	$('#tabContent1').css('display', 'none');
+	$('#tabContent2').css('display', 'none');
+	$('#tabContent3').css('display', 'block');	
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
