@@ -46,6 +46,12 @@ public class PlannerController {
 		return "/planner/detailplanner";
 	}
 	
+	@GetMapping("/planner/testPlanner.do")
+	public String testPlanner() {
+		log.info("GET / 요청!");
+		return "/planner/plannertest";
+	}
+	
 	
 	
 }
