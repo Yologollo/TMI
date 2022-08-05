@@ -8,14 +8,20 @@
 		insert into
 			tmi_member
 		values (
-			#{mNickName},
 			seq_m_no.nextval,
 			#{mEmail},
+			#{mNickName},
 			#{mPassword},
 			#{mName},
 			#{mPhone},
 			null,
 			default)
+	</insert>
+	<insert id="insertMemberRole">
+		insert into
+			tmi_member_role
+		values(
+			'ROLE_USER', #{mEmail})
 	</insert>
 	
 	<select id="selectOneMember" resultType="member">

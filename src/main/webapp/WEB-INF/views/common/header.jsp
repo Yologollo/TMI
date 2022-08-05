@@ -45,6 +45,7 @@
                 </a>
                 <div class="nav_menu" id="nav-menu">
                     <ul class="nav_list grid" style="margin-bottom: 0px;">
+                    	<!-- 비회원도 보이는 목록 -->
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/aboutus" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 이용방법
@@ -55,9 +56,16 @@
                                 <i class="nav_icon"></i> 게시판
                             </a>
                         </li>
+
+                        
+                        <li class="nav_item">
+                            <a href="${pageContext.request.contextPath}/admin/memberList.do" class="nav_link" id="nav_color">
+                                <i class="nav_icon"></i> 회원관리
+                            </a>
+                        </li>
                         
                         <!-- 로그인 후 -->
-						<c:if test="${!empty loginMember}">
+						<sec:authorize access="isAuthenticated()">
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/planner/myPlanner" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 플래너
@@ -68,21 +76,23 @@
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
-                        <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/login/memberLogout.do" class="nav_link" id="nav_color">
-                                <i class=" nav_icon"></i> 로그아웃
-                            </a>
-                        </li>
-						</c:if>
+                        <form:form id="logoutFrm" action="${pageContext.request.contextPath}/login/memberLogout.do" method="POST">
+	                        <li class="nav_item">
+	                            <a href="#" onclick="return logoutFrm()"class="nav_link" id="nav_color">
+	                                <i class=" nav_icon"></i> 로그아웃
+	                            </a>
+	                        </li>
+                        </form:form>
+						</sec:authorize>
                         
                         <!-- 로그인 전 -->
-						<c:if test="${empty loginMember}">
+						<sec:authorize access="isAnonymous()">
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/login/login" class="nav_link" id="nav_color">
                                 <i class=" nav_icon"></i> 로그인
                             </a>
                         </li>
-						</c:if>
+						</sec:authorize>
                     </ul>
                 </div>
             </nav>
@@ -96,6 +106,11 @@
             </c:if>
 	</header>
 	<script>
+	/* 로그아웃 a태그를 submit 폼제출 */
+	function logoutFrm() {
+		document.getElementById('logoutFrm').submit();
+	}
+	
 	function scrollHeader(){
 	    if(this.scrollY >= 40) {
 	        $('#header').addClass('scroll-header');

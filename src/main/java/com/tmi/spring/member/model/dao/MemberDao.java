@@ -15,6 +15,8 @@ public interface MemberDao {
 
 	int insertMember(Member member);
 
+	int insertMemberRole(Member member);
+
 	Member selectOneMember(String mEmail);
 
 }

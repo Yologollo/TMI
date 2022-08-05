@@ -22,7 +22,7 @@
 			<div class="signup_title">
  				<img src="${pageContext.request.contextPath}/resources/images/title_blue.png" id="title_img"/>
 		 		<h1>회원가입</h1>
-		 		<form name="memberSignUpFrm" method="POST">
+		 		<form:form name="memberSignUpFrm" method="POST">
 			 		<div class="form-box">
 			 			<div class="input-box">
 			                <input id="mName" type="text" name="mName" placeholder="아이디" required>
@@ -64,7 +64,7 @@
 			            	<input type="button" value="카카오 로그인" class="kakao_login_btn">
 			            </div>
 		            </div>
-		 		</form>
+		 		</form:form>
 	 		</div>
  		</div>
 	</div>

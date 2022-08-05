@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.security.model.dao.SecurityDao">
+<!-- <mapper namespace="dao 경로"> -->
+	<select id="loadUserByUsername" resultMap="memberMap">
+		select
+		    *
+		from
+		    tmi_member m join tmi_member_role a
+		        on m.m_email = a.mr_m_email
+		where
+		    m.m_email = #{mEmail}
+	</select>
+	
+	<resultMap type="member" id="memberMap">
+		<id column="m_email" property="mEmail"/>
+		<result column="m_password" property="mPassword"/>
+		<result column="m_name" property="mName"/>
+		<result column="m_nickname" property="mNickName"/>
+		<result column="m_phone" property="mPhone"/>
+		<result column="m_socialtype" property="mSocialtype"/>
+		<result column="m_created_at" property="mCreatedAt"/>
+		<result column="m_no" property="mNo"/>
+		<collection property="authorities" ofType="simpleGrantedAuthority">
+			<constructor>
+				<arg column="mr_auth" javaType="string"/>
+			</constructor>
+		</collection>
+	</resultMap>
+</mapper>

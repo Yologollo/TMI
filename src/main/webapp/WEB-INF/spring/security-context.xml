@@ -10,5 +10,58 @@
 	<!-- #9.2. bcryptPasswordEncoder빈 등록 -->
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
+	<!-- 리소스패키지 검사하지 필터처리 제외하기(css,js,images등) -->
+	<http security="none" pattern="/resources/**"/>
+	
+	<!-- isAuthenticated() 회원 -->
+	<!-- isAnonymous() 비회원 -->
+	<!-- isRememberMe() 자동로그인한경우 -->
+	<!-- isFullyAuthenticated() 자동로그인비활성화 , 권한상관없이 회원 -->
+	<!-- hasRole('권한') 해당 권한이 있는 경우 -->
+	<!-- permitAll 모든 경우 출력 <-> denyAll 모든 경우 출력하지 않음 -->
+	
+	<http auto-config="true">
+		<!-- 비회원 -->
+		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<intercept-url pattern="/login/login" access="permitAll"/>
+		<intercept-url pattern="/login/memberEnroll.do" access="isAnonymous()"/>
+		<intercept-url pattern="/login/memberLogin.do" access="isAnonymous()"/>
+		
+		<!-- 관리자영역 -->
+		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
+		
+		<!-- 회원영역 -->
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		
+		<!-- 로그인 커스터마이징 -->
+		<form-login
+			login-page="/login/memberLogin.do"
+			login-processing-url="/login/memberLogin.do"
 
+			username-parameter="mEmail"
+			password-parameter="mPassword"/>
+		<!-- 로그아웃 -->
+		<logout 
+			logout-url="/login/memberLogout.do"
+			logout-success-url="/"/>
+			
+		<!-- csrf off:true/ on:false-->
+		<csrf disabled="false"/>
+		
+		<!-- 토큰유효시간(초) 60 * 60 * 24 * 14 (2주) -->
+		<remember-me 
+			data-source-ref="dataSource"
+			token-validity-seconds="1209600"/>
+	</http>
+	
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="securityService">
+			<password-encoder ref="bcryptPasswordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- @Component 클래스를 빈으로 등록 -->
+	<context:component-scan base-package="com.tmi.security" />
 </beans:beans>
