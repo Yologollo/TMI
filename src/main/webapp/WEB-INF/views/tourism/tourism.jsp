@@ -1,20 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/tourism.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
 
 <div id="commonMain">
 	<!-- 
@@ -45,14 +41,13 @@
 				<p id="tourismInfoTitle">고사포해수욕장</p>
 				<div id="tourismInfoTagBox">
 					<ul id="tourismInfoThreeTab">
-						<li id="tagBox"><button type="button">기본정보</button></li>
-						<li id=""><button type="button">이용안내</button></li>
-						<li id=""><button type="button">상세정보</button></li>
-						<li id="on-back"></li>
+						<li><button type="button" id="tagBox1">기본정보</button></li>
+						<li><button type="button" id="tagBox2">이용안내</button></li>
+						<li><button type="button" id="tagBox3">상세정보</button></li>
 					</ul>
 				</div>
 				<div id="tabContent1">
-					<table id="tabContent1Table">
+					<table id="tabContent1Table" class="table table-bordered">
 						<caption>관광데이터 기본정보</caption>
 						<tbody>
 							<tr>
@@ -80,7 +75,7 @@
 				<div id="tabContent2">
 					<strong id="tabContent2Strong">관광지</strong>
 					<div id="scrolldown">
-						<table id="tabContent2Table">
+						<table id="tabContent2Table" class="table table-bordered">
 							<caption>관광데이터 이용안내</caption>
 							<tbody>
 								<tr>
@@ -119,7 +114,7 @@
 				</div>
 				<div id="tabContent3">
 					<div id="scrolldown">
-						<table id="tabContent3Table">
+						<table id="tabContent3Table" class="table table-bordered">
 							<caption>관광데이터 상세정보</caption>
 							<tbody>
 								<tr>
@@ -161,9 +156,28 @@
 	</div>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
+$('#tagBox1').on('click', function(){
+	console.log('1번박스클릭');
+	$('#tabContent1').css('display', 'block');
+	$('#tabContent2').css('display', 'none');
+	$('#tabContent3').css('display', 'none');	
+});
 
+$('#tagBox2').on('click', function(){
+	console.log('2번박스클릭');
+	$('#tabContent1').css('display', 'none');
+	$('#tabContent2').css('display', 'block');
+	$('#tabContent3').css('display', 'none');	
+});
+
+$('#tagBox3').on('click', function(){
+	console.log('3번박스클릭');
+	$('#tabContent1').css('display', 'none');
+	$('#tabContent2').css('display', 'none');
+	$('#tabContent3').css('display', 'block');	
+});
 </script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

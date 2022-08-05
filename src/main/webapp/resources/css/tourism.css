@@ -66,6 +66,27 @@
 
 #tabContent1{
 	clear: both;
+	display:block;
+}
+
+#tabContent2{
+	display:none;
+}
+
+#tabContent3{
+	display:none;
+}
+
+#tabContent1Table{
+	border: 1px solid black;
+}
+
+#tabContent2Table{
+	border: 1px solid black;
+}
+
+#tabContent3Table{
+	border: 1px solid black;
 }
 
 #infoBot{
