@@ -12,6 +12,7 @@
 </jsp:include>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/aboutus.css">
 <div id="commonMain">
 
 <!-- 
