@@ -37,6 +37,59 @@
 #plannerAllCard {
 	width: 100%;
 }
+
+.plannerDetailCard {
+	margin: 3%;
+}
+
+.plannerDetailCardBody {
+	border-bottom: 1px solid #d3d3d3;
+	display: table;
+	border: 1px solid yellow;
+	padding: 2%;
+	text-align: center;
+}
+
+.plannerDetailCardBodyInfo {
+	display: table-cell;
+	float: left;
+	border: 1px solid red;
+	width: 70%;
+	height: 15vh;
+}
+
+.plannerDetailCardBodyMap {
+	display: table-cell;
+	float: right;
+	border: 1px solid blue;
+	width: 30%;
+	height: 100%;
+}
+
+.plannerDetailCardBody:last-child {
+	border-bottom: hidden;
+}
+
+.plannerDetailCardDay {
+	font-size: 24px;
+}
+
+.plannerDetailCardBodyTimeWrapper {
+	font-size: 18px;
+}
+
+.plannerDetailCardBodyPlaceWrapper {
+	margin-bottom: 5%;
+	font-size: 32px;
+}
+
+.blockquote-footer {
+	margin-top: 5%;
+}
+
+.plannerDetailCardTime { 
+	margin-left: 5%;
+}
 </style>
 
 <div id="commonMain">
@@ -69,7 +122,116 @@
 			</div>
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
-					
+					<div class="plannerDetailCard card">
+						<div class="card-header">
+							<span class="plannerDetailCardDay">DAY 1</span>
+							<span class="plannerDetailCardTime">2022.08.05 금요일</span>
+						</div>
+						<div class="plannerDetailCardBody card-body">
+							<div class="plannerDetailCardBodyInfo">
+								<blockquote class="blockquote mb-0">
+									<div class="plannerDetailCardBodyTimeWrapper">
+										<span class="plannerDetailCardBodyTime">오전 11:22</span>
+									</div>
+									<div class="plannerDetailCardBodyPlaceWrapper">
+										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
+										<span class="plannerDetailCardBodyPlace">장소</span>
+									</div>
+									<footer class="blockquote-footer">
+										<span class="plannerDetailCardBodyMemo">메모</span>
+									</footer>
+								</blockquote>
+							</div>
+							<div class="plannerDetailCardBodyMap">
+
+							</div>
+						</div>
+						<div class="plannerDetailCardBody card-body">
+							<div class="plannerDetailCardBodyInfo">
+								<blockquote class="blockquote mb-0">
+									<div class="plannerDetailCardBodyTimeWrapper">
+										<span class="plannerDetailCardBodyTime">오전 11:22</span>
+									</div>
+									<div class="plannerDetailCardBodyPlaceWrapper">
+										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
+										<span class="plannerDetailCardBodyPlace">장소</span>
+									</div>
+									<footer class="blockquote-footer">
+										<span class="plannerDetailCardBodyMemo">메모</span>
+									</footer>
+								</blockquote>
+							</div>
+							<div class="plannerDetailCardBodyMap">
+
+							</div>
+						</div>
+						<div class="plannerDetailCardBody card-body">
+							<div class="plannerDetailCardBodyInfo">
+								<blockquote class="blockquote mb-0">
+									<div class="plannerDetailCardBodyTimeWrapper">
+										<span class="plannerDetailCardBodyTime">오전 11:22</span>
+									</div>
+									<div class="plannerDetailCardBodyPlaceWrapper">
+										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
+										<span class="plannerDetailCardBodyPlace">장소</span>
+									</div>
+									<footer class="blockquote-footer">
+										<span class="plannerDetailCardBodyMemo">메모</span>
+									</footer>
+								</blockquote>
+							</div>
+							<div class="plannerDetailCardBodyMap">
+
+							</div>
+						</div>
+						
+						<div class="card-header">
+							<span class="plannerDetailCardDay">DAY 2</span>
+							<span class="plannerDetailCardTime">2022.08.06 토요일</span>
+						</div>
+						<div class="plannerDetailCardBody card-body">
+							<div class="plannerDetailCardBodyInfo">
+								<blockquote class="blockquote mb-0">
+									<div class="plannerDetailCardBodyTimeWrapper">
+										<span class="plannerDetailCardBodyTime">오전 11:22</span>
+									</div>
+									<div class="plannerDetailCardBodyPlaceWrapper">
+										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
+										<span class="plannerDetailCardBodyPlace">장소</span>
+									</div>
+									<footer class="blockquote-footer">
+										<span class="plannerDetailCardBodyMemo">메모</span>
+									</footer>
+								</blockquote>
+							</div>
+							<div class="plannerDetailCardBodyMap">
+
+							</div>
+						</div>
+						<div class="card-header">
+							<span class="plannerDetailCardDay">DAY 2</span>
+							<span class="plannerDetailCardTime">2022.08.06 토요일</span>
+						</div>
+						<div class="plannerDetailCardBody card-body">
+							<div class="plannerDetailCardBodyInfo">
+								<blockquote class="blockquote mb-0">
+									<div class="plannerDetailCardBodyTimeWrapper">
+										<span class="plannerDetailCardBodyTime">오전 11:22</span>
+									</div>
+									<div class="plannerDetailCardBodyPlaceWrapper">
+										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
+										<span class="plannerDetailCardBodyPlace">장소</span>
+									</div>
+									<footer class="blockquote-footer">
+										<span class="plannerDetailCardBodyMemo">메모</span>
+									</footer>
+								</blockquote>
+							</div>
+							<div class="plannerDetailCardBodyMap">
+
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="plannerAllWrapper">
 					<div class="card" id="plannerAllCard">
