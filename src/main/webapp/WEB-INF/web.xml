@@ -63,7 +63,7 @@
   	
 	<!-- #9.3. Security Filter 등록 -->
 	<!-- Security 사용시 주석 해제해 주세요 ! -용민- -->
-	<!-- 
+	
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -72,12 +72,11 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	 -->
-	
-	<!--
+
+	<!-- 
 	<session-config>
 		<session-timeout>1</session-timeout>
-	</session-config>
+	</session-config>  
 	-->
-
+	
 </web-app>

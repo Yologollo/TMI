@@ -73,9 +73,9 @@ public class MemberSecurityController {
 			e.printStackTrace();
 			throw e;
 		}
-		return "redirect:/";
+		return "redirect:/login";
 	}
-	
+	/*
 	@PostMapping("/memberLogin.do")
 	public String memberLogin(
 			@RequestParam String mEmail,
@@ -120,5 +120,5 @@ public class MemberSecurityController {
 		
 		return "redirect:/";
 	}
-	
+	*/
 }

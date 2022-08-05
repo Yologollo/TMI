@@ -22,7 +22,7 @@
  			<div class="login_title">
  				<img src="${pageContext.request.contextPath}/resources/images/title_blue.png" id="title_img"/>
 		 		<h1>로그인</h1>
-		 		<form name="memberLoginFrm" method="POST">
+		 		<form:form name="memberLoginFrm" method="POST">
 		 			<div class="form-box">
 			            <div class="input-box">
 			                <input id="mEmail" type="text" name="mEmail" placeholder="이메일">
@@ -33,8 +33,8 @@
 			                <label for="mPassword">비밀번호</label>
 			            </div>
 						<div class="checks small">
-						  <input type="checkbox" id="ex_chk2"> 
-						  <label for="ex_chk2">이메일저장</label> 
+						  <input type="checkbox" id="ex_chk2" name="remember-me"> 
+						  <label for="ex_chk2" name="">이메일저장</label> 
 						</div>
 			            <a href="${pageContext.request.contextPath}/" class="find_pw">비밀번호 찾기</a>
 
@@ -44,7 +44,7 @@
 				            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="sign_up">간편 가입하기</a>
 			            </div>
 		 			</div>
-		 		</form>
+		 		</form:form>
  			</div>
  		</div>
  	</div>

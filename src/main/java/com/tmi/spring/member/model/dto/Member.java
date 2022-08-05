@@ -1,29 +1,56 @@
 package com.tmi.spring.member.model.dto;
 
-import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
+import lombok.ToString;
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Member {
+@ToString(callSuper = true)
+public class Member extends MemberEntity implements UserDetails{
 	
-	@NonNull
-	protected String mNickName;
-	protected int mNo;
-	@NonNull
-	protected String mEmail;
-	@NonNull
-	protected String mPassword;
-	@NonNull
-	protected String mName;
-	@NonNull
-	protected String mPhone;
-	protected String mSocialType;
-	@NonNull
-	protected LocalDateTime mCreatedAt;
+	List<SimpleGrantedAuthority> authorities;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+	
+	@Override
+	public String getPassword() {
+		return mPassword;
+	}
+
+	@Override
+	public String getUsername() {
+		return mEmail;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 }
