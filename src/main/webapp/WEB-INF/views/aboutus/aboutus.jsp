@@ -20,6 +20,8 @@
  -->
  	<h1>이용방법</h1>
  	 <h3>Travel Making Imagine </h3>
+ 	 
+ 	 
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
