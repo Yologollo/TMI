@@ -1,10 +1,10 @@
 @charset "UTF-8";
 .body div div#featured h3{
+	font-family: 'Nanum+Gothic';
 	color:rgb(17, 9, 9);
 	font-size:28px;
 	line-height:28px;
 	text-shadow: 0 10px 3px #58afed;
-	font-family: 'RokkittRegular';
 	margin:75px 0 20px 280px;
 	width:360px;
 	
@@ -16,7 +16,7 @@
 	border:0;
     height:102px;
     width:392px;
-	font-family: 'RokkittRegular';
+	font-family: 'Nanum+Gothic';
 	color:#32617f;
 	font-size:20px;
 	font-weight:bold;
@@ -33,6 +33,7 @@
 .body div ul.blog{
 	margin:0 auto;	
 	width:1440px;
+	font-family: 'Nanum+Gothic';
 }
 
 .body div ul.blog li{
@@ -43,6 +44,7 @@
 	width:290px;
     list-style: none;
 	font-weight:bold;
+	font-family: 'Nanum+Gothic';
 }
 
 .body div ul.blog li a:first-child{
@@ -51,11 +53,12 @@
 	background:none;
 	width:auto;
 	height:auto;
+	font-family: 'Nanum+Gothic';
 }
 
 .body div ul.blog li a{
 	color:#1199e8;
-	font-family: 'RokkittRegular';
+	font-family: 'Nanum+Gothic';
 	text-decoration:none;
 	display:block;
 	margin:40px auto;
@@ -78,6 +81,7 @@
 
 .body div ul.blog li a:hover{
 	transition: 0.1s;
+	font-family: 'Nanum+Gothic';
 	transform: scale(1);
 	background-color: #1c445e;
 	color: transparent;
@@ -85,15 +89,16 @@
 	-webkit-background-clip: text;
 	   -moz-background-clip: text;
 			background-clip: text;
+		
 }
 
 
 .body div h3{
-	font-family: 'RokkittRegular';
-	font-size:22px;
+	font-family: 'Nanum+Gothic';
+	font-size:33px;
 	font-weight:bold;
 	color:#000988;
-	margin:35px 0 0;
+	margin:55px 0 0;
 	line-height:21px;
 }
 
@@ -102,6 +107,7 @@
 /*제목*/
 
 .body div div{
+	font-family: 'Nanum+Gothic';
 	width:940px;
 	padding: 0 10px 54px !important; 
 	margin:0 auto;

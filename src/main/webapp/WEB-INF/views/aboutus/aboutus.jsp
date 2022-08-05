@@ -52,7 +52,7 @@
                             <h3>여행 친구 찾기</h3>
                             <p>나를 위한 여행친구 <br>
                                 새로운 친구와 새로운 추억을<br>  쌓을 수있습니다.</p>
-                            <a href="blog.html">Click Me!</a>
+                            <a href="${pageContext.request.contextPath}/board/friend/friendBoard.do">Click Me!</a>
                         </li>
 
                         <li>
