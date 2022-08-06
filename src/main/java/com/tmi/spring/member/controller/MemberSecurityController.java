@@ -76,7 +76,7 @@ public class MemberSecurityController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/checkEmail")
+	@GetMapping("/checkEmail.do")
 	public String checkEmail(@RequestParam String mEmail, Model model) {
 		try {
 			Member member = memberService.selectOneMember(mEmail);
