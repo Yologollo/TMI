@@ -1,3 +1,6 @@
+<%@page import="com.tmi.spring.member.model.dto.Member"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,6 +19,11 @@
 <style>
 
 </style>
+<script>
+const mEmail = '<sec:authentication property="principal.username"/>';
+</script>
+<form:form action="${pageContext.request.contextPath}/planner/createPlanner.do" name="createPlannerFrm" method="POST">
+
 <div class="createPlannerModalForm">
 	<div class="modal-dialog-centered" id="createPlannerModal">
 		<div class="modal-content">
@@ -26,30 +34,32 @@
 			<div class="modal-body">
 				<div class="modalInfo" id="travelTitleWrapper">
 					<label for="travelTitle">여행 제목</label>
-					<input type="text" class="form-control" id="travelTitle" placeholder="여행 제목">
+					<input type="hidden" class="form-control" name="pmEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
+					<input type="text" class="form-control" id="travelTitle" name="pTitle" placeholder="여행 제목">
 				</div>
 				<div class="modalInfo" id="travelTimeWrapper">
 					<div id="travelTimeStartWrapper">
 						<label for="travelTime">여행 기간</label>
-						<input type="date" class="travelTimeClass form-control" id="travelTimeStart" placeholder="출발">					
+						<input type="date" class="travelTimeClass form-control" name="pLeaveDate" id="travelTimeStart" placeholder="출발">					
 					</div>
 					<div id="travelTimeEndWrapper">				
 						<span> ~</span>
-						<input type="date" class="travelTimeClass form-control" id="travelTimeEnd" placeholder="도착">
+						<input type="date" class="travelTimeClass form-control" name="pReturnDate" id="travelTimeEnd" placeholder="도착">
 					</div>
 				</div>
 				<div class="modalInfo" id="travelMemoWrapper">
 					<label for="travelMemo">설명</label>
-					<input type="text" class="form-control"id="travelMemo" placeholder="설명">
+					<input type="text" class="form-control"id="travelMemo" name="pExplan" placeholder="설명">
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary btn-lg" id="btnModalCreateModal" onclick="location.href='${pageContext.request.contextPath}/planner/createPlanner.do'">플래너 작성</button>
+				<button type="submit" class="btn btn-primary btn-lg" id="btnModalCreateModal">플래너 작성</button>
 				<button type="button" class="btn btn-danger btn-lg" id="btnModalCloseDown" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
 </div>
+</form:form>
 
 
 <div id="commonMain">

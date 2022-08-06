@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.spring.planner.model.dao.PlannerDao">
+<!-- <mapper namespace="dao 경로"> -->
+	<insert id="createPlanner">
+		insert into
+			tmi_planner
+		values (
+			seq_p_no.nextval,
+			#{pmEmail},
+			#{pTitle},
+			#{pExplan},
+			#{pLeaveDate},
+			#{pReturnDate},
+			default,
+			default)
+	</insert>
+</mapper>
