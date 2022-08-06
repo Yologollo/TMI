@@ -36,6 +36,11 @@
 	</c:if>
 </script>
 <body>	
+	<sec:authorize access="isAuthenticated()">
+		<script>
+		const mEmail = '<sec:authentication property="principal.username"/>';
+		</script>
+	</sec:authorize>
 <div id="container">
 	<!-- header코드 들어갈 부분 -->
 	<header class="header" id="header">
