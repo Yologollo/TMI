@@ -1,6 +1,3 @@
-<%@page import="com.tmi.spring.member.model.dto.Member"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,19 +6,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 
+	생성 : 김용민
+	작업 : 김용민
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css">
-<style>
 
-</style>
-<script>
-const mEmail = '<sec:authentication property="principal.username"/>';
-</script>
 <form:form action="${pageContext.request.contextPath}/planner/createPlanner.do" name="createPlannerFrm" method="POST">
 
 <div class="createPlannerModalForm">
@@ -63,10 +58,6 @@ const mEmail = '<sec:authentication property="principal.username"/>';
 
 
 <div id="commonMain">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민
- -->
 	<div id="bannder">배너 / My플래너</div>
 	<div id="wrapper">
 		<div id="menuContainer">
