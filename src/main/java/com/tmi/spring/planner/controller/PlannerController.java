@@ -35,11 +35,9 @@ public class PlannerController {
 	
 	@PostMapping("/createPlanner.do")
 	public String createPlanner(Planner planner, RedirectAttributes redirectAttr) {
-		log.info("planner = {}", planner);
 		try {
 			// 업무로직
 			int result = plannerService.createPlanner(planner);
-			log.info("planner = {}", planner);
 		} catch (Exception e) {
 			log.error("Planner 생성 오류", e);
 			throw e;
