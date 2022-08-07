@@ -25,13 +25,22 @@
 	</insert>
 	
 	
-	<select id="selectOneMember" resultType="member">
+	<select id="emailChk" resultType="member">
 		select
 			*
 		from
 			tmi_member
 		where
 			m_email = #{mEmail}
+	</select>
+	
+	<select id="NickNameChk" resultType="member">
+		select
+			*
+		from
+			tmi_member
+		where
+			m_nickname = #{mNickName}
 	</select>
 	
 	<resultMap type="member" id="memberMap">

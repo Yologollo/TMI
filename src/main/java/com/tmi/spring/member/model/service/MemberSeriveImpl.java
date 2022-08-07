@@ -1,5 +1,7 @@
 package com.tmi.spring.member.model.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +30,15 @@ public class MemberSeriveImpl implements MemberService {
 	}
 
 	@Override
-	public Member selectOneMember(String mEmail) {
-		return memberDao.selectOneMember(mEmail);
+	public Member emailChk(String member) {
+		return memberDao.emailChk(member);
 	}
+
+	@Override
+	public Member NickNameChk(String mNickName) {
+		return memberDao.NickNameChk(mNickName);
+	}
+
+
 
 }

@@ -27,28 +27,49 @@
 			 			<div class="input-box">
 			                <input id="mName" type="text" name="mName" placeholder="아이디" required>
 			                <label for="mName">이름</label>
+			                <div class="check">
+				                <span id="name_chk_already" style="color:red; display:none;">이름은 한글 2글자이상 입력해주세요.</span>
+							</div>
 			            </div>
 			 			<div class="input-box">
-			                <input id="mEmail" type="text" name="mEmail" placeholder="abcde@naver.com" required>
+			                <input id="mEmail" type="email" name="mEmail" placeholder="abcde@naver.com" required>
 			                <label for="mEmail">이메일</label>
+				            <div class="check">
+				                <span class="email_ok" style="color:green; display:none;">이 아이디는 사용가능합니다.</span>
+								<span class="email_already" style="color:red; display:none;">이 아이디는 이미 사용중입니다.</span>
+								<input type="hidden" id="emailValid" value="0" /> <!-- 0-사용불가 1-사용가능 -->
+				            </div>
 			            </div>
 			 			<div class="input-box">
-			                <input id="mPhone" type="tel" name="mPhone" placeholder="(-없이)01012345678" required>
+			                <input id="mPhone" type="number" name="mPhone" ng-focus="chkPhoneType('focus');" ng-blur="chkPhoneType('blur');" placeholder="예)010-1234-5678" required>
 			                <label for="mPhone">휴대폰</label>
 			            </div>
 			 			<div class="input-box">
 			                <input id="mNickName" type="text" name="mNickName" placeholder="2글자이상" required>
 			                <label for="mNickName">닉네임</label>
+			                <div class="check">
+				                <span class="nickname_ok" style="color:green; display:none;">이 닉네임은 사용가능합니다.</span>
+								<span class="nickname_already" style="color:red; display:none;">이 닉네임은 이미 사용중입니다.</span>
+								<input type="hidden" id="nicknameValid" value="0" /> <!-- 0-사용불가 1-사용가능 -->
+							</div>
 			            </div>
 			            <div class="input-box">
 			                <input id="mPassword" type="password" name="mPassword" placeholder="비밀번호" required>
 			                <label for="mPassword">비밀번호</label>
+			                <div class="check">
+				                <span id="pw_chk_ok" style="color:green; display:none;">사용가능</span>
+				                <span id="pw_chk_already" style="color:red; display:none;">영문,숫자 조합 4 ~ 16글자 이상어야 합니다.</span>
+							</div>
 			            </div>
 			            <div class="input-box">
 			                <input id="passwordCheck" type="password" name="password" placeholder="비밀번호" required>
 			                <label for="passwordCheck">비밀번호 확인</label>
+			                <div class="check">
+				                <span id="pw2_chk_ok" style="color:green; display:none;">일치</span>
+				                <span id="pw2_chk_already" style="color:red; display:none;">비밀번호가 일치하지 않습니다.</span>
+							</div>
 			            </div>
-			            <input type="submit" value="가입하기" onClick="location.href='${pageContext.request.contextPath}/login/memberEnroll.do'">
+			            <input type="submit" id="submitButton" value="가입하기" onClick="location.href='${pageContext.request.contextPath}/login/memberEnroll.do'">
 			            <div class="form_footer">
 			            	<span class="footer_policy">
 			            		통합 계정 및 서비스 이용약관 ( TMI ), 개인정보취급방침에 동의합니다.
@@ -71,76 +92,191 @@
 
 </div>
 <script>
+/* 휴대폰 포커스에 따라 text | number 사용 */
+$(document).ready(function() { 
+    $("#mPhone").focus(focused); //input에 focus일 때
+    $("#mPhone").blur(blured);   //focus out일 때
+})
+
+function focused(){
+	var input = $("#mPhone").val();
+	//input안에서 하이픈(-) 제거
+	var phone = input.replace( /-/gi, '');
+	//number 타입으로 변경(숫자만 입력)
+	$("#mPhone").prop('type', 'number');
+	$("#mPhone").val(phone);
+}
+
+function blured(){
+	var input = $("#mPhone").val();
+	//숫자에 하이픈(-) 추가
+	var phone = chkItemPhone(input);
+	//text 타입으로 변경
+	$("#mPhone").prop('type', 'text');
+	$("#mPhone").val(phone);
+}
+/* submit시에는 하이픈제거 */
+document.querySelector('#submitButton').addEventListener('click', (event) => {
+	var input = $("#mPhone").val();
+	var phone = input.replace( /-/gi, '');
+	$("#mPhone").prop('type', 'number');
+	$("#mPhone").val(phone);
+});
+
+
+/* 휴대폰 하이픈추가 */
+function chkItemPhone(temp) {
+	var number = temp.replace(/[^0-9]/g, "");
+	var phone = "";
+	
+	if (number.length < 9) {
+		return number;
+	} else if (number.length < 10) {
+        phone += number.substr(0, 2);
+	    phone += "-";
+	    phone += number.substr(2, 3);
+	    phone += "-";
+	    phone += number.substr(5);
+	} else if (number.length < 11) {
+	    phone += number.substr(0, 3);
+	    phone += "-";
+	    phone += number.substr(3, 3);
+	    phone += "-";
+	    phone += number.substr(6);
+	} else {
+	    phone += number.substr(0, 3);
+	    phone += "-";
+	    phone += number.substr(3, 4);
+	    phone += "-";
+	    phone += number.substr(7);
+	}
+	
+	return phone;
+}
+
+
+
+/* nickname 중복검사 */
+document.querySelector("#mNickName").addEventListener('keyup', (e) => {
+	const memberNickname = e.target.value;
+
+	if(memberNickname.length < 2) {
+		$('.nickname_already').css('display', 'none');
+		$('.nickname_ok').css('display', 'none');
+		$('#nicknameValud').value = 0;
+		return;
+	}
+	
+	console.log(memberNickname);
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/login/checkNickname.do',
+		data : {
+			mNickName : memberNickname
+		},
+		success(response){
+			console.log(response);
+			const {mNickName, available} = response;
+			
+			if(available){
+				$('.nickname_ok').css('display', 'inline-block');
+				$('.nickname_already').css('display', 'none');
+				$('#nicknameValud').value = 1;
+			}
+			else {
+				$('.nickname_already').css('display', 'inline-block');
+				$('.nickname_ok').css('display', 'none');
+				$('#nicknameValud').value = 0;
+			}
+		},
+		error(jqxhr, statusText, err){
+			console.log(jqxhr, statusText, err);
+			
+			const {responseJSON : {error}} = jqxhr;
+			alert(error);
+		}
+		
+	});
+	
+});
+
+/* email 중복검사 */
 document.querySelector("#mEmail").addEventListener('keyup', (e) => {
-	const mEmailVal = e.target.value;
-	if(mEmailVal.length < 5) return;
-	console.log(mEmailVal);
+	const memberEmailVal = e.target.value;
+
+	if(memberEmailVal.length < 4) {
+		$('.email_already').css('display', 'none');
+		$('.email_ok').css('display', 'none');
+		$('#emailValud').value = 0;
+		return;
+	}
+	
+	console.log(memberEmailVal);
+	
 	$.ajax({
 		url : '${pageContext.request.contextPath}/login/checkEmail.do',
-		date : {
-			mEmail : mEmailVal
+		data : {
+			mEmail : memberEmailVal
 		},
-		success(response) {
+		success(response){
 			console.log(response);
-		}, 
-		error : console.log
+			const {mEmail, available} = response;
+			
+			if(available){
+				$('.email_ok').css('display', 'inline-block');
+				$('.email_already').css('display', 'none');
+				$('#emailValud').value = 1;
+			}
+			else {
+				$('.email_already').css('display', 'inline-block');
+				$('.email_ok').css('display', 'none');
+				$('#emailValud').value = 0;
+			}
+		},
+		error(jqxhr, statusText, err){
+			console.log(jqxhr, statusText, err);
+			
+			const {responseJSON : {error}} = jqxhr;
+			alert(error);
+		}
 		
-	})
-})
-
-
-document.memberSignUpFrm.addEventListener('submit', (e) => {
-	const mNickName = document.querySelector("#mNickName");
-	const mName = document.querySelector("#mName");
-	const mEmail = document.querySelector("#mEmail");
-	const mPassword = document.querySelector("#mPassword");
-	const passwordCheck = document.querySelector("#passwordCheck");
-	const mPhone = document.querySelector("#mPhone");
+	});
 	
-	// nickName
-	if(!/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/.test(mNickName.value)){
-		swal.fire('유효성 검사[닉네임]', "닉네임 문자 2글자이상 16글자이하로 입력해주세요.", 'warning');
-		e.preventDefault();
-		return;
+});
+
+/* 정규식 */
+const empRex = /\s/g;
+const mNickNameRex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+const mNameRex = /^[가-힣]{2,}$/;
+const mEmailRex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+const mPasswordRex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/;
+const mPhoneRex = /^010\d{8}$/;
+
+$('#mPassword').blur(function() {
+	if(mPasswordRex.test($('#mPassword').val())){
+		$('#pw_chk_ok').css('display', 'inline-block');
+		$('#pw_chk_already').css('display', 'none');
+	} else {
+		$('#pw_chk_already').css('display', 'inline-block');
+		$('#pw_chk_ok').css('display', 'none');
 	}
-	// name
-	if(!/^[가-힣]{2,}$/.test(mName.value)){
-		swal.fire('유효성 검사[이름]', "이름은 한글 2글자이상 입력해주세요.", 'warning');
-		e.preventDefault();
-		return;
+});
+$('#passwordCheck').blur(function() {
+	if($('#mPassword').val() != $(this).val()){
+		$('#pw2_chk_already').css('display', 'inline-block');
+		$('#pw2_chk_ok').css('display', 'none');
+	} else {
+		$('#pw2_chk_ok').css('display', 'inline-block');
+		$('#pw2_chk_already').css('display', 'none');
 	}
-	// email
-	if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/.test(mEmail.value)){
-		swal.fire('유효성 검사[이메일]', "유효한 이메일을 입력하세요.", 'warning');
-		e.preventDefault();
-		return;
-	}
-	// password
-	if(!/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/.test(mPassword.value)){
-		swal.fire('유효성 검사[비밀번호]', "비밀번호는 영문,숫자 조합 4 ~ 16글자 이상어야 합니다.", 'warning');
-		e.preventDefault();
-		return;
-	}
-	if(!passwordCheck.onblur()){
-		return;		
-	}
-	// phone
-	if(!/^010\d{8}$/.test(mPhone.value)){
-		swal.fire('유효성 검사[전화번호]', "유효한 전화번호를 입력하세요.", 'warning');
-		e.preventDefault();
-		return;
+});
+$('#mName').blur(function() {
+	if(mNameRex.test($('#mName').val())){
+		$('#name_chk_already').css('display', 'none');
+	} else {
+		$('#name_chk_already').css('display', 'inline-block');
 	}
 })
-
-const passwordValidator = () => {
-	const mPassword = document.querySelector("#mPassword");	
-	const passwordCheck = document.querySelector("#passwordCheck");
-	if(password.value !== passwordCheck.value){
-		swal.fire('비밀번호 불일치', "두 비밀번호가 일치하지 않습니다.", 'warning');
-		mPassword.select();
-	}
-};
-document.querySelector("#passwordCheck").addEventListener('blur', passwordValidator);
 
 
 </script>
