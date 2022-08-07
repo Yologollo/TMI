@@ -1,5 +1,7 @@
 package com.tmi.spring.member.model.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tmi.spring.member.model.dto.Member;
@@ -17,6 +19,8 @@ public interface MemberDao {
 
 	int insertMemberRole(Member member);
 
-	Member selectOneMember(String mEmail);
+	Member emailChk(String mEmail);
+
+	Member NickNameChk(String mNickName);
 
 }
