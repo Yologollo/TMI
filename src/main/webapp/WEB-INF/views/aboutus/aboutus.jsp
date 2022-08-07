@@ -37,14 +37,14 @@
                             <h3>관광정보</h3> <br>
                             <p>여행 떠날 지역을 검색하세요. <br>
                                 검색하신 지역의 여행정보를 <br> 확인 할 수 있습니다. </p>
-                            <a href="blog.html">Click Me!</a>
+                            <a href="${pageContext.request.contextPath}">Click Me!</a>
                         </li>
                        
                         <li>
                             <img src="${pageContext.request.contextPath}/resources/images/aboutus/bag_icon.png" alt="">
                             <h3>게시판</h3><br>
                             <p>내가 직접 여행계획을 세워 플래너를 <br> 작성 할수 있고, 인기있는 플래너를 <br>눌러 확인 할 수 있습니다.</p>
-                            <a href="blog.html">Click Me!</a>
+                            <a href="${pageContext.request.contextPath}">Click Me!</a>
                         </li>
                       
                         <li>
@@ -61,7 +61,7 @@
                             <p>내가 작성한 글을 보거나 담아둔 게시글 확인 및 수정
                                 <br> 나의 정보도 확인 할 수 있습니다.
                             </p>
-                            <a href="blog.html">Click Me!</a>
+                            <a href="${pageContext.request.contextPath}">Click Me!</a>
                         </li>
                    
                         <li>
@@ -72,7 +72,7 @@
                                 회원가입 또는 로그인 해주세요! <br>
                                 많은 정보를 얻을 수 있습니다.
                             </p>
-                            <a href="blog.html">Click Me!</a>
+                            <a href="${pageContext.request.contextPath}">Click Me!</a>
                         </li>
                   
 
