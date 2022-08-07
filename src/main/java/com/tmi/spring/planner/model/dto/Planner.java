@@ -16,9 +16,7 @@ public class Planner {
 	private String pmEmail;
 	private String pTitle;
 	private String pExplan;
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date pLeaveDate;
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date pReturnDate;
 	private Date pWriteDate;
 	private String pShare;
