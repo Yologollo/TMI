@@ -1,5 +1,7 @@
 package com.tmi.spring.member.model.service;
 
+import java.util.HashMap;
+
 import com.tmi.spring.member.model.dto.Member;
 
 /**
@@ -15,6 +17,8 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
-	Member selectOneMember(String mEmail);
+	Member emailChk(String mEmail);
+
+	Member NickNameChk(String mNickName);
 
 }

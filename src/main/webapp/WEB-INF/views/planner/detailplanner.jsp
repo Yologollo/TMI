@@ -208,10 +208,6 @@
 
 							</div>
 						</div>
-						<div class="card-header">
-							<span class="plannerDetailCardDay">DAY 2</span>
-							<span class="plannerDetailCardTime">2022.08.06 토요일</span>
-						</div>
 						<div class="plannerDetailCardBody card-body">
 							<div class="plannerDetailCardBodyInfo">
 								<blockquote class="blockquote mb-0">

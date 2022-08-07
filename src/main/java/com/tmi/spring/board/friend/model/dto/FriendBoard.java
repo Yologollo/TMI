@@ -12,12 +12,9 @@ import lombok.ToString;
 public class FriendBoard extends FriendBoardEntity {
 	private int attachCount;
 
-	public FriendBoard(int fb_no, int fb_p_no, String fb_m_email, String fb_title, String fb_content,
+	public FriendBoard(int fb_no, int fb_p_no, String m_nickname, String fb_title, String fb_content,
 			LocalDateTime fb_created_at, LocalDateTime fb_updated_at, int fb_read_count, int attachCount) {
-		super(fb_no, fb_p_no, fb_m_email, fb_title, fb_content, fb_created_at, fb_updated_at, fb_read_count);
+		super(fb_no, fb_p_no, m_nickname, fb_title, fb_content, fb_created_at, fb_updated_at, fb_read_count);
 		this.attachCount = attachCount;
 	}
-	
-	
-	
 }

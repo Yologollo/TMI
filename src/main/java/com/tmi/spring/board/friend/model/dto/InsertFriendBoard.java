@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FriendBoardEntity {
+public class InsertFriendBoard {
 	private int fb_no;
 	private int fb_p_no;
-	private String m_nickname;
+	private String fb_m_email;
 	private String fb_title;
 	private String fb_content;
 	private LocalDateTime fb_created_at;

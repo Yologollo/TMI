@@ -24,7 +24,8 @@
 			'ROLE_USER', #{mEmail})
 	</insert>
 	
-	<select id="selectOneMember" resultType="member">
+	
+	<select id="emailChk" resultType="member">
 		select
 			*
 		from
@@ -32,5 +33,30 @@
 		where
 			m_email = #{mEmail}
 	</select>
+	
+	<select id="NickNameChk" resultType="member">
+		select
+			*
+		from
+			tmi_member
+		where
+			m_nickname = #{mNickName}
+	</select>
+	
+	<resultMap type="member" id="memberMap">
+		<id column="m_email" property="mEmail"/>
+		<result column="m_password" property="mPassword"/>
+		<result column="m_name" property="mName"/>
+		<result column="m_nickname" property="mNickName"/>
+		<result column="m_phone" property="mPhone"/>
+		<result column="m_socialtype" property="mSocialtype"/>
+		<result column="m_created_at" property="mCreatedAt"/>
+		<result column="m_no" property="mNo"/>
+		<collection property="authorities" ofType="simpleGrantedAuthority">
+			<constructor>
+				<arg column="mr_auth" javaType="string"/>
+			</constructor>
+		</collection>
+	</resultMap>
 
 </mapper>
