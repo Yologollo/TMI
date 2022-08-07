@@ -21,6 +21,79 @@
  	<h1>회원관리</h1>
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    
+     <table>
+        <!-- <caption>Developers Rating</caption> -->
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>회원아이디</th>
+                <th>이름</th>
+                <th></th>
+                <th>탈퇴</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>hoggd</td>
+                <td>홍길동</td>
+                <td></td>
+                <td>
+                  
+                    <button class="delete">탈퇴</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>hoggd</td>
+                <td>홍길동</td>
+                <td></td>
+                <td>
+                  
+                    <button class="delete">탈퇴</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>hoggd</td>
+                <td>홍길동</td>
+                <td></td>
+                <td>
+                  
+                    <button class="delete">탈퇴</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>hoggd</td>
+                <td>홍길동</td>
+                <td></td>
+                <td>
+                  
+                    <button class="delete">탈퇴</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>hoggd</td>
+                <td>홍길동</td>
+                <td></td>
+                <td>
+                  
+                    <button class="delete">탈퇴</button>
+                </td>
+            </tr>
+
+           
+        </tbody>
+        
+    </table>
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
