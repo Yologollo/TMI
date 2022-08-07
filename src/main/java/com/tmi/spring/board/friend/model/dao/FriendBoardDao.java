@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
+import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
 @Mapper
 public interface FriendBoardDao {
@@ -15,5 +16,7 @@ public interface FriendBoardDao {
 
 	@Select("select count(*) from tmi_friend_board")
 	int selectTotalContent();
+
+	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 
 }

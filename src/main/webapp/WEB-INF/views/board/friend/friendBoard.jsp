@@ -38,10 +38,10 @@
 				<tr>
 					<td>${friendBoard.fb_no}</td>
 					<td>${friendBoard.fb_title}</td>
-					<td>${friendBoard.fb_m_email}</td>
+					<td>${friendBoard.m_nickname}</td>
 					<td>
 						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
-						<fmt:formatDate value="${createAt}" pattern="MM-dd HH:mm"/>
+						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
 					<td>
 						<c:if test="${friendBoard.attachCount gt 0}">
