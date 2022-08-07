@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tmi.spring.board.friend.model.dao.FriendBoardDao;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
+import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
 @Service
 public class FriendBoardServiceImpl implements FriendBoardService {
@@ -26,6 +27,11 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	@Override
 	public int selectTotalContent() {
 		return friendBoardDao.selectTotalContent();
+	}
+	
+	@Override
+	public int insertFriendBoard(InsertFriendBoard insertFriendBoard) {
+		return friendBoardDao.insertFriendBoard(insertFriendBoard);
 	}
 	
 }
