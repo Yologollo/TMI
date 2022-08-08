@@ -30,10 +30,10 @@
 }
 .input-box{
     position:relative;
-    margin:10px 0;
+    margin:15px 0;
 }
 .input-box > input{
-    background:transparent;
+    background:white;
     border:none;
     border-bottom: solid 1px #7c7c7c;
     padding:15px 0px 5px 0px;
@@ -202,3 +202,8 @@ hr {
     font-size: 14pt;
     font-family: 'Nanum+Gothic';
 }
+.check{
+	font-size:13px;
+	float:right;
+}
+

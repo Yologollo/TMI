@@ -16,7 +16,8 @@
     border: 1px solid black;
 }
 </style>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
     <div id="video_area">
         <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
     </div>
@@ -42,4 +43,34 @@
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
     
+    <div class="menu">
+       <ul>
+        <li><a href="#" class="item" onclick="javascript:window.scrollTo(0,0)"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+    </ul>
+</div>
+
+    <script>
+  //side menu
+    console.clear();
+    $(window).scroll(function() {
+        let scrollTop = $(this).scrollTop();
+        console.log(scrollTop)
+        
+        if ( scrollTop < 1000) {
+            scrollTop = 1000;
+        }
+        else if ( scrollTop > 96000 ) {
+            scrollTop = 96000;
+        }
+        
+        let duration = 1000;
+        $('.menu').stop().animate({top:scrollTop}, duration);
+        
+        //console.log(scrollTop);
+    });
+    </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

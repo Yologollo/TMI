@@ -30,6 +30,7 @@
 		<intercept-url pattern="/login/login" access="permitAll"/>
 		<intercept-url pattern="/login/memberEnroll.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/checkEmail.do" access="isAnonymous()"/>
+		<intercept-url pattern="/login/checkNickname.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/memberLogin.do" access="isAnonymous()"/>
 		
 		<!-- 관리자영역 -->
@@ -51,7 +52,7 @@
 			logout-success-url="/"/>
 			
 		<!-- csrf off:true/ on:false-->
-		<csrf disabled="false"/>
+		<csrf disabled="true"/>
 		
 		<!-- 토큰유효시간(초) 60 * 60 * 24 * 14 (2주) -->
 		<remember-me 
