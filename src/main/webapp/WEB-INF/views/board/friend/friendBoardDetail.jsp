@@ -8,7 +8,7 @@
 <fmt:requestEncoding value="utf-8" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="글 작성" name="title" />
+	<jsp:param value="상세보기" name="title" />
 </jsp:include>
 <!-- include libraries(jQuery, bootstrap) -->
 

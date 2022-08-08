@@ -5,12 +5,18 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tmi.spring.board.friend.model.dao.FriendBoardDao;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
+import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
+@Transactional(rollbackFor = Exception.class)
 public class FriendBoardServiceImpl implements FriendBoardService {
 
 	@Autowired
@@ -31,7 +37,30 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	
 	@Override
 	public int insertFriendBoard(InsertFriendBoard insertFriendBoard) {
-		return friendBoardDao.insertFriendBoard(insertFriendBoard);
+		int result = friendBoardDao.insertFriendBoard(insertFriendBoard);
+		log.debug("insertFriendBoard = {}", insertFriendBoard.getFb_no());
+		
+		List<FriendBoardAttachment> attachments = insertFriendBoard.getAttachments();
+		if(!attachments.isEmpty())
+		{
+			for(FriendBoardAttachment attach : attachments)
+			{
+				attach.setFba_fb_no(insertFriendBoard.getFb_no());
+				result = friendBoardDao.insertAttachment(attach);
+			}
+		}
+		return result;
 	}
+	
+	@Override
+	public InsertFriendBoard selectOneFriendBoard(int no) {
+		InsertFriendBoard insertFriendBoard = friendBoardDao.selectOneFriendBoard(no);
+		List<FriendBoardAttachment> attachments = friendBoardDao.selectAttachmentListByNo(no);
+		insertFriendBoard.setAttachments(attachments);
+		
+		return insertFriendBoard;
+	}
+	
+
 	
 }
