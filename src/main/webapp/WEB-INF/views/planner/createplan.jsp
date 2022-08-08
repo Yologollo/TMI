@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
@@ -21,6 +21,7 @@
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose">닫기</button>
+			<%-- <input type="text" class="form-control" value="${planner.pTitle}" readonly required> --%>
 		</div>
 	</div>
 	
@@ -29,14 +30,12 @@
 			<div id="palnnerDateInfoFirstId">
 				<span>일정</span>
 			</div>
-			<div class="plannerDateInfo">
-				<span class="palnnerDateInfoSpanClass">DAY 1</span><br />
-				<span>08.04</span>
-			</div>
-			<div class="plannerDateInfo">
-				<span class="palnnerDateInfoSpanClass">DAY 2</span><br />
-				<span>08.05</span>
-			</div>
+			<c:forEach items="${days}" var="day" varStatus="status">
+                <div class="plannerDateInfo" data-date="${day}">
+                    <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
+                    <fmt:formatDate value="${day}" pattern="MM.dd" />
+                </div>
+            </c:forEach>
 		</div>
 		<div id="plannerDetailDate">
 			<div id="plannerDetailDateInfoFirstId">

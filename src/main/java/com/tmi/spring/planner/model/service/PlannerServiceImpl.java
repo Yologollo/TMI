@@ -1,5 +1,10 @@
 package com.tmi.spring.planner.model.service;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +21,30 @@ public class PlannerServiceImpl implements PlannerService {
 	public int createPlanner(Planner planner) {
 		return plannerDao.createPlanner(planner);
 	}
+
+	@Override
+	public Planner selectOnePlanner(int pNo) {
+		return plannerDao.selectOnePlanner(pNo);
+	}
+
+	@Override
+	public List<Date> selectPlanDateList(Date pLeaveDate, Date pReturnDate) {
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(pLeaveDate);
+        int count = getDiffDayCount(pLeaveDate, pReturnDate);
+        // 시작일부터
+        cal.add(Calendar.DATE, -1);
+        // 데이터 저장
+        List result = new ArrayList();
+        for(int i = 0;i<=count;i++){
+            cal.add(Calendar.DATE, 1);
+            result.add(cal.getTime());
+        }
+        return result;
+	}
+	
+	public int getDiffDayCount(Date pLeaveDate, Date pReturnDate){
+        return (int)((pReturnDate.getTime() - pLeaveDate.getTime()) / 1000 / 60 / 60 / 24);
+    }
 
 }
