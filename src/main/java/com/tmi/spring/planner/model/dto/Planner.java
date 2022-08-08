@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Planner {
-	private Long pNo;
+	private int pNo;
 	private String pmEmail;
 	private String pTitle;
 	private String pExplan;

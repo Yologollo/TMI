@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlannerPlan {
-	private long pp_no;
-	private long pp_p_no;
-	private Date pp_date;
-	private String pp_place_name;
-	private String pp_memo;
-	private Float pp_x;
-	private Float pp_y;
+	private long ppNo;
+	private long pppNo;
+	private Date ppDate;
+	private String ppPlaceName;
+	private String ppMemo;
+	private Float ppX;
+	private Float ppY;
 }
