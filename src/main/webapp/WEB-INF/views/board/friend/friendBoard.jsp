@@ -11,6 +11,26 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<style>
+	tr[data-no] {
+		cursor: pointer;
+	}
+</style>
+<script>
+window.addEventListener('load', (e) => {
+	document.querySelectorAll("tr[data-no]").forEach((tr) => {
+		tr.addEventListener('click', (e) => {
+			console.log(e.target);
+			const tr = e.target.parentElement;
+			console.log(tr);
+			if(tr.matches('tr[data-no]')) {
+				const no = tr.dataset.no;
+				location.href = '${pageContext.request.contextPath}/board/friend/friendBoardDetail.do?no=' + no;
+			}
+		});
+	});
+});
+</script>
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -35,7 +55,7 @@
 				<th>조회수</th>
 			</tr>
 			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
-				<tr>
+				<tr data-no="${friendBoard.fb_no}">
 					<td>${friendBoard.fb_no}</td>
 					<td>${friendBoard.fb_title}</td>
 					<td>${friendBoard.m_nickname}</td>

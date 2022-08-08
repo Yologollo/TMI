@@ -27,13 +27,13 @@
 	}
 </style>
 <div id="commonMain">
- 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardEnroll.do" method="POST">
+ 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardEnroll.do" method="POST" enctype="multipart/form-data">
 		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="fb_title" id="title" required>
 		<input type="text" class="form-control" name="fb_m_email" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
-		  <input type="file" class="form-control" id="inputGroupFile01">
+		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		
 	  	<textarea id="summernote" name="fb_content"></textarea>
@@ -45,6 +45,13 @@
 	</form:form>
 </div>
 <script>
+	document.querySelectorAll("[name=upFile]").forEach((input) => {
+		input.addEventListener('change', (e) => {
+			const [file] = e.target.files;
+			console.log(file);
+		});
+	});
+
 	$('#summernote').summernote({
 		placeholder: '내용을 입력하세요.',
 		tabsize: 1, // 줄바꿈 간격
@@ -66,7 +73,7 @@
 	  
 /*  	document.boardFrm.addEventListener('submit', (e) => {
 		const title = document.querySelector("#title");
-		const content = document.querySelector("#summernote").value;
+		const content = document.querySelector("#summernote");
 	 
 		if(!/^.+$/.test(title.value))
 		{
@@ -74,7 +81,7 @@
 			alert("제목을 작성해주세요.");
 			return;
 		}
-		if(!/^(.|\n)+$/.test(content))
+		if(!/^(.|\n)+$/.test(content.value))
 		{
 			e.preventDefault();
 			alert("내용을 작성해주세요.");
