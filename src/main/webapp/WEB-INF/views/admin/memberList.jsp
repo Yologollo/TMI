@@ -12,6 +12,8 @@
 </jsp:include>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
+
 <div id="commonMain">
 
 <!-- 
@@ -19,9 +21,7 @@
 	작업 : 
  -->
  	<h1>회원관리</h1>
- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    
+ 	
     
      <table>
         <!-- <caption>Developers Rating</caption> -->
