@@ -72,7 +72,7 @@
                         <!-- 로그인 후 -->
 						<sec:authorize access="isAuthenticated()">
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/planner/myPlanner" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/planner/myplanner" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 플래너
                             </a>
                         </li>

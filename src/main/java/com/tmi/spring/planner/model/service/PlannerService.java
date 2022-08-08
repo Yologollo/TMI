@@ -13,4 +13,8 @@ public interface PlannerService {
 
 	List<Date> selectPlanDateList(Date pLeaveDate, Date pReturnDate);
 
+	List<Planner> findPlannerByEmail(String memberEmail);
+
+	List<Planner> findPlanner();
+
 }
