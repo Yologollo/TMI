@@ -13,4 +13,6 @@ public interface FriendBoardService {
 
 	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 
+	InsertFriendBoard selectOneFriendBoard(int no);
+
 }
