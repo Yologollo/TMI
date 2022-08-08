@@ -70,10 +70,10 @@ create table tmi_planner_board (
     pb_p_no number not null,
     pb_m_email varchar2(256) not null,
     pb_title varchar2(2000),
-    pb_content varchar2(4000),
     pb_created_at date default sysdate,
     pb_updated_at date default sysdate,
     pb_read_count number default 0,
+    pb_content clob,
     
     constraint pk_pb_no primary key(pb_no),
     constraint fk_planner_board_p_no foreign key(pb_p_no) references tmi_planner(p_no) on delete set null,
@@ -115,10 +115,10 @@ create table tmi_review_board (
     rb_p_no number,
     rb_m_email varchar2(256) not null,
     rb_title varchar2(2000),
-    rb_content varchar2(4000),
     rb_created_at date default sysdate,
     rb_updated_at date default sysdate,
     rb_read_count number default 0,
+    rb_content clob,
     
     constraint pk_rb_no primary key(rb_no),
     constraint fk_review_board_p_no foreign key(rb_p_no) references tmi_planner(p_no) on delete set null,
@@ -176,10 +176,10 @@ Create table tmi_friend_board (
     fb_p_no number,
     fb_m_email varchar2(256) not null,
     fb_title varchar2(256),
-    fb_content varchar2(256),
     fb_created_at date default sysdate,
     fb_updated_at date default sysdate,
     fb_read_count number default 0,
+    fb_content clob,
     
     constraint pk_fb_no primary key(fb_no),
     constraint fk_friend_board_p_no foreign key(fb_p_no) references tmi_planner(p_no) on delete set null,
@@ -222,10 +222,10 @@ create table tmi_notice_board (
     nb_no number,
     nb_m_email varchar2(256) not null,
     nb_title varchar2(2000),
-    nb_content varchar2(4000),
     nb_created_at date default sysdate,
     nb_update_at date default sysdate,
     nb_read_count number default 0,
+    nb_content clob,
     
     constraint pk_nb_no primary key(nb_no),
     constraint fk_notice_board_m_email foreign key(nb_m_email) references tmi_member(m_email) on delete set null   

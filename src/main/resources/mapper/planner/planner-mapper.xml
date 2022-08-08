@@ -16,5 +16,24 @@
 			#{pReturnDate},
 			default,
 			default)
+			<selectKey keyProperty="pNo" resultType="_int" order="AFTER">
+				select
+					seq_p_no.currval
+				from
+					dual
+			</selectKey>
+	</insert>
+	
+	<insert id="createPlannerPlan">
+		insert into
+			tmi_planner_plan
+		values (
+			seq_pp_no.nextval,
+			#{pppNo},
+			default,
+			#{ppPlaceName},
+			#{ppMemo},
+			#{ppX},
+			#{ppY})
 	</insert>
 </mapper>
