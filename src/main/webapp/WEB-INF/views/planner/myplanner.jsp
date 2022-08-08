@@ -87,52 +87,16 @@
 	    	
 	    	<c:if test="${not empty plannerList}">
 				<c:forEach items="${plannerList}" var="planner" varStatus="vs">
-				<span>작성된 플래너가 있습니다.</span>
+					<div class="card" style="width: 18rem;" data-no="${planner.PNo}">
 		                <img src="..." class="card-img-top" alt="...">
 						<div class="card-body">
-							<%-- <span>${planner.pNo}</span>
-							<span>${planner.pTitle}</span> --%>
+							<span>${planner.PNo}</span>
+							<span>${planner.PTitle}</span>
+							<a href="${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}"><p class="card-text">디테일 플래너 임시페이지 이동</p></a>
 						</div>
+					</div>
 	            </c:forEach>
             </c:if>
-            
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<a href="${pageContext.request.contextPath}/planner/detailPlanner.do"><p class="card-text">디테일 플래너 임시페이지 이동</p></a>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">플래너</p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">플래너</p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">플래너</p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">플래너</p>
-					</div>
-				</div>
-				<div class="card" style="width: 18rem;">
-					<img src="..." class="card-img-top" alt="...">
-					<div class="card-body">
-						<p class="card-text">플래너</p>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	
