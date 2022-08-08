@@ -79,7 +79,23 @@
 			<div id="plannerInfo">
 				<button type="button" id="createPlannerModalbtn" class="btn btn-primary btn-lg">플래너 작성</button>
 			</div>
+			
 			<div id="cardWrapper">
+			<c:if test="${empty plannerList}">
+		    	<span>작성된 플래너가 없습니다.</span>
+	    	</c:if>
+	    	
+	    	<c:if test="${not empty plannerList}">
+				<c:forEach items="${plannerList}" var="planner" varStatus="vs">
+				<span>작성된 플래너가 있습니다.</span>
+		                <img src="..." class="card-img-top" alt="...">
+						<div class="card-body">
+							<%-- <span>${planner.pNo}</span>
+							<span>${planner.pTitle}</span> --%>
+						</div>
+	            </c:forEach>
+            </c:if>
+            
 				<div class="card" style="width: 18rem;">
 					<img src="..." class="card-img-top" alt="...">
 					<div class="card-body">

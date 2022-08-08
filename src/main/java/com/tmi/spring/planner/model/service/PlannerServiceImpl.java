@@ -31,12 +31,12 @@ public class PlannerServiceImpl implements PlannerService {
 	public List<Date> selectPlanDateList(Date pLeaveDate, Date pReturnDate) {
 		Calendar cal = Calendar.getInstance();
         cal.setTime(pLeaveDate);
+        
         int count = getDiffDayCount(pLeaveDate, pReturnDate);
-        // 시작일부터
         cal.add(Calendar.DATE, -1);
-        // 데이터 저장
         List result = new ArrayList();
-        for(int i = 0;i<=count;i++){
+        
+        for(int i = 0; i <= count; i++) {
             cal.add(Calendar.DATE, 1);
             result.add(cal.getTime());
         }
@@ -47,4 +47,14 @@ public class PlannerServiceImpl implements PlannerService {
         return (int)((pReturnDate.getTime() - pLeaveDate.getTime()) / 1000 / 60 / 60 / 24);
     }
 
+	@Override
+	public List<Planner> findPlannerByEmail(String memberEmail) {
+		return plannerDao.findPlannerByEmail(memberEmail);
+	}
+
+	@Override
+	public List<Planner> findPlanner() {
+		return plannerDao.findPlanner();
+	}
+	
 }
