@@ -6,16 +6,47 @@
 <!-- <mapper namespace="dao 경로"> -->
  	<select id="selectFriendBoardList" parameterType="String" resultMap="FriendBoardMap">
 		select
-			b.*,
-			(select count(*) from tmi_friend_board_attachment where fba_fb_no = b.fb_no) attachCount
+		    fb.fb_no,
+		    fb.fb_p_no,
+		    m.m_nickname,
+		    fb.fb_title,
+		    fb.fb_content,
+		    fb.fb_created_at,
+		    fb.fb_updated_at,
+		    fb.fb_read_count,
+		    (select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount
 		from
-			tmi_friend_board b
+		    tmi_friend_board fb join tmi_member m
+		        on fb_m_email = m.m_email
+		order by
+			fb.fb_no desc
 	</select> 
+	
+	<insert id="insertFriendBoard">
+		insert into 
+			tmi_friend_board 
+		values 
+			(seq_pb_no.nextval, null, #{fb_m_email}, #{fb_title}, sysdate, sysdate, 0, #{fb_content})
+		<selectKey keyProperty="fb_no" resultType="_int" order="AFTER">
+			select
+				seq_pb_no.currval
+			from
+				dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment">
+		insert into 
+			tmi_friend_board_attachment 
+			(fba_no, fba_fb_no, fba_original_filename, fba_renamed_filename) 
+		values 
+			(seq_fba_no.nextval, #{fba_fb_no}, #{fba_original_filename}, #{fba_renamed_filename})
+	</insert>
 	
 	<resultMap id="FriendBoardMap" type="friendBoard">
 		<result column="fb_no" property="fb_no"/>
 		<result column="fb_p_no" property="fb_p_no"/>
-		<result column="fb_m_email" property="fb_m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
 		<result column="fb_title" property="fb_title"/>
 		<result column="fb_content" property="fb_content"/>
 		<result column="fb_created_at" property="fb_created_at"/>

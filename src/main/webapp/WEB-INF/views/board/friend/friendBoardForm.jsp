@@ -6,6 +6,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
+<!-- 
+	생성 : 이경석
+	작업 : 이경석
+ -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="글 작성" name="title" />
@@ -23,47 +27,67 @@
 	}
 </style>
 <div id="commonMain">
-<!-- 
-	생성 : 이경석
-	작업 : 이경석
- -->
-	
-	<form method="post">
-		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="title" id="title" required>
-		<input type="text" class="form-control" name="memberId" value="작성자 : " readonly required>
+ 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardEnroll.do" method="POST" enctype="multipart/form-data">
+		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="fb_title" id="title" required>
+		<input type="text" class="form-control" name="fb_m_email" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
-		  <input type="file" class="form-control" id="inputGroupFile01">
+		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		
-	  	<div id="summernote"></div>
-	</form>
-
-	<br /><br />
-	<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" onclick="">
-	<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
-	<br /><br /><br />
-
+	  	<textarea id="summernote" name="fb_content"></textarea>
+	  	
+		<br /><br />
+		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
+		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
+		<br /><br /><br />
+	</form:form>
 </div>
 <script>
-  $('#summernote').summernote({
-    placeholder: '내용을 입력하세요.',
-    tabsize: 1, // 줄바꿈 간격
-    height: 700, // 노트 크기
-    disableResizeEditor: true, // 노트 크기 고정
-    lang: "ko-KR",
-	focus : true, 
-    toolbar: [ // 툴바 메뉴들 검색해서 추가 가능
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture', 'video']],
-      ['view', ['fullscreen', 'codeview', 'help']]
-    ]
-  });
+	document.querySelectorAll("[name=upFile]").forEach((input) => {
+		input.addEventListener('change', (e) => {
+			const [file] = e.target.files;
+			console.log(file);
+		});
+	});
+
+	$('#summernote').summernote({
+		placeholder: '내용을 입력하세요.',
+		tabsize: 1, // 줄바꿈 간격
+		height: 700, // 노트 크기
+		disableResizeEditor: true, // 노트 크기 고정
+		lang: "ko-KR",
+		focus : true, 
+		toolbar: [ // 툴바 메뉴들 검색해서 추가 가능
+			['style', ['style']],
+			['font', ['bold', 'underline', 'clear']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'video']],
+			['view', ['fullscreen', 'codeview', 'help']]
+		]
+	});
+	
+	  
+/*  	document.boardFrm.addEventListener('submit', (e) => {
+		const title = document.querySelector("#title");
+		const content = document.querySelector("#summernote");
+	 
+		if(!/^.+$/.test(title.value))
+		{
+			e.preventDefault();
+			alert("제목을 작성해주세요.");
+			return;
+		}
+		if(!/^(.|\n)+$/.test(content.value))
+		{
+			e.preventDefault();
+			alert("내용을 작성해주세요.");
+			return;
+		}
+	});  */  
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

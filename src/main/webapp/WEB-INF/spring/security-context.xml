@@ -52,7 +52,7 @@
 			logout-success-url="/"/>
 			
 		<!-- csrf off:true/ on:false-->
-		<csrf disabled="false"/>
+		<csrf disabled="true"/>
 		
 		<!-- 토큰유효시간(초) 60 * 60 * 24 * 14 (2주) -->
 		<remember-me 
