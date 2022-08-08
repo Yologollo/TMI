@@ -11,13 +11,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 </head>
 <body>
-<div class="menu">
-    <ul>
+    <div class="menu">
+       <ul>
         <li><a href="#" class="item" onclick="javascript:window.scrollTo(0,0)"></a></li>
-        <li><a href="#" class="item"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/main/mainBoard.do'"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
     </ul>
 </div>
+
     
 </body>
 </html>
