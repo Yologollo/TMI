@@ -40,15 +40,12 @@ public class MemberSecurityController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	@GetMapping("/login")
-	public String login() {
-		return "/member/login/login";
-	}
 	
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
 		return "/member/login/memberLogin";
 	}
+
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
 		return "/member/login/memberEnroll";

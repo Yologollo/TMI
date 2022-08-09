@@ -29,6 +29,8 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<!-- swal alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <script>
 	<c:if test="${!empty msg}">
@@ -93,7 +95,7 @@
                         <!-- 로그인 전 -->
 						<sec:authorize access="isAnonymous()">
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/login/login" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/login/memberLogin" class="nav_link" id="nav_color">
                                 <i class=" nav_icon"></i> 로그인
                             </a>
                         </li>
