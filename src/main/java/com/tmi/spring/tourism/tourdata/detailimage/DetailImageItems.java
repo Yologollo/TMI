@@ -1,5 +1,5 @@
 package com.tmi.spring.tourism.tourdata.detailimage;
 
-public class DetailImage {
+public class DetailImageItems {
 
 }

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AreaCode {
-	private int rnum; // 1
+public class AreaCodeItem {
 	private int code; // 1
 	private String name; // 강남구
+	private int rnum; // 1
 }

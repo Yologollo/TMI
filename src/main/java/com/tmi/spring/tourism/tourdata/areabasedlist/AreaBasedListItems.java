@@ -1,5 +1,5 @@
 package com.tmi.spring.tourism.tourdata.areabasedlist;
 
-public class AreaBasedList {
+public class AreaBasedListItems {
 
 }

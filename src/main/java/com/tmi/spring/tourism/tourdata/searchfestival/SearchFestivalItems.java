@@ -1,5 +1,5 @@
 package com.tmi.spring.tourism.tourdata.searchfestival;
 
-public class SearchFestival {
+public class SearchFestivalItems {
 
 }

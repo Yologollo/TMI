@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.tmi.spring.tourism.tourdata.areacode.AreaCode;
+import com.tmi.spring.tourism.tourdata.areacode.AreaCodeItem;
 import com.tmi.spring.tourism.tourdata.areacode.AreaCodeBody;
 import com.tmi.spring.tourism.tourdata.areacode.AreaCodeData;
 
@@ -33,13 +33,13 @@ public class TourismServiceImpl implements TourismService {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(url);
 			NodeList nodeList = doc.getElementsByTagName("item");
-			List<AreaCode> areacodes = new ArrayList<>();
+			List<AreaCodeItem> areacodes = new ArrayList<>();
 			for(int i = 0; i < nodeList.getLength(); i++) {
 				Element elem = (Element) nodeList.item(i);
-				int rnum = Integer.parseInt(getTextContent(elem, "rnum"));
 				int code = Integer.parseInt(getTextContent(elem, "code"));
 				String name = getTextContent(elem, "name");
-				AreaCode areacode = new AreaCode(rnum, code, name);
+				int rnum = Integer.parseInt(getTextContent(elem, "rnum"));
+				AreaCodeItem areacode = new AreaCodeItem(code, name, rnum);
 				areacodes.add(areacode);
 			}
 			areacodebody.setAreacode(areacodes);

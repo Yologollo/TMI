@@ -1,4 +1,4 @@
-package com.tmi.spring.tourism.tourdata.detailimage;
+package com.tmi.spring.tourism.tourdata.categorycode;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailImageBody {
+public class CategoryCodeBody {
 	@JacksonXmlElementWrapper(useWrapping = true)
-	@JacksonXmlProperty(localName = "detailimage")
-	List<DetailImageItem> detailimage;
+	@JacksonXmlProperty(localName = "category")
+	List<CategoryCodeItem> categorycode;
 	int numOfRows;
 	int pageNo;
 	int totalCount;

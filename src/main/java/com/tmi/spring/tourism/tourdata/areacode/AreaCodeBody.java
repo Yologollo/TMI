@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class AreaCodeBody {
 	@JacksonXmlElementWrapper(useWrapping = true)
 	@JacksonXmlProperty(localName = "areacode")
-	List<AreaCode> areacode;
+	List<AreaCodeItem> areacode;
 	int numOfRows;
 	int pageNo;
 	int totalCount;
