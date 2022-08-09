@@ -22,6 +22,7 @@
  -->
  	<h1>회원관리</h1>
  	
+ 	 <body>
     
      <table>
         <!-- <caption>Developers Rating</caption> -->
@@ -94,7 +95,8 @@
         </tbody>
         
     </table>
-
+</body>
+ 	 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
