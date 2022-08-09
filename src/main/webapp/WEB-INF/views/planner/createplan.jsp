@@ -20,7 +20,6 @@
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose">닫기</button>
-			<%-- <input type="text" class="form-control" value="${planner.pTitle}" readonly required> --%>
 		</div>
 	</div>
 	
