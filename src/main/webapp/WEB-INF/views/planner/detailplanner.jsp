@@ -47,7 +47,7 @@
 			</c:forEach>
 			
 			<form action="${pageContext.request.contextPath}/planner/deletePlanner.do" name="plannerDelFrm" method="POST">
-				<input type="text" name="pNo" />
+				<input type="hidden" name="pNo" />
 			</form>
 			
 			<div id="plannerContainerWrapper">
