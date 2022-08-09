@@ -36,6 +36,7 @@ public class PlannerController {
 	@Autowired
 	PlannerService plannerService;
 	
+	// My 플래너 페이지 작업
 	@GetMapping("/myplanner")
 	public String myPlanner(@AuthenticationPrincipal Member member, Model model) {
 		try {
@@ -54,6 +55,7 @@ public class PlannerController {
 		return "/planner/myplanner";
 	}
 	
+	// My 플래너 페이지 플래너 생성
 	@PostMapping("/createPlanner.do")
 	public String createPlanner(@ModelAttribute Planner planner, RedirectAttributes redirectAttr) {
 		try {
@@ -67,6 +69,7 @@ public class PlannerController {
 		return "redirect:/planner/createplan.do?pNo=" + planner.getPNo();
 	}
 	
+	// 플랜 페이지 작업
 	@GetMapping("/createplan.do")
 	public void createPlan(@RequestParam int pNo, Model model) {
 		try {
@@ -83,6 +86,7 @@ public class PlannerController {
 		}
 	}
 	
+	// 디테일 플래너 페이지 작업
 	@GetMapping("/detailPlanner.do")
 	public String detailPlanner(Planner planner, Model model) {
 		try {
@@ -103,6 +107,7 @@ public class PlannerController {
 		return "/planner/detailplanner";
 	}
 	
+	// 디테일 플래너 페이지 삭제
 	@PostMapping("/deletePlanner.do")
 	public String deletePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
 		try {
@@ -114,6 +119,20 @@ public class PlannerController {
 			throw e;
 		}
 		return "redirect:/planner/myplanner";
+	}
+	
+	// 플랜 페이지 닫기
+	@PostMapping("/cnacelPlanner.do")
+	public String cnacelPlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
+
+		return "redirect:/planner/myplanner";
+	}
+	
+	// 플랜 페이지 저장
+	@PostMapping("/savePlanner.do")
+	public String savePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
+
+		return "redirect:/planner/detailPlanner.do?pNo=" + pNo;
 	}
 	
 	@GetMapping("/sharePlanner")

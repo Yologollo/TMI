@@ -18,11 +18,41 @@
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
-			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave">저장</button>
-			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose">닫기</button>
+			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
+			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 		</div>
 	</div>
+
+	<form action="${pageContext.request.contextPath}/planner/savePlanner.do" name="plannerSaveFrm" method="POST">
+		<input type="hidden" name="pNo" />
+	</form>
 	
+	<form action="${pageContext.request.contextPath}/planner/cnacelPlanner.do" name="plannerCancelFrm" method="POST">
+		<input type="hidden" name="pNo" />
+	</form>
+
+	<script>
+	// 플래너 닫기
+	document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			console.log(e.target);
+			console.log(e.target.dataset.pNo);
+			document.plannerCancelFrm.pNo.value = e.target.dataset.no;
+			document.plannerCancelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		});
+	});
+	
+	// 플래너 저장
+	document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			console.log(e.target);
+			console.log(e.target.dataset.pNo);
+			document.plannerSaveFrm.pNo.value = e.target.dataset.no;
+			document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		});
+	});
+	</script>
+
 	<div id=palnnerInfo>
 		<div id="palnnerDate">
 			<div id="palnnerDateInfoFirstId">
