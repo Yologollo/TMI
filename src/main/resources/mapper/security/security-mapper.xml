@@ -20,7 +20,6 @@
 		<result column="m_name" property="mName"/>
 		<result column="m_nickname" property="mNickName"/>
 		<result column="m_phone" property="mPhone"/>
-		<result column="m_socialtype" property="mSocialtype"/>
 		<result column="m_created_at" property="mCreatedAt"/>
 		<result column="m_no" property="mNo"/>
 		<collection property="authorities" ofType="simpleGrantedAuthority">

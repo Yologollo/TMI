@@ -23,7 +23,6 @@ public class MemberEntity {
 	protected String mName;
 	@NonNull
 	protected String mPhone;
-	protected String mSocialType;
 	@NonNull
 	protected LocalDateTime mCreatedAt;
 }
