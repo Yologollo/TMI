@@ -3,13 +3,18 @@ package com.tmi.spring.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,18 +45,40 @@ public class MemberSecurityController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	@GetMapping("/login")
-	public String login() {
-		return "/member/login/login";
-	}
 	
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
 		return "/member/login/memberLogin";
 	}
+
 	@GetMapping("/memberEnroll.do")
 	public String memberEnroll() {
 		return "/member/login/memberEnroll";
+	}
+	@GetMapping("/findPw.do")
+	public String findPw() {
+		return "/member/login/findPw";
+	}
+	@PostMapping("/findPw.do")
+	public String findPw(@RequestParam String mEmail) {
+		System.out.println("폼에서 받아온 email 값: " + mEmail);
+		return null;
+	}
+	
+	@PostMapping("/loginSuccess.do")
+	public String loginSuccess(@AuthenticationPrincipal Member member, HttpSession session, Model model) {
+		log.debug("loginSuccess");
+
+		// security redirect사용하기
+		SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+		String location = "/";
+		if(savedRequest != null)
+			location = savedRequest.getRedirectUrl();
+		
+		log.debug("location = {}", location);
+		
+//		return "redirect:" + location;
+		return "redirect:/";
 	}
 	
 	@PostMapping("/memberEnroll.do")

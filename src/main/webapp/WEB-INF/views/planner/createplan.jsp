@@ -10,37 +10,67 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
-
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
-			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave">저장</button>
-			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose">닫기</button>
-			<%-- <input type="text" class="form-control" value="${planner.pTitle}" readonly required> --%>
+			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
+			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 		</div>
 	</div>
+
+	<form action="${pageContext.request.contextPath}/planner/savePlanner.do" name="plannerSaveFrm" method="POST">
+		<input type="hidden" name="pNo" />
+	</form>
 	
+	<form action="${pageContext.request.contextPath}/planner/cnacelPlanner.do" name="plannerCancelFrm" method="POST">
+		<input type="hidden" name="pNo" />
+	</form>
+
+	<script>
+	// 플래너 닫기
+	document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			console.log(e.target);
+			console.log(e.target.dataset.pNo);
+			document.plannerCancelFrm.pNo.value = e.target.dataset.no;
+			document.plannerCancelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		});
+	});
+	
+	// 플래너 저장
+	document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			console.log(e.target);
+			console.log(e.target.dataset.pNo);
+			document.plannerSaveFrm.pNo.value = e.target.dataset.no;
+			document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		});
+	});
+	</script>
+
 	<div id=palnnerInfo>
 		<div id="palnnerDate">
 			<div id="palnnerDateInfoFirstId">
 				<span>일정</span>
 			</div>
 			<c:forEach items="${days}" var="day" varStatus="status">
-                <div class="plannerDateInfo" data-date="${day}">
+                <div class="plannerDateInfo" data-date="${day}" onclick="plansChange(${status.count})">
                     <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
                     <fmt:formatDate value="${day}" pattern="MM.dd" />
                 </div>
             </c:forEach>
 		</div>
 		<div id="plannerDetailDate">
-			<div id="plannerDetailDateInfoFirstId">
-				<span>DAY 1 | 08.04 목요일</span>
-			</div>
+			<c:forEach items="${days}" var="day" varStatus="status">
+				<div class="plannerDetailDateInfoFirstId" data-date="${day}">
+					<span>DAY ${status.count} | <fmt:formatDate value="${day}" pattern="MM.dd E요일" /></span>
+				</div>
+			</c:forEach>
 			<div class="plannerDetailDateInfo">
 			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
 				<div class="plannerDetailDateInfoTitle">
@@ -108,6 +138,23 @@
 	
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+
+// DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
+var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
+var plans_current = 1;
+
+function plansChange(n){
+    n -= 1;
+    for(var i = 0; i < planslide.length; i++){
+        planslide[i].style.display = "none";
+    }
+    planslide[n].style.display = "block";
+}
+
+plansChange(plans_current);
+
+</script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
 <script>
 //마커를 담을 배열입니다

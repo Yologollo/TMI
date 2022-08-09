@@ -11,87 +11,7 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css">
-<style>
-#plannerContainerWrapper {
-	border: 1px solid orange;
-	display: table;
-	width: 100%;
-	height: 90%;
-}
-
-#plannerDetailWrapper {
-	border: 1px solid black;
-	width: 70%;
-	height: 100%;
-	display: table-cell;
-}
-
-#plannerAllWrapper {
-	border: 1px solid blue;
-	width: 30%;
-	height: 100%;
-	display: table-cell;
-}
-
-#plannerAllCard {
-	width: 100%;
-}
-
-.plannerDetailCard {
-	margin: 3%;
-}
-
-.plannerDetailCardBody {
-	border-bottom: 1px solid #d3d3d3;
-	display: table;
-	border: 1px solid yellow;
-	padding: 2%;
-	text-align: center;
-}
-
-.plannerDetailCardBodyInfo {
-	display: table-cell;
-	float: left;
-	border: 1px solid red;
-	width: 70%;
-	height: 15vh;
-}
-
-.plannerDetailCardBodyMap {
-	display: table-cell;
-	float: right;
-	border: 1px solid blue;
-	width: 30%;
-	height: 100%;
-}
-
-.plannerDetailCardBody:last-child {
-	border-bottom: hidden;
-}
-
-.plannerDetailCardDay {
-	font-size: 24px;
-}
-
-.plannerDetailCardBodyTimeWrapper {
-	font-size: 18px;
-}
-
-.plannerDetailCardBodyPlaceWrapper {
-	margin-bottom: 5%;
-	font-size: 32px;
-}
-
-.blockquote-footer {
-	margin-top: 5%;
-}
-
-.plannerDetailCardTime { 
-	margin-left: 5%;
-}
-</style>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -102,7 +22,7 @@
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
 				<li class="plannerMenuli">
@@ -115,11 +35,21 @@
 				<hr />
 			</ul>
 		</div>
+
+		
 		<div id="plannerContainer">
-			<div id="plannerInfo">
-				<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg">삭제</button>
-				<button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg">수정</button>
-			</div>
+			<c:forEach items="${plannerList}" var="planner" varStatus="vs">
+				<div id="plannerInfo" data-no="${planner.PNo}">
+					<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg" data-no="${planner.PNo}">삭제</button>			
+					<button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg" 
+						onclick="location.href='${pageContext.request.contextPath}/planner/createplan.do?pNo=${planner.PNo}'">수정</button>
+				</div>
+			</c:forEach>
+			
+			<form action="${pageContext.request.contextPath}/planner/deletePlanner.do" name="plannerDelFrm" method="POST">
+				<input type="hidden" name="pNo" />
+			</form>
+			
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
 					<div class="plannerDetailCard card">
@@ -243,4 +173,15 @@
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+// 플래너 삭제
+document.querySelectorAll("#btnDeletePlanner").forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		console.log(e.target);
+		console.log(e.target.dataset.pNo);
+		document.plannerDelFrm.pNo.value = e.target.dataset.no;
+		document.plannerDelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+	});
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -15,7 +15,7 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css?after">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">
 
 <form:form action="${pageContext.request.contextPath}/planner/createPlanner.do" name="createPlannerFrm" method="POST">
 	<div class="createPlannerModalForm">
@@ -62,7 +62,7 @@
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
 				<li class="plannerMenuli">
@@ -87,14 +87,15 @@
 	    	
 	    	<c:if test="${not empty plannerList}">
 				<c:forEach items="${plannerList}" var="planner" varStatus="vs">
-					<div class="card" style="width: 18rem;" data-no="${planner.PNo}">
-		                <img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<span>${planner.PNo}</span>
-							<span>${planner.PTitle}</span>
-							<a href="${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}"><p class="card-text">디테일 플래너 임시페이지 이동</p></a>
+					<a href="${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}">
+						<div class="card" style="width: 18rem;" data-no="${planner.PNo}">
+			                <img src="..." class="card-img-top" alt="...">
+								<div class="card-body">
+									<span class="cardTitleSpan">${planner.PTitle}</span><br />
+									<span class="cardExplanSpan">${planner.PExplan}</span>
+								</div>
 						</div>
-					</div>
+					</a>
 	            </c:forEach>
             </c:if>
 		</div>

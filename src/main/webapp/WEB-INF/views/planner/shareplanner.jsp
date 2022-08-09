@@ -11,7 +11,7 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css?after">
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -22,7 +22,7 @@
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
 				<li class="plannerMenuli">

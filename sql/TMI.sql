@@ -6,7 +6,6 @@ create table tmi_member (
     m_password varchar2(512) not null,
     m_name varchar2(256) not null,
     m_phone char(11) not null,
-    m_socialtype varchar2(256),
     m_created_at date default sysdate,
     
     constraint pk_m_email primary key(m_email)
@@ -43,7 +42,7 @@ create table tmi_planner (
     p_share char(1) default 'N',
     
     constraint pk_p_no primary key(p_no),
-    constraint fk_planner_m_email foreign key(p_m_email) references tmi_member(m_email) on delete set null
+    constraint fk_planner_m_email foreign key(p_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_p_no;
@@ -77,7 +76,7 @@ create table tmi_planner_board (
     
     constraint pk_pb_no primary key(pb_no),
     constraint fk_planner_board_p_no foreign key(pb_p_no) references tmi_planner(p_no) on delete set null,
-    constraint fk_planner_board_m_email foreign key(pb_m_email) references tmi_member(m_email) on delete set null
+    constraint fk_planner_board_m_email foreign key(pb_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_pb_no;
@@ -92,7 +91,7 @@ create table tmi_planner_board_comment (
     
     constraint pk_pbc_no primary key(pbc_no),
     constraint fk_planner_board_comment_pb_no foreign key(pbc_pb_no) references tmi_planner_board(pb_no) on delete cascade,
-    constraint fk_planner_board_comment_m_email foreign key(pbc_m_email) references tmi_member(m_email) on delete set null
+    constraint fk_planner_board_comment_m_email foreign key(pbc_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_pbc_no;
@@ -122,7 +121,7 @@ create table tmi_review_board (
     
     constraint pk_rb_no primary key(rb_no),
     constraint fk_review_board_p_no foreign key(rb_p_no) references tmi_planner(p_no) on delete set null,
-    constraint fk_review_board_m_email foreign key(rb_m_email) references tmi_member(m_email) on delete set null   
+    constraint fk_review_board_m_email foreign key(rb_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_rb_no;
@@ -165,7 +164,7 @@ create table tmi_review_board_comment (
     
     constraint pk_rbc_no primary key(rbc_no),
     constraint fk_planner_review_coment_rb_no foreign key(rbc_rb_no) references tmi_review_board(rb_no) on delete cascade,
-    constraint fk_planner_review_m_email foreign key(rbc_m_email) references tmi_member(m_email) on delete set null
+    constraint fk_planner_review_m_email foreign key(rbc_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_rbc_no;
@@ -183,7 +182,7 @@ Create table tmi_friend_board (
     
     constraint pk_fb_no primary key(fb_no),
     constraint fk_friend_board_p_no foreign key(fb_p_no) references tmi_planner(p_no) on delete set null,
-    constraint fk_friend_board_m_email foreign key(fb_m_email) references tmi_member(m_email) on delete set null   
+    constraint fk_friend_board_m_email foreign key(fb_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_pb_no;
@@ -212,7 +211,7 @@ Create table tmi_friend_board_comment (
     
     constraint pk_fbc_no primary key(fbc_no),
     constraint fk_planner_friend_coment_rb_no foreign key(fbc_fb_no) references tmi_friend_board(fb_no) on delete cascade,
-    constraint fk_planner_friend_m_email foreign key(fbc_m_email) references tmi_member(m_email) on delete set null
+    constraint fk_planner_friend_m_email foreign key(fbc_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_fbc_no;
@@ -228,7 +227,7 @@ create table tmi_notice_board (
     nb_content clob,
     
     constraint pk_nb_no primary key(nb_no),
-    constraint fk_notice_board_m_email foreign key(nb_m_email) references tmi_member(m_email) on delete set null   
+    constraint fk_notice_board_m_email foreign key(nb_m_email) references tmi_member(m_email) on delete cascade
 );
 
 create sequence seq_nb_no;
@@ -242,7 +241,7 @@ create table tmi_notice_board_attachment (
     nba_created_at date default sysdate,
     
     constraint pk_nba_no primary key(nba_no),
-    constraint fk_friend_board_attachment_nb_no foreign key(nba_nb_no) references tmi_notice_board(nb_no) on delete set null  
+    constraint fk_friend_board_attachment_nb_no foreign key(nba_nb_no) references tmi_notice_board(nb_no) on delete cascade
 );
 
 create sequence seq_nba_no;
@@ -257,8 +256,8 @@ create table tmi_chat_room (
     cr_deleted_at date,
     
     constraint pk_chat_member primary key(cr_title, cr_m_email),
-    constraint fk_chat_room_m_email foreign key(cr_m_email) references tmi_member(m_email) on delete set null,
-    constraint fk_chat_room_fb_no foreign key(cr_fb_no) references tmi_friend_board(fb_no) on delete set null 
+    constraint fk_chat_room_m_email foreign key(cr_m_email) references tmi_member(m_email) on delete cascade,
+    constraint fk_chat_room_fb_no foreign key(cr_fb_no) references tmi_friend_board(fb_no) on delete cascade
 );
 
 -- 채팅 내용

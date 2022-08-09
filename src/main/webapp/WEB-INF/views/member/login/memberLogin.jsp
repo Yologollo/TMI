@@ -36,12 +36,12 @@
 						  <input type="checkbox" id="ex_chk2" name="remember-me"> 
 						  <label for="ex_chk2" name="">이메일저장</label> 
 						</div>
-			            <a href="${pageContext.request.contextPath}/" class="find_pw">비밀번호 찾기</a>
+			            <a href="${pageContext.request.contextPath}/login/findPw.do" class="find_pw">비밀번호 찾기</a>
 
-			            <input type="submit" value="이메일로 시작하기" onClick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'">
+			            <input type="submit" value="로그인" onClick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'">
 			            <div class="sign_up_box">
 			            	<p>아직 계정이 없으신가요?</p>
-				            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="sign_up">간편 가입하기</a>
+				            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="sign_up">가입하기</a>
 			            </div>
 		 			</div>
 		 		</form:form>
@@ -62,11 +62,11 @@ document.memberLoginFrm.addEventListener('submit', (e) => {
 		return;
 	}
 	// password
-	if(!/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/.test(mPassword.value)){
+	/* if(!/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/.test(mPassword.value)){
 		swal.fire('유효성 검사[비밀번호]', "비밀번호는 영문,숫자 조합 4 ~ 16글자 이상어야 합니다.", 'warning');
 		e.preventDefault();
 		return;
-	}
+	} */
 
 })
 </script>

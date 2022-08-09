@@ -1,4 +1,4 @@
-package com.tmi.spring.tourism.tourdata.detailimage;
+package com.tmi.spring.tourism.tourdata.detailcommon;
 
 import com.tmi.spring.tourism.tourdata.Header;
 
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailImageData {
+public class DetailCommonData {
 	
 	private Header header;
-	private DetailImageBody detailimagebody;
+	private DetailCommonBody detailcommonbody;
 
 }

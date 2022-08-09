@@ -1,3 +1,28 @@
+a {
+	color: black;
+	text-decoration:none;
+}
+
+a:hover {
+	color: black;
+	text-decoration:none;
+}
+
+a:link {
+	color: black;
+	text-decoration:none;
+}
+
+a:visited {
+	color: black;
+	text-decoration:none;
+}
+
+a:active {
+	color: black;
+	text-decoration:none;
+}
+
 #bannder {
 	border: 1px solid purple;
 	height:300px;
@@ -55,4 +80,82 @@
 	margin: auto 0;
 	margin-top: 10px;
 	margin-right: 5%
+}
+
+#plannerContainerWrapper {
+	border: 1px solid orange;
+	display: table;
+	width: 100%;
+	height: 90%;
+}
+
+#plannerDetailWrapper {
+	border: 1px solid black;
+	width: 70%;
+	height: 100%;
+	display: table-cell;
+}
+
+#plannerAllWrapper {
+	border: 1px solid blue;
+	width: 30%;
+	height: 100%;
+	display: table-cell;
+}
+
+#plannerAllCard {
+	width: 100%;
+}
+
+.plannerDetailCard {
+	margin: 3%;
+}
+
+.plannerDetailCardBody {
+	border-bottom: 1px solid #d3d3d3;
+	display: table;
+	border: 1px solid yellow;
+	padding: 2%;
+	text-align: center;
+}
+
+.plannerDetailCardBodyInfo {
+	display: table-cell;
+	float: left;
+	border: 1px solid red;
+	width: 70%;
+	height: 15vh;
+}
+
+.plannerDetailCardBodyMap {
+	display: table-cell;
+	float: right;
+	border: 1px solid blue;
+	width: 30%;
+	height: 100%;
+}
+
+.plannerDetailCardBody:last-child {
+	border-bottom: hidden;
+}
+
+.plannerDetailCardDay {
+	font-size: 24px;
+}
+
+.plannerDetailCardBodyTimeWrapper {
+	font-size: 18px;
+}
+
+.plannerDetailCardBodyPlaceWrapper {
+	margin-bottom: 5%;
+	font-size: 32px;
+}
+
+.blockquote-footer {
+	margin-top: 5%;
+}
+
+.plannerDetailCardTime { 
+	margin-left: 5%;
 }
