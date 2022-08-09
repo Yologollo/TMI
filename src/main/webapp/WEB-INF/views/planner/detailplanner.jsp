@@ -22,7 +22,7 @@
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
 				<li class="plannerMenuli">
@@ -36,17 +36,20 @@
 			</ul>
 		</div>
 
+		
 		<div id="plannerContainer">
 			<c:forEach items="${plannerList}" var="planner" varStatus="vs">
 				<div id="plannerInfo" data-no="${planner.PNo}">
-					<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg">삭제</button>
+					<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg" data-no="${planner.PNo}">삭제</button>			
 					<button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg" 
 						onclick="location.href='${pageContext.request.contextPath}/planner/createplan.do?pNo=${planner.PNo}'">수정</button>
 				</div>
 			</c:forEach>
-			<c:set var="p">
-				
-			</c:set>
+			
+			<form action="${pageContext.request.contextPath}/planner/deletePlanner.do" name="plannerDelFrm" method="POST">
+				<input type="text" name="pNo" />
+			</form>
+			
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
 					<div class="plannerDetailCard card">
@@ -170,4 +173,15 @@
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+// 플래너 삭제
+document.querySelectorAll("#btnDeletePlanner").forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		console.log(e.target);
+		console.log(e.target.dataset.pNo);
+		document.plannerDelFrm.pNo.value = e.target.dataset.no;
+		document.plannerDelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+	});
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

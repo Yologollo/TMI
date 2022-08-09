@@ -57,4 +57,9 @@ public class PlannerServiceImpl implements PlannerService {
 		return plannerDao.findPlannerBypNo(pNo);
 	}
 	
+	@Override
+	public int deletePlanner(int pNo) {
+		return plannerDao.deletePlanner(pNo);
+	}
+	
 }
