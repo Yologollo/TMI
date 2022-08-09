@@ -45,11 +45,8 @@ public class PlannerController {
 			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
 			log.debug("plannerList = {}", plannerList);
 			
-//			model.addAttribute("memberEmail", memberEmail);
 			model.addAttribute("plannerList", plannerList);
-			
-//			List<Planner> plannerList = plannerService.findPlanner();
-			
+						
 		} catch (Exception e) {
 			log.error("Planner 조회 오류", e);
 			throw e;
@@ -86,24 +83,25 @@ public class PlannerController {
 		}
 	}
 	
-//	@GetMapping("/createplan.do")
-//	public ModelAndView createPlan(@RequestParam int pNo, ModelAndView mav) {
-//		try {
-//			Planner planner = plannerService.selectOnePlanner(pNo);
-//			log.debug("planner = {}", planner);
-//			
-//			
-//			
-//			mav.addObject("planner", planner);
-//			mav.setViewName("planner/createplan");
-//		} catch (Exception e){
-//			log.error("플래너 조회 오류", e);
-//			throw e;
-//		}
-//		return mav;
-//	}
-	
-	
+	@GetMapping("/detailPlanner.do")
+	public String detailPlanner(Planner planner, Model model) {
+		try {
+			
+			int pNo = planner.getPNo();
+			log.debug("pNo = {}", pNo);
+			
+			List<Planner> plannerList = plannerService.findPlannerBypNo(pNo);
+			log.debug("plannerList = {}", plannerList);
+			
+			model.addAttribute("pNo", pNo);
+			model.addAttribute("plannerList", plannerList);
+						
+		} catch (Exception e) {
+			log.error("Planner 조회 오류", e);
+			throw e;
+		}
+		return "/planner/detailplanner";
+	}
 	
 	@GetMapping("/sharePlanner")
 	public String sharePlanner() {
@@ -117,21 +115,4 @@ public class PlannerController {
 		log.info("GET / 요청!");
 		return "/planner/loveplanner";
 	}
-	
-
-	
-	@GetMapping("/detailPlanner.do")
-	public String detailPlanner() {
-		log.info("GET / 요청!");
-		return "/planner/detailplanner";
-	}
-	
-	@GetMapping("/testPlanner.do")
-	public String testPlanner() {
-		log.info("GET / 요청!");
-		return "/planner/plannertest";
-	}
-	
-	
-	
 }

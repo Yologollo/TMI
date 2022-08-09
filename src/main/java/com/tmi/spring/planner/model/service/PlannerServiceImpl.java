@@ -53,8 +53,8 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public List<Planner> findPlanner() {
-		return plannerDao.findPlanner();
+	public List<Planner> findPlannerBypNo(int pNo) {
+		return plannerDao.findPlannerBypNo(pNo);
 	}
 	
 }
