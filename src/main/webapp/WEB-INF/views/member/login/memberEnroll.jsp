@@ -35,8 +35,9 @@
 			                <input id="mEmail" type="email" name="mEmail" placeholder="abcde@naver.com" required>
 			                <label for="mEmail">이메일</label>
 				            <div class="check">
-				                <span class="email_ok" style="color:green; display:none;">이 아이디는 사용가능합니다.</span>
-								<span class="email_already" style="color:red; display:none;">이 아이디는 이미 사용중입니다.</span>
+				                <span class="email_ok" style="color:green; display:none;">이 이메일은 사용가능합니다.</span>
+								<span class="email_already" style="color:red; display:none;">이 이메일은 이미 사용중입니다.</span>
+								<span class="email_chk_already" style="color:red; display:none;">이메일 형식이 맞지 않습니다.</span>
 								<input type="hidden" id="emailValid" value="0" /> <!-- 0-사용불가 1-사용가능 -->
 				            </div>
 			            </div>
@@ -69,7 +70,6 @@
 				                <span id="pw2_chk_already" style="color:red; display:none;">비밀번호가 일치하지 않습니다.</span>
 							</div>
 			            </div>
-			            <input type="submit" id="submitButton" value="가입하기" onClick="location.href='${pageContext.request.contextPath}/login/memberEnroll.do'">
 			            <div class="form_footer">
 			            	<span class="footer_policy">
 			            		통합 계정 및 서비스 이용약관 ( TMI ), 개인정보취급방침에 동의합니다.
@@ -79,10 +79,10 @@
 							  <label for="ex_chk2">이용약관 동의</label> 
 							</div>
 			            </div>
-			            <div class="signup_kakao">
-			            	<hr class="kakao_line">
-			            	<span class="kakao_title">간편 회원가입</span>
-			            	<input type="button" value="카카오 로그인" class="kakao_login_btn">
+			            <div class="signup_box">
+			            	<hr class="signup_line">
+			            	<span class="signup_title">회원가입</span>
+			            	<input type="submit" id="submitButton" value="가입하기">
 			            </div>
 		            </div>
 		 		</form:form>
@@ -92,6 +92,23 @@
 
 </div>
 <script>
+/* 이용약관 체크시*/
+
+$("#submitButton").click(function(){
+	//체크박스가 체크되었는지 판별
+	if($("#ex_chk2").is(":checked")){
+		location.href = "location.href='${pageContext.request.contextPath}/login/memberEnroll.do'";
+	} else {
+		if(!$("#ex_chk2").is(":checked")){
+			swal.fire('이용약관 동의', "약관을 동의하셔야 합니다.", 'warning');
+			$('#ex_chk2').focus();  // 해당 체크박스로 포커스 이동.
+			return false;
+		}
+	}
+});
+
+
+
 /* 휴대폰 포커스에 따라 text | number 사용 */
 $(document).ready(function() { 
     $("#mPhone").focus(focused); //input에 focus일 때
@@ -203,13 +220,24 @@ document.querySelector("#mNickName").addEventListener('keyup', (e) => {
 /* email 중복검사 */
 document.querySelector("#mEmail").addEventListener('keyup', (e) => {
 	const memberEmailVal = e.target.value;
-
+	const mEmailRex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	
 	if(memberEmailVal.length < 4) {
 		$('.email_already').css('display', 'none');
 		$('.email_ok').css('display', 'none');
 		$('#emailValud').value = 0;
 		return;
 	}
+	
+	$('#mEmail').blur(function() {
+		if(mEmailRex.test($('#mEmail').val())){
+			$('.email_chk_already').css('display', 'none');
+		} else {
+			$('.email_ok').css('display', 'none');
+			$('.email_already').css('display', 'none');
+			$('.email_chk_already').css('display', 'inline-block');
+		}
+	})
 	
 	console.log(memberEmailVal);
 	
@@ -225,11 +253,13 @@ document.querySelector("#mEmail").addEventListener('keyup', (e) => {
 			if(available){
 				$('.email_ok').css('display', 'inline-block');
 				$('.email_already').css('display', 'none');
+				$('.email_chk_already').css('display', 'none');
 				$('#emailValud').value = 1;
 			}
 			else {
 				$('.email_already').css('display', 'inline-block');
 				$('.email_ok').css('display', 'none');
+				$('.email_chk_already').css('display', 'none');
 				$('#emailValud').value = 0;
 			}
 		},
@@ -248,7 +278,7 @@ document.querySelector("#mEmail").addEventListener('keyup', (e) => {
 const empRex = /\s/g;
 const mNickNameRex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 const mNameRex = /^[가-힣]{2,}$/;
-const mEmailRex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
 const mPasswordRex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/;
 const mPhoneRex = /^010\d{8}$/;
 
@@ -277,6 +307,7 @@ $('#mName').blur(function() {
 		$('#name_chk_already').css('display', 'inline-block');
 	}
 })
+
 
 
 </script>
