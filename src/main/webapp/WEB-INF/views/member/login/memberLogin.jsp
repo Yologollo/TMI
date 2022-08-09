@@ -38,10 +38,10 @@
 						</div>
 			            <a href="${pageContext.request.contextPath}/" class="find_pw">비밀번호 찾기</a>
 
-			            <input type="submit" value="이메일로 시작하기" onClick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'">
+			            <input type="submit" value="로그인" onClick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'">
 			            <div class="sign_up_box">
 			            	<p>아직 계정이 없으신가요?</p>
-				            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="sign_up">간편 가입하기</a>
+				            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="sign_up">가입하기</a>
 			            </div>
 		 			</div>
 		 		</form:form>
