@@ -21,11 +21,11 @@
 	작업 : 
  -->
  	<h1>회원관리</h1>
- 	
+ 	<br><br><br>
  	 <body>
     
      <table>
-        <!-- <caption>Developers Rating</caption> -->
+        
         <thead>
             <tr>
                 <th>NO</th>
@@ -95,6 +95,8 @@
         </tbody>
         
     </table>
+    <br><br><br><br><br><br><br><br><br>
+    
 </body>
  	 
 </div>
