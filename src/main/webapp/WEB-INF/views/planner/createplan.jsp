@@ -10,12 +10,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
-
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
@@ -31,16 +30,18 @@
 				<span>일정</span>
 			</div>
 			<c:forEach items="${days}" var="day" varStatus="status">
-                <div class="plannerDateInfo" data-date="${day}">
+                <div class="plannerDateInfo" data-date="${day}" onclick="plansChange(${status.count})">
                     <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
                     <fmt:formatDate value="${day}" pattern="MM.dd" />
                 </div>
             </c:forEach>
 		</div>
 		<div id="plannerDetailDate">
-			<div id="plannerDetailDateInfoFirstId">
-				<span>DAY 1 | 08.04 목요일</span>
-			</div>
+			<c:forEach items="${days}" var="day" varStatus="status">
+				<div class="plannerDetailDateInfoFirstId" data-date="${day}">
+					<span>DAY ${status.count} | <fmt:formatDate value="${day}" pattern="MM.dd E요일" /></span>
+				</div>
+			</c:forEach>
 			<div class="plannerDetailDateInfo">
 			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
 				<div class="plannerDetailDateInfoTitle">
@@ -108,6 +109,23 @@
 	
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+
+// DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
+var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
+var plans_current = 1;
+
+function plansChange(n){
+    n -= 1;
+    for(var i = 0; i < planslide.length; i++){
+        planslide[i].style.display = "none";
+    }
+    planslide[n].style.display = "block";
+}
+
+plansChange(plans_current);
+
+</script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
 <script>
 //마커를 담을 배열입니다

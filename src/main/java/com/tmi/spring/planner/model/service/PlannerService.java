@@ -15,6 +15,6 @@ public interface PlannerService {
 
 	List<Planner> findPlannerByEmail(String memberEmail);
 
-	List<Planner> findPlanner();
+	List<Planner> findPlannerBypNo(int pNo);
 
 }

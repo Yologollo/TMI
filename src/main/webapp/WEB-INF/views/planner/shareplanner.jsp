@@ -22,7 +22,7 @@
 		<div id="menuContainer">
 			<ul>
 				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myPlanner">My 플래너</a>
+					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
 				<li class="plannerMenuli">
