@@ -103,6 +103,19 @@ public class PlannerController {
 		return "/planner/detailplanner";
 	}
 	
+	@PostMapping("/deletePlanner.do")
+	public String deletePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
+		try {
+			
+			int result = plannerService.deletePlanner(pNo);
+						
+		} catch (Exception e) {
+			log.error("Planner 삭제 오류", e);
+			throw e;
+		}
+		return "redirect:/planner/myplanner";
+	}
+	
 	@GetMapping("/sharePlanner")
 	public String sharePlanner() {
 		log.info("GET / 요청!");

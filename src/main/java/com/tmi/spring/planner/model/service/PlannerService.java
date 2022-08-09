@@ -17,4 +17,6 @@ public interface PlannerService {
 
 	List<Planner> findPlannerBypNo(int pNo);
 
+	int deletePlanner(int pNo);
+
 }
