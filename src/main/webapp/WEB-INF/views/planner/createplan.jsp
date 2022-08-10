@@ -49,36 +49,23 @@
 					<span>DAY ${status.count} | <fmt:formatDate value="${day}" pattern="MM.dd E요일" /></span>
 				</div>
 			</c:forEach>
-			<div class="plannerDetailDateInfo">
+			
+ 			<!-- <div class="plannerDetailDateInfo">
 			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
 				<div class="plannerDetailDateInfoTitle">
-					<span>1.</span>				
-					<span>KH정보교육원</span>
+					<span class="plannerDetailDateInfoTitleNumberSpan">1.</span>				
+					<span class="plannerDetailDateInfoTitleSpan">KH정보교육원</span>
 				</div>
 				<div class="plannerDetailDateInfoTime">
-					<label for="">시간</label>
-					<input type="time" class="form-control" placeholder="시간">
+					<label for="" class="plannerDetailDateInfoTimeLabel">시간</label>
+					<input type="time" class="form-control" placeholder="시간" class="plannerDetailDateInfoTimeInput">
 				</div>
 				<div class="plannerDetailDateInfoMemo">
-					<label for="">메모</label>
-					<input type="text" class="form-control" placeholder="메모">				
+					<label for="" class="plannerDetailDateInfoMemoLabel">메모</label>
+					<input type="text" class="form-control" placeholder="메모" class="plannerDetailDateInfoMemoInput">				
 				</div>
-			</div>
-			<div class="plannerDetailDateInfo">
-			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
-				<div class="plannerDetailDateInfoTitle">
-					<span>2.</span>				
-					<span>야호</span>
-				</div>
-				<div class="plannerDetailDateInfoTime">
-					<label for="">시간</label>
-					<input type="time" class="form-control" placeholder="시간">
-				</div>
-				<div class="plannerDetailDateInfoMemo">
-					<label for="">메모</label>
-					<input type="text" class="form-control" placeholder="메모">				
-				</div>
-			</div>
+			</div>  -->
+
 		</div>
 		<div id="plannerDetailPlace">
 			<div class="map_wrap">
@@ -152,6 +139,64 @@ function plansChange(n){
 
 plansChange(plans_current);
 
+// 장소 검색 후 추가 버튼 클릭시 일정 부분에 일정 추가하는 함수
+function planInsert(place_name, place_y, place_x){
+    var parent =  $('.plannerDetailDateInfoFirstId[style*="display: block"]');
+    var data_date = parent.attr('data-date');
+    var num = parent.children().length; // 하위 엘리먼트기에 일정 - 제목 (DAY) 부분도 포함됨
+
+   if(num < 10){ // 일정은 9개까지만 추가 가능
+       parent.append(getHtml(place_name, place_y, place_x, num, data_date));
+   } else{
+       alert("일정은 최대 9개로 제한됩니다.");
+   }
+}
+
+// 일정 추가시 일정 관련 <div> 코드 생성해주는 함수
+function getHtml(place_name, place_y, place_x, num, data_date){
+    var div = "<div class=\"plannerDetailDateInfo\" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
+    div += "<button type=\"button\" class=\"plannerDetailDateInfoClose btn-close\" onclick=\"planDelete(\'" + num +  "\')\"></button>";
+    div += "<div class=\"plannerDetailDateInfoTitle\">";
+    div += "<span class=\"plannerDetailDateInfoTitleNumberSpan\">" + num + ". " +"</span>";
+	div += "<span class=\"plannerDetailDateInfoTitleSpan\">" + place_name + "</span>";
+	div += "</div>";
+	div += "<div class=\"plannerDetailDateInfoTime\">";
+	div += "<span class=\"plannerDetailDateInfoTimeLabel\">시간</span>";
+	div += "<input type=\"time\" class=\"form-control\" placeholder=\"시간\" class=\"plannerDetailDateInfoTimeInput\">";
+	div += "</div>";
+	div += "<div class=\"plannerDetailDateInfoMemo\">";
+	div += "<span class=\"plannerDetailDateInfoMemoLabel\">메모</span>";
+	div += "<input type=\"text\" class=\"form-control\" placeholder=\"메모\" class=\"plannerDetailDateInfoMemoInput\">";
+	div += "</div>";
+	div += "</div>";
+	
+/*    div += "<div class=\"planI-plannum\">";
+    div += "<img src=\"_image/plan/num/number" + num + ".png\" class=\"planI-plannum__img-navy\">";
+    div += "<span class=\"planI-plannum__span--time\">시간</span>";
+    div += "<span class=\"planI-plannum__span--memo\">메모</span></div>";
+    div += " <div class=\"planI-plandetail\">";
+    div += " <span class=\"planI-plandetail__span--place\" title=\"" + place_name + "\">" + place_name + "</span>";
+    div += "<input type=\"time\" name=\"time\" class=\"planI-plandetail__input--time\" required >";
+    div += "<input type=\"text\" name=\"intro\" class=\"planI-plandetail__input--intro\" placeholder=\"20자 내로 메모를 입력해주세요.\"  maxlength=\"20\">";
+    div += "<button class=\"planI-plandetail__button--blue\" onclick=\"planDelete(\'" + num +  "\')\">&times;</button></div> </div>"; */
+/*     var div = "<div class="plannerDetailDateInfo" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
+    	div += "<button type="button" class="plannerDetailDateInfoClose btn-close"></button>";
+    	div += "<div class="plannerDetailDateInfoTitle">";
+    	div += "<span class="plannerDetailDateInfoTitleNumberSpan">1.</span>";
+    	div += "<span class="plannerDetailDateInfoTitleSpan">KH정보교육원</span>";
+    	div += "</div>";
+    	div += "<div class="plannerDetailDateInfoTime">";
+    	div += "<label for="" class="plannerDetailDateInfoTimeLabel">시간</label>";
+    	div += "<input type="time" class="form-control" placeholder="시간" class="plannerDetailDateInfoTimeInput">";
+    	div += "</div>";
+    	div += "<div class="plannerDetailDateInfoMemo">";
+    	div += "<label for="" class="plannerDetailDateInfoMemoLabel">메모</label>";
+    	div += "<input type="text" class="form-control" placeholder="메모" class="plannerDetailDateInfoMemoInput">";
+    	div += "</div>";
+    	div += "</div>"; */
+
+    return div;
+}
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
 <script>
