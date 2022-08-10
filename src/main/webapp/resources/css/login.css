@@ -35,30 +35,6 @@
 	font-family: 'Nanum+Gothic';
 }
 
-.kakao_login_btn{
-	background-color: #FEE500;
-    border:none;
-    color:#4a4a4a;
-    border-radius: 5px;
-    width:80%;
-    height:42px;
-    font-size: 12pt;
-    margin-top:50px;
-    font-family: 'Nanum+Gothic';
-    font-weight: 600;
-}
-.email_login_btn{
-	background-color: #E0E0E0;
-    border:none;
-    color:#4a4a4a;
-    border-radius: 5px;
-    width:80%;
-    height:42px;
-    font-size: 12pt;
-    margin-top:10px;
-    font-family: 'Nanum+Gothic';
-    font-weight: 600;
-}
 .form-box{
 	margin-left: 10%;
 	margin-right: 10%;
@@ -66,9 +42,10 @@
 .input-box{
     position:relative;
     margin:10px 0;
+    background:#fff;
 }
 .input-box > input{
-    background:transparent;
+    background:#fff;
     border:none;
     border-bottom: solid 1px #7c7c7c;
     padding:20px 0px 5px 0px;
@@ -76,8 +53,13 @@
     width:100%;
     font-family: 'Nanum+Gothic';
 }
+input:-webkit-autofill { 
+	-webkit-box-shadow: 0 0 0 30px #fff inset ; 
+	-webkit-text-fill-color: #000; 
+}
+
 input::placeholder{
-    color:transparent;
+    color:#fff;
 }
 input:placeholder-shown + label{
     color:#aaa;
@@ -221,4 +203,8 @@ input[id="ex_chk2"] + label {
 }
 .sign_up:hover {
 	color:#70B9E9;
+}
+.check{
+	font-size:13px;
+	float:right;
 }

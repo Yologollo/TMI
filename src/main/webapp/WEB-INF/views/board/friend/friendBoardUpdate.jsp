@@ -12,7 +12,7 @@
  -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="글 작성" name="title" />
+	<jsp:param value="게시글 수정" name="title" />
 </jsp:include>
 <!-- include libraries(jQuery, bootstrap) -->
 
@@ -27,16 +27,32 @@
 	}
 </style>
 <div id="commonMain">
- 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardEnroll.do" method="POST" enctype="multipart/form-data">
-		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="fbTitle" id="title" required>
+ 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do" method="POST" enctype="multipart/form-data">
+		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" required>
 		<input type="text" class="form-control" name="fbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
+		
+		<c:if test="${not empty insertFriendBoard.attachments}">
+			<c:forEach items="${insertFriendBoard.attachments}" var="attach" varStatus="vs">
+				<div class="btn-group-toggle pb-1" data-toggle="buttons">
+	            	<label class="btn btn-outline-danger btn-block" title="${attach.fbaOriginalFilename} 삭제">
+	                	<input type="checkbox" id="delFile${vs.count}" name="delFile" value="${attach.fbaNo}">
+						<c:if test="${fn:length(attach.fbaOriginalFilename) ge 30}">
+							${fn:substring(attach.fbaOriginalFilename, 0, 30)}... 삭제
+						</c:if> 
+						<c:if test="${fn:length(attach.fbaOriginalFilename) lt 30}">
+							${attach.fbaOriginalFilename} 삭제
+						</c:if>
+	            	</label>
+	        	</div>
+			</c:forEach>
+		</c:if>
 		
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		
-	  	<textarea id="summernote" name="fbContent"></textarea>
+		<textarea id="summernote" name="fbContent">${insertFriendBoard.fbContent}</textarea>
 	  	
 		<br /><br />
 		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >

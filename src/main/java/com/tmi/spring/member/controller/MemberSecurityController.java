@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,15 +30,15 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
- * @생성 김용민
- * @작업 김용민
+ * @생성 김용민 최윤서
+ * @작업 김용민 최윤서
  *
  */
 
 @Controller
 @Slf4j
 @RequestMapping("/login")
-@SessionAttributes({"loginMember", "next"})
+@SessionAttributes({"loginMember"})
 public class MemberSecurityController {
 	@Autowired
 	MemberService memberService;
@@ -45,6 +46,9 @@ public class MemberSecurityController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	String swalTitle = null;
+	String swalIcon = null;
+	String swalText = null;
 	
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
@@ -55,18 +59,62 @@ public class MemberSecurityController {
 	public String memberEnroll() {
 		return "/member/login/memberEnroll";
 	}
+	
 	@GetMapping("/findPw.do")
 	public String findPw() {
 		return "/member/login/findPw";
 	}
+	
+	@GetMapping("/findPwUpdate.do")
+	public String findPwUpdate() {
+		return "/member/login/findPwUpdate";
+	}
+	
+	@PostMapping("/findPwUpdate.do")
+	public String findPwUpdate(@RequestParam String mEmail, @RequestParam String mPassword, RedirectAttributes redirectAttr) {
+		try {
+			mEmail = mEmail.replace(",", "");
+			Member member = memberService.emailChk(mEmail);
+			String rawPassword = member.getMPassword();
+			String encryptedPassword = bcryptPasswordEncoder.encode(rawPassword);
+			member.setMPassword(encryptedPassword);
+			log.debug("member = {}",member);
+			if(member != null) {
+				int result = memberService.findPwUpdate(member);
+			}
+			redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return "redirect:/login/memberLogin.do";
+	}
+	
 	@PostMapping("/findPw.do")
-	public String findPw(@RequestParam String mEmail) {
-		System.out.println("폼에서 받아온 email 값: " + mEmail);
-		return null;
+	public String findPw(@RequestParam String mEmail, @RequestParam String mNickName,RedirectAttributes redirectAttr) {
+		log.debug("mEmail,mNickName = {}{}", mEmail, mNickName);
+		try {
+			Member member = memberService.emailChk(mEmail);
+			log.info("member = {}", member);
+			
+			if(member != null && mNickName.equals(member.getMNickName())) {
+				redirectAttr.addAttribute("mEmail", mEmail);
+				redirectAttr.addFlashAttribute("msg", "인증성공🎉 비밀번호를 변경해주세요.");
+				return "redirect:/login/findPwUpdate.do";
+			}
+			else {
+				redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+				return "redirect:/login/findPw.do";
+			}
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 	@PostMapping("/loginSuccess.do")
-	public String loginSuccess(@AuthenticationPrincipal Member member, HttpSession session, Model model) {
+	public String loginSuccess(@AuthenticationPrincipal Member member, HttpSession session, Model model, RedirectAttributes redirectAttr) {
 		log.debug("loginSuccess");
 
 		// security redirect사용하기
@@ -76,7 +124,6 @@ public class MemberSecurityController {
 			location = savedRequest.getRedirectUrl();
 		
 		log.debug("location = {}", location);
-		
 //		return "redirect:" + location;
 		return "redirect:/";
 	}
@@ -93,9 +140,12 @@ public class MemberSecurityController {
 			
 			int result = memberService.insertMember(member);
 			
-			redirectAttr.addFlashAttribute("msgIcon", "success");
-			redirectAttr.addFlashAttribute("msgTitle", "회원가입");
-			redirectAttr.addFlashAttribute("msgContent", "성공적으로 회원가입했습니다.");
+			if(result > 0) {
+				redirectAttr.addFlashAttribute("msg", "환영합니다🤗 로그인을 진행해주세요.");
+			} else {
+				redirectAttr.addFlashAttribute("msg", "회원 가입 과정에서 문제가 발생했습니다.");
+			}
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +154,13 @@ public class MemberSecurityController {
 		return "redirect:/login";
 	}
 
+	//이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(String mEmail) {
+		return "/member/login/memberEnroll";
+	}
+		
 	@GetMapping("/checkEmail.do")
 	public ResponseEntity<?> checkEmail(@RequestParam String mEmail) {
 		Map<String, Object> map = new HashMap<>();

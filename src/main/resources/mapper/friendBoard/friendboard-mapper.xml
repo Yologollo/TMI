@@ -26,8 +26,9 @@
 		insert into 
 			tmi_friend_board 
 		values 
-			(seq_pb_no.nextval, null, #{fb_m_email}, #{fb_title}, sysdate, sysdate, 0, #{fb_content})
-		<selectKey keyProperty="fb_no" resultType="_int" order="AFTER">
+			(seq_pb_no.nextval, null, #{fbMEmail}, #{fbTitle}, sysdate, sysdate, 0, #{fbContent})
+			
+		<selectKey keyProperty="fbNo" resultType="_int" order="AFTER">
 			select
 				seq_pb_no.currval
 			from
@@ -40,9 +41,9 @@
 			tmi_friend_board_attachment 
 			(fba_no, fba_fb_no, fba_original_filename, fba_renamed_filename) 
 		values 
-			(seq_fba_no.nextval, #{fba_fb_no}, #{fba_original_filename}, #{fba_renamed_filename})
+			(seq_fba_no.nextval, #{fbaFbNo}, #{fbaOriginalFilename}, #{fbaRenamedFilename})
 	</insert>
-	
+	 
 	<resultMap id="FriendBoardMap" type="friendBoard">
 		<result column="fb_no" property="fb_no"/>
 		<result column="fb_p_no" property="fb_p_no"/>

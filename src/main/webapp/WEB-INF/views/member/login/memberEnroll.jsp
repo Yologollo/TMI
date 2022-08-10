@@ -31,6 +31,7 @@
 				                <span id="name_chk_already" style="color:red; display:none;">이름은 한글 2글자이상 입력해주세요.</span>
 							</div>
 			            </div>
+			            
 			 			<div class="input-box">
 			                <input id="mEmail" type="email" name="mEmail" placeholder="abcde@naver.com" required>
 			                <label for="mEmail">이메일</label>
@@ -40,11 +41,13 @@
 								<span class="email_chk_already" style="color:red; display:none;">이메일 형식이 맞지 않습니다.</span>
 								<input type="hidden" id="emailValid" value="0" /> <!-- 0-사용불가 1-사용가능 -->
 				            </div>
-			            </div>
+			            </div >
+
 			 			<div class="input-box">
 			                <input id="mPhone" type="number" name="mPhone" ng-focus="chkPhoneType('focus');" ng-blur="chkPhoneType('blur');" placeholder="예)010-1234-5678" required>
 			                <label for="mPhone">휴대폰</label>
 			            </div>
+			            
 			 			<div class="input-box">
 			                <input id="mNickName" type="text" name="mNickName" placeholder="2글자이상" required>
 			                <label for="mNickName">닉네임</label>
@@ -54,6 +57,7 @@
 								<input type="hidden" id="nicknameValid" value="0" /> <!-- 0-사용불가 1-사용가능 -->
 							</div>
 			            </div>
+			            
 			            <div class="input-box">
 			                <input id="mPassword" type="password" name="mPassword" placeholder="비밀번호" required>
 			                <label for="mPassword">비밀번호</label>
@@ -62,6 +66,7 @@
 				                <span id="pw_chk_already" style="color:red; display:none;">영문,숫자 조합 4 ~ 16글자 이상어야 합니다.</span>
 							</div>
 			            </div>
+			            
 			            <div class="input-box">
 			                <input id="passwordCheck" type="password" name="password" placeholder="비밀번호" required>
 			                <label for="passwordCheck">비밀번호 확인</label>
@@ -70,6 +75,7 @@
 				                <span id="pw2_chk_already" style="color:red; display:none;">비밀번호가 일치하지 않습니다.</span>
 							</div>
 			            </div>
+			            
 			            <div class="form_footer">
 			            	<span class="footer_policy">
 			            		통합 계정 및 서비스 이용약관 ( TMI ), 개인정보취급방침에 동의합니다.
@@ -79,6 +85,7 @@
 							  <label for="ex_chk2">이용약관 동의</label> 
 							</div>
 			            </div>
+			            
 			            <div class="signup_box">
 			            	<hr class="signup_line">
 			            	<span class="signup_title">회원가입</span>
@@ -278,7 +285,6 @@ document.querySelector("#mEmail").addEventListener('keyup', (e) => {
 const empRex = /\s/g;
 const mNickNameRex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
 const mNameRex = /^[가-힣]{2,}$/;
-
 const mPasswordRex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/;
 const mPhoneRex = /^010\d{8}$/;
 
