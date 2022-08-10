@@ -15,56 +15,107 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
+<script>
+
+$(document).ready(function() {
+	$("#btnPlannerSave").click(function() {
+		var date = [];
+		var memo = [];
+		var y = [];
+		var x = [];
+		var time = [];
+		
+		var isValid = true;
+		
+		if(isValid == true){
+            $('.plannerDetailDateInfoFirstId').each(function(i) {
+                date.push($(this).attr("data-date"));
+            });
+            
+            $('.plannerDetailDateInfoMemoInput').each(function(i) {
+                if($(this).val() == null){
+                    memo.push(" ");
+                } else{
+                    memo.push($(this).val());
+                }
+            });
+
+            $('.plannerDetailDateInfoFirstId').each(function(i) {
+                y.push($(this).attr("data-y"));
+            });
+
+            $('.plannerDetailDateInfoFirstId').each(function(i) {
+                x.push($(this).attr("data-x"));
+            });
+
+            $('.plannerDetailDateInfoTimeInput').each(function(i) {
+                time.push($(this).val());
+            });
+
+            for(var i = 0; i < time.length; i++){
+                if(time[i] == "") {
+                    alert("시간은 필수 입력 항목입니다.");
+                    return false;
+                }
+            }
+            
+            $.ajax({
+                url:"${pageContext.request.contextPath}/planner/savePlanner.do?pNo=${planner.PNo}",
+                data:{
+                    date : date,
+                    memo : memo,
+                    y : y,
+                    x : x,
+                    time : time
+                },
+                type:"post",
+                success: function (data) {
+                    location.href="${pageContext.request.contextPath}/" + data;
+                }
+            });
+		}
+	});
+});
+</script>
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
+			<input type="text" value="${planner.PNo}"/>
 		</div>
 	</div>
 
-	<form action="${pageContext.request.contextPath}/planner/savePlanner.do" name="plannerSaveFrm" method="POST">
+<%-- 	<form action="${pageContext.request.contextPath}/planner/savePlanner.do" name="plannerSaveFrm" method="POST">
 		<input type="hidden" name="pNo" />
-	</form>
+	</form> --%>
 	
 	<form action="${pageContext.request.contextPath}/planner/cnacelPlanner.do" name="plannerCancelFrm" method="POST">
 		<input type="hidden" name="pNo" />
 	</form>
 
 	<div id=palnnerInfo>
+	
 		<div id="palnnerDate">
 			<div id="palnnerDateInfoFirstId">
 				<span>일정</span>
 			</div>
+			
 			<c:forEach items="${days}" var="day" varStatus="status">
                 <div class="plannerDateInfo" data-date="${day}" onclick="plansChange(${status.count})">
                     <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
                     <fmt:formatDate value="${day}" pattern="MM.dd" />
                 </div>
             </c:forEach>
+            
 		</div>
 		<div id="plannerDetailDate">
+		
 			<c:forEach items="${days}" var="day" varStatus="status">
 				<div class="plannerDetailDateInfoFirstId" data-date="${day}">
 					<span>DAY ${status.count} | <fmt:formatDate value="${day}" pattern="MM.dd E요일" /></span>
 				</div>
 			</c:forEach>
-			
- 			<!-- <div class="plannerDetailDateInfo">
-			<button type="button" class="plannerDetailDateInfoClose btn-close"></button>
-				<div class="plannerDetailDateInfoTitle">
-					<span class="plannerDetailDateInfoTitleNumberSpan">1.</span>				
-					<span class="plannerDetailDateInfoTitleSpan">KH정보교육원</span>
-				</div>
-				<div class="plannerDetailDateInfoTime">
-					<label for="" class="plannerDetailDateInfoTimeLabel">시간</label>
-					<input type="time" class="form-control" placeholder="시간" class="plannerDetailDateInfoTimeInput">
-				</div>
-				<div class="plannerDetailDateInfoMemo">
-					<label for="" class="plannerDetailDateInfoMemoLabel">메모</label>
-					<input type="text" class="form-control" placeholder="메모" class="plannerDetailDateInfoMemoInput">				
-				</div>
-			</div>  -->
 
 		</div>
 		<div id="plannerDetailPlace">
@@ -116,14 +167,14 @@ document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
 });
 
 // 플래너 저장
-document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
+/* document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
 	btn.addEventListener('click', (e) => {
 		console.log(e.target);
 		console.log(e.target.dataset.pNo);
 		document.plannerSaveFrm.pNo.value = e.target.dataset.no;
 		document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
 	});
-});
+}); */
 
 // DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
 var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
@@ -150,6 +201,9 @@ function planInsert(place_name, place_y, place_x){
    } else{
        alert("일정은 최대 9개로 제한됩니다.");
    }
+    
+
+
 }
 
 // 일정 추가시 일정 관련 <div> 코드 생성해주는 함수
@@ -170,33 +224,26 @@ function getHtml(place_name, place_y, place_x, num, data_date){
 	div += "</div>";
 	div += "</div>";
 	
-/*    div += "<div class=\"planI-plannum\">";
-    div += "<img src=\"_image/plan/num/number" + num + ".png\" class=\"planI-plannum__img-navy\">";
-    div += "<span class=\"planI-plannum__span--time\">시간</span>";
-    div += "<span class=\"planI-plannum__span--memo\">메모</span></div>";
-    div += " <div class=\"planI-plandetail\">";
-    div += " <span class=\"planI-plandetail__span--place\" title=\"" + place_name + "\">" + place_name + "</span>";
-    div += "<input type=\"time\" name=\"time\" class=\"planI-plandetail__input--time\" required >";
-    div += "<input type=\"text\" name=\"intro\" class=\"planI-plandetail__input--intro\" placeholder=\"20자 내로 메모를 입력해주세요.\"  maxlength=\"20\">";
-    div += "<button class=\"planI-plandetail__button--blue\" onclick=\"planDelete(\'" + num +  "\')\">&times;</button></div> </div>"; */
-/*     var div = "<div class="plannerDetailDateInfo" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
-    	div += "<button type="button" class="plannerDetailDateInfoClose btn-close"></button>";
-    	div += "<div class="plannerDetailDateInfoTitle">";
-    	div += "<span class="plannerDetailDateInfoTitleNumberSpan">1.</span>";
-    	div += "<span class="plannerDetailDateInfoTitleSpan">KH정보교육원</span>";
-    	div += "</div>";
-    	div += "<div class="plannerDetailDateInfoTime">";
-    	div += "<label for="" class="plannerDetailDateInfoTimeLabel">시간</label>";
-    	div += "<input type="time" class="form-control" placeholder="시간" class="plannerDetailDateInfoTimeInput">";
-    	div += "</div>";
-    	div += "<div class="plannerDetailDateInfoMemo">";
-    	div += "<label for="" class="plannerDetailDateInfoMemoLabel">메모</label>";
-    	div += "<input type="text" class="form-control" placeholder="메모" class="plannerDetailDateInfoMemoInput">";
-    	div += "</div>";
-    	div += "</div>"; */
+
 
     return div;
 }
+
+// 일정 부분에서 삭제(X) 버튼 클릭시 해당 div 삭제
+function planDelete(num){
+    var parent =  $('.plannerDetailDateInfoFirstId[style*="display: block"]');
+    var kid = parent.children().eq(num); // 일정 부분에 제목도 자식에 포함되기에 index +1
+    var next_kids = kid.nextAll();
+
+    kid.detach();
+
+    next_kids.each(function (index, element){
+        var btn = "planDelete(" + num + ")";
+        $(this).find('button').attr("onclick", btn);
+        ++ num;
+    });
+}
+
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
 <script>

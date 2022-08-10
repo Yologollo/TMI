@@ -201,8 +201,8 @@
 }
 
 .plannerDetailDateInfoClose {
+	position: sticky;
 	float: right;
-	position: relative;
 }
 
 .plannerDetailDateInfoFirstId {

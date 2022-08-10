@@ -24,6 +24,8 @@ public interface PlannerDao {
 
 	@Delete("delete from tmi_planner where p_no = #{pNo}")
 	int deletePlanner(int pNo);
+
+	int savePlannerPlan(int pNo);
 	
 	
 

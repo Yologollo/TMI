@@ -19,4 +19,6 @@ public interface PlannerService {
 
 	int deletePlanner(int pNo);
 
+	int savePlannerPlan(int pNo);
+
 }
