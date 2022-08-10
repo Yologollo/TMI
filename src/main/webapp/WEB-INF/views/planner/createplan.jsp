@@ -31,28 +31,6 @@
 		<input type="hidden" name="pNo" />
 	</form>
 
-	<script>
-	// 플래너 닫기
-	document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			console.log(e.target);
-			console.log(e.target.dataset.pNo);
-			document.plannerCancelFrm.pNo.value = e.target.dataset.no;
-			document.plannerCancelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
-		});
-	});
-	
-	// 플래너 저장
-	document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			console.log(e.target);
-			console.log(e.target.dataset.pNo);
-			document.plannerSaveFrm.pNo.value = e.target.dataset.no;
-			document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
-		});
-	});
-	</script>
-
 	<div id=palnnerInfo>
 		<div id="palnnerDate">
 			<div id="palnnerDateInfoFirstId">
@@ -139,6 +117,26 @@
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
+
+// 플래너 닫기
+document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		console.log(e.target);
+		console.log(e.target.dataset.pNo);
+		document.plannerCancelFrm.pNo.value = e.target.dataset.no;
+		document.plannerCancelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+	});
+});
+
+// 플래너 저장
+document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		console.log(e.target);
+		console.log(e.target.dataset.pNo);
+		document.plannerSaveFrm.pNo.value = e.target.dataset.no;
+		document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+	});
+});
 
 // DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
 var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
