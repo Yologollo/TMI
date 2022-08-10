@@ -23,4 +23,6 @@ public interface MemberDao {
 
 	Member NickNameChk(String mNickName);
 
+	int findPwUpdate(Member member);
+
 }

@@ -28,6 +28,7 @@
 			                <input id="mEmail" type="text" name="mEmail" placeholder="이메일">
 			                <label for="mEmail">이메일</label>
 			            </div>
+			            
 			            <div class="input-box">
 			                <input id="mPassword" type="password" name="mPassword" placeholder="비밀번호">
 			                <label for="mPassword">비밀번호</label>
