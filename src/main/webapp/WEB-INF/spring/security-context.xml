@@ -32,6 +32,7 @@
 
 		<intercept-url pattern="/login/memberLogin.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/findPw.do" access="isAnonymous()"/>
+		<intercept-url pattern="/login/findPwUpdate.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/memberEnroll.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/checkEmail.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/checkNickname.do" access="isAnonymous()"/>

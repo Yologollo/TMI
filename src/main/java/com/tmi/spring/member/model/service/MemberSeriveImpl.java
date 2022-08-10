@@ -39,6 +39,11 @@ public class MemberSeriveImpl implements MemberService {
 		return memberDao.NickNameChk(mNickName);
 	}
 
+	@Override
+	public int findPwUpdate(Member member) {
+		return memberDao.findPwUpdate(member);
+	}
+
 
 
 }

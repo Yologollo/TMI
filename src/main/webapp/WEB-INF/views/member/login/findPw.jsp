@@ -22,20 +22,17 @@
  			<div class="login_title">
  				<img src="${pageContext.request.contextPath}/resources/images/title_blue.png" id="title_img"/>
 		 		<h1>비밀번호 찾기</h1>
-		 		<form:form name="memberLoginFrm" method="POST">
+		 		<form:form name="findPwFrm" method="POST">
 		 			<div class="form-box" style="margin-top: 50px;">
 		 				<div class="input-box">
-			                <input id="mNickName" type="text" name="mNickName" placeholder="닉네임">
+			                <input id="mNickName" type="text" name="mNickName" placeholder="닉네임" required>
 			                <label for="mNickName">닉네임</label>
 			            </div>
 			            <div class="input-box">
-			                <input id="mEmail" type="email" name="mEmail" placeholder="이메일">
+			                <input id="mEmail" type="email" name="mEmail" placeholder="이메일" required>
 			                <label for="mEmail">이메일</label>
 			            </div>
-						
-			            <a href="${pageContext.request.contextPath}/login/memberEnroll.do" class="find_pw">새 계정 만들기</a>
-
-			            <input type="submit" value="찾기" onClick="location.href='${pageContext.request.contextPath}/login/findPw.do'">
+			            <input type="submit" value="찾기" id="submitButton">
 			            <div class="sign_up_box">
 			            	<p>로그인창으로 돌아가시겠습니까?</p>
 				            <a href="${pageContext.request.contextPath}/login/memberLogin.do" class="sign_up">로그인</a>
@@ -47,6 +44,20 @@
  	</div>
 </div>
 <script>
+$("#submitButton").click(function(){
+	if ($("#mNickName").val() == '') {
+		swal.fire('닉네임 입력','닉네임을 입력해주세요.','warning');
+		$("#mNickName").select().focus();
+		return false;
+	}
+	if ($("#mEmail").val() == '') {
+		swal.fire('이메일 입력','이메일을 입력해주세요.','warning');
+		$("#mEmail").select().focus();
+		return false;
+	} else {
+		location.href = "location.href='${pageContext.request.contextPath}/login/findPw.do'";
+	};
+});
 
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>

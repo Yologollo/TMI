@@ -21,4 +21,6 @@ public interface MemberService {
 
 	Member NickNameChk(String mNickName);
 
+	int findPwUpdate(Member member);
+
 }
