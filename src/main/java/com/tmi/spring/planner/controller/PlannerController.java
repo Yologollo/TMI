@@ -55,18 +55,20 @@ public class PlannerController {
 		return "/planner/myplanner";
 	}
 	
-	// My 플래너 페이지 플래너 생성
+
 	@PostMapping("/createPlanner.do")
 	public String createPlanner(@ModelAttribute Planner planner, RedirectAttributes redirectAttr) {
 		try {
 			// 업무로직
 			int result = plannerService.createPlanner(planner);
 			log.debug("createplanner = {}", planner);
+			
 		} catch (Exception e) {
 			log.error("Planner 생성 오류", e);
-			throw e;
 		}
+
 		return "redirect:/planner/createplan.do?pNo=" + planner.getPNo();
+		
 	}
 	
 	// 플랜 페이지 작업
@@ -131,8 +133,22 @@ public class PlannerController {
 	// 플랜 페이지 저장
 	@PostMapping("/savePlanner.do")
 	public String savePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
-
+		try {						
+			Planner planner = plannerService.selectOnePlanner(pNo);
+			int result = plannerService.savePlannerPlan(pNo);
+			
+		} catch (Exception e) {
+			log.error("Plan 저장 오류", e);
+			throw e;
+		}
+		
 		return "redirect:/planner/detailPlanner.do?pNo=" + pNo;
+	}
+	
+	@PostMapping("/planInsert.do")
+	public void planInsert() {
+		
+
 	}
 	
 	@GetMapping("/sharePlanner")
