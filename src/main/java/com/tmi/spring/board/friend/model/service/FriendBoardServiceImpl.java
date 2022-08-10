@@ -38,14 +38,14 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	@Override
 	public int insertFriendBoard(InsertFriendBoard insertFriendBoard) {
 		int result = friendBoardDao.insertFriendBoard(insertFriendBoard);
-		log.debug("insertFriendBoard = {}", insertFriendBoard.getFb_no());
+		log.debug("insertFriendBoard = {}", insertFriendBoard.getFbNo());
 		
 		List<FriendBoardAttachment> attachments = insertFriendBoard.getAttachments();
 		if(!attachments.isEmpty())
 		{
 			for(FriendBoardAttachment attach : attachments)
 			{
-				attach.setFba_fb_no(insertFriendBoard.getFb_no());
+				attach.setFbaFbNo(insertFriendBoard.getFbNo());
 				result = friendBoardDao.insertAttachment(attach);
 			}
 		}
@@ -59,8 +59,8 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 		insertFriendBoard.setAttachments(attachments);
 		
 		return insertFriendBoard;
-	}
-	
+//		return friendBoardDao.selectOneFriendBoard(no);
 
+	}
 	
 }

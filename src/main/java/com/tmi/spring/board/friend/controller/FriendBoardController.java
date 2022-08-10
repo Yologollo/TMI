@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -70,15 +72,12 @@ public class FriendBoardController {
 	@GetMapping("/board/friend/friendBoardForm.do")
 	public void FriendBoardForm() {}
 	
-//	@RequestMapping(value = "/board/friend/friendBoardEnroll.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@PostMapping("/board/friend/friendBoardEnroll.do")
 	public String FriendBoardEnroll(InsertFriendBoard insertFriendBoard, 
 									@RequestParam("upFile")MultipartFile[] upFiles, 
 									RedirectAttributes redirectAttr) {
 		try {
 			log.debug("friendBoard = {}", insertFriendBoard);
-//			log.debug("application = {}", application);
-//			log.debug("saveDirectory = {}", saveDirectory);
 			
 			String saveDirectory = application.getRealPath("/resources/upload/friendboard");
 			
@@ -95,15 +94,13 @@ public class FriendBoardController {
 					upFile.transferTo(destFile);
 					
 					FriendBoardAttachment attach = new FriendBoardAttachment();
-					attach.setFba_original_filename(originalFilename);
-					attach.setFba_renamed_filename(renamedFilename);
+					attach.setFbaOriginalFilename(originalFilename);
+					attach.setFbaRenamedFilename(renamedFilename);
 					insertFriendBoard.addAttachment(attach);
 				}
 			}
 			
 			int result = friendBoardService.insertFriendBoard(insertFriendBoard);
-			
-//			redirectAttr.addFlashAttribute("msg","게시글을 성공적으로 등록했습니다.");
 			
 		} catch(IOException e) {
 			log.error("첨부파일 저장 오류", e);
@@ -119,17 +116,38 @@ public class FriendBoardController {
 	@GetMapping("/board/friend/friendBoardDetail.do")
 	public ModelAndView FriendBoardDetail(@RequestParam int no, ModelAndView mav) {
 		try {
+			log.debug("no = {}", no);			
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
 			log.debug("insertFriendBoard = {}", insertFriendBoard);
 			
 			mav.addObject("insertFriendBoard", insertFriendBoard);
 			mav.setViewName("board/friend/friendBoardDetail");
-			
+
 		} catch (Exception e) {
 			log.error("게시글 조회 오류", e);
 			throw e;
 		}
 		return mav;
+	}
+	
+	@GetMapping("/board/friend/friendBoardUpdate.do")
+	public void friendBoardUpdate(@RequestParam int no, Model model) {
+		try {
+			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
+			log.debug("insertFriendBoard = {}", insertFriendBoard);
+			
+			model.addAttribute("insertFriendBoard",insertFriendBoard);
+		} catch (Exception e) {
+			log.error("게시글 수정 폼 오류", e);
+			throw e;
+		}
+	}
+	
+	@PostMapping("/board/friend/friendBoardUpdate.do")
+	public String friendBoardUpdate(RedirectAttributes redirectAttr) {
+		
+		
+		return "redirect:/board/friend/friendBoardDetail.do?no";
 	}
 
 }
