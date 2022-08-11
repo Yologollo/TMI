@@ -28,6 +28,7 @@
 </style>
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do" method="POST" enctype="multipart/form-data">
+		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertFriendBoard.fbNo}" required>
 		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" required>
 		<input type="text" class="form-control" name="fbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
@@ -55,6 +56,7 @@
 		<textarea id="summernote" name="fbContent">${insertFriendBoard.fbContent}</textarea>
 	  	
 		<br /><br />
+		<input type="hidden" name="fbNo" value="${insertFriendBoard.fbNo}" />
 		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
 		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
 		<br /><br /><br />

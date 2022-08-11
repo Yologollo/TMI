@@ -3,6 +3,7 @@ package com.tmi.spring.board.friend.model.service;
 import java.util.List;
 
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
+import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
 public interface FriendBoardService {
@@ -14,5 +15,13 @@ public interface FriendBoardService {
 	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 
 	InsertFriendBoard selectOneFriendBoard(int no);
+
+	FriendBoardAttachment selectOneAttachment(int attachNo);
+
+	int deleteAttachment(int attachNo);
+
+	int updateFriendBoard(InsertFriendBoard insertFriendBoard);
+
+	int deleteFriendBoard(int no);
 
 }
