@@ -63,4 +63,31 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 
 	}
 	
+	@Override
+	public FriendBoardAttachment selectOneAttachment(int attachNo) {
+		return friendBoardDao.selectOneAttachment(attachNo);
+	}
+	
+	@Override
+	public int deleteAttachment(int attachNo) {
+		return friendBoardDao.deleteAttachment(attachNo);
+	}
+	
+	@Override
+	public int updateFriendBoard(InsertFriendBoard insertFriendBoard) {
+		int result = friendBoardDao.updateFriendBoard(insertFriendBoard);
+		
+		List<FriendBoardAttachment> attachments = insertFriendBoard.getAttachments();
+		if(!attachments.isEmpty()) {
+			for(FriendBoardAttachment attach : attachments)
+				result = friendBoardDao.insertAttachment(attach);
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteFriendBoard(int no) {
+		return friendBoardDao.deleteFriendBoard(no);
+	}
+	
 }

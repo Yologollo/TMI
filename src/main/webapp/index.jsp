@@ -31,7 +31,7 @@
  -->
      <div style="width:auto; height:100vh; border:1px solid blue; display:flex; margin:auto 0;"></div>
     <div>
-    <h1 class="section_title">${sessionScope.loginMember}${swalIcon}</h1>
+    <h1 class="section_title">${sessionScope.loginMember}</h1>
     <h2 class="section_subtitle">테스트 커밋</h2>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

@@ -2,18 +2,25 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,6 +51,9 @@ public class FriendBoardController {
 	
 	@Autowired
 	ServletContext application;
+	
+	@Autowired
+	ResourceLoader resourceLoader;
 
 	@GetMapping("/board/friend/friendBoard.do")
 	public ModelAndView FriendBoard(@RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
@@ -144,10 +154,101 @@ public class FriendBoardController {
 	}
 	
 	@PostMapping("/board/friend/friendBoardUpdate.do")
-	public String friendBoardUpdate(RedirectAttributes redirectAttr) {
+	public String friendBoardUpdate(
+			@ModelAttribute InsertFriendBoard insertFriendBoard,
+			@RequestParam("upFile") MultipartFile[] upFiles,
+			@RequestParam(value="delFile", required=false) int[] delFiles,
+			RedirectAttributes redirectAttr) throws Exception {
 		
+		String saveDirectory = application.getRealPath("/resources/upload/friendboard");
 		
-		return "redirect:/board/friend/friendBoardDetail.do?no";
+		try {
+				if(delFiles != null)
+				{
+					for(int attachNo : delFiles)
+					{
+						FriendBoardAttachment attach = friendBoardService.selectOneAttachment(attachNo);
+						log.debug("attach= {}", attach);
+						log.debug("insertFriendBoard = {}", insertFriendBoard);
+						
+						String renamedFilename = attach.getFbaRenamedFilename();
+						File delFile = new File(saveDirectory, renamedFilename);
+						if(delFile.exists())
+						{
+							delFile.delete();
+							log.debug("{}번 {}파일 삭제", attachNo, renamedFilename);
+						}
+						
+						int result = friendBoardService.deleteAttachment(attachNo);
+						log.debug("{}번 Attachment 레코드 삭제", attachNo);
+					}
+				}
+				
+				for(MultipartFile upFile : upFiles)
+				{
+					if(upFile.getSize() > 0)
+					{
+						FriendBoardAttachment attach = new FriendBoardAttachment();
+						attach.setFbaOriginalFilename(upFile.getOriginalFilename());
+						attach.setFbaRenamedFilename(HelloSpringUtils.getRenamedFilename(upFile.getOriginalFilename()));
+						attach.setFbaFbNo(insertFriendBoard.getFbNo());
+						insertFriendBoard.addAttachment(attach);
+						
+						File destFile = new File(saveDirectory, attach.getFbaRenamedFilename());
+						upFile.transferTo(destFile);
+					}
+				}
+				
+				int result = friendBoardService.updateFriendBoard(insertFriendBoard);
+				
+		}
+		catch(Exception e) {
+			log.error("게시글 수정 오류", e);
+			throw e;
+		}
+
+		return "redirect:/board/friend/friendBoardDetail.do?no=" + insertFriendBoard.getFbNo();
+	}
+	
+	@GetMapping(path = "/board/friend/fileDownload.do", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public Resource fileDownload(@RequestParam int no, HttpServletResponse response) throws Exception {
+		Resource resource = null;
+		try {
+			FriendBoardAttachment attach = friendBoardService.selectOneAttachment(no);
+			log.debug("attach = {}", attach);
+			
+			String saveDirectory = application.getRealPath("/resources/upload/friendboard");
+			File downFile = new File(saveDirectory, attach.getFbaRenamedFilename());
+			
+			String location = "file:" + downFile;
+			log.debug("location = {}",location);
+			resource = resourceLoader.getResource(location);
+			
+			String filename = URLEncoder.encode(attach.getFbaOriginalFilename(), "utf-8");
+//			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
+			
+		} catch (Exception e) {
+			log.error("파일 다운로드 오류", e);
+			throw e;
+		}
+		
+		return resource;
+	}
+	
+	@GetMapping("/board/friend/friendBoardDelete.do")
+	public String friendBoardDelete(@RequestParam int no) {
+		try {
+			log.debug("no = {}",no);
+			int result = friendBoardService.deleteFriendBoard(no);
+			
+		} catch (Exception e) {
+			log.error("게시판 삭제 오류",e);
+			throw e;
+		}
+		
+		return "redirect:/board/friend/friendBoard.do";
 	}
 
 }

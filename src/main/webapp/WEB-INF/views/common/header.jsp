@@ -30,8 +30,6 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
-	<!-- swal alert -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <script>
 	<c:if test="${!empty msg}">

@@ -30,6 +30,7 @@
 	}
 </style>
 <div id="commonMain">
+		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertFriendBoard.fbNo}" required>
 		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" required readonly>
  		<input type="text" class="form-control" name="fbMEmail" value="${insertFriendBoard.fbMEmail}" readonly required>
 		
@@ -37,7 +38,7 @@
 			<c:if test="${not empty insertFriendBoard.attachments}">
 				<c:forEach items="${insertFriendBoard.attachments}" var="attach">
 					<div class="btn-group-toggle pb-1" data-toggle="buttons">
-						<button type="button" id="downloadFile" class="btn btn-outline-success ">${attach.fbaOriginalFilename}</button>
+						<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
 					</div>
 				</c:forEach>
 			</c:if>
@@ -47,6 +48,7 @@
 
 		 <sec:authorize access="isAuthenticated()">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
 		 </sec:authorize> 
 
 		
@@ -76,6 +78,14 @@
 			[]
 		]
 	}); 
+ 	
+ 	document.querySelectorAll(".attach").forEach((btn) => {
+ 		btn.addEventListener("click", (e) => {
+ 			const attachNo = e.target.value;
+ 			console.log(attachNo);
+ 			location.href = `${pageContext.request.contextPath}/board/friend/fileDownload.do?no=\${attachNo}`;
+ 		});
+ 	});
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

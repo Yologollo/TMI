@@ -46,12 +46,12 @@
 <script>
 $("#submitButton").click(function(){
 	if ($("#mNickName").val() == '') {
-		swal.fire('닉네임 입력','닉네임을 입력해주세요.','warning');
+		alert('닉네임을 입력해주세요.');
 		$("#mNickName").select().focus();
 		return false;
 	}
 	if ($("#mEmail").val() == '') {
-		swal.fire('이메일 입력','이메일을 입력해주세요.','warning');
+		alert('이메일을 입력해주세요.');
 		$("#mEmail").select().focus();
 		return false;
 	} else {
