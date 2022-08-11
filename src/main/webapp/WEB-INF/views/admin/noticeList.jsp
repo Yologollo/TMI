@@ -60,9 +60,10 @@
 
 		<br><br><br><br><br><br>
 		<br><br><br><br><br><br>
+		<br><br><br>
 		
+</section>
 
-
-
+</div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

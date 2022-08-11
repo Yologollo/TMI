@@ -91,7 +91,7 @@
     </table>
     
     
-</body>
+
  	 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
