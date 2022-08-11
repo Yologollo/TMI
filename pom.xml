@@ -258,7 +258,14 @@
 			<artifactId>osdt_core</artifactId>
 			<version>21.5.0.0</version>
 		</dependency>
-	
+
+		<!-- Json Date Time 의존 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.13.1</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
