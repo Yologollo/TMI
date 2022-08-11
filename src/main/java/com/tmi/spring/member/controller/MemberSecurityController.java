@@ -46,10 +46,6 @@ public class MemberSecurityController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	String swalTitle = null;
-	String swalIcon = null;
-	String swalText = null;
-	
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
 		return "/member/login/memberLogin";

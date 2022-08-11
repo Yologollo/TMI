@@ -56,12 +56,12 @@
 
 $("#submitButton").click(function(){
 	if ($("#mPassword").val() == '') {
-		swal.fire('비밀번호','새로운 비밀번호를 입력해주세요.','warning' );
+		alert("새로운 비밀번호를 입력해주세요.")
 		$("#mPassword").select().focus();
 		return false;
 	}
 	if ($("#passwordCheck").val() == '') {
-		swal.fire('비밀번호 확인','비밀번호 확인을 해주세요.','warning' );
+		alert("위 입력한 비밀번호 확인해주세요.")
 		$("#passwordCheck").select().focus();
 		return false;
 	} else {
