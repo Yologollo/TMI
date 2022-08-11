@@ -21,7 +21,7 @@
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
-			<input type="text" value="${planner.PNo}"/>
+			<input type="hidden" value="${planner.PNo}"/>
 				
 		</div>
 	</div>
@@ -152,12 +152,13 @@ function planInsert(place_name, place_y, place_x){
 }
 
 // 일정 추가시 일정 관련 <div> 코드 생성해주는 함수
-function getHtml(place_name, place_y, place_x, num, data_date){
+function getHtml(place_name, place_y, place_x, num, data_date, ppTime){
 	
     var div = "<div class=\"plannerDetailDateInfo\" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
-    div += "<span class=\"data_dateSpan\">" + data_date + "</span>";
-    div += "<span class=\"place_ySpan\">" + place_y + "</span>";
-    div += "<span class=\"place_xSpan\">" + place_x + "</span>";
+    div += "<span class=\"data_dateSpan\" hidden=\"hidden\">" + data_date + "</span>";
+    div += "<span class=\"place_ySpan\" hidden=\"hidden\">" + place_y + "</span>";
+    div += "<span class=\"place_xSpan\" hidden=\"hidden\">" + place_x + "</span>";
+    div += "<span class=\"place_nameSpan\" hidden=\"hidden\">" + place_name + "</span>";
     div += "<button type=\"button\" class=\"plannerDetailDateInfoClose btn-close\" onclick=\"planDelete(\'" + num +  "\')\"></button>";
     div += "<div class=\"plannerDetailDateInfoTitle\">";
     div += "<span class=\"plannerDetailDateInfoTitleNumberSpan\">" + num + ". " +"</span>";
@@ -171,10 +172,9 @@ function getHtml(place_name, place_y, place_x, num, data_date){
 	div += "<span class=\"plannerDetailDateInfoMemoLabel\">메모</span>";
 	div += "<input type=\"text\" class=\"form-control plannerDetailDateInfoMemoInput\" name=\"ppMemo\" placeholder=\"메모\">";
 	div += "</div>";
+	div += "<input type=\"hidden\" class=\"form-control pNoClass\" name=\"pNo\">";
 	div += "</div>";
 	
-
-
     return div;
 }
 
@@ -199,77 +199,31 @@ function planDelete(num){
 
 $(document).ready(function() {
 	$("#btnPlannerSave").click(function() {
-		var date = [];
-		var place_name = [];
-		var ppMemo = [];
-		var place_y = [];
-		var place_x = [];
-		var ppTime = [];
-	
-		var isValid = true;
 		
-		if(isValid == true){
-            $('.data_dateSpan').each(function(i) {
-                date.push($(this).attr("data-date"));
-            });
-            
-            $('.plannerDetailDateInfoTitleSpan').each(function (i){
-            	place_name.push($(this).attr("place_name"));
-            });
-            
-            $('.plannerDetailDateInfoMemoInput').each(function(i) {
-                if($(this).val() == null){
-                	ppMemo.push(" ");
-                } else{
-                	ppMemo.push($(this).val());
-                }
-            });
+		var arr = document.querySelectorAll('.plannerDetailDateInfo');
+		var plans = [];
 
-            $('.place_ySpan').each(function(i) {
-            	place_y.push($(this).attr("data-y"));
-            });
+		arr.forEach((div) => {
+			
+			var [date, y, x, place_name] = div.children;
+			var ppTime = div.querySelector('.plannerDetailDateInfoTimeInput');
+			var ppMemo = div.querySelector('.plannerDetailDateInfoMemoInput');
+			var [pNo] = $("div").children('input');
+			
+		    plans.push({
+		        date : date.textContent,
+		        y : y.textContent,
+		        x : x.textContent,
+				place_name : place_name.textContent,
+				ppTime : ppTime.value,
+				ppMemo : ppMemo.value,
+				pNo : pNo.value
+		    });
+		});
+		console.log(plans);
 
-            $('.place_xSpan').each(function(i) {
-            	place_x.push($(this).attr("data-x"));
-            });
-
-            $('.plannerDetailDateInfoTimeInput').each(function(i) {
-                ppTime.push($(this).val());
-            });
-
-            /* for(var i = 0; i < time.length; i++){
-                if(time[i] == "") {
-                    alert("시간은 필수 입력 항목입니다.");
-                    return false;
-                }
-            } */
-            
-            console.log("x좌표 배열 = " + place_x);
-    	    console.log("y좌표 배열 = " + place_y);
-    	    console.log("메모 배열 = " + ppMemo);
-    	    console.log("날짜 배열 = " + date);
-    	    console.log("장소 배열 = " + place_name);
-    	    console.log("시간 배열 = " + ppTime);
-            
-/*             $.ajax({
-                url:"${pageContext.request.contextPath}/planner/savePlanner.do?pNo=${planner.PNo}",
-                data:{
-                	ppDate : date,
-                    ppPlaceName : title,
-                    ppMemo : memo,
-                    PpY : place_y,
-                    PpX : place_x,
-                    ppTime : time
-                },
-                type:"POST",
-                success: function (data) {
-                    location.href="${pageContext.request.contextPath}/" + data;
-                }
-            }); */
-		}
 	});
 });
-
 
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
