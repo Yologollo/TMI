@@ -21,7 +21,7 @@
  -->
 
 <div class="top-logo">
-  <span>공지사항</span>
+  <span>관리자</span>
 </div>
 <section id="container">
   <div id="Tadminboard-submenu" class="submenu">

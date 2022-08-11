@@ -23,7 +23,7 @@
  	<!-- <h1>회원관리</h1> -->
  
 <div class="top-logo">
-  <span>회원관리</span>
+  <span>관리자</span>
 </div>
 <section id="container">
   <div id="Tadminboard-submenu" class="submenu">

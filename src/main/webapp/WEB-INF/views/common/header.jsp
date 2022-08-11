@@ -99,13 +99,15 @@
                                 <i class="nav_icon"></i> 게시판
                             </a>
                         </li>
-
                         
+                         <!-- 관리자만 보임 -->
+                        <sec:authorize access="hasRole('ADMIN')">
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/admin/memberList.do" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 회원관리
                             </a>
                         </li>
+                        </sec:authorize>
                         <sec:authorize access="hasRole('ADMIN')">
 					    	<a data-bs-toggle="modal" href="#adminNoticeModal" role="button" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 채팅공지
