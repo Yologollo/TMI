@@ -30,11 +30,11 @@
 		values (
 			seq_pp_no.nextval,
 			#{pppNo},
-			default,
+			#{ppTime},
 			#{ppPlaceName},
 			#{ppMemo},
 			#{ppX},
 			#{ppY},
-			#{ppTime})
+			#{ppDate})
 	</insert>
 </mapper>

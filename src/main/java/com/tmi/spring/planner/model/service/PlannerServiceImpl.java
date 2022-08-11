@@ -64,8 +64,9 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 	
 	@Override
-	public int savePlannerPlan(int pNo) {
-		return plannerDao.savePlannerPlan(pNo);
+	public int savePlannerPlan(List<PlannerPlan> planList) {
+		return plannerDao.savePlannerPlan(planList);
 	}
 	
+
 }
