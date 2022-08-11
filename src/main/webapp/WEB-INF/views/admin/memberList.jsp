@@ -17,8 +17,8 @@
 <div id="commonMain"> 
 
 <!-- 
-	생성 : 
-	작업 : 
+	생성 : 권민지
+	작업 : 권민지
  -->
  	<!-- <h1>회원관리</h1> -->
  
@@ -42,7 +42,6 @@
       	<h2>회원목록</h2>
         <div id="btn-sort-wrap">
           <button onclick="deleteBoard();">삭제</button>
-          
         </div>
       </div>
       
@@ -82,7 +81,7 @@
       </div> 
     </div>
 	<div id="pagebar">
-	<%-- 	<%= pagebar %> --%>
+		<%-- <%= pagebar %>  --%>
 	</div>
   </div>
 

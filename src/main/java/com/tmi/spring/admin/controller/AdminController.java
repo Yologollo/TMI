@@ -17,7 +17,13 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		log.info("GET / 요청!");
+		return "/admin/noticeList";
+	}
 
+	
 	
 //	@GetMapping("/members")
 //    public String list(Model model){
