@@ -29,9 +29,9 @@
   <div id="Tadminboard-submenu" class="submenu">
   
 	    <ul id="sub">
-	      <li><a href="" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a id="now_menu" class="current" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-	      </li>
+	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
+	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+	      
 	    </ul>
 
     

@@ -46,7 +46,7 @@
     /* 여기까지 submenu */
   
   #adminboard{
-    margin: -132px 0px 0px 230px;
+    margin: -132px 0px 0px 190px;
     width: 80%;
     
     display: flex;
@@ -181,7 +181,7 @@
       #search-wrap {
         display: flex;
         justify-content: center;
-        margin-top: 60px;
+        margin-top: 200px;
       } 
       #search {
         width: 220px;
