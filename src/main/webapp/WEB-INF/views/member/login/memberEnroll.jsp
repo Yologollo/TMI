@@ -107,7 +107,7 @@ $("#submitButton").click(function(){
 		location.href = "location.href='${pageContext.request.contextPath}/login/memberEnroll.do'";
 	} else {
 		if(!$("#ex_chk2").is(":checked")){
-			swal.fire('이용약관 동의', "약관을 동의하셔야 합니다.", 'warning');
+			alert("약관을 동의하셔야 합니다.");
 			$('#ex_chk2').focus();  // 해당 체크박스로 포커스 이동.
 			return false;
 		}
