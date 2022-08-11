@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 @Mapper
 public interface PlannerDao {
@@ -25,8 +26,8 @@ public interface PlannerDao {
 	@Delete("delete from tmi_planner where p_no = #{pNo}")
 	int deletePlanner(int pNo);
 
-	int savePlannerPlan(int pNo);
-	
+	int savePlannerPlan(List<PlannerPlan> planList);
+
 	
 
 }

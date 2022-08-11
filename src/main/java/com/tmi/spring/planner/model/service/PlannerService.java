@@ -1,9 +1,11 @@
 package com.tmi.spring.planner.model.service;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 public interface PlannerService {
 
@@ -19,6 +21,6 @@ public interface PlannerService {
 
 	int deletePlanner(int pNo);
 
-	int savePlannerPlan(int pNo);
+	int savePlannerPlan(List<PlannerPlan> planList);
 
 }

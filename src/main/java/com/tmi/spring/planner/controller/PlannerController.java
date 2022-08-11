@@ -1,15 +1,20 @@
 package com.tmi.spring.planner.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.member.model.dto.Member;
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 import com.tmi.spring.planner.model.service.PlannerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -131,19 +137,46 @@ public class PlannerController {
 	}
 	
 	// 플랜 페이지 저장
+//	@PostMapping("/savePlanner.do")
+//	public ResponseEntity<?> savePlanner(@RequestBody PlannerPlan plan) {	
+//		log.debug("planList = {}", plan);
+//		Map<String, Object> map = new HashMap<>();
+//		try {						
+//			int result = plannerService.savePlannerPlan(plan);
+//			map.put("msg", "플랜을 정상적으로 등록했습니다.");
+//			return ResponseEntity.ok(map); 
+//		} catch (Exception e) {
+//			log.error("Plan 저장 오류", e);
+//			map.put("msg", "플랜 등록 오류!");
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+//		}	
+//	}
+	
 	@PostMapping("/savePlanner.do")
-	public String savePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
+	public ResponseEntity<?> savePlanner(@RequestBody List<PlannerPlan> planList) {		
 		try {						
-			Planner planner = plannerService.selectOnePlanner(pNo);
-			int result = plannerService.savePlannerPlan(pNo);
-			
+			int result = plannerService.savePlannerPlan(planList);
+			log.debug("planList = {}", planList);
 		} catch (Exception e) {
 			log.error("Plan 저장 오류", e);
-			throw e;
 		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		
-		return "redirect:/planner/detailPlanner.do?pNo=" + pNo;
 	}
+	
+//	@PostMapping("/savePlanner.do")
+//	public String savePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
+//		try {						
+//			Planner planner = plannerService.selectOnePlanner(pNo);
+//			int result = plannerService.savePlannerPlan(pNo);
+//			
+//		} catch (Exception e) {
+//			log.error("Plan 저장 오류", e);
+//			throw e;
+//		}
+//		
+//		return "redirect:/planner/detailPlanner.do?pNo=" + pNo;
+//	}
 	
 	@PostMapping("/planInsert.do")
 	public void planInsert() {

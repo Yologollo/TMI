@@ -211,16 +211,29 @@ $(document).ready(function() {
 			var [pNo] = $("div").children('input');
 			
 		    plans.push({
-		        date : date.textContent,
-		        y : y.textContent,
-		        x : x.textContent,
-				place_name : place_name.textContent,
-				ppTime : ppTime.value,
+		    	ppDate : date.textContent,
+		        ppY : y.textContent,
+		        ppX : x.textContent,
+		        ppPlaceName : place_name.textContent,
 				ppMemo : ppMemo.value,
-				pNo : pNo.value
+				ppTime : ppTime.value,
+				pppNo : pNo.value,
 		    });
 		});
+		
 		console.log(plans);
+		
+ 		$.ajax({
+			url : '${pageContext.request.contextPath}/planner/savePlanner.do',
+			method : "POST",
+			data : JSON.stringify(plans),
+			contentType : 'application/json; charset=utf-8',
+			success(response){
+				console.log(response);
+				const {plans} = response
+			},
+			error : console.log
+		})
 
 	});
 });
