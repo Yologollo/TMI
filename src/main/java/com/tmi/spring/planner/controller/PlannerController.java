@@ -142,37 +142,7 @@ public class PlannerController {
 		return "redirect:/planner/myplanner";
 	}
 	
-	// 플랜 페이지 저장
-//	@PostMapping("/savePlanner.do")
-//	public ResponseEntity<?> savePlanner(@RequestBody PlannerPlan plan) {	
-//		log.debug("planList = {}", plan);
-//		Map<String, Object> map = new HashMap<>();
-//		try {						
-//			int result = plannerService.savePlannerPlanMap(plan);
-//			map.put("msg", "플랜을 정상적으로 등록했습니다.");
-//			return ResponseEntity.ok(map); 
-//		} catch (Exception e) {
-//			log.error("Plan 저장 오류", e);
-//			map.put("msg", "플랜 등록 오류!");
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
-//		}	
-//	}
-	
-	//ORA-01400 파라미터 널값
-//	@PostMapping("/savePlanner.do")
-//	public ResponseEntity<?> savePlanner(@RequestParam(value = "planList[]", required = false)List<PlannerPlan> planList) {		
-//		log.debug("planListTest = {}", planList);
-//		try {		
-//			
-//			int result = plannerService.savePlannerPlan(planList);
-//			log.debug("planList = {}", planList);
-//			
-//		} catch (Exception e) {
-//			log.error("Plan 저장 오류", e);
-//		}
-//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//	}
-	
+	// 플래너 플랜 저장
 	@PostMapping("/savePlanner.do")
 	public ResponseEntity<?> savePlanner(@RequestBody(required = false) List<PlannerPlan> planList) {		
 		log.debug("planListTest = {}", planList);
@@ -188,14 +158,6 @@ public class PlannerController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
-
-	
-	@PostMapping("/planInsert.do")
-	public void planInsert() {
-		
-
-	}
-	
 	@GetMapping("/sharePlanner")
 	public String sharePlanner() {
 		log.info("GET / 요청!");

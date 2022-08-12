@@ -15,6 +15,8 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
+ 
+ 
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
@@ -90,12 +92,11 @@
 			<!-- 카카오 API -->
 		</div>
 	</div>
-	
 </div>
 
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
-<script>
 
+<script>
 // 플래너 닫기
 document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
 	btn.addEventListener('click', (e) => {
@@ -106,15 +107,6 @@ document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
 	});
 });
 
-// 플래너 저장
-/* document.querySelectorAll("#btnPlannerSave").forEach((btn) => {
-	btn.addEventListener('click', (e) => {
-		console.log(e.target);
-		console.log(e.target.dataset.pNo);
-		document.plannerSaveFrm.pNo.value = e.target.dataset.no;
-		document.plannerSaveFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
-	});
-}); */
 
 // DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
 var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
@@ -193,12 +185,6 @@ function planDelete(num){
     });
 }
 
-</script>
-
-<script>
-
-
-
 $(document).ready(function() {
 	$("#btnPlannerSave").click(function() {
 
@@ -240,6 +226,7 @@ $(document).ready(function() {
 });
 
 </script>
+<!-- KAKAO API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b&libraries=services"></script>
 <script>
 //마커를 담을 배열입니다
