@@ -3,6 +3,7 @@ package com.tmi.spring.planner.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -27,6 +28,9 @@ public interface PlannerDao {
 	int deletePlanner(int pNo);
 
 	int savePlannerPlan(List<PlannerPlan> planList);
+
+	@Insert("insert into tmi_planner_plan values (seq_pp_no.nextval, #{pppNo}, #{ppTime}, #{ppPlaceName}, #{ppMemo}, #{ppX}, #{ppY}, #{ppDate})")
+	int savePlannerPlanMap(PlannerPlan plan);
 
 	
 

@@ -15,13 +15,12 @@
 	생성 : 김용민
 	작업 : 김용민
  -->
-
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
-			<input type="hidden" value="${planner.PNo}"/>
+			<input type="hidden" id="planner-No" value="${planner.PNo}"/>
 				
 		</div>
 	</div>
@@ -126,7 +125,9 @@ function plansChange(n){
     for(var i = 0; i < planslide.length; i++){
         planslide[i].style.display = "none";
     }
+    
     planslide[n].style.display = "block";
+    
 }
 
 plansChange(plans_current);
@@ -152,7 +153,7 @@ function planInsert(place_name, place_y, place_x){
 }
 
 // 일정 추가시 일정 관련 <div> 코드 생성해주는 함수
-function getHtml(place_name, place_y, place_x, num, data_date, ppTime){
+function getHtml(place_name, place_y, place_x, num, data_date){
 	
     var div = "<div class=\"plannerDetailDateInfo\" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
     div += "<span class=\"data_dateSpan\" hidden=\"hidden\">" + data_date + "</span>";
@@ -172,7 +173,6 @@ function getHtml(place_name, place_y, place_x, num, data_date, ppTime){
 	div += "<span class=\"plannerDetailDateInfoMemoLabel\">메모</span>";
 	div += "<input type=\"text\" class=\"form-control plannerDetailDateInfoMemoInput\" name=\"ppMemo\" placeholder=\"메모\">";
 	div += "</div>";
-	div += "<input type=\"hidden\" class=\"form-control pNoClass\" name=\"pNo\">";
 	div += "</div>";
 	
     return div;
@@ -197,9 +197,12 @@ function planDelete(num){
 
 <script>
 
+
+
 $(document).ready(function() {
 	$("#btnPlannerSave").click(function() {
-		
+
+		var pNo = document.querySelector('#planner-No');
 		var arr = document.querySelectorAll('.plannerDetailDateInfo');
 		var plans = [];
 
@@ -208,22 +211,21 @@ $(document).ready(function() {
 			var [date, y, x, place_name] = div.children;
 			var ppTime = div.querySelector('.plannerDetailDateInfoTimeInput');
 			var ppMemo = div.querySelector('.plannerDetailDateInfoMemoInput');
-			var [pNo] = $("div").children('input');
 			
 		    plans.push({
-		    	ppDate : date.textContent,
-		        ppY : y.textContent,
-		        ppX : x.textContent,
-		        ppPlaceName : place_name.textContent,
-				ppMemo : ppMemo.value,
-				ppTime : ppTime.value,
 				pppNo : pNo.value,
+				ppTime : ppTime.value,
+				ppPlaceName : place_name.textContent,
+				ppMemo : ppMemo.value,
+		        ppDate : date.textContent,
+		        ppY : y.textContent,
+		        ppX : x.textContent
 		    });
 		});
-		
+
 		console.log(plans);
 		
- 		$.ajax({
+   		$.ajax({
 			url : '${pageContext.request.contextPath}/planner/savePlanner.do',
 			method : "POST",
 			data : JSON.stringify(plans),
@@ -233,8 +235,7 @@ $(document).ready(function() {
 				const {plans} = response
 			},
 			error : console.log
-		})
-
+		}) 
 	});
 });
 

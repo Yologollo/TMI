@@ -1,10 +1,14 @@
 package com.tmi.spring.planner.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +90,9 @@ public class PlannerController {
 			
 			List<Date> days = plannerService.selectPlanDateList(planner.getPLeaveDate(), planner.getPReturnDate());
 			log.debug("days = {}", days);
-	
+			
+			
+			
 			model.addAttribute("days", days);
 			model.addAttribute("planner", planner);
 		} catch (Exception e){
@@ -142,7 +148,7 @@ public class PlannerController {
 //		log.debug("planList = {}", plan);
 //		Map<String, Object> map = new HashMap<>();
 //		try {						
-//			int result = plannerService.savePlannerPlan(plan);
+//			int result = plannerService.savePlannerPlanMap(plan);
 //			map.put("msg", "플랜을 정상적으로 등록했습니다.");
 //			return ResponseEntity.ok(map); 
 //		} catch (Exception e) {
@@ -154,14 +160,15 @@ public class PlannerController {
 	
 	@PostMapping("/savePlanner.do")
 	public ResponseEntity<?> savePlanner(@RequestBody List<PlannerPlan> planList) {		
+		log.debug("planList1 = {}", planList);
 		try {						
 			int result = plannerService.savePlannerPlan(planList);
 			log.debug("planList = {}", planList);
+			
 		} catch (Exception e) {
 			log.error("Plan 저장 오류", e);
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		
 	}
 	
 //	@PostMapping("/savePlanner.do")

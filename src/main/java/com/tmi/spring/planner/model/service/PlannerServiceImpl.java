@@ -31,21 +31,21 @@ public class PlannerServiceImpl implements PlannerService {
 	@Override
 	public List<Date> selectPlanDateList(Date pLeaveDate, Date pReturnDate) {
 		Calendar cal = Calendar.getInstance();
-        cal.setTime(pLeaveDate);
-        
-        int count = getDiffDayCount(pLeaveDate, pReturnDate);
-        cal.add(Calendar.DATE, -1);
-        List result = new ArrayList();
-        
-        for(int i = 0; i <= count; i++) {
-            cal.add(Calendar.DATE, 1);
-            result.add(cal.getTime());
-        }
+		
+	    int count = getDiffDayCount(pLeaveDate, pReturnDate);
+	    cal.add(Calendar.DATE, -1);
+	    List result = new ArrayList();
+	    
+	    for(int i = 0; i <= count; i++) {
+	        cal.add(Calendar.DATE, 1);
+	        Date sqlDate = new Date(cal.getTimeInMillis());
+	        result.add(sqlDate);
+	    }
         return result;
 	}
 	
 	public int getDiffDayCount(Date pLeaveDate, Date pReturnDate){
-        return (int)((pReturnDate.getTime() - pLeaveDate.getTime()) / 1000 / 60 / 60 / 24);
+        return (int) ((pReturnDate.getTime() - pLeaveDate.getTime()) / 1000 / 60 / 60 / 24);
     }
 
 	@Override
@@ -66,6 +66,11 @@ public class PlannerServiceImpl implements PlannerService {
 	@Override
 	public int savePlannerPlan(List<PlannerPlan> planList) {
 		return plannerDao.savePlannerPlan(planList);
+	}
+	
+	@Override
+	public int savePlannerPlanMap(PlannerPlan plan) {
+		return plannerDao.savePlannerPlanMap(plan);
 	}
 	
 
