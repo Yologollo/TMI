@@ -53,7 +53,7 @@ create table tmi_planner_plan (
     pp_p_no number not null,
     pp_time date,
     pp_place_name varchar2(2000),
-    pp_memo varchar2(2000),
+    pp_memo varchar2(2000) default null,
     pp_x varchar2(256) not null,
     pp_y varchar2(256) not null,
     pp_date date,
