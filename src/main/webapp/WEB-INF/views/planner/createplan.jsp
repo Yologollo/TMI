@@ -18,7 +18,7 @@
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
-			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button>
+			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}" onclick="location.href='${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}'">저장</button>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 			<input type="hidden" id="planner-No" value="${planner.PNo}"/>
 				
@@ -204,7 +204,7 @@ $(document).ready(function() {
 
 		var pNo = document.querySelector('#planner-No');
 		var arr = document.querySelectorAll('.plannerDetailDateInfo');
-		var plans = [];
+		var planList = [];
 
 		arr.forEach((div) => {
 			
@@ -212,7 +212,7 @@ $(document).ready(function() {
 			var ppTime = div.querySelector('.plannerDetailDateInfoTimeInput');
 			var ppMemo = div.querySelector('.plannerDetailDateInfoMemoInput');
 			
-		    plans.push({
+			planList.push({
 				pppNo : pNo.value,
 				ppTime : ppTime.value,
 				ppPlaceName : place_name.textContent,
@@ -223,16 +223,16 @@ $(document).ready(function() {
 		    });
 		});
 
-		console.log(plans);
+		console.log(planList);
 		
    		$.ajax({
 			url : '${pageContext.request.contextPath}/planner/savePlanner.do',
 			method : "POST",
-			data : JSON.stringify(plans),
+			data : JSON.stringify(planList),
 			contentType : 'application/json; charset=utf-8',
 			success(response){
 				console.log(response);
-				const {plans} = response
+				const {planList} = response
 			},
 			error : console.log
 		}) 

@@ -158,32 +158,37 @@ public class PlannerController {
 //		}	
 //	}
 	
+	//ORA-01400 파라미터 널값
+//	@PostMapping("/savePlanner.do")
+//	public ResponseEntity<?> savePlanner(@RequestParam(value = "planList[]", required = false)List<PlannerPlan> planList) {		
+//		log.debug("planListTest = {}", planList);
+//		try {		
+//			
+//			int result = plannerService.savePlannerPlan(planList);
+//			log.debug("planList = {}", planList);
+//			
+//		} catch (Exception e) {
+//			log.error("Plan 저장 오류", e);
+//		}
+//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//	}
+	
 	@PostMapping("/savePlanner.do")
-	public ResponseEntity<?> savePlanner(@RequestBody List<PlannerPlan> planList) {		
-		log.debug("planList1 = {}", planList);
-		try {						
+	public ResponseEntity<?> savePlanner(@RequestBody(required = false) List<PlannerPlan> planList) {		
+		log.debug("planListTest = {}", planList);
+		try {		
+
 			int result = plannerService.savePlannerPlan(planList);
 			log.debug("planList = {}", planList);
 			
 		} catch (Exception e) {
 			log.error("Plan 저장 오류", e);
 		}
+		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
-	
-//	@PostMapping("/savePlanner.do")
-//	public String savePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
-//		try {						
-//			Planner planner = plannerService.selectOnePlanner(pNo);
-//			int result = plannerService.savePlannerPlan(pNo);
-//			
-//		} catch (Exception e) {
-//			log.error("Plan 저장 오류", e);
-//			throw e;
-//		}
-//		
-//		return "redirect:/planner/detailPlanner.do?pNo=" + pNo;
-//	}
+
+
 	
 	@PostMapping("/planInsert.do")
 	public void planInsert() {
