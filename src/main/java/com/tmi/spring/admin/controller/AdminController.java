@@ -11,8 +11,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdminController {
 
-	@GetMapping("/memberList.do")
+	@GetMapping("/memberList.do")  //GET 요청 없는 경우의 화면
 	public void memberList() {
 		log.debug("/admin/memberList.do 요청!");
+		
 	}
+	
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		log.info("GET / 요청!");
+		return "/admin/noticeList";
+	}
+
+	
+	
+//	@GetMapping("/members")
+//    public String list(Model model){
+//        List<Member> members = memberService.findMembers();
+//        model.addAttribute("members", members);
+//        return "members/memberList";
+//    }
 }

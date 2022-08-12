@@ -15,13 +15,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
 <div id="commonMain"> 
-
 <!-- 
 	생성 : 권민지
 	작업 : 권민지
  -->
- 	<!-- <h1>회원관리</h1> -->
- 
+
 <div class="top-logo">
   <span>관리자</span>
 </div>
@@ -33,15 +31,13 @@
 	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	      
 	    </ul>
-
-    
-  </div>
+</div>
   <div id="adminboard">
     <div>
       <div id="adminboard-head">
-      	<h2>회원목록</h2>
-        <div id="btn-sort-wrap">
-          <button onclick="deleteBoard();">삭제</button>
+      	<h2>공지사항</h2>
+      	<div id="btn-sort-wrap">
+          <button onclick="">추가하기</button>
         </div>
       </div>
       
@@ -49,50 +45,25 @@
         <thead id="list-head">
           <tr>
           	<th></th>
-            <th>회원아이디</th>
-            <th>회원별명</th>
-            <th>회원이름</th>
+            <th>관리자</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
-        <tbody id="list-content">
+         <tbody id="list-content">
          <td><input type="checkbox" ></td>
          <td>hogged</td>
          <td>홍쥐디</td>
          <td>홍길동</td>
-       <%--  <%
-			for(int i = 0; i < list.size(); i++){ 
-		%> --%>
-       <%--    코드 수정하기!!!!!!!! ㅋㅋㅋㅋ
-        <tr class="" id="tr<%= list.get(i).getNo() %>" >
-          	<td><input type="checkbox" name="ck" class="ckbox" id="ck<%= list.get(i).getNo() %>" value="<%= list.get(i).getNo() %>"></td>
-            <td><%= list.get(i).getNo() %></td>
-            <td><a href="<%= request.getContextPath() %> memberlist <%= list.get(i).getNo() %>"><%= list.get(i).getTitle() %></a></td>
-            
-          </tr>
-  			<% 	} %>
-  			 --%>
-  			</tbody>
+        	</tbody>
       	</table>
+
+		<br><br><br><br><br><br>
+		<br><br><br><br><br><br>
+		<br><br><br>
 		
-
-      <div id="search-wrap">
-        <input type="text" id="search" name="search" placeholder="회원을 검색해보세요!"/>
-        <button type="button" onclick="searchMember();" id="btn" class="btn">검색</button>
-      </div> 
-    </div>
-	<div id="pagebar">
-		<%-- <%= pagebar %>  --%>
-	</div>
-  </div>
-
- 
 </section>
- 	
-    </table>
-    
-    
 
- 	 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
