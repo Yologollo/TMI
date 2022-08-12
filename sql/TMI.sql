@@ -54,13 +54,14 @@ create table tmi_planner_plan (
     pp_time date,
     pp_place_name varchar2(2000),
     pp_memo varchar2(2000),
-    pp_x number not null,
-    pp_y number not null,
+    pp_x varchar2(256) not null,
+    pp_y varchar2(256) not null,
+    pp_date date,
     
     constraint pk_pp_no primary key(pp_no),
     constraint fk_planner_plan_p_no foreign key(pp_p_no) references tmi_planner(p_no) on delete cascade
 );
-
+drop table tmi_planner_plan;
 create sequence seq_pp_no;
 
 -- 플래너 게시판
@@ -252,7 +253,7 @@ create table tmi_chat_room (
     cr_m_email varchar(256) not null,
     cr_fb_no number,
     cr_created_at date default sysdate,
-    cr_last_check number,
+    cr_last_check number default 0,
     cr_deleted_at date,
     
     constraint pk_chat_member primary key(cr_title, cr_m_email),
