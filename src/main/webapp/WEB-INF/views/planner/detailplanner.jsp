@@ -55,7 +55,7 @@ $(document).ready(function () {
 </script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css">
 <style>
 #plannerTitle {
 	border: 1px solid black;
