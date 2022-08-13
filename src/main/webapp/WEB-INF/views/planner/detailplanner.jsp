@@ -12,6 +12,13 @@
 </jsp:include>
 
 <script>
+// 페이지가 열릴때 페이지 새로고침
+window.onload = function() {
+	if(!window.location.hash) {
+		window.location = window.location + '#loaded';
+		window.location.reload();
+	}
+}
 // DAY 1 지도 도출
 $(document).ready(function () {
 	

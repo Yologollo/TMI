@@ -27,10 +27,6 @@
 				
 		</div>
 	</div>
-
-<%-- 	<form action="${pageContext.request.contextPath}/planner/savePlanner.do" name="plannerSaveFrm" method="POST">
-		<input type="hidden" name="pNo" />
-	</form> --%>
 	
 	<form action="${pageContext.request.contextPath}/planner/cnacelPlanner.do" name="plannerCancelFrm" method="POST">
 		<input type="hidden" name="pNo" />
@@ -186,6 +182,14 @@ function planDelete(num){
     });
 }
 
+var delay = (function () {
+    var timer = 0;
+    return function (callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
 $(document).ready(function() {
 	$("#btnPlannerSave").click(function() {
 
@@ -210,8 +214,6 @@ $(document).ready(function() {
 		    });
 		});
 
-		console.log(planList);
-		
    		$.ajax({
 			url : '${pageContext.request.contextPath}/planner/savePlanner.do',
 			method : "POST",
