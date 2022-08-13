@@ -35,6 +35,10 @@ a:active {
 	height: 100%;
 }
 
+#plannerDetailCardWrapper{
+	margin-top: 5%;	
+}
+
 #menuContainer{
 	border: 1px solid blue;
 	float: left;

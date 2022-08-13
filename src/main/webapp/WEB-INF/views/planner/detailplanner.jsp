@@ -14,11 +14,19 @@
 <script>
 // 페이지가 열릴때 페이지 새로고침
 window.onload = function() {
-	if(!window.location.hash) {
-		window.location = window.location + '#loaded';
-		window.location.reload();
-	}
+	setTimeout(function(){
+		(function() {
+			if( window.localStorage ) {
+		  	if( !localStorage.getItem('firstLoad') ) {
+			    localStorage['firstLoad'] = true;
+			    window.location.reload();
+		  	} else 
+		    	localStorage.removeItem('firstLoad');
+			}
+		})();
+	}, 500);
 }
+
 // DAY 1 지도 도출
 $(document).ready(function () {
 	
@@ -48,7 +56,15 @@ $(document).ready(function () {
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
+<style>
+#plannerTitle {
+	border: 1px solid black;
+	text-align:center;
+	font-size: 34px;
+	justify-content: center;
+}
 
+</style>
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -87,8 +103,9 @@ $(document).ready(function () {
 			
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
+					<div id="plannerTitle">${planner.PTitle}</div>
+					<div id="plannerDetailCardWrapper">
 					<div class="plannerDetailCard card">
-						
 						<c:forEach items="${days}" var="days" varStatus="status">
 							<div class="card-header">
 								<span class="plannerDetailCardDay">DAY ${status.count}</span>
@@ -106,7 +123,7 @@ $(document).ready(function () {
 									<div class="plannerDetailCardBodyInfo">
 										<blockquote class="blockquote mb-0">
 											<div class="plannerDetailCardBodyTimeWrapper">
-												<span class="plannerDetailCardBodyTime">시간 정보 뜨는 곳<fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
+												<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
 											</div>
 											<div class="plannerDetailCardBodyPlaceWrapper">
 												<span class="plannerDetailCardBodyPlaceNumber"><%=i%>. </span>
@@ -141,6 +158,7 @@ $(document).ready(function () {
 							</c:forEach>
 						</c:forEach>
 					</div>
+					</div>
 				</div>
 				
 				<div id="plannerAllWrapper">
@@ -155,7 +173,7 @@ $(document).ready(function () {
 							var mapContainer = document.getElementById('dayAllMap${status.count}');
 						    var mapOption = {
 					    		center: new kakao.maps.LatLng(36.25, 127.75),
-						        level: 13
+						        level: 14
 						    };
 						    var map = new kakao.maps.Map(mapContainer, mapOption);
 						    
@@ -227,7 +245,7 @@ $(document).ready(function () {
 	
 	                                        <c:if test="${nowDate eq openDate}">
 	                                            <div class="dayAllMapInfoNo" data-no="${plan.ppNo}">
-	                                                <span class="dayAllMapInfoSpan">${plan.ppPlaceName}</span>
+	                                                <span class="dayAllMapInfoSpan"><%=j%>. ${plan.ppPlaceName}</span>
 	                                            </div>
 	                                <% ++j;%>
 	                                        </c:if>

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class PlannerPlan {
 	private long ppNo;
 	private long pppNo;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "Asia/Seoul")
 	private Date ppTime;
 	private String ppPlaceName;
 	private String ppMemo;
