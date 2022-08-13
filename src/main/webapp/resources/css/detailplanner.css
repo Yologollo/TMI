@@ -39,6 +39,11 @@ a:active {
 	margin-top: 5%;	
 }
 
+#dayAllMapSelectId {
+	width: 100%; 
+	text-align: center;
+}
+
 #menuContainer{
 	border: 1px solid blue;
 	float: left;
