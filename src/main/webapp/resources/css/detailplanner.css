@@ -93,14 +93,14 @@ a:active {
 	border: 1px solid black;
 	width: 70%;
 	height: 100%;
-	display: table-cell;
+	float: left;
 }
 
 #plannerAllWrapper {
 	border: 1px solid blue;
 	width: 30%;
 	height: 100%;
-	display: table-cell;
+	float: right;
 }
 
 #plannerAllCard {
@@ -132,7 +132,7 @@ a:active {
 	float: right;
 	border: 1px solid blue;
 	width: 30%;
-	height: 100%;
+	height: 15vh;
 }
 
 .plannerDetailCardBody:last-child {
@@ -158,4 +158,13 @@ a:active {
 
 .plannerDetailCardTime { 
 	margin-left: 5%;
+}
+
+#allMap {
+	height: 100%; 
+	width: 100%;
+}
+
+.dayAllMapClass{
+	height: 30vh;
 }

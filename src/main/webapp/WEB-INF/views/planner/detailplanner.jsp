@@ -10,8 +10,38 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
+
+<script>
+// DAY 1 지도 도출
+$(document).ready(function () {
+	
+	var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
+    var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
+    var index = 0;
+
+    function show(n){
+    	
+        for(var i = 0; i < dayAllMapClass.length; i++){
+        	dayAllMapClass[i].style.display = "none";
+        }
+        
+        dayAllMapClass[n].style.display = "block";
+
+        for(var j = 0; j < dayAllMapInfo.length; j++){
+        	dayAllMapInfo[j].style.display = "none";
+        }
+        
+        dayAllMapInfo[n].style.display = "block";
+    }
+    
+    show(index);
+    
+});
+</script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
+
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -69,7 +99,7 @@
 									<div class="plannerDetailCardBodyInfo">
 										<blockquote class="blockquote mb-0">
 											<div class="plannerDetailCardBodyTimeWrapper">
-												<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
+												<span class="plannerDetailCardBodyTime">시간 정보 뜨는 곳<fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
 											</div>
 											<div class="plannerDetailCardBodyPlaceWrapper">
 												<span class="plannerDetailCardBodyPlaceNumber"><%=i%>. </span>
@@ -80,104 +110,126 @@
 											</footer>
 										</blockquote>
 									</div>
-									<div class="plannerDetailCardBodyMap">
-		
-									</div>
+									<div class="plannerDetailCardBodyMap" id="map${status.count}-${plan_status.count}"></div>
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+									<script>
+									    /* 지도 생성 */
+									    var mapContainer = document.getElementById('map${status.count}-${plan_status.count}');
+									    var mapOption = {
+								    		center: new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX}),
+									        level: 3
+									    };
+									    var map = new kakao.maps.Map(mapContainer, mapOption);
+									
+									    /* 마커 생성 */
+									    var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+									    var marker = new kakao.maps.Marker({
+									        position: markerPosition
+									    });
+									    marker.setMap(map);
+									</script>
 								</div>
 							 <% ++i;%>
 							 	</c:if>
 							</c:forEach>
 						</c:forEach>
-						
-						<!-- <div class="plannerDetailCardBody card-body">
-							<div class="plannerDetailCardBodyInfo">
-								<blockquote class="blockquote mb-0">
-									<div class="plannerDetailCardBodyTimeWrapper">
-										<span class="plannerDetailCardBodyTime">오전 11:22</span>
-									</div>
-									<div class="plannerDetailCardBodyPlaceWrapper">
-										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
-										<span class="plannerDetailCardBodyPlace">장소</span>
-									</div>
-									<footer class="blockquote-footer">
-										<span class="plannerDetailCardBodyMemo">메모</span>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="plannerDetailCardBodyMap">
-
-							</div>
-						</div>
-						<div class="plannerDetailCardBody card-body">
-							<div class="plannerDetailCardBodyInfo">
-								<blockquote class="blockquote mb-0">
-									<div class="plannerDetailCardBodyTimeWrapper">
-										<span class="plannerDetailCardBodyTime">오전 11:22</span>
-									</div>
-									<div class="plannerDetailCardBodyPlaceWrapper">
-										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
-										<span class="plannerDetailCardBodyPlace">장소</span>
-									</div>
-									<footer class="blockquote-footer">
-										<span class="plannerDetailCardBodyMemo">메모</span>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="plannerDetailCardBodyMap">
-
-							</div>
-						</div>
-						
-						<div class="card-header">
-							<span class="plannerDetailCardDay">DAY 2</span>
-							<span class="plannerDetailCardTime">2022.08.06 토요일</span>
-						</div>
-						<div class="plannerDetailCardBody card-body">
-							<div class="plannerDetailCardBodyInfo">
-								<blockquote class="blockquote mb-0">
-									<div class="plannerDetailCardBodyTimeWrapper">
-										<span class="plannerDetailCardBodyTime">오전 11:22</span>
-									</div>
-									<div class="plannerDetailCardBodyPlaceWrapper">
-										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
-										<span class="plannerDetailCardBodyPlace">장소</span>
-									</div>
-									<footer class="blockquote-footer">
-										<span class="plannerDetailCardBodyMemo">메모</span>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="plannerDetailCardBodyMap">
-
-							</div>
-						</div>
-						<div class="plannerDetailCardBody card-body">
-							<div class="plannerDetailCardBodyInfo">
-								<blockquote class="blockquote mb-0">
-									<div class="plannerDetailCardBodyTimeWrapper">
-										<span class="plannerDetailCardBodyTime">오전 11:22</span>
-									</div>
-									<div class="plannerDetailCardBodyPlaceWrapper">
-										<span class="plannerDetailCardBodyPlaceNumber">1. </span>
-										<span class="plannerDetailCardBodyPlace">장소</span>
-									</div>
-									<footer class="blockquote-footer">
-										<span class="plannerDetailCardBodyMemo">메모</span>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="plannerDetailCardBodyMap">
-
-							</div>
-						</div> -->
 					</div>
 				</div>
+				
 				<div id="plannerAllWrapper">
-					<div class="card" id="plannerAllCard">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">지도 정보</p>
-						</div>
+					<div class="allMap">
+					
+						<c:forEach items="${days}" var="days" varStatus="status">
+						
+							<div class="dayAllMapClass" id="dayAllMap${status.count}"></div>
+							
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+							<script>
+							var mapContainer = document.getElementById('dayAllMap${status.count}');
+						    var mapOption = {
+					    		center: new kakao.maps.LatLng(36.25, 127.75),
+						        level: 13
+						    };
+						    var map = new kakao.maps.Map(mapContainer, mapOption);
+						    
+							var polyline = new kakao.maps.Polyline({
+							                       map: map,
+							                       path: [],
+							                       strokeWeight: 3,
+							                       strokeColor: '#5882fa',
+							                       strokeOpacity: 1,
+							                       strokeStyle: 'solid'
+							                   });
+							 
+							 var a = 0;
+						    
+						    
+							 <c:forEach items="${plans}" var="plan" varStatus="plan_status">
+								 <fmt:formatDate value="${days}" pattern="yyyy-MM-dd" var="nowDate" />
+								 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+	
+								 <c:if test="${nowDate eq openDate}">
+								 	var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+								 	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png',
+								 	imageSize = new kakao.maps.Size(36, 37),
+								 	
+								 	imgOptions =  {
+	                                    spriteSize : new kakao.maps.Size(36, 691),
+	                                    spriteOrigin : new kakao.maps.Point(0, (a*46)+10),
+	                                    offset: new kakao.maps.Point(13, 37) 
+                                	},
+                                	
+	                                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+	                                marker = new kakao.maps.Marker({
+	                                    position: markerPosition,
+	                                    image: markerImage
+                                	});
+								 	
+                           			marker.setMap(map);
+
+
+		                            var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+		                            var path = polyline.getPath();
+		                            path.push(point);
+		                            polyline.setPath(path);
+
+                       				++a;
+                        		</c:if>
+                			</c:forEach>		    
+							</script>
+						</c:forEach>
+						
+						<div class="dayAllMapSelectWrapper">
+                            <select id="dayAllMapSelectId" class="dayAllMapSelectClass" onchange="mapChange()">
+                                <c:forEach items="${days}" var="days" varStatus="status">
+                                    <option value="${status.index}">DAY ${status.count}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+						
+						<div class="card">
+	                        <c:forEach items="${days}" var="days" varStatus="status">
+	                            <div class="card-body dayAllMapInfo">
+	
+	                                <% int j = 1;%>
+	
+	                                     <c:forEach items="${plans}" var="plan" varStatus="plan_status">
+	                                        <!-- 화면에서 보이면 주석처리 -->
+	                                        <fmt:formatDate value="${days}" pattern="yyyy-MM-dd" var="nowDate" />
+	                            			<fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+	
+	                                        <c:if test="${nowDate eq openDate}">
+	                                            <div class="dayAllMapInfoNo" data-no="${plan.ppNo}">
+	                                                <span class="dayAllMapInfoSpan">${plan.ppPlaceName}</span>
+	                                            </div>
+	                                <% ++j;%>
+	                                        </c:if>
+	
+	                                    </c:forEach>
+	                            </div>
+	                        </c:forEach>
+	                    </div>
+	                    
 					</div>
 				</div>
 			</div>
@@ -185,15 +237,39 @@
 	</div>
 
 </div>
+<script>
+
+</script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
+// 맵 변경
+function mapChange(){
+	
+    var dayAllMapSelectId = document.getElementById("dayAllMapSelectId");
+    var index = dayAllMapSelectId.options[dayAllMapSelectId.selectedIndex].value;
+    var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
+    var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
+
+    for(var i = 0; i < dayAllMapClass.length; i++){
+    	dayAllMapClass[i].style.display = "none";
+    }
+    
+    dayAllMapClass[index].style.display = "block";
+
+    for(var j = 0; j < dayAllMapInfo.length; j++){
+    	dayAllMapInfo[j].style.display = "none";
+    }
+    
+    dayAllMapInfo[index].style.display = "block";
+}
+
 // 플래너 삭제
 document.querySelectorAll("#btnDeletePlanner").forEach((btn) => {
 	btn.addEventListener('click', (e) => {
 		console.log(e.target);
 		console.log(e.target.dataset.pNo);
 		document.plannerDelFrm.pNo.value = e.target.dataset.no;
-		document.plannerDelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		document.plannerDelFrm.submit();
 	});
 });
 </script>
