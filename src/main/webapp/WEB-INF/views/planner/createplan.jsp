@@ -21,6 +21,7 @@
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}" onclick="location.href='${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}'">저장</button>
+			<%-- <button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button> --%>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 			<input type="hidden" id="planner-No" value="${planner.PNo}"/>
 				
@@ -221,7 +222,7 @@ $(document).ready(function() {
 				const {planList} = response
 			},
 			error : console.log
-		}) 
+		})
 	});
 });
 

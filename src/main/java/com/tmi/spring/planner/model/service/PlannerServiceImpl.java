@@ -1,6 +1,7 @@
 package com.tmi.spring.planner.model.service;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -37,10 +38,12 @@ public class PlannerServiceImpl implements PlannerService {
 	    List result = new ArrayList();
 	    
 	    for(int i = 0; i <= count; i++) {
-	        cal.add(Calendar.DATE, 1);
+	    	
+	    	cal.add(Calendar.DATE, 1);
 	        Date sqlDate = new Date(cal.getTimeInMillis());
 	        result.add(sqlDate);
 	    }
+
         return result;
 	}
 	
@@ -69,8 +72,8 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 	
 	@Override
-	public int savePlannerPlanMap(PlannerPlan plan) {
-		return plannerDao.savePlannerPlanMap(plan);
+	public List<PlannerPlan> selectPlannerPlanList(int pNo) {
+		return plannerDao.selectPlannerPlanList(pNo);
 	}
 	
 

@@ -30,7 +30,7 @@
 		<foreach item="item" collection="list" separator="UNION ALL " >
 			select
 				#{item.pppNo} as pp_p_no,
-				#{item.ppTime} as pp_time,
+				to_char(#{item.ppTime}, 'YYYY-MM-DD HH24:MI') as pp_time,
 				#{item.ppPlaceName} as pp_place_name,
 				#{item.ppMemo} as pp_memo,
 				#{item.ppX} as pp_x,
