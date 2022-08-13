@@ -29,8 +29,9 @@ public interface PlannerDao {
 
 	int savePlannerPlan(List<PlannerPlan> planList);
 
-	@Insert("insert into tmi_planner_plan values (seq_pp_no.nextval, #{pppNo}, #{ppTime}, #{ppPlaceName}, #{ppMemo}, #{ppX}, #{ppY}, #{ppDate})")
-	int savePlannerPlanMap(PlannerPlan plan);
+	@Select("select pp_no, pp_p_no, EXTRACT(HOUR FROM CAST(pp_time AS TIMESTAMP)) AS HOUR, pp_place_name, pp_memo, pp_x, pp_y, pp_date from tmi_planner_plan where pp_p_no = #{pNo}")
+	List<PlannerPlan> selectPlannerPlanList(int pNo);
+
 
 	
 

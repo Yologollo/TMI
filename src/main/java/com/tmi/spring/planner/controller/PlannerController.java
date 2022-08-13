@@ -88,10 +88,12 @@ public class PlannerController {
 			Planner planner = plannerService.selectOnePlanner(pNo);
 			log.debug("planner = {}", planner);
 			
+			log.debug("Before PLeaveDate = {}", planner.getPLeaveDate());
+			log.debug("Before PReturnDate = {}", planner.getPReturnDate());
 			List<Date> days = plannerService.selectPlanDateList(planner.getPLeaveDate(), planner.getPReturnDate());
+			log.debug("After PLeaveDate = {}", planner.getPLeaveDate());
+			log.debug("Aftet PReturnDate = {}", planner.getPReturnDate());
 			log.debug("days = {}", days);
-			
-			
 			
 			model.addAttribute("days", days);
 			model.addAttribute("planner", planner);
@@ -104,15 +106,24 @@ public class PlannerController {
 	@GetMapping("/detailPlanner.do")
 	public String detailPlanner(Planner planner, Model model) {
 		try {
+			planner = plannerService.selectOnePlanner(planner.getPNo());
+			log.debug("planner = {}", planner);
+			List<Date> days = plannerService.selectPlanDateList(planner.getPLeaveDate(), planner.getPReturnDate());
+			log.debug("days = {}", days);
+			List<PlannerPlan> plans = plannerService.selectPlannerPlanList(planner.getPNo());
+			log.debug("plans = {}", plans);
 			
-			int pNo = planner.getPNo();
-			log.debug("pNo = {}", pNo);
-			
-			List<Planner> plannerList = plannerService.findPlannerBypNo(pNo);
-			log.debug("plannerList = {}", plannerList);
-			
-			model.addAttribute("pNo", pNo);
-			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("planner", planner);
+	        model.addAttribute("days", days);
+	        model.addAttribute("plans", plans);
+//			int pNo = planner.getPNo();
+//			log.debug("pNo = {}", pNo);
+//			
+//			List<Planner> plannerList = plannerService.findPlannerBypNo(pNo);
+//			log.debug("plannerList = {}", plannerList);
+//			
+//			model.addAttribute("pNo", pNo);
+//			model.addAttribute("plannerList", plannerList);
 						
 		} catch (Exception e) {
 			log.error("Planner 조회 오류", e);

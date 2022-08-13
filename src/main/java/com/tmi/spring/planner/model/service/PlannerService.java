@@ -23,6 +23,6 @@ public interface PlannerService {
 
 	int savePlannerPlan(List<PlannerPlan> planList);
 
-	int savePlannerPlanMap(PlannerPlan plan);
+	List<PlannerPlan> selectPlannerPlanList(int pNo);
 
 }
