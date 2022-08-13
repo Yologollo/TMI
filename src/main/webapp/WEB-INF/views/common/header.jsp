@@ -41,6 +41,7 @@
 		<sec:authentication property="principal" var="loginMember" scope="page"/>
 		<script>
 			const mNickName = '${loginMember.MNickName}';
+			const mEmail = '${loginMember.MEmail}';
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -50,36 +51,6 @@
 <body>	
 
 <div id="container">
-    <!-- 관리자용 공지 modal -->
-	<div class="modal fade" id="adminNoticeModal" tabindex="-1" role="dialog" aria-labelledby="#adminNoticeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="adminNoticeModalLabel">Notice</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form name="adminNoticeFrm">
-	          <div class="form-group">
-	            <label for="send-to-name" class="col-form-label">받는이 :</label>
-	            <input type="text" class="form-control" id="send-to-name" placeholder="생략시 전체 접속회원에게 공지합니다.">
-	          </div>
-	          <div class="form-group">
-	            <label for="message-text" class="col-form-label">메세지 :</label>
-	            <textarea class="form-control" id="message-text"></textarea>
-	          </div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary" id="adminNoticeSendBtn">전송</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
 	<!-- header코드 들어갈 부분 -->
 	<header class="header" id="header">
             <nav class="nav container">
@@ -156,36 +127,6 @@
             </c:if>
 
 	</header>
-	<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="loginMember" scope="page"/>
-	<script>
-	/* modal */
-	document.querySelector("#adminNoticeSendBtn").addEventListener('click', (e) => {
-	const to = document.querySelector("#send-to-name").value;
-	const msg = document.querySelector("#message-text").value;
-	
-	
-	if(!msg) return;
-	
-	const payload = {
-		from : '${loginMember.MNickName}',
-		to,
-		msg,
-		time : Date.now(),
-		type : 'NOTICE'
-	};
-	console.log(payload);
-	/* 받는사람이 존재한다면 \${to} 특정사용자이름 보내주기 */
-	const url = to ? `/app/admin/notice/\${to}` : '/app/admin/notice'; 
-	
-	stompClient.send(url, null, JSON.stringify(payload));
-	
-	$(adminNoticeModal).modal('hide'); // 모달 숨기기
-	document.adminNoticeFrm.reset(); // 폼초기화
-	
-	});
-	</script>
-	</sec:authorize>
 	<script>
 	/* 로그아웃 a태그를 submit 폼제출 */
 	function logoutFrm() {
