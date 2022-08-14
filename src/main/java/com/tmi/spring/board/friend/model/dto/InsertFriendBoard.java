@@ -16,6 +16,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class InsertFriendBoard {
 	private List<FriendBoardAttachment> attachments = new ArrayList<>();
+	private List<FriendBoardComment> comments = new ArrayList<>();
 	
 	private int fbNo;
 	private int fbPNo;
@@ -25,16 +26,12 @@ public class InsertFriendBoard {
 	private LocalDateTime fbCreatedAt;
 	private LocalDateTime fbUpdatedAt;
 	private int fbReadCount;
-//	private int fb_no;
-//	private int fb_p_no;
-//	private String fb_m_email;
-//	private String fb_title;
-//	private String fb_content;
-//	private LocalDateTime fb_created_at;
-//	private LocalDateTime fb_updated_at;
-//	private int fb_read_count;
 	
 	public void addAttachment(@NonNull FriendBoardAttachment attach) {
 			attachments.add(attach);
+	}
+
+	public void setBoardComments(List<FriendBoardComment> comments) {
+			this.comments = comments;
 	}
 }

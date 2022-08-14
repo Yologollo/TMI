@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.board.friend.model.service.FriendBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
@@ -56,7 +58,7 @@ public class FriendBoardController {
 	ResourceLoader resourceLoader;
 
 	@GetMapping("/board/friend/friendBoard.do")
-	public ModelAndView FriendBoard(@RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView FriendBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			List<FriendBoard> list = friendBoardService.selectFriendBoardList(cPage, numPerPage);
@@ -124,12 +126,50 @@ public class FriendBoardController {
 	}
 	
 	@GetMapping("/board/friend/friendBoardDetail.do")
-	public ModelAndView FriendBoardDetail(@RequestParam int no, ModelAndView mav) {
+	public ModelAndView FriendBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			log.debug("no = {}", no);			
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
-			log.debug("insertFriendBoard = {}", insertFriendBoard);
+			log.debug("insertFriendBoard = {}", insertFriendBoard);			
 			
+			
+			Cookie[] cookies = request.getCookies();
+			int visitor = 0;
+			
+			for(Cookie cookie : cookies)
+			{
+				log.info(cookie.getName());
+				if(cookie.getName().equals("visit"))
+				{
+					visitor = 1;
+					
+					log.info("visit통과");
+					
+					if(cookie.getValue().contains(request.getParameter("no")))
+					{						
+						log.info("visit no통과");
+					}
+					else
+					{
+						cookie.setValue(cookie.getValue()+"_" + request.getParameter("no"));
+						cookie.setMaxAge(60*60*24);
+						response.addCookie(cookie);
+						int result = friendBoardService.updateReadCount(no);
+					}
+				}
+			}
+			
+			if(visitor == 0)
+			{
+				Cookie cookie1 = new Cookie("visit", request.getParameter("no"));
+				cookie1.setMaxAge(60*60*24);
+				response.addCookie(cookie1);
+				int result = friendBoardService.updateReadCount(no);
+			}
+			
+			
+			
+//	        int result = friendBoardService.updateReadCount(no);
 			mav.addObject("insertFriendBoard", insertFriendBoard);
 			mav.setViewName("board/friend/friendBoardDetail");
 
@@ -139,7 +179,7 @@ public class FriendBoardController {
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("/board/friend/friendBoardUpdate.do")
 	public void friendBoardUpdate(@RequestParam int no, Model model) {
 		try {
@@ -249,6 +289,39 @@ public class FriendBoardController {
 		}
 		
 		return "redirect:/board/friend/friendBoard.do";
+	}
+	
+	@PostMapping("/board/friend/friendBoardCommentEnroll.do")
+	public String friendBoardCommentEnroll(@RequestParam int fbcFbNo, @RequestParam String fbcMEmail, @RequestParam String fbcContent) {
+		try {
+			log.debug("fbNo = {}",fbcFbNo);
+			log.debug("fbMEmail = {}",fbcMEmail);
+			log.debug("fbcContent = {}",fbcContent);
+			
+			FriendBoardComment fbComment = new FriendBoardComment(0, fbcMEmail, fbcFbNo, null, fbcContent);
+			
+			int result = friendBoardService.insertFriendComment(fbComment);
+			
+		} catch (Exception e) {
+			log.error("댓글 작성 오류", e);
+			throw e;
+		}
+		return  "redirect:/board/friend/friendBoardDetail.do?no=" + fbcFbNo;
+	}
+	
+	@GetMapping("/board/friend/deleteComment.do")
+	public String friendBoarddeleteComment(@RequestParam int fbcFbNo, @RequestParam int fbcNo) {
+		try {
+			log.debug("fbcFbNo = {}", fbcFbNo);
+			log.debug("fbcNo = {}", fbcNo);
+			
+			int result = friendBoardService.deleteFriendBoardComment(fbcNo);
+			
+		} catch (Exception e) {
+			log.error("댓글 삭제 오류",e);
+			throw e;
+		}
+		return "redirect:/board/friend/friendBoardDetail.do?no=" + fbcFbNo;
 	}
 
 }

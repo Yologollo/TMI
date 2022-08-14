@@ -57,7 +57,7 @@ window.addEventListener('load', (e) => {
 			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
 				<tr data-no="${friendBoard.fb_no}">
 					<td>${friendBoard.fb_no}</td>
-					<td>${friendBoard.fb_title}</td>
+					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
 					<td>${friendBoard.m_nickname}</td>
 					<td>
 						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
