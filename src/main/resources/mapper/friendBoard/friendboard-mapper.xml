@@ -14,7 +14,8 @@
 		    fb.fb_created_at,
 		    fb.fb_updated_at,
 		    fb.fb_read_count,
-		    (select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount
+		    (select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount,
+		    (select count(*) from tmi_friend_board_comment where fbc_fb_no = fb.fb_no) commentCount
 		from
 		    tmi_friend_board fb join tmi_member m
 		        on fb_m_email = m.m_email
@@ -43,6 +44,13 @@
 		values 
 			(seq_fba_no.nextval, #{fbaFbNo}, #{fbaOriginalFilename}, #{fbaRenamedFilename})
 	</insert>
+	
+	<insert id="insertFriendComment">
+		insert into 
+			tmi_friend_board_comment 
+		values
+			(seq_fbc_no.nextval, #{fbcMEmail}, #{fbcFbNo}, sysdate, #{fbcContent})
+	</insert>
 	 
 	<resultMap id="FriendBoardMap" type="friendBoard">
 		<result column="fb_no" property="fb_no"/>
@@ -54,5 +62,6 @@
 		<result column="fb_updated_at" property="fb_updated_at"/>
 		<result column="fb_read_count" property="fb_read_count"/>
 		<result column="attachCount" property="attachCount"/>
+		<result column="commentCount" property="commentCount"/>
 	 </resultMap>
 </mapper>

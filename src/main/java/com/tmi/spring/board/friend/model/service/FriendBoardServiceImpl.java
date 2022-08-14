@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tmi.spring.board.friend.model.dao.FriendBoardDao;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,10 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	public InsertFriendBoard selectOneFriendBoard(int no) {
 		InsertFriendBoard insertFriendBoard = friendBoardDao.selectOneFriendBoard(no);
 		List<FriendBoardAttachment> attachments = friendBoardDao.selectAttachmentListByNo(no);
+		List<FriendBoardComment> comments = friendBoardDao.findBoardCommentByNo(no);
+		
 		insertFriendBoard.setAttachments(attachments);
+		insertFriendBoard.setBoardComments(comments);
 		
 		return insertFriendBoard;
 //		return friendBoardDao.selectOneFriendBoard(no);
@@ -88,6 +92,21 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	@Override
 	public int deleteFriendBoard(int no) {
 		return friendBoardDao.deleteFriendBoard(no);
+	}
+	
+	@Override
+	public int insertFriendComment(FriendBoardComment fbComment) {
+		return friendBoardDao.insertFriendComment(fbComment);
+	}
+	
+	@Override
+	public int deleteFriendBoardComment(int fbcNo) {
+		return friendBoardDao.deleteFriendBoardComment(fbcNo);
+	}
+	
+	@Override
+	public int updateReadCount(int no) {
+		return friendBoardDao.updateReadCount(no);
 	}
 	
 }
