@@ -3,6 +3,7 @@ package com.tmi.spring.board.friend.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 
 @Mapper
@@ -26,7 +28,6 @@ public interface FriendBoardDao {
 	
 	@Select("select * from tmi_friend_board where fb_no = #{no}")
 	InsertFriendBoard selectOneFriendBoard(int no);
-//	Map<String, Object> selectOneFriendBoard(int no);
 
 	@Select("select * from tmi_friend_board_attachment where fba_fb_no = #{no}")
 	List<FriendBoardAttachment> selectAttachmentListByNo(int no);
@@ -42,7 +43,16 @@ public interface FriendBoardDao {
 
 	@Delete("delete from tmi_friend_board where fb_no = #{no}")
 	int deleteFriendBoard(int no);
-	
-	
 
+	int insertFriendComment(FriendBoardComment fbComment);
+
+	@Select("select * from tmi_friend_board_comment where fbc_fb_no = #{no}")
+	List<FriendBoardComment> findBoardCommentByNo(int no);
+
+	@Delete("delete from tmi_friend_board_comment where fbc_no = #{fbcNo}")
+	int deleteFriendBoardComment(int fbcNo);
+
+	@Update("update tmi_friend_board set fb_read_count = fb_read_count + 1 where fb_no = #{no}")
+	int updateReadCount(int no);
+	
 }
