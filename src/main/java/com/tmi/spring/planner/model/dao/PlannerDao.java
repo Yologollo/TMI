@@ -21,9 +21,6 @@ public interface PlannerDao {
 	@Select("select * from tmi_planner where p_m_email = #{pmEmail} order by p_write_date desc")
 	List<Planner> findPlannerByEmail(String memberEmail);
 
-	@Select("select * from tmi_planner where p_no = #{pNo}")
-	List<Planner> findPlannerBypNo(int pNo);
-
 	@Delete("delete from tmi_planner where p_no = #{pNo}")
 	int deletePlanner(int pNo);
 

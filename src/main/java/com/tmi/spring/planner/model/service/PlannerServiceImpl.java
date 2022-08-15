@@ -33,11 +33,6 @@ public class PlannerServiceImpl implements PlannerService {
 	public List<Planner> findPlannerByEmail(String memberEmail) {
 		return plannerDao.findPlannerByEmail(memberEmail);
 	}
-
-	@Override
-	public List<Planner> findPlannerBypNo(int pNo) {
-		return plannerDao.findPlannerBypNo(pNo);
-	}
 	
 	@Override
 	public int deletePlanner(int pNo) {

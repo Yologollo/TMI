@@ -15,8 +15,6 @@ public interface PlannerService {
 
 	List<Planner> findPlannerByEmail(String memberEmail);
 
-	List<Planner> findPlannerBypNo(int pNo);
-
 	int deletePlanner(int pNo);
 
 	int savePlannerPlan(List<PlannerPlan> planList);
