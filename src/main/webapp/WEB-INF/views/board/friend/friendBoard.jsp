@@ -65,7 +65,7 @@ window.addEventListener('load', (e) => {
 					</td>
 					<td>
 						<c:if test="${friendBoard.attachCount gt 0}">
-							<img src="${pageContext.request.contextPath}/resource/images/board/file.png" width="16px" />
+							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
 						</c:if>
 					</td>
 					<td>${friendBoard.fb_read_count}</td>

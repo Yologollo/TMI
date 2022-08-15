@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.spring.board.review.model.dao.ReviewBoardDao">
+<!-- <mapper namespace="dao 경로"> -->
+	<select id="selectReviewBoardList" parameterType="String" resultMap="ReviewBoardMap">
+		select
+		    rb.rb_no,
+		    rb.rb_p_no,
+		    m.m_nickname,
+		    rb.rb_title,
+		    rb.rb_content,
+		    rb.rb_created_at,
+		    rb.rb_updated_at,
+		    rb.rb_read_count,
+		    (select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    (select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount
+		from
+		    tmi_review_board rb join tmi_member m
+		        on rb_m_email = m.m_email
+		order by
+		    rb.rb_no desc
+	</select>
+	
+		<insert id="insertReviewBoard">
+		insert into 
+			tmi_review_board 
+		values 
+			(seq_rb_no.nextval, null, #{rbMEmail}, #{rbTitle}, sysdate, sysdate, 0, #{rbContent})
+			
+		<selectKey keyProperty="rbNo" resultType="_int" order="AFTER">
+			select
+				seq_rb_no.currval
+			from
+				dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment">
+		insert into 
+			tmi_review_board_attachment 
+			(rba_no, rba_rb_no, rba_original_filename, rba_renamed_filename) 
+		values 
+			(seq_rba_no.nextval, #{rbaRbNo}, #{rbaOriginalFilename}, #{rbaRenamedFilename})
+	</insert>
+	
+	<insert id="insertReviewComment">
+		insert into 
+			tmi_review_board_comment 
+		values
+			(seq_rbc_no.nextval, #{rbcRbNo}, #{rbcMEmail}, sysdate, #{rbcContent})
+	</insert>
+	
+	<resultMap id="ReviewBoardMap" type="reviewBoard">
+		<result column="rb_no" property="rb_no"/>
+		<result column="rb_p_no" property="rb_p_no"/>
+		<result column="m_nickname" property="m_nickname"/>
+		<result column="rb_title" property="rb_title"/>
+		<result column="rb_content" property="rb_content"/>
+		<result column="rb_created_at" property="rb_created_at"/>
+		<result column="rb_updated_at" property="rb_updated_at"/>
+		<result column="rb_read_count" property="rb_read_count"/>
+		<result column="attachCount" property="attachCount"/>
+		<result column="commentCount" property="commentCount"/>
+	 </resultMap>
+</mapper>
