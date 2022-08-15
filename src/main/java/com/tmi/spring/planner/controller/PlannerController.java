@@ -1,6 +1,8 @@
 package com.tmi.spring.planner.controller;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,6 @@ public class PlannerController {
 	@PostMapping("/createPlanner.do")
 	public String createPlanner(@ModelAttribute Planner planner, RedirectAttributes redirectAttr) {
 		try {
-			// 업무로직
 			int result = plannerService.createPlanner(planner);
 			log.debug("createplanner = {}", planner);
 			
@@ -80,43 +81,52 @@ public class PlannerController {
 		try {
 			Planner planner = plannerService.selectOnePlanner(pNo);
 			log.debug("planner = {}", planner);
-			
-			log.debug("Before PLeaveDate = {}", planner.getPLeaveDate());
-			log.debug("Before PReturnDate = {}", planner.getPReturnDate());
-			List<Date> days = plannerService.selectPlanDateList(planner.getPLeaveDate(), planner.getPReturnDate());
-			log.debug("After PLeaveDate = {}", planner.getPLeaveDate());
-			log.debug("Aftet PReturnDate = {}", planner.getPReturnDate());
-			log.debug("days = {}", days);
-			
-			model.addAttribute("days", days);
+
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
+	        
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("days = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        log.debug("days = {}", days);
+
+	        model.addAttribute("days", days);
 			model.addAttribute("planner", planner);
 		} catch (Exception e){
 			log.error("플래너 조회 오류", e);
 		}
 	}
-	
+
 	// 디테일 플래너 페이지 작업
 	@GetMapping("/detailPlanner.do")
 	public String detailPlanner(Planner planner, Model model) {
-		try {
+		try {    
 			planner = plannerService.selectOnePlanner(planner.getPNo());
 			log.debug("planner = {}", planner);
-			List<Date> days = plannerService.selectPlanDateList(planner.getPLeaveDate(), planner.getPReturnDate());
-			log.debug("days = {}", days);
+			
 			List<PlannerPlan> plans = plannerService.selectPlannerPlanList(planner.getPNo());
 			log.debug("plans = {}", plans);
 			
-			model.addAttribute("planner", planner);
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
+	        
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("daysCount = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        
+	        log.debug("days = {}", days);
+
 	        model.addAttribute("days", days);
+			model.addAttribute("planner", planner);
 	        model.addAttribute("plans", plans);
-//			int pNo = planner.getPNo();
-//			log.debug("pNo = {}", pNo);
-//			
-//			List<Planner> plannerList = plannerService.findPlannerBypNo(pNo);
-//			log.debug("plannerList = {}", plannerList);
-//			
-//			model.addAttribute("pNo", pNo);
-//			model.addAttribute("plannerList", plannerList);
 						
 		} catch (Exception e) {
 			log.error("Planner 조회 오류", e);
@@ -129,9 +139,7 @@ public class PlannerController {
 	@PostMapping("/deletePlanner.do")
 	public String deletePlanner(@RequestParam int pNo, RedirectAttributes redirectAttr) {
 		try {
-			
-			int result = plannerService.deletePlanner(pNo);
-						
+			int result = plannerService.deletePlanner(pNo);		
 		} catch (Exception e) {
 			log.error("Planner 삭제 오류", e);
 			throw e;
@@ -151,10 +159,8 @@ public class PlannerController {
 	public ResponseEntity<?> savePlanner(@RequestBody(required = false) List<PlannerPlan> planList) {		
 		log.debug("planListTest = {}", planList);
 		try {		
-
 			int result = plannerService.savePlannerPlan(planList);
-			log.debug("planList = {}", planList);
-			
+			log.debug("planList = {}", planList);	
 		} catch (Exception e) {
 			log.error("Plan 저장 오류", e);
 		}

@@ -1,8 +1,9 @@
 package com.tmi.spring.planner.model.dto;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +17,10 @@ public class Planner {
 	private String pmEmail;
 	private String pTitle;
 	private String pExplan;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date pLeaveDate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date pReturnDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate pLeaveDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate pReturnDate;
 	private Date pWriteDate;
 	private String pShare;
 }
