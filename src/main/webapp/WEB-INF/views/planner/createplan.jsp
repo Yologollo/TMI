@@ -39,19 +39,25 @@
 				<span>일정</span>
 			</div>
 			
+            
 			<c:forEach items="${days}" var="day" varStatus="status">
                 <div class="plannerDateInfo" data-date="${day}" onclick="plansChange(${status.count})">
                     <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
-                    <fmt:formatDate value="${day}" pattern="MM.dd" />
-                </div>
+                    <%-- <fmt:formatDate value="${day}" pattern="MM.dd" /> --%>
+                    <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+                    <fmt:formatDate value="${dayformat}" pattern="MM.dd" /> 
+                </div> 
             </c:forEach>
-            
+           
 		</div>
 		<div id="plannerDetailDate">
 		
 			<c:forEach items="${days}" var="day" varStatus="status">
 				<div class="plannerDetailDateInfoFirstId" data-date="${day}">
-					<span>DAY ${status.count} | <fmt:formatDate value="${day}" pattern="MM.dd E요일" /></span>
+					<span>DAY ${status.count} | 
+						<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+	                    <fmt:formatDate value="${dayformat}" pattern="MM.dd E요일" /> 
+	                </span>
 				</div>
 			</c:forEach>
 
@@ -213,6 +219,8 @@ $(document).ready(function() {
 		        ppX : x.textContent
 		    });
 		});
+		
+		console.log(planList);
 
    		$.ajax({
 			url : '${pageContext.request.contextPath}/planner/savePlanner.do',
