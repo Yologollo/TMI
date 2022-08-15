@@ -106,16 +106,21 @@ $(document).ready(function () {
 					<div id="plannerTitle">${planner.PTitle}</div>
 					<div id="plannerDetailCardWrapper">
 					<div class="plannerDetailCard card">
-						<c:forEach items="${days}" var="days" varStatus="status">
+						<c:forEach items="${days}" var="day" varStatus="status">
 							<div class="card-header">
 								<span class="plannerDetailCardDay">DAY ${status.count}</span>
-								<span class="plannerDetailCardTime"><fmt:formatDate value="${days}" pattern="yyyy.MM.dd E" />요일</span>
+								<span class="plannerDetailCardTime">
+									<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${dayformat}" pattern="yyyy.MM.dd E요일" />
+								</span>
 							</div>
 						
 							<% int i = 1;%>
 							<c:forEach items="${plans}" var="plan" varStatus="plan_status">
-								<fmt:formatDate value="${days}" pattern="yyyy-MM-dd" var="nowDate" />
-	                            <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+								<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
 
                             	<c:if test="${nowDate eq openDate}">
                             
@@ -164,7 +169,7 @@ $(document).ready(function () {
 				<div id="plannerAllWrapper">
 					<div class="allMap">
 					
-						<c:forEach items="${days}" var="days" varStatus="status">
+						<c:forEach items="${days}" var="day" varStatus="status">
 						
 							<div class="dayAllMapClass" id="dayAllMap${status.count}"></div>
 							
@@ -190,8 +195,12 @@ $(document).ready(function () {
 						    
 						    
 							 <c:forEach items="${plans}" var="plan" varStatus="plan_status">
-								 <fmt:formatDate value="${days}" pattern="yyyy-MM-dd" var="nowDate" />
+							 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+								 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 								 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+								 <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+								 <fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
+
 	
 								 <c:if test="${nowDate eq openDate}">
 								 	var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
@@ -226,22 +235,24 @@ $(document).ready(function () {
 						
 						<div class="dayAllMapSelectWrapper">
                             <select id="dayAllMapSelectId" class="dayAllMapSelectClass" onchange="mapChange()">
-                                <c:forEach items="${days}" var="days" varStatus="status">
+                                <c:forEach items="${days}" var="day" varStatus="status">
                                     <option value="${status.index}">DAY ${status.count}</option>
                                 </c:forEach>
                             </select>
                         </div>
 						
 						<div class="card">
-	                        <c:forEach items="${days}" var="days" varStatus="status">
+	                        <c:forEach items="${days}" var="day" varStatus="status">
 	                            <div class="card-body dayAllMapInfo">
 	
 	                                <% int j = 1;%>
 	
 	                                     <c:forEach items="${plans}" var="plan" varStatus="plan_status">
 	                                        <!-- 화면에서 보이면 주석처리 -->
-	                                        <fmt:formatDate value="${days}" pattern="yyyy-MM-dd" var="nowDate" />
-	                            			<fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+	                                        <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+	                                        <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+	                                        <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+	                            			<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
 	
 	                                        <c:if test="${nowDate eq openDate}">
 	                                            <div class="dayAllMapInfoNo" data-no="${plan.ppNo}">

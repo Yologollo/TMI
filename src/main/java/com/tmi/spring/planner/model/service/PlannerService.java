@@ -13,8 +13,6 @@ public interface PlannerService {
 
 	Planner selectOnePlanner(int pNo);
 
-	List<Date> selectPlanDateList(Date pLeaveDate, Date pReturnDate);
-
 	List<Planner> findPlannerByEmail(String memberEmail);
 
 	List<Planner> findPlannerBypNo(int pNo);

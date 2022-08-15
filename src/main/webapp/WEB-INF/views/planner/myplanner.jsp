@@ -55,8 +55,17 @@
 	</div>
 </form>
 
+
 <div id="commonMain">
 	<div id="bannder">배너 / My플래너</div>
+	
+<%-- <form name="datesFrm">
+        <label for="start">출발</label>
+        <input type="date" name="start" id="start" value="2022-09-01">
+        <label for="end">도착</label>
+        <input type="date" name="end" id="end" value="2022-09-05">
+        <button type="submit">제출</button>
+    </form> --%>
 	<div id="wrapper">
 		<div id="menuContainer">
 			<ul>
@@ -103,6 +112,29 @@
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
+/* document.datesFrm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const frm = e.target;
+    const _data = {
+        start: e.target.start.value,
+        end: e.target.end.value
+    };
+    const data = JSON.stringify(_data);
+    console.log(_data);
+    $.ajax({
+        url: "${pageContext.request.contextPath}/planner/dates",
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        data,
+        success(response){
+            console.log(response);
+        },
+        error: console.log
+
+    });
+
+ }); */
+
 document.querySelector('.createPlannerModalForm').addEventListener('click', function(e) {
 	if (e.target == document.querySelector('.createPlannerModalForm')) {
 		document.querySelector('.createPlannerModalForm').classList.remove('show-modal');
@@ -138,5 +170,7 @@ document.createPlannerFrm.addEventListener('submit', (e) => {
     	return;
     }
 });
+
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
