@@ -187,6 +187,12 @@
            <artifactId>spring-security-test</artifactId>
            <version>${org.springframework.security-version}</version>        
        </dependency>
+       
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.14.3</version>
+		</dependency>
 
 		<!-- #12. 파일 업로드 처리를 위한 의존 -->
 		<dependency>
