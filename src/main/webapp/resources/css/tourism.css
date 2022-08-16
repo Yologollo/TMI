@@ -105,3 +105,137 @@
 	width: 10%;
 	text-align : center;
 }
+
+/* test */
+
+#searchTh{
+	text-align : center;
+	width : 20%;
+}
+
+#searchTd{
+	
+}
+
+#searchContentBtn{
+	float: right;
+}
+
+#searchServiceBtn{
+	float: right;
+}
+
+#searchAreaBtn{
+	float: right;
+}
+
+.createContentModalForm{
+	width : 100%;
+	height : 100%;
+	position : fixed;
+	background : rgba(0,0,0,0.5);
+	z-index : 5;
+	padding: 30px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 1s;
+}
+
+.createAreaModalForm{
+	width : 100%;
+	height : 100%;
+	position : fixed;
+	background : rgba(0,0,0,0.5);
+	z-index : 5;
+	padding: 30px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 1s;
+}
+
+.createServiceModalForm{
+	width : 100%;
+	height : 100%;
+	position : fixed;
+	background : rgba(0,0,0,0.5);
+	z-index : 5;
+	padding: 30px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 1s;
+}
+
+.show-modal {
+	visibility: visible;
+	opacity: 1;
+}
+
+#createContentModal {
+	width : 50%;
+	height : 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#createAreaModal {
+	width : 50%;
+	height : 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#createServiceModal {
+	width : 50%;
+	height : 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+.modalInfo {
+	float: left;
+	margin-top: 30px;
+	margin: auto 0;
+}
+
+#title {
+	float: right;
+	width: 70%;
+}
+
+.modal-body {
+	font-size: 25px;
+	padding-left: 20%
+}
+
+.modal-footer {
+	justify-content: center;
+	margin: auto 0;
+}
+
+.finalName {
+	display: inline-block;
+}
+
+.btn btn-info {
+	display: block;
+}
+
+#contentArea2 {
+	margin-left : auto;
+	margin-right : auto;
+}
+
+.thumbNailLink {
+	display: inline-block;
+	margin : 10px;
+	width : 300px;
+	height : 220px;
+	text-align: center;
+}
+
+.thumbNailName {
+	dispaly : inline-block;
+	width : 300px;
+	height : 65px;
+	text-align: center;
+}

@@ -159,6 +159,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
+
 $('#tagBox1').on('click', function(){
 	console.log('1번박스클릭');
 	$('#tabContent1').css('display', 'block');
@@ -179,5 +180,6 @@ $('#tagBox3').on('click', function(){
 	$('#tabContent2').css('display', 'none');
 	$('#tabContent3').css('display', 'block');	
 });
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

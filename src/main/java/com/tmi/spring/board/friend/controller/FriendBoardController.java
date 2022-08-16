@@ -3,6 +3,9 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -15,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +37,17 @@ import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.board.friend.model.service.FriendBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
+import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
+import com.tmi.spring.planner.model.service.PlannerService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
  * @생성 이경석
- * @작업 이경석
+ * @작업 이경석, 김용민
  *
  */
 
@@ -56,6 +64,9 @@ public class FriendBoardController {
 	
 	@Autowired
 	ResourceLoader resourceLoader;
+	
+	@Autowired
+	PlannerService plannerService;
 
 	@GetMapping("/board/friend/friendBoard.do")
 	public ModelAndView FriendBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
@@ -82,7 +93,25 @@ public class FriendBoardController {
 	}
 	
 	@GetMapping("/board/friend/friendBoardForm.do")
-	public void FriendBoardForm() {}
+	public void FriendBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
+		try {
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
+						
+		} catch (Exception e) {
+			log.error("Planner 조회 오류", e);
+			throw e;
+		}
+	}
 	
 	@PostMapping("/board/friend/friendBoardEnroll.do")
 	public String FriendBoardEnroll(InsertFriendBoard insertFriendBoard, 
