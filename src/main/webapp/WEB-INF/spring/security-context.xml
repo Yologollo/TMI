@@ -29,6 +29,7 @@
 		<intercept-url pattern="/aboutus" access="permitAll"/>
 
 		<intercept-url pattern="/tourism/**" access="permitAll"/>
+		<intercept-url pattern="/widget/**" access="permitAll"/>
 
 		<intercept-url pattern="/login/memberLogin.do" access="isAnonymous()"/>
 		<intercept-url pattern="/login/findPw.do" access="isAnonymous()"/>
