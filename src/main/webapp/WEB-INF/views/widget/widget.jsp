@@ -33,8 +33,6 @@ id="createAreaModal">
 			<div class="modal-body">
 				<div class="modalInfo" id="areaList">
 					<label for="title">광역시/도</label><br />
-					<button type="button" class="btn btn-light" value="0"
-						onClick="insertArea(this);">전국</button>
 					<button type="button" class="btn btn-light" value="1"
 						onClick="insertArea(this);">서울</button>
 					<button type="button" class="btn btn-light" value="2"
@@ -185,14 +183,25 @@ id="createAreaModal">
 	</div>
 
 	<article id="contentArea">
-		<div id="selectContent">
-			<ul id="contentList">
-				<li>리스트</li>
-			</ul>
+		<div id="contentArea2">
+			<div id="selectContent"></div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
 		</div>
-		<div id="paging">페이징기능</div>
 	</article>
-	
 </div>
 
 <script
@@ -299,17 +308,19 @@ id="createAreaModal">
 		var finalArea = '';
 
 		if (sigunguName != '0') {
+			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
 			console.log('finalArea = ' + finalArea);
+			$('.createAreaModalForm').removeClass('show-modal');
+			$('#areaCodeFinal').append(finalArea);
+		} else if (areaCode == '0') {
+			alert('광역시/도 를 선택하십시요.');
 		} else {
-
 			finalArea += '광역시/도 : ' + areaName
 			console.log('finalArea = ' + finalArea);
+			$('.createAreaModalForm').removeClass('show-modal');
+			$('#areaCodeFinal').append(finalArea);
 		}
-
-		$('.createAreaModalForm').removeClass('show-modal');
-		$('#areaCodeFinal').append(finalArea);
-
 	});
 
 	// contentModal
@@ -526,17 +537,20 @@ id="createAreaModal">
 		console.log('cat1 = ' + cat1);
 		console.log('cat2 = ' + cat2);
 		console.log('cat3 = ' + cat3);
+		console.log("검색 실행");
+		
+		$('#paging').hide();
 		
 		$.ajax({
-			url : 'callareaBasedList.do',
+			url : 'callAreaBasedList.do',
 			type : 'get',
 			data : {
 				
 				areaCode : areaCode,
 				sigunguCode : sigunguCode,
-				cat1 : cat1,
-				cat2 : cat2,
-				cat3 : cat3
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
 				
 			},
 			
@@ -546,6 +560,29 @@ id="createAreaModal">
 				var myItem = data.response.body.items.item;
 				console.log(myItem);
 				
+				$('#selectContent').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a class="thumbNailLink" id="' + myItem[i].contentid + '" href="http://localhost:9090/TMI/tourism/">';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200">';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+					$('#paging').show();
+				
+				};
+				
+					console.log("검색 ajax 끝");
+					
 			},
 
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -555,6 +592,36 @@ id="createAreaModal">
 
 		});
 		
+		
+		$.ajax({
+			url : 'callPagingLength.do',
+			type : 'get',
+			data : {
+				
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				var myItem = data.response.body.items.item;
+				console.log(myItem);
+				
+				
+				
+			},
+
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+			}
+
+		});
 	});
 	
 	
