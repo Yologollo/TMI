@@ -27,10 +27,10 @@ public class MainBoardController {
 		log.info("GET / 요청!");
 	}
 	
-	@GetMapping("/board/review/reviewBoard.do")
-	public void reviewBoard() {
-		log.info("GET / 요청!");
-	}
+//	@GetMapping("/board/review/reviewBoard.do")
+//	public void reviewBoard() {
+//		log.info("GET / 요청!");
+//	}
 	
 //	@GetMapping("/board/friend/friendBoard.do") // friendcontroller에 있습니다.
 //	public void friendBoard() {

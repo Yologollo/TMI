@@ -40,25 +40,51 @@
     <div>
       <div id="adminboard-head">
       	<h2>회원목록</h2>
-        <div id="btn-sort-wrap">
+        <!-- <div id="btn-sort-wrap">
           <button onclick="deleteBoard();">삭제</button>
-        </div>
+        </div> -->
       </div>
       
       <table>
         <thead id="list-head">
           <tr>
           	<th></th>
-            <th>회원아이디</th>
+            <th>회원번호</th>
             <th>회원별명</th>
             <th>회원이름</th>
           </tr>
         </thead>
         <tbody id="list-content">
-         <td><input type="checkbox" ></td>
+        <td></td>
          <td>hogged</td>
          <td>홍쥐디</td>
          <td>홍길동</td>
+         <td>
+           <div id="btn-sort-wrap">
+             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
+           </div>
+        </td>
+        
+        <!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5>회원탈퇴</h5> 
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        회원을 정말 탈퇴시키겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary">탈퇴하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+        
        <%--  <%
 			for(int i = 0; i < list.size(); i++){ 
 		%> --%>
@@ -95,4 +121,18 @@
  	 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+
+
+<script>
+/* 	function clickDel(formName) {
+		formName.action = "/board/contentDelAsk";
+		formName.method = "post";
+		formName.submit();
+	} */
+	
+	
+	myModal.addEventListener('shown.bs.modal', function () {
+	  myInput.focus()
+	})
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

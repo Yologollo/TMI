@@ -64,20 +64,15 @@
 		</div>
 		<div id="plannerDetailPlace">
 			<div class="map_wrap">
-				<div id="map"
-					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+				<div id="map"></div>
 
 				<div id="menu_wrap" class="bg_white">
 					<div id="plannerDetailPlaceFirstId">
 						<div id="plannerDetailPlaceFirstIdWrapper">
-							<div class="option">
-								<div>
-									<form onsubmit="searchPlaces(); return false;">
-										<input type="text" class="form-control" value="KH정보교육원" id="keyword">
-										<button type="submit" id="keywordSearchBtn" class="btn btn-primary">검색</button>
-									</form>
-								</div>
-							</div>
+							<form onsubmit="searchPlaces(); return false;">
+								<input type="text" class="form-control" value="KH정보교육원" id="keyword">
+								<button type="submit" id="keywordSearchBtn" class="btn btn-primary">검색</button>
+							</form>
 						</div>
 					</div>
 					<div class="plannerDetailPlaceInfo">

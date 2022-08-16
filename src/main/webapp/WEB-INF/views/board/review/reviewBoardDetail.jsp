@@ -41,20 +41,20 @@
 </sec:authorize>
 
 <div id="commonMain">
-		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertFriendBoard.fbNo}" required>
-		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" required readonly>
- 		<input type="text" class="form-control" name="fbMEmail" value="${insertFriendBoard.fbMEmail}" readonly required>
+		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
+		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" required readonly>
+ 		<input type="text" class="form-control" name="rbMEmail" value="${insertReviewBoard.rbMEmail}" readonly required>
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
-			<c:if test="${not empty insertFriendBoard.attachments}">
-				<c:forEach items="${insertFriendBoard.attachments}" var="attach">
+			<c:if test="${not empty insertReviewBoard.attachments}">
+				<c:forEach items="${insertReviewBoard.attachments}" var="attach">
 					<div class="btn-group-toggle pb-1" data-toggle="buttons">
-						<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
+						<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.rbaNo}">${attach.rbaOriginalFilename}</button>
 					</div>
 				</c:forEach>
 			</c:if>
 		
-	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
+	  	${insertReviewBoard.rbContent} <!-- summernote 출력 -->
 		<br /><br />
 		<hr />
 		
@@ -63,31 +63,31 @@
 			<div class="comment-container">
 		        <div class="comment-editor">
 		            <form
-						action="${pageContext.request.contextPath}/board/friend/friendBoardCommentEnroll.do" method="post" name="friendBoardCommentFrm">
-		                <input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
-		                <input type="hidden" name="fbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
-						<textarea name="fbcContent" cols="100" rows="3"></textarea>
+						action="${pageContext.request.contextPath}/board/review/reviewBoardCommentEnroll.do" method="post" name="reviewBoardCommentFrm">
+		                <input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
+		                <input type="hidden" name="rbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
+						<textarea name="rbcContent" cols="100" rows="3"></textarea>
 		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
 		            </form>
 		        </div>
 		</c:if>
 				<!--table#tbl-comment-->
-				 <c:if test="${insertFriendBoard.comments ne null && not empty insertFriendBoard.comments}">
+				 <c:if test="${insertReviewBoard.comments ne null && not empty insertReviewBoard.comments}">
 					<table id="tbl-comment">
 						<tbody>
-						<c:forEach items="${insertFriendBoard.comments}" var="comment">
+						<c:forEach items="${insertReviewBoard.comments}" var="comment">
 							<tr class="level1">
 								<td>
-									<sub class="comment-writer">${comment.fbcMEmail}</sub>
-									<sub class="comment-date">${comment.fbcCreatedAt}</sub>
+									<sub class="comment-writer">${comment.rbcMEmail}</sub>
+									<sub class="comment-date">${comment.rbcCreatedAt}</sub>
 									<br />
-									${comment.fbcContent}
+									${comment.rbcContent}
 								</td>
 								<td>
-									<form action="${pageContext.request.contextPath}/board/friend/deleteComment.do" method="get" name="friendBoardCommentDeleteFrm">
-										<input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
-										<input type="hidden" name="fbcNo" value="${comment.fbcNo}" />
-										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.fbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
+									<form action="${pageContext.request.contextPath}/board/review/deleteComment.do" method="get" name="reviewBoardCommentDeleteFrm">
+										<input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
+										<input type="hidden" name="rbcNo" value="${comment.rbcNo}" />
+										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.rbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 					                		<button type="submit" id="deleteComment" class="">삭제</button>
 					                	</c:if>
 									</form>
@@ -97,15 +97,13 @@
 						</tbody>
 					</table>
 				 </c:if> 
-			
 		
-		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
+		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
 		</c:if>
 		
-		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
-		<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href=''">
+		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
 		<br /><br /><br />
 </div>
 <script>
@@ -136,11 +134,11 @@
  		btn.addEventListener("click", (e) => {
  			const attachNo = e.target.value;
  			console.log(attachNo);
- 			location.href = `${pageContext.request.contextPath}/board/friend/fileDownload.do?no=\${attachNo}`;
+ 			location.href = `${pageContext.request.contextPath}/board/review/fileDownload.do?no=\${attachNo}`;
  		});
  	});
 
- 	document.friendBoardCommentFrm.onsubmit = (e) => {
+ 	document.reviewBoardCommentFrm.onsubmit = (e) => {
  		const contentVal = e.target.fbcContent.value.trim();
  		if(!/^(.|\n)+$/.test(contentVal))
  		{

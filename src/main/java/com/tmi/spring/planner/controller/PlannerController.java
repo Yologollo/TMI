@@ -43,7 +43,7 @@ public class PlannerController {
 	
 	// My 플래너 페이지 작업
 	@GetMapping("/myplanner")
-	public String myPlanner(@AuthenticationPrincipal Member member, Model model) {
+	public String myPlanner(@AuthenticationPrincipal Member member, Planner planner, Model model) {
 		try {
 			String memberEmail = member.getMEmail();
 			log.debug("memberEmail = {}", memberEmail);
@@ -51,7 +51,11 @@ public class PlannerController {
 			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
 			log.debug("plannerList = {}", plannerList);
 			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
 			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 						
 		} catch (Exception e) {
 			log.error("Planner 조회 오류", e);
