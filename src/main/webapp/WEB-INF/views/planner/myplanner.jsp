@@ -13,6 +13,23 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
+<style>
+.cardDateSpan {
+	float: left;
+}
+
+.cardDaySpan {
+	float: right;
+}
+
+.cardTitleSpan {
+	font-size: 28px;
+}
+
+.cardExplanSpan {
+	font-size: 14px;
+}
+</style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/planner.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">
@@ -58,14 +75,6 @@
 
 <div id="commonMain">
 	<div id="bannder">배너 / My플래너</div>
-	
-<%-- <form name="datesFrm">
-        <label for="start">출발</label>
-        <input type="date" name="start" id="start" value="2022-09-01">
-        <label for="end">도착</label>
-        <input type="date" name="end" id="end" value="2022-09-05">
-        <button type="submit">제출</button>
-    </form> --%>
 	<div id="wrapper">
 		<div id="menuContainer">
 			<ul>
@@ -97,8 +106,55 @@
 				<c:forEach items="${plannerList}" var="planner" varStatus="vs">
 					<a href="${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}">
 						<div class="card" style="width: 18rem;" data-no="${planner.PNo}">
-			                <img src="..." class="card-img-top" alt="...">
+						
+							<div class="dayAllMapClass" id="dayAllMap${vs.count}" style="border: 1px solid black; height: 25vh;"></div>
+							
+								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+								<script>
+									var mapContainer = document.getElementById('dayAllMap${vs.count}');
+									
+									var mapOption = {
+								    		center: new kakao.maps.LatLng(36.25, 127.75),
+									        level: 14
+									};
+									
+									var map = new kakao.maps.Map(mapContainer, mapOption);
+									
+									var polyline = new kakao.maps.Polyline({
+					                       map: map,
+					                       path: [],
+					                       strokeWeight: 3,
+					                       strokeColor: '#5882fa',
+					                       strokeOpacity: 1,
+					                       strokeStyle: 'solid'
+					                   });
+									
+									<c:forEach items="${plans}" var="plan" varStatus="status">
+										<c:if test="${planner.PNo eq plan.pppNo}">
+											var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                                var marker = new kakao.maps.Marker({
+			                                    position: markerPosition
+			                                });
+			                                marker.setMap(map);
+			                                
+			                                var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                                var path = polyline.getPath();
+			                                path.push(point);
+			                                polyline.setPath(path);
+										</c:if>
+									</c:forEach>
+								</script>
+			                
+			                
 								<div class="card-body">
+									<span class="cardDateSpan">${planner.PLeaveDate} ~ ${planner.PReturnDate}</span>
+									<span class="cardDaySpan">
+										<fmt:parseDate value="${planner.PLeaveDate}" var="leaveDateFormat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${leaveDateFormat}" pattern="dd" var="leaveDate" />
+										<fmt:parseDate value="${planner.PReturnDate}" var="returnDateFormat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${returnDateFormat}" pattern="dd" var="returnDate" />
+										${returnDate - leaveDate} DAY
+									</span><br />
 									<span class="cardTitleSpan">${planner.PTitle}</span><br />
 									<span class="cardExplanSpan">${planner.PExplan}</span>
 								</div>
@@ -112,29 +168,6 @@
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
-/* document.datesFrm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const frm = e.target;
-    const _data = {
-        start: e.target.start.value,
-        end: e.target.end.value
-    };
-    const data = JSON.stringify(_data);
-    console.log(_data);
-    $.ajax({
-        url: "${pageContext.request.contextPath}/planner/dates",
-        method: "POST",
-        contentType: "application/json; charset=utf-8",
-        data,
-        success(response){
-            console.log(response);
-        },
-        error: console.log
-
-    });
-
- }); */
-
 document.querySelector('.createPlannerModalForm').addEventListener('click', function(e) {
 	if (e.target == document.querySelector('.createPlannerModalForm')) {
 		document.querySelector('.createPlannerModalForm').classList.remove('show-modal');
@@ -170,7 +203,5 @@ document.createPlannerFrm.addEventListener('submit', (e) => {
     	return;
     }
 });
-
-
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -1,7 +1,5 @@
 package com.tmi.spring.planner.model.service;
 
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.List;
 
 import com.tmi.spring.planner.model.dto.Planner;
@@ -20,5 +18,7 @@ public interface PlannerService {
 	int savePlannerPlan(List<PlannerPlan> planList);
 
 	List<PlannerPlan> selectPlannerPlanList(int pNo);
+
+	List<PlannerPlan> findPlansList(List<Planner> plannerList);
 
 }

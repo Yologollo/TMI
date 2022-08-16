@@ -29,7 +29,7 @@ public interface PlannerDao {
 	@Select("select pp_no, pp_p_no, pp_time, pp_place_name, pp_memo, pp_x, pp_y, pp_date from tmi_planner_plan where pp_p_no = #{pNo} order by pp_time asc")
 	List<PlannerPlan> selectPlannerPlanList(int pNo);
 
-
+	@Select("select * from tmi_planner_plan")
+	List<PlannerPlan> findPlansList(List<Planner> plannerList);
 	
-
 }

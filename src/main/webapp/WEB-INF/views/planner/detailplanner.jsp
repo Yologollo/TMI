@@ -175,61 +175,61 @@ $(document).ready(function () {
 							
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
 							<script>
-							var mapContainer = document.getElementById('dayAllMap${status.count}');
-						    var mapOption = {
-					    		center: new kakao.maps.LatLng(36.25, 127.75),
-						        level: 14
-						    };
-						    var map = new kakao.maps.Map(mapContainer, mapOption);
-						    
-							var polyline = new kakao.maps.Polyline({
-							                       map: map,
-							                       path: [],
-							                       strokeWeight: 3,
-							                       strokeColor: '#5882fa',
-							                       strokeOpacity: 1,
-							                       strokeStyle: 'solid'
-							                   });
-							 
-							 var a = 0;
-						    
-						    
-							 <c:forEach items="${plans}" var="plan" varStatus="plan_status">
-							 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
-								 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
-								 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
-								 <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
-								 <fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
-
+								var mapContainer = document.getElementById('dayAllMap${status.count}');
+							    var mapOption = {
+						    		center: new kakao.maps.LatLng(36.25, 127.75),
+							        level: 14
+							    };
+							    var map = new kakao.maps.Map(mapContainer, mapOption);
+							    
+							    var polyline = new kakao.maps.Polyline({
+				                       map: map,
+				                       path: [],
+				                       strokeWeight: 3,
+				                       strokeColor: '#5882fa',
+				                       strokeOpacity: 1,
+				                       strokeStyle: 'solid'
+				                   });
+								 
+								 var a = 0;
+							    
+							    
+								 <c:forEach items="${plans}" var="plan" varStatus="plan_status">
+								 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+									 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+									 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+									 <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+									 <fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
 	
-								 <c:if test="${nowDate eq openDate}">
-								 	var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
-								 	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png',
-								 	imageSize = new kakao.maps.Size(36, 37),
-								 	
-								 	imgOptions =  {
-	                                    spriteSize : new kakao.maps.Size(36, 691),
-	                                    spriteOrigin : new kakao.maps.Point(0, (a*46)+10),
-	                                    offset: new kakao.maps.Point(13, 37) 
-                                	},
-                                	
-	                                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-	                                marker = new kakao.maps.Marker({
-	                                    position: markerPosition,
-	                                    image: markerImage
-                                	});
-								 	
-                           			marker.setMap(map);
-
-
-		                            var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
-		                            var path = polyline.getPath();
-		                            path.push(point);
-		                            polyline.setPath(path);
-
-                       				++a;
-                        		</c:if>
-                			</c:forEach>		    
+		
+									 <c:if test="${nowDate eq openDate}">
+									 	var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+									 	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png',
+									 	imageSize = new kakao.maps.Size(36, 37),
+									 	
+									 	imgOptions =  {
+		                                    spriteSize : new kakao.maps.Size(36, 691),
+		                                    spriteOrigin : new kakao.maps.Point(0, (a*46)+10),
+		                                    offset: new kakao.maps.Point(13, 37) 
+	                                	},
+	                                	
+		                                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+		                                marker = new kakao.maps.Marker({
+		                                    position: markerPosition,
+		                                    image: markerImage
+	                                	});
+									 	
+	                           			marker.setMap(map);
+	
+	
+			                            var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                            var path = polyline.getPath();
+			                            path.push(point);
+			                            polyline.setPath(path);
+	
+	                       				++a;
+	                        		</c:if>
+	                			</c:forEach>		    
 							</script>
 						</c:forEach>
 						
