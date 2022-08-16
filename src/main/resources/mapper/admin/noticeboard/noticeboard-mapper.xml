@@ -8,7 +8,7 @@
 		select
 		    nb.nb_no,
 		    m.m_nickname,
-		    nb.nb_title,
+		    nb.nb_title, 
 		    nb.nb_content,
 		    nb.nb_created_at,
 		    nb.nb_updated_at,

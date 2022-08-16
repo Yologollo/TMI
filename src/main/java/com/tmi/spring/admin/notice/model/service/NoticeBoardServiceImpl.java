@@ -22,6 +22,6 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		int limit = numPerPage;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return noticeBoardDao.selectNoticeBoardList(rowBounds);
-		
+		 
 	}
 }

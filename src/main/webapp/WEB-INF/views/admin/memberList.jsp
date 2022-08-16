@@ -49,7 +49,7 @@
         <thead id="list-head">
           <tr>
           	<th></th>
-            <th>회원번호</th>
+            <th>회원번호</th> 
             <th>회원별명</th>
             <th>회원이름</th>
           </tr>

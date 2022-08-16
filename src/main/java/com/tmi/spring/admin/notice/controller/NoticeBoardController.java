@@ -38,7 +38,7 @@ public class NoticeBoardController {
 		} catch (Exception e) {
 			log.error("공지사항 목록 조회 오류",e);
 		}
-		
+		 
 		return mav;
 	}
 }

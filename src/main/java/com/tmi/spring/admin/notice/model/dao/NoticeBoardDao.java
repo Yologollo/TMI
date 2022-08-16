@@ -9,7 +9,7 @@ import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
 
 @Mapper
 public interface NoticeBoardDao {
-
+ 
 	List<NoticeBoard> selectNoticeBoardList(RowBounds rowBounds);
 
 }

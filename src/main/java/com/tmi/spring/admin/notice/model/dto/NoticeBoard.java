@@ -10,7 +10,7 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@ToString(callSuper = true)
+@ToString(callSuper = true) 
 public class NoticeBoard extends NoticeBoardEntity {
 	private int attachCount;
 	private int commentCount;
