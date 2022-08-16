@@ -1,9 +1,5 @@
 package com.tmi.spring.planner.model.service;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +45,9 @@ public class PlannerServiceImpl implements PlannerService {
 		return plannerDao.selectPlannerPlanList(pNo);
 	}
 	
+	@Override
+	public List<PlannerPlan> findPlansList(List<Planner> plannerList) {
+		return plannerDao.findPlansList(plannerList);
+	}
 
 }
