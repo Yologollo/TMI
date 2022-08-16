@@ -97,7 +97,7 @@
 						</tbody>
 					</table>
 				 </c:if> 
-			</div>
+			
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
@@ -105,6 +105,7 @@
 		</c:if>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
+		<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href=''">
 		<br /><br /><br />
 </div>
 <script>

@@ -97,7 +97,6 @@
 						</tbody>
 					</table>
 				 </c:if> 
-			</div>
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
