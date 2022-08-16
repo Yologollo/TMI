@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.spring.admin.notice.model.dao.NoticeBoardDao">
+<!-- <mapper namespace="dao 경로"> -->
+ 	<select id="selectNoticeBoardList" parameterType="String" resultMap="NoticeBoardMap">
+		select
+		    nb.nb_no,
+		    m.m_nickname,
+		    nb.nb_title,
+		    nb.nb_content,
+		    nb.nb_created_at,
+		    nb.nb_updated_at,
+		    nb.nb_read_count,
+		    (select count(*) from tmi_friend_board_attachment where nba_nb_no = nb.nb_no) attachCount,
+		    (select count(*) from tmi_friend_board_comment where nbc_nb_no = nb.nb_no) commentCount
+		from
+		    tmi_friend_board nb join tmi_member m
+		        on nb_m_email = m.m_email
+		order by
+			nb.nb_no desc
+	</select> 
+	
+	<!-- <insert id="insertFriendBoard">
+		insert into 
+			tmi_friend_board 
+		values 
+			(seq_pb_no.nextval, null, #{fbMEmail}, #{fbTitle}, sysdate, sysdate, 0, #{fbContent})
+			
+		<selectKey keyProperty="fbNo" resultType="_int" order="AFTER">
+			select
+				seq_pb_no.currval
+			from
+				dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment">
+		insert into 
+			tmi_friend_board_attachment 
+			(fba_no, fba_fb_no, fba_original_filename, fba_renamed_filename) 
+		values 
+			(seq_fba_no.nextval, #{fbaFbNo}, #{fbaOriginalFilename}, #{fbaRenamedFilename})
+	</insert>
+	
+	<insert id="insertFriendComment">
+		insert into 
+			tmi_friend_board_comment 
+		values
+			(seq_fbc_no.nextval, #{fbcMEmail}, #{fbcFbNo}, sysdate, #{fbcContent})
+	</insert>
+	 
+	<resultMap id="FriendBoardMap" type="friendBoard">
+		<result column="fb_no" property="fb_no"/>
+		<result column="fb_p_no" property="fb_p_no"/>
+		<result column="m_nickname" property="m_nickname"/>
+		<result column="fb_title" property="fb_title"/>
+		<result column="fb_content" property="fb_content"/>
+		<result column="fb_created_at" property="fb_created_at"/>
+		<result column="fb_updated_at" property="fb_updated_at"/>
+		<result column="fb_read_count" property="fb_read_count"/>
+		<result column="attachCount" property="attachCount"/>
+		<result column="commentCount" property="commentCount"/>
+	 </resultMap> -->
+</mapper>

@@ -44,18 +44,32 @@
       <table>
         <thead id="list-head">
           <tr>
-          	<th></th>
-            <th>관리자</th>
-            <th></th>
-            <th></th>
+	          	<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>첨부파일</th>
+				<th>조회수</th>
           </tr>
         </thead>
          <tbody id="list-content">
-         <td><input type="checkbox" ></td>
-         <td>hogged</td>
-         <td>홍쥐디</td>
-         <td>홍길동</td>
-        	</tbody>
+        <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+        <tr data-no="${noticeBoard.nb_no}">
+					<td>${friendBoard.fb_no}</td>
+					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
+					<td>${friendBoard.m_nickname}</td>
+					<td>
+						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
+					</td>
+					<td>
+						<c:if test="${friendBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+						</c:if>
+					</td>
+					<td>${friendBoard.fb_read_count}</td>
+				</tr>
+			</c:forEach>
       	</table>
 
 		<br><br><br><br><br><br>

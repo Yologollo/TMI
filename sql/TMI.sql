@@ -274,3 +274,5 @@ create table tmi_chat_content(
 );
 
 create sequence seq_cc_no;
+
+

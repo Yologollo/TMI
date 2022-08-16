@@ -30,7 +30,7 @@
   
 	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+	      <li><a href="${pageContext.request.contextPath}/admin/noticeBoard" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	      
 	    </ul>
 
@@ -54,17 +54,21 @@
             <th>회원이름</th>
           </tr>
         </thead>
+      
         <tbody id="list-content">
-        <td></td>
-         <td>hogged</td>
-         <td>홍쥐디</td>
-         <td>홍길동</td>
+        <c:forEach items="${list}" var="adminList" varStatus="vs">
+        <td></td> 
+         <td>${adminList.m_no}</td>
+         <td>${adminList.m_nickname}</td>
+         <td>${adminList.m_name}</td>
+        
          <td>
            <div id="btn-sort-wrap">
              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
            </div>
         </td>
         
+        </c:forEach>
         <!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
