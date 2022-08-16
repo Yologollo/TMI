@@ -109,15 +109,29 @@ a:active {
 	width: 70%;
 }
 
+.cardDateSpan {
+	float: left;
+}
+
+.cardDaySpan {
+	float: right;
+}
+
 .cardTitleSpan {
-	font-size: 18px;
+	font-size: 28px;
 }
 
 .cardExplanSpan {
-	font-size: 12px;
+	font-size: 14px;
+	color: #868e96;
 }
 
 .modal-footer {
 	justify-content: center;
 	margin: auto 0;
+}
+
+.dayAllMapClass {
+	border: 1px solid #d3d3d3;
+	height: 25vh;
 }
