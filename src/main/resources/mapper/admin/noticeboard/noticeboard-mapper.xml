@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmi.spring.admin.notice.model.dao.NoticeBoardDao">
 <!-- <mapper namespace="dao 경로"> -->
- 	<select id="selectNoticeBoardList" parameterType="String" resultMap="NoticeBoardMap">
+ 	<select id="selectNoticeBoardList" resultType="noticeBoard">
+ 	<!-- parameterType="String" resultMap="NoticeBoard -->
 		select
 		    nb.nb_no,
 		    m.m_nickname,

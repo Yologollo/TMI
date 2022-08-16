@@ -7,5 +7,7 @@ import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
 public interface NoticeBoardService {
 
 	List<NoticeBoard> selectNoticeBoardList(int cPage, int numPerPage);
+
+	int selectTotalContent();
  
 }

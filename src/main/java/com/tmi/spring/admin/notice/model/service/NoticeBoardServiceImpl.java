@@ -24,4 +24,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		return noticeBoardDao.selectNoticeBoardList(rowBounds);
 		 
 	}
+	
+	@Override
+	public int selectTotalContent() {
+		return noticeBoardDao.selectTotalContent();
+	}
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
 import com.tmi.spring.admin.notice.model.service.NoticeBoardService;
+import com.tmi.spring.common.HelloSpringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +33,15 @@ public class NoticeBoardController {
 			List<NoticeBoard> list = noticeBoardService.selectNoticeBoardList(cPage, numPerPage);
 			log.debug("list = {}", list);
 			mav.addObject("list", list);
+			
+			//페이지바
+			int totalContent = noticeBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
 			
 			//viewName설정
 			mav.setViewName("admin/notice/noticeBoard");

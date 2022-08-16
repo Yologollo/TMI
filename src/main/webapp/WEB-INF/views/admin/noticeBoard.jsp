@@ -55,28 +55,27 @@
          <tbody id="list-content">
         <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
         <tr data-no="${noticeBoard.nb_no}">
-					<td>${friendBoard.fb_no}</td>
-					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
-					<td>${friendBoard.m_nickname}</td>
+					<td>${noticeBoard.nb_no}</td>
+					<td>${noticeBoard.nb_title}<c:if test="${noticeBoard.commentCount > 0}"> (${noticeBoard.commentCount})</c:if></td>
+					<td>${noticeBoard.m_nickname}</td>
 					<td>
-						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${noticeBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
 					<td>
-						<c:if test="${friendBoard.attachCount gt 0}">
-							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+						<c:if test="${noticeBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
 						</c:if>
 					</td>
-					<td>${friendBoard.fb_read_count}</td>
+					<td>${noticeBoard.fb_read_count}</td>
 				</tr>
 			</c:forEach>
       	</table>
-
+		<nav>${pagebar}</nav>
+  </section>
 		<br><br><br><br><br><br>
 		<br><br><br><br><br><br>
-		<br><br><br>
 		
-</section>
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
