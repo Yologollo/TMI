@@ -43,6 +43,7 @@ public class WidgetController {
 
 	final String SERVICE_KEY = "ServiceKey=WJrWhTS5sO0umKspB%2F6l3eIML4y24JazyOw7uenJR%2F%2FnZ6LQfNHV09G8L47Al%2BdjLJIxbskdBRU6Rx8qwkJWoQ%3D%3D";
 	final String LAST_URL = "&MobileOS=ETC&MobileApp=TMI&_type=json";
+	final String DETAILCOMMON_LAST_URL = "&defaultYN=Y&firstImageYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&MobileOS=ETC&MobileApp=TMI&_type=json";
 
 	@GetMapping("/widget")
 	public String index() {
@@ -62,7 +63,7 @@ public class WidgetController {
 
 		PrintWriter out = response.getWriter();
 
-		if (areaCode != "0") {
+		if (!areaCode.equals("0")) {
 
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + LAST_URL;
@@ -110,7 +111,7 @@ public class WidgetController {
 
 		PrintWriter out = response.getWriter();
 
-		if (cat1 != "0") {
+		if (!cat1.equals("0")) {
 
 			parameter = parameter + "&" + "cat1=" + cat1;
 			parameter = parameter + LAST_URL;
@@ -158,7 +159,7 @@ public class WidgetController {
 
 		PrintWriter out = response.getWriter();
 
-		if (cat2 == "0") {
+		if (cat2.equals("0")) {
 
 			parameter = parameter + "&" + "cat1=" + cat1;
 			parameter = parameter + LAST_URL;
@@ -196,24 +197,49 @@ public class WidgetController {
 
 	}
 
-	@GetMapping("/widget/callareaBasedList.do")
-	public void callareaBasedList(HttpServletResponse request, HttpServletResponse response,
-			@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String cat1,
-			@RequestParam String cat2, @RequestParam String cat3) throws Exception {
+	@GetMapping("/widget/callAreaBasedList.do")
+	public void callAreaBasedList(HttpServletResponse request, HttpServletResponse response,
+			@RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
 
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html, charset=utf-8");
 
-		String addr = CATEGORYCODE_URL;
+		String addr = AREABASEDLIST_URL;
 		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);		
 
 		PrintWriter out = response.getWriter();
+		
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + LAST_URL;
 
-		parameter = parameter + "&" + "areaCode" + areaCode;
-		parameter = parameter + LAST_URL;
-		addr = addr + SERVICE_KEY + parameter;
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		}
+		;
 
 		URL url = new URL(addr);
+		System.out.println(addr);
 
 		InputStream in = url.openStream();
 
@@ -232,5 +258,73 @@ public class WidgetController {
 		json.put("data", s);
 
 	}
+	
+	
+	@GetMapping("/widget/callPagingLength.do")
+	public void callPagingLength(HttpServletResponse request, HttpServletResponse response,
+			@RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
+
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html, charset=utf-8");
+
+		String addr = AREABASEDLIST_URL;
+		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);		
+
+		PrintWriter out = response.getWriter();
+		
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		}
+		;
+
+		URL url = new URL(addr);
+		System.out.println(addr);
+
+		InputStream in = url.openStream();
+
+		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		IOUtils.copy(in, bos1);
+		in.close();
+		bos1.close();
+
+		String mbos = bos1.toString("UTF-8");
+
+		byte[] b = mbos.getBytes("UTF-8");
+		String s = new String(b, "UTF-8");
+		out.println(s);
+
+		JSONObject json = new JSONObject();
+		json.put("data", s);
+
+	}
+
 
 }
