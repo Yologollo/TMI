@@ -54,9 +54,14 @@
 				</c:forEach>
 			</c:if>
 		
-		<c:forEach items="${insertFriendBoard.planner}" var="planner">
-			${planner.PTitle}
-		</c:forEach>
+		<div class="form-control">
+			<c:forEach items="${insertFriendBoard.planner}" var="planner">
+					${planner.PTitle}
+			</c:forEach>
+			<c:forEach items="${insertFriendBoard.plans}" var="plans">
+					${plans.ppPlaceName}
+			</c:forEach>
+		</div>
 		
 	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
 		<br /><br />
