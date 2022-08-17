@@ -12,6 +12,7 @@ import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
+import com.tmi.spring.planner.model.dto.Planner;
 
 @Mapper
 public interface FriendBoardDao {
@@ -24,6 +25,9 @@ public interface FriendBoardDao {
 	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 
 	int insertAttachment(FriendBoardAttachment attach);
+	
+//	@Select("select * from tmi_friend_board fb join tmi_planner p on fb.fb_p_no = p.p_no where fb_no = #{no}")
+//	InsertFriendBoard selectOneFriendBoard(int no);
 	
 	@Select("select * from tmi_friend_board where fb_no = #{no}")
 	InsertFriendBoard selectOneFriendBoard(int no);
@@ -53,5 +57,8 @@ public interface FriendBoardDao {
 
 	@Update("update tmi_friend_board set fb_read_count = fb_read_count + 1 where fb_no = #{no}")
 	int updateReadCount(int no);
+
+	@Select("select fb_no, p_no, p_title, p_explan, p_leave_date, p_return_date from tmi_friend_board fb join tmi_planner p on fb.fb_p_no = p.p_no where fb_no = #{no}")
+	List<Planner> findBoardPlannerByNo(int no);
 	
 }

@@ -312,6 +312,7 @@ public class FriendBoardController {
 			log.debug("no = {}",no);
 			int result = friendBoardService.deleteFriendBoard(no);
 			
+			
 		} catch (Exception e) {
 			log.error("게시판 삭제 오류",e);
 			throw e;

@@ -21,4 +21,6 @@ public interface PlannerService {
 
 	List<PlannerPlan> findPlansList(List<Planner> plannerList);
 
+	List<Planner> findSharePlannerByEmail(String memberEmail);
+
 }
