@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.tmi.spring.member.model.dto.MemberEntity;
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class InsertFriendBoard {
 	private List<FriendBoardAttachment> attachments = new ArrayList<>();
 	private List<FriendBoardComment> comments = new ArrayList<>();
 	private List<Planner> planner = new ArrayList<>();
+	private List<PlannerPlan> plans = new ArrayList<>();
 	
 	private int fbNo;
 	private int fbPNo;

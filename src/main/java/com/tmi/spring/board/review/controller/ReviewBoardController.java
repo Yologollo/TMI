@@ -18,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.board.review.model.service.ReviewBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
+import com.tmi.spring.member.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,7 +63,7 @@ public class ReviewBoardController {
 	@GetMapping("/board/review/reviewBoard.do")
 	public ModelAndView ReviewBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
 		try {
-			int numPerPage = 5;
+			int numPerPage = 8;
 			List<ReviewBoard> list = reviewBoardService.selectReviewBoardList(cPage, numPerPage);
 			Iterator<ReviewBoard> it = list.iterator();
 
@@ -70,6 +72,7 @@ public class ReviewBoardController {
 			
 			int totalContent = reviewBoardService.selectTotalContent();
 			String url = request.getRequestURI();
+			log.debug("url = {}", url);
 
 			while(it.hasNext()) {
 				ReviewBoard boardEntity = it.next();
@@ -143,13 +146,17 @@ public class ReviewBoardController {
 		return "redirect:/board/review/reviewBoard.do";
 	}
 	
+	@ResponseBody
 	@GetMapping("/board/review/reviewBoardDetail.do")
-	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
+										  @AuthenticationPrincipal Member member) {
 		try {
 			log.debug("no = {}", no);			
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
-			log.debug("insertReviewBoard = {}", insertReviewBoard);			
+			log.debug("insertReviewBoard = {}", insertReviewBoard);					
 			
+			String email = member.getMEmail();
+			log.debug("email = {}", email);
 			
 			Cookie[] cookies = request.getCookies();
 			int visitor = 0;
@@ -185,6 +192,17 @@ public class ReviewBoardController {
 				int result = reviewBoardService.updateReadCount(no);
 			}
 			
+//			log.info("상세보기 페이지");
+//			model.addAttribute("Detail", reviewBoardService.freeDetail(no));
+//			
+//			ReviewBoardLove like = new ReviewBoardLove();
+//			
+//			like.setRblRbNo(no);
+//			like.setRblMEmail(user_id);
+//			
+//			model.addAttribute("like", reviewBoardService.findLike(no, user_id));
+//			model.addAttribute("getLike", reviewBoardService.getLike(no));
+//			reviewBoardService.hit(no);
 			
 			
 //	        int result = friendBoardService.updateReadCount(no);
@@ -340,7 +358,7 @@ public class ReviewBoardController {
 			throw e;
 		}
 		return "redirect:/board/review/reviewBoardDetail.do?no=" + rbcRbNo;
-	}
+	}		
 	
 }
 
