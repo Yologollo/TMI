@@ -34,6 +34,7 @@ import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 import com.tmi.spring.board.review.model.service.ReviewBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
@@ -149,11 +150,11 @@ public class ReviewBoardController {
 	@ResponseBody
 	@GetMapping("/board/review/reviewBoardDetail.do")
 	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
-										  @AuthenticationPrincipal Member member) {
+										  @AuthenticationPrincipal Member member, Model model) {
 		try {
 			log.debug("no = {}", no);			
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
-			log.debug("insertReviewBoard = {}", insertReviewBoard);					
+			log.debug("insertReviewBoard = {}", insertReviewBoard);		
 			
 			String email = member.getMEmail();
 			log.debug("email = {}", email);
@@ -192,20 +193,12 @@ public class ReviewBoardController {
 				int result = reviewBoardService.updateReadCount(no);
 			}
 			
-//			log.info("상세보기 페이지");
-//			model.addAttribute("Detail", reviewBoardService.freeDetail(no));
-//			
-//			ReviewBoardLove like = new ReviewBoardLove();
-//			
-//			like.setRblRbNo(no);
-//			like.setRblMEmail(user_id);
-//			
-//			model.addAttribute("like", reviewBoardService.findLike(no, user_id));
-//			model.addAttribute("getLike", reviewBoardService.getLike(no));
-//			reviewBoardService.hit(no);
+//			ReviewBoardLove heart = new ReviewBoardLove();
+//			// 좋아요가 되있는지 찾기위해 게시글번호와 회원번호를 보냄.
+//			heart = reviewBoardService.findHeart(email, m_number);
+//			// 찾은 정보를 heart로 담아서 보냄
+//			model.addAttribute("heart",heart);
 			
-			
-//	        int result = friendBoardService.updateReadCount(no);
 			mav.addObject("insertReviewBoard", insertReviewBoard);
 			mav.setViewName("board/review/reviewBoardDetail");
 
