@@ -12,126 +12,89 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
 
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+<script>
+
+var contentId = location.href.split('?')[1];
+console.log("contentId = " + contentId);
+
+
+$(document).ready(function(){
+	
+	console.log("contentId = " + contentId);
+
+	$.ajax({
+		url : '${pageContext.request.contextPath}/tourism/callDetailCommon.do',
+		type : 'get',
+		data : {
+			contentId : contentId
+		},
+		dataType : 'json',
+		success : function(data) {
+
+			var myItem = data.response.body.items.item;
+			console.log(myItem);
+			
+		},
+
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("Status : " + textStatus);
+			alert("Error : " + errorThrown);
+		}
+	});	
+
+});
+
+
+</script>
+
+
 <div id="commonMain">
 	<!-- 
 	생성 : 전인찬
 	작업 : 전인찬
  -->
  <div id="commonMain2">
-	<div id="infoBox">
-		<!-- 
+		<div id="infoBox">
+			<!-- 
 		<p id="info-box title">고사포해수욕장</p>
 		 -->
-		<div id="infoTop">
-			<div id="slideBox">
-				<div id="slideBoxBigImg">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/tourism/topimg1.jpg"
-						alt="" id="bigImg" />
-					<div id="slideBoxSlide">
-						<button type="button" data-role="none" id="slideBoxPrew"
-							style="display: block;">Previous</button>
-						<div id="slideBoxList">사진 슬라이드쇼 위치</div>
-						<button type="button" data-role="none" id="slideBoxNext"
-							style="display: block;">next</button>
+			<div id="infoTop">
+					<div id="bigImg">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/tourism/topimg1.jpg"
+							alt="" id="bigImg2" />
 					</div>
-				</div>
-			</div>
-			<div id="tourismInfo">
-				<p id="tourismInfoTitle">고사포해수욕장</p>
-				<div id="tourismInfoTagBox">
-					<ul id="tourismInfoThreeTab">
-						<li><button type="button" id="tagBox1">기본정보</button></li>
-						<li><button type="button" id="tagBox2">이용안내</button></li>
-						<li><button type="button" id="tagBox3">상세정보</button></li>
-					</ul>
-				</div>
-				<div id="tabContent1">
-					<table id="tabContent1Table" class="table table-bordered">
-						<caption>관광데이터 기본정보</caption>
-						<tbody>
-							<tr>
-								<th id="content1TableTh">우편번호</th>
-								<td>56339</td>
-							</tr>
-							<tr>
-								<th>홈페이지</th>
-								<td>
-									<div id="content1TableHomepage">
-										<a href="http://www.buan.go.kr/tour">
-											http://www.buan.go.kr/tour </a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>주소</th>
-								<td>
-									<div>전라북도 부안군 변산면 노루목길 8-8&nbsp;(변산면)</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="tabContent2">
-					<strong id="tabContent2Strong">관광지</strong>
-					<div id="scrolldown">
-						<table id="tabContent2Table" class="table table-bordered">
-							<caption>관광데이터 이용안내</caption>
+				<div id="tourismInfo">
+					<p id="tourismInfoTitle">고사포해수욕장</p>
+					<div id="tourismInfoBox">
+						
+						<table id="contentTable" class="table table-bordered">
+							<caption>관광데이터 기본정보</caption>
 							<tbody>
 								<tr>
-									<th>문의 및 안내</th>
+									<th id="contentTableTh">우편번호</th>
+									<td>56339</td>
+								</tr>
+								<tr>
+									<th>홈페이지</th>
 									<td>
-										<div>063-582-7808</div>
+										<div id="contentTableHomepage">
+											<a href="http://www.buan.go.kr/tour">
+												http://www.buan.go.kr/tour </a>
+										</div>
 									</td>
 								</tr>
 								<tr>
-									<th>쉬는날</th>
-									<td>연중무휴</td>
-								</tr>
-								<tr>
-									<th>체험가능연령</th>
-									<td>만 5세 이상</td>
-								</tr>
-								<tr>
-									<th>주차시설</th>
-									<td>있음</td>
-								</tr>
-								<tr>
-									<th>유모차 대여 여부</th>
-									<td>없음</td>
-								</tr>
-								<tr>
-									<th>애완동물 동반가능여부</th>
-									<td>가능</td>
-								</tr>
-								<tr>
-									<th>신용카드 가능 여부</th>
-									<td>없음</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div id="tabContent3">
-					<div id="scrolldown">
-						<table id="tabContent3Table" class="table table-bordered">
-							<caption>관광데이터 상세정보</caption>
-							<tbody>
-								<tr>
-									<th id="content3TableTh">화장실</th>
+									<th>주소</th>
 									<td>
-										<div style="text-align: initial;">있음</div>
-									</td>
-								</tr>
-								<tr>
-									<th id="content3TableTh">이용가능시설</th>
-									<td>
-										<div style="text-align: initial;">음수대, 샤워장(해수욕장 개장기간만 이용
-											가능)</div>
+										<div>전라북도 부안군 변산면 노루목길 8-8&nbsp;(변산면)</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+					
 					</div>
 				</div>
 			</div>
@@ -154,35 +117,9 @@
 		<a id="mainlistButton"
 			href="https://api.visitkorea.or.kr/#/hubTourSearch">목록</a>
 	</div>
-	</div>
 </div>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+
 <script>
-
-var recieveData = location.href.split('?')[1];
-console.log("recieveData = " + recieveData);
-
-$('#tagBox1').on('click', function(){
-	console.log('1번박스클릭');
-	$('#tabContent1').css('display', 'block');
-	$('#tabContent2').css('display', 'none');
-	$('#tabContent3').css('display', 'none');	
-});
-
-$('#tagBox2').on('click', function(){
-	console.log('2번박스클릭');
-	$('#tabContent1').css('display', 'none');
-	$('#tabContent2').css('display', 'block');
-	$('#tabContent3').css('display', 'none');	
-});
-
-$('#tagBox3').on('click', function(){
-	console.log('3번박스클릭');
-	$('#tabContent1').css('display', 'none');
-	$('#tabContent2').css('display', 'none');
-	$('#tabContent3').css('display', 'block');	
-});
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
