@@ -50,9 +50,4 @@ public class PlannerServiceImpl implements PlannerService {
 		return plannerDao.findPlansList(plannerList);
 	}
 	
-	@Override
-	public List<Planner> findSharePlannerByEmail(String memberEmail) {
-		return plannerDao.findSharePlannerByEmail(memberEmail);
-	}
-
 }

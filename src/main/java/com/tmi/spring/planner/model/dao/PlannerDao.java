@@ -31,8 +31,5 @@ public interface PlannerDao {
 
 	@Select("select * from tmi_planner_plan")
 	List<PlannerPlan> findPlansList(List<Planner> plannerList);
-
-	@Select("select * from tmi_planner where p_m_email = #{pmEmail} and p_share = 'Y' order by p_leave_date desc")
-	List<Planner> findSharePlannerByEmail(String memberEmail);
 	
 }

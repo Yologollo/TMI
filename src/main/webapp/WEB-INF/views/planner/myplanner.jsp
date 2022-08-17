@@ -59,22 +59,6 @@
 <div id="commonMain">
 	<div id="bannder">배너 / My플래너</div>
 	<div id="wrapper">
-		<div id="menuContainer">
-			<ul>
-				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
-				</li>
-				<hr />
-				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/sharePlanner">공유 플래너</a>
-				</li>
-				<hr />
-				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/lovePlanner">좋아요 플래너</a>
-				</li>
-				<hr />
-			</ul>
-		</div>
 		<div id="plannerContainer">
 			<div id="plannerInfo">
 				<button type="button" id="createPlannerModalbtn" class="btn btn-primary btn-lg">플래너 작성</button>
