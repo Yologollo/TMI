@@ -92,7 +92,7 @@
 									</span><br />
 									<span class="cardTitleSpan">${planner.PTitle}</span><br />
 									<span class="cardExplanSpan">${planner.PExplan}</span><br />
-									<button type="button" class="btn btn-primary plannerChoose">플래너 선택</button>
+									<button type="button" class="btn btn-primary plannerChoose" value="${planner.PNo}">플래너 선택</button>
 								</div>
 							</div>
 			            </c:forEach>
@@ -113,6 +113,7 @@
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		<button type="button" id="createPlannerModalbtn" class="btn btn-primary btn-lg">플래너 불러오기</button>
+		<input type="hidden" id="modalPlannerNo" name="fbPNo" value=""/>
 		
 	  	<textarea id="summernote" name="fbContent"></textarea>
 	  	
@@ -184,6 +185,13 @@
 	$('#btnModalCloseDown').on('click', function() {
 	    $('.createPlannerModalForm').removeClass('show-modal');
 	});
+	
+	$('.plannerChoose').click(function(e){
+		var plannerNo = e.target.value
+		$('input[name=fbPNo]').attr('value', plannerNo);
+		alert('플래너가 선택되었습니다 !');
+		$('.createPlannerModalForm').removeClass('show-modal');
+	})
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
