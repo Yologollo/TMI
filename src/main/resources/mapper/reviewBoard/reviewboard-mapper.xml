@@ -52,6 +52,10 @@
 			(seq_rbc_no.nextval, #{rbcRbNo}, #{rbcMEmail}, sysdate, #{rbcContent})
 	</insert>
 	
+<!-- 	<select id="findLike" resultType="int">
+		select count(*) from tmi_review_board_love where rbl_rb_no = #{} and rbl_m_email = #{}
+	</select> -->
+	
 	<resultMap id="ReviewBoardMap" type="reviewBoard">
 		<result column="rb_no" property="rb_no"/>
 		<result column="rb_p_no" property="rb_p_no"/>

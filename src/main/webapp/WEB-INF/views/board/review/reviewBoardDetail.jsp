@@ -39,8 +39,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
+<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
+
+<script>
+const email = document.getElementById("loginMemberEmail").value;
+});
+</script>
 
 <div id="commonMain">
+		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
 		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" required readonly>
  		<input type="text" class="form-control" name="rbMEmail" value="${insertReviewBoard.rbMEmail}" readonly required>
@@ -83,6 +90,7 @@
 									<br />
 									${comment.rbcContent}
 								</td>
+								
 								<td>
 									<form action="${pageContext.request.contextPath}/board/review/deleteComment.do" method="get" name="reviewBoardCommentDeleteFrm">
 										<input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
