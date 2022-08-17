@@ -21,12 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/tourism")
+//@RequestMapping("/tourism")
 public class TourismController {
 	
-	@GetMapping("/")
-	public void index() {
+	@GetMapping("/tourism")
+	public String index() {
 		log.info("GET / 요청!");
+		return "/tourism/tourism";
 	}
 	
 	final String AREACODE_URL = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode";
