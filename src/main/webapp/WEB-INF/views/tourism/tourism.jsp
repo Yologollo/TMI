@@ -160,6 +160,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
 
+var recieveData = location.href.split('?')[1];
+console.log("recieveData = " + recieveData);
+
 $('#tagBox1').on('click', function(){
 	console.log('1번박스클릭');
 	$('#tabContent1').css('display', 'block');
