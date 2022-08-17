@@ -43,7 +43,6 @@
 
 <script>
 const email = document.getElementById("loginMemberEmail").value;
-});
 </script>
 
 <div id="commonMain">
@@ -78,6 +77,13 @@ const email = document.getElementById("loginMemberEmail").value;
 		            </form>
 		        </div>
 		</c:if>
+		
+		<div>
+			<a class="text-dark heart" style="text-decoration-line: none;">
+				<img id="heart" src="${pageContext.request.contextPath}/resources/images/noImage.png">
+				좋아요
+			</a>
+		</div>
 				<!--table#tbl-comment-->
 				 <c:if test="${insertReviewBoard.comments ne null && not empty insertReviewBoard.comments}">
 					<table id="tbl-comment">
@@ -163,7 +169,6 @@ const email = document.getElementById("loginMemberEmail").value;
  			}
  		});
  	}); 
-
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
