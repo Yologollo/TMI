@@ -80,7 +80,7 @@ public class WidgetController {
 			addr = addr + SERVICE_KEY + parameter;
 
 		}
-		;
+		; // 12
 
 		URL url = new URL(addr);
 
