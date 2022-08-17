@@ -12,10 +12,10 @@
 		    nb.nb_title, 
 		    nb.nb_content,
 		    nb.nb_created_at,
-		    nb.nb_updated_at,
+		    nb.nb_update_at,
 		    nb.nb_read_count,
-		    (select count(*) from tmi_friend_board_attachment where nba_nb_no = nb.nb_no) attachCount,
-		    (select count(*) from tmi_friend_board_comment where nbc_nb_no = nb.nb_no) commentCount
+		    (select count(*) from tmi_notice_board_attachment where nba_nb_no = nb.nb_no) attachCount,
+		    (select count(*) from tmi_notice_board_comment where nbc_nb_no = nb.nb_no) commentCount
 		from
 		    tmi_friend_board nb join tmi_member m
 		        on nb_m_email = m.m_email
@@ -23,13 +23,13 @@
 			nb.nb_no desc
 	</select> 
 	
-	<!-- <insert id="insertFriendBoard">
+	<insert id="insertNoticeBoard">
 		insert into 
-			tmi_friend_board 
+			tmi_notice_board 
 		values 
-			(seq_pb_no.nextval, null, #{fbMEmail}, #{fbTitle}, sysdate, sysdate, 0, #{fbContent})
+			(seq_pb_no.nextval, null, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0, #{nbContent})
 			
-		<selectKey keyProperty="fbNo" resultType="_int" order="AFTER">
+		<selectKey keyProperty="nbNo" resultType="_int" order="AFTER">
 			select
 				seq_pb_no.currval
 			from
@@ -39,29 +39,22 @@
 	
 	<insert id="insertAttachment">
 		insert into 
-			tmi_friend_board_attachment 
-			(fba_no, fba_fb_no, fba_original_filename, fba_renamed_filename) 
+			tmi_notice_board_attachment 
+			(nba_no, nba_nb_no, nba_original_filename, nba_renamed_filename) 
 		values 
-			(seq_fba_no.nextval, #{fbaFbNo}, #{fbaOriginalFilename}, #{fbaRenamedFilename})
+			(seq_nba_no.nextval, #{nbaNbNo}, #{nbaOriginalFilename}, #{nbaRenamedFilename})
 	</insert>
 	
-	<insert id="insertFriendComment">
-		insert into 
-			tmi_friend_board_comment 
-		values
-			(seq_fbc_no.nextval, #{fbcMEmail}, #{fbcFbNo}, sysdate, #{fbcContent})
-	</insert>
 	 
-	<resultMap id="FriendBoardMap" type="friendBoard">
-		<result column="fb_no" property="fb_no"/>
-		<result column="fb_p_no" property="fb_p_no"/>
+	<resultMap id="NoticeBoardMap" type="noticeBoard">
+		<result column="nb_no" property="nb_no"/>
+		<result column="nb_p_no" property="nb_p_no"/>
 		<result column="m_nickname" property="m_nickname"/>
-		<result column="fb_title" property="fb_title"/>
-		<result column="fb_content" property="fb_content"/>
-		<result column="fb_created_at" property="fb_created_at"/>
-		<result column="fb_updated_at" property="fb_updated_at"/>
-		<result column="fb_read_count" property="fb_read_count"/>
+		<result column="nb_title" property="nb_title"/>
+		<result column="nb_content" property="nb_content"/>
+		<result column="nb_created_at" property="nb_created_at"/>
+		<result column="nb_updated_at" property="nb_updated_at"/>
+		<result column="nb_read_count" property="nb_read_count"/>
 		<result column="attachCount" property="attachCount"/>
-		<result column="commentCount" property="commentCount"/>
-	 </resultMap> -->
+	 </resultMap> 
 </mapper>

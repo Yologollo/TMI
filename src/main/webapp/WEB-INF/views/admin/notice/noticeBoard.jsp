@@ -29,15 +29,15 @@
 	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
 	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-	      
 	    </ul>
 </div>
+    
   <div id="adminboard">
     <div>
       <div id="adminboard-head">
       	<h2>공지사항</h2>
       	<div id="btn-sort-wrap">
-          <button onclick="">추가하기</button>
+          <button onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>추가하기</button>
         </div>
       </div>
       

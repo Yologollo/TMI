@@ -50,14 +50,10 @@ public class AdminListController {
 	}
 	
 	
-	
-	
-	
-	
-	@GetMapping("/noticeBoard")
+	@GetMapping("notice/noticeBoard")
 	public String noticeList() {
 		log.info("GET / 요청!");
-		return "/admin/noticeBoard";
+		return "/admin/notice/noticeBoard";
 	}
 
 	
