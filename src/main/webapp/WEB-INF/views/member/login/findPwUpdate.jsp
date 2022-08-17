@@ -61,7 +61,7 @@ $("#submitButton").click(function(){
 		return false;
 	}
 	if ($("#passwordCheck").val() == '') {
-		alert("위 입력한 비밀번호 확인해주세요.")
+		alert("위 입력한 비밀번호를 확인해주세요.")
 		$("#passwordCheck").select().focus();
 		return false;
 	} else {
