@@ -63,7 +63,7 @@ a:active {
 	border: 1px solid #d3d3d3;
 	border-top: none;
 	float: right;
-	width: 80%;
+	width: 100%;
 	height: 100%;
 }
 
@@ -86,13 +86,13 @@ a:active {
 #cardWrapper {
 	justify-content: center;
 	margin: auto 0;
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-left: 6%;
+	padding-right: 6%;
 }
 
 #plannerContainer .card{
 	display: inline-block;
     vertical-align: middle;
     position: relative;
-    margin: 5%;
+    margin: 3%;
 }

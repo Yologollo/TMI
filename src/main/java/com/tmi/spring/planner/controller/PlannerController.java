@@ -172,32 +172,4 @@ public class PlannerController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
-	@GetMapping("/sharePlanner")
-	public String sharePlanner(@AuthenticationPrincipal Member member, Planner planner, Model model) {
-		try {
-			String memberEmail = member.getMEmail();
-			log.debug("memberEmail = {}", memberEmail);
-			
-			List<Planner> plannerList = plannerService.findSharePlannerByEmail(memberEmail);
-			log.debug("plannerList = {}", plannerList);
-			
-			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
-			log.debug("plans = {}", plans);
-			
-			model.addAttribute("plannerList", plannerList);
-			model.addAttribute("plans", plans);
-						
-		} catch (Exception e) {
-			log.error("Planner 조회 오류", e);
-			throw e;
-		}
-		return "/planner/shareplanner";
-	}
-	
-	@GetMapping("/lovePlanner")
-	public String lovePlanner() {
-		
-		log.info("GET / 요청!");
-		return "/planner/loveplanner";
-	}
 }
