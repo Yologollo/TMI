@@ -172,16 +172,4 @@ public class PlannerController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
-	@GetMapping("/sharePlanner")
-	public String sharePlanner() {
-		log.info("GET / 요청!");
-		return "/planner/shareplanner";
-	}
-	
-	@GetMapping("/lovePlanner")
-	public String lovePlanner() {
-		
-		log.info("GET / 요청!");
-		return "/planner/loveplanner";
-	}
 }

@@ -39,7 +39,6 @@ create table tmi_planner (
     p_leave_date date not null,
     p_return_date date not null,
     p_write_date date default sysdate,
-    p_share char(1) default 'N',
     
     constraint pk_p_no primary key(p_no),
     constraint fk_planner_m_email foreign key(p_m_email) references tmi_member(m_email) on delete cascade

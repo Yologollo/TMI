@@ -49,5 +49,5 @@ public class PlannerServiceImpl implements PlannerService {
 	public List<PlannerPlan> findPlansList(List<Planner> plannerList) {
 		return plannerDao.findPlansList(plannerList);
 	}
-
+	
 }

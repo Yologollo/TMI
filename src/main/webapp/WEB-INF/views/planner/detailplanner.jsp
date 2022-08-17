@@ -69,14 +69,6 @@ $(document).ready(function () {
 					<a href="${pageContext.request.contextPath}/planner/myplanner">My 플래너</a>
 				</li>
 				<hr />
-				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/sharePlanner">공유 플래너</a>
-				</li>
-				<hr />
-				<li class="plannerMenuli">
-					<a href="${pageContext.request.contextPath}/planner/lovePlanner">좋아요 플래너</a>
-				</li>
-				<hr />
 			</ul>
 		</div>
 

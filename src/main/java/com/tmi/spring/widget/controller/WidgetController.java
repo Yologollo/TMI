@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.tmi.spring.common.HelloSpringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
@@ -197,23 +200,98 @@ public class WidgetController {
 
 	}
 
+	@GetMapping("/widget/callAreaBasedListlength.do")
+	public void callAreaBasedListlength(HttpServletResponse request, HttpServletResponse response,
+			@RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
+
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html, charset=utf-8");
+
+		String addr = AREABASEDLIST_URL;
+		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);
+
+		PrintWriter out = response.getWriter();
+		
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "listYN=N";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		};
+
+		URL url = new URL(addr);
+		System.out.println(addr);
+
+		InputStream in = url.openStream();
+
+		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		IOUtils.copy(in, bos1);
+		in.close();
+		bos1.close();
+
+		String mbos = bos1.toString("UTF-8");
+
+		byte[] b = mbos.getBytes("UTF-8");
+		String s = new String(b, "UTF-8");
+		out.println(s);
+
+		JSONObject json = new JSONObject();
+		json.put("data", s);
+	}
+	
 	@GetMapping("/widget/callAreaBasedList.do")
 	public void callAreaBasedList(HttpServletResponse request, HttpServletResponse response,
-			@RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
-
+			@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount, ModelAndView mav) throws Exception {
 		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html, charset=utf-8");
 
+		int cPage = 1;
+		int numPerPage = 8;
+		int totalContent = Integer.parseInt(totalCount);
+		String url = "/#";
+		
+		String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+		mav.addObject("pagebar", pagebar);
+		
 		String addr = AREABASEDLIST_URL;
 		String parameter = "";
 		System.out.println("areaCode = " + areaCode);
-		System.out.println("sigunguCode = " + sigunguCode);		
+		System.out.println("sigunguCode = " + sigunguCode);
 
 		PrintWriter out = response.getWriter();
 		
 		if (areaCode.equals("0")) {
 			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + LAST_URL;
 
 			addr = addr + SERVICE_KEY + parameter;
@@ -221,6 +299,8 @@ public class WidgetController {
 		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
 			
 			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + LAST_URL;
 
@@ -229,19 +309,20 @@ public class WidgetController {
 		} else {
 
 			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
 			parameter = parameter + LAST_URL;
 			
 			addr = addr + SERVICE_KEY + parameter;
 			
-		}
-		;
+		};
 
-		URL url = new URL(addr);
+		URL url2 = new URL(addr);
 		System.out.println(addr);
 
-		InputStream in = url.openStream();
+		InputStream in = url2.openStream();
 
 		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
 		IOUtils.copy(in, bos1);
@@ -256,75 +337,6 @@ public class WidgetController {
 
 		JSONObject json = new JSONObject();
 		json.put("data", s);
-
 	}
 	
-	
-	@GetMapping("/widget/callPagingLength.do")
-	public void callPagingLength(HttpServletResponse request, HttpServletResponse response,
-			@RequestParam String areaCode, @RequestParam String sigunguCode) throws Exception {
-
-		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html, charset=utf-8");
-
-		String addr = AREABASEDLIST_URL;
-		String parameter = "";
-		System.out.println("areaCode = " + areaCode);
-		System.out.println("sigunguCode = " + sigunguCode);		
-
-		PrintWriter out = response.getWriter();
-		
-		if (areaCode.equals("0")) {
-			
-			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "listYN=N";
-			parameter = parameter + LAST_URL;
-
-			addr = addr + SERVICE_KEY + parameter;
-			
-		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
-			
-			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "listYN=N";
-			parameter = parameter + "&" + "areaCode=" + areaCode;
-			parameter = parameter + LAST_URL;
-
-			addr = addr + SERVICE_KEY + parameter;
-
-		} else {
-
-			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "listYN=N";
-			parameter = parameter + "&" + "areaCode=" + areaCode;
-			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
-			parameter = parameter + LAST_URL;
-			
-			addr = addr + SERVICE_KEY + parameter;
-			
-		}
-		;
-
-		URL url = new URL(addr);
-		System.out.println(addr);
-
-		InputStream in = url.openStream();
-
-		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-		IOUtils.copy(in, bos1);
-		in.close();
-		bos1.close();
-
-		String mbos = bos1.toString("UTF-8");
-
-		byte[] b = mbos.getBytes("UTF-8");
-		String s = new String(b, "UTF-8");
-		out.println(s);
-
-		JSONObject json = new JSONObject();
-		json.put("data", s);
-
-	}
-
-
 }

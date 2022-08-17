@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.spring.chat.model.dao.ChatDao">
+<!-- <mapper namespace="dao 경로"> -->
+	<!-- <select id="findRecentChatRoomList" resultType="chatContent">
+	select 
+	    *
+	from(
+	    select 
+	        cc.*,
+	        row_number() over(partition by chatroom_id order by message_time desc) rnum
+	    from tmi_chat_content cc
+	    where send_email=#{loginMemberEmail} or receive_email = #{loginMemberEmail}) cc
+	where 
+	    rnum = 1
+	</select> -->
+	
+	
+	<resultMap type="chatContent" id="chatContentMap">
+		<id column="content_no" property="contentNo"/>
+		<result column="chatroom_id" property="chatroomId"/>
+		<result column="send_email" property="sendEmail"/>
+		<result column="receive_email" property="receiveEmail"/>
+		<result column="message_content" property="messageContent"/>
+		<result column="message_time" property="messageTime"/>
+	</resultMap>
+</mapper>

@@ -77,8 +77,8 @@ public class MemberSecurityController {
 			log.debug("member = {}",member);
 			if(member != null) {
 				int result = memberService.findPwUpdate(member);
+				redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 			}
-			redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -99,7 +99,7 @@ public class MemberSecurityController {
 				return "redirect:/login/findPwUpdate.do";
 			}
 			else {
-				redirectAttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+				redirectAttr.addFlashAttribute("msg", "조회된 회원이 없습니다.");
 				return "redirect:/login/findPw.do";
 			}
 		} 

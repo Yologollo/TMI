@@ -26,7 +26,7 @@
 id="createAreaModal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1>관광타입</h1>
+				<h1>지역</h1>
 				<button type="button" class="btn-close" id="areaModalCloseBtn"
 					data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
@@ -72,7 +72,7 @@ id="createAreaModal">
 				<div class="modalInfo" id="sigunguList"></div>
 
 			</div>
-			<div class="modal-foot">
+			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
 				<button type="button" class="btn btn-secondary" id="areaCancelBtn"
 					data-bs-dismiss="modal">취소</button>
@@ -111,7 +111,7 @@ id="createAreaModal">
 						onClick="insertContent(this);">추천코스</button>
 				</div>
 			</div>
-			<div class="modal-foot">
+			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
 				<button type="button" class="btn btn-secondary"
 					id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
@@ -138,7 +138,7 @@ id="createAreaModal">
 				<div class="modalInfo" id="serviceCat3List">
 				</div>
 			</div>
-			<div class="modal-foot">
+			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
 				<button type="button" class="btn btn-secondary" id="serviceCancelBtn"
 					data-bs-dismiss="modal">취소</button>
@@ -183,24 +183,10 @@ id="createAreaModal">
 	</div>
 
 	<article id="contentArea">
-		<div id="contentArea2">
+		<div id="contentArea2" style="display: none">
 			<div id="selectContent"></div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-				</nav>
 		</div>
+		<nav>${pagebar}</nav>
 	</article>
 </div>
 
@@ -220,6 +206,8 @@ id="createAreaModal">
 	var cat2Name = 0;
 	var cat3 = 0;
 	var cat3Name = 0;
+	var totalCount = 0;
+	
 
 	// areaModal
 
@@ -247,7 +235,7 @@ id="createAreaModal">
 		console.log('areaName = ' + areaName);
 
 		$.ajax({
-					url : 'callAreaCode.do',
+					url : '${pageContext.request.contextPath}/widget/callAreaCode.do',
 					type : 'get',
 					data : {
 						areaCode : areaCode
@@ -262,6 +250,18 @@ id="createAreaModal">
 
 						$('#sigunguList').append(titleLable);
 
+						for (var i = 0; myItem.length > i; i++) {
+
+							var output = '';
+							output += '<button type="button" class="btn btn-light" value="'
+									+ myItem[i].code
+									+ '" onClick="insertSigungu(this);">'
+									+ myItem[i].name + '</button>';
+
+							$('#sigunguList').append(output);
+
+						}
+						
 						for (var i = 0; myItem.length > i; i++) {
 
 							var output = '';
@@ -407,7 +407,7 @@ id="createAreaModal">
 		console.log('cat1Name = ' + cat1Name);
 		
 		$.ajax({
-			url : 'callCat2Code.do',
+			url : '${pageContext.request.contextPath}/widget/docallCat2Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1
@@ -454,7 +454,7 @@ id="createAreaModal">
 		console.log('cat2Name = ' + cat2Name);
 		
 		$.ajax({
-			url : 'callCat3Code.do',
+			url : '${pageContext.request.contextPath}/widget/callCat3Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1, 
@@ -539,10 +539,10 @@ id="createAreaModal">
 		console.log('cat3 = ' + cat3);
 		console.log("검색 실행");
 		
-		$('#paging').hide();
+		$('#contentArea2').show();
 		
 		$.ajax({
-			url : 'callAreaBasedList.do',
+			url : '${pageContext.request.contextPath}/widget/callAreaBasedListlength.do',
 			type : 'get',
 			data : {
 				
@@ -556,32 +556,63 @@ id="createAreaModal">
 			
 			dataType : 'json',
 			success : function(data) {
-				
+
 				var myItem = data.response.body.items.item;
 				console.log(myItem);
-				
-				$('#selectContent').empty();
-		
-				for(var i = 0; myItem.length > i; i++){
-					
-					if(myItem[i].firstimage2 == ""){
-						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
-					};
-					
-					var gallery = "";
-					gallery += '<a class="thumbNailLink" id="' + myItem[i].contentid + '" href="http://localhost:9090/TMI/tourism/">';
-					gallery += '<span class="thumbNailImage">';
-					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200">';
-					gallery += '</span>';
-					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
-					gallery += '</a>';
-					
-					$('#selectContent').append(gallery);
-					$('#paging').show();
-				
+				console.log("1차 ajax 성공");
+				for (var i = 0; myItem.length > i; i++) {
+						totalCount = myItem[i].totalCnt;
 				};
+				console.log("totalCount = " + totalCount);
 				
-					console.log("검색 ajax 끝");
+				$.ajax({
+					url : '${pageContext.request.contextPath}/widget/callAreaBasedList.do',
+					type : 'get',
+					data : {
+						
+						areaCode : areaCode,
+						sigunguCode : sigunguCode,
+						totalCount : totalCount
+						// cat1 : cat1,
+						// cat2 : cat2,
+						// cat3 : cat3
+						
+					},
+					
+					dataType : 'json',
+					success : function(data) {
+						
+						var myItem = data.response.body.items.item;
+						console.log(myItem);
+						
+						$('#selectContent').empty();
+				
+						for(var i = 0; myItem.length > i; i++){
+							
+							if(myItem[i].firstimage2 == ""){
+								myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+							};
+							
+							var gallery = "";
+							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<span class="thumbNailImage">';
+							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+							gallery += '</span>';
+							gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+							gallery += '</a>';
+							
+							$('#selectContent').append(gallery);
+						};
+							console.log("검색 ajax 끝");
+					},
+					
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("Status : " + textStatus);
+						alert("Error : " + errorThrown);
+					}
+					
+				});
+				
 					
 			},
 
@@ -591,37 +622,7 @@ id="createAreaModal">
 			}
 
 		});
-		
-		
-		$.ajax({
-			url : 'callPagingLength.do',
-			type : 'get',
-			data : {
-				
-				areaCode : areaCode,
-				sigunguCode : sigunguCode,
-				// cat1 : cat1,
-				// cat2 : cat2,
-				// cat3 : cat3
-				
-			},
-			
-			dataType : 'json',
-			success : function(data) {
-				
-				var myItem = data.response.body.items.item;
-				console.log(myItem);
-				
-				
-				
-			},
 
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert("Status : " + textStatus);
-				alert("Error : " + errorThrown);
-			}
-
-		});
 	});
 	
 	

@@ -54,6 +54,15 @@
 				</c:forEach>
 			</c:if>
 		
+		<div class="form-control">
+			<c:forEach items="${insertFriendBoard.planner}" var="planner">
+					${planner.PTitle}
+			</c:forEach>
+			<c:forEach items="${insertFriendBoard.plans}" var="plans">
+					${plans.ppPlaceName}
+			</c:forEach>
+		</div>
+		
 	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
 		<br /><br />
 		<hr />
@@ -105,7 +114,7 @@
 		</c:if>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
-		<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href=''">
+		<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
 		<br /><br /><br />
 </div>
 <script>

@@ -12,6 +12,8 @@ import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,9 +60,13 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 		InsertFriendBoard insertFriendBoard = friendBoardDao.selectOneFriendBoard(no);
 		List<FriendBoardAttachment> attachments = friendBoardDao.selectAttachmentListByNo(no);
 		List<FriendBoardComment> comments = friendBoardDao.findBoardCommentByNo(no);
+		List<Planner> planner = friendBoardDao.findBoardPlannerByNo(no);
+		List<PlannerPlan> plans = friendBoardDao.findBoardPlanByNo(no);
 		
 		insertFriendBoard.setAttachments(attachments);
 		insertFriendBoard.setBoardComments(comments);
+		insertFriendBoard.setPlanner(planner);
+		insertFriendBoard.setPlans(plans);
 		
 		return insertFriendBoard;
 //		return friendBoardDao.selectOneFriendBoard(no);

@@ -27,7 +27,7 @@
 		insert into 
 			tmi_friend_board 
 		values 
-			(seq_pb_no.nextval, null, #{fbMEmail}, #{fbTitle}, sysdate, sysdate, 0, #{fbContent})
+			(seq_pb_no.nextval, #{fbPNo}, #{fbMEmail}, #{fbTitle}, sysdate, sysdate, 0, #{fbContent})
 			
 		<selectKey keyProperty="fbNo" resultType="_int" order="AFTER">
 			select
