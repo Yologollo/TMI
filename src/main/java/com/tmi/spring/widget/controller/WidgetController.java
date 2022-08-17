@@ -80,7 +80,7 @@ public class WidgetController {
 			addr = addr + SERVICE_KEY + parameter;
 
 		}
-		;
+		; // 12
 
 		URL url = new URL(addr);
 
@@ -317,7 +317,7 @@ public class WidgetController {
 			
 			addr = addr + SERVICE_KEY + parameter;
 			
-		};
+		};//123123123
 
 		URL url2 = new URL(addr);
 		System.out.println(addr);
