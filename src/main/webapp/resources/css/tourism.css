@@ -22,34 +22,19 @@
 	margin-right: 3%;
 }
 
-#slideBoxBigImg{
+#bigImg{
 	border: 2px solid black;
 	width: 30%;
 	float: left;
+	width : 400px;
+	height : 300px;
 }
 
-#bigImg{
-}
-
-#slideBoxSlide{
-	margin-top: 5%;
+#bigImg2{
 	
-}
-
-#slideBoxPrew{
-	display: inline-block;
-	float: left;
-}
-
-#slideBoxList{
-	margin: auto;
-	text-align : center;
-	display: inline-block;
-}
-
-#slideBoxNext{
-	display: inline-block;
-	float: right;
+	width : 400px;
+	height : 300px;
+	
 }
 
 #tourismInfo{
@@ -59,33 +44,17 @@
 	display: inline-block;
 }
 
-#tourismInfoTagBox{
+#tourismInfoBox{
 	margin: auto;
 	wifth: 100%;
 }
 
-#tabContent1{
+#tabContent{
 	clear: both;
 	display:block;
 }
 
-#tabContent2{
-	display:none;
-}
-
-#tabContent3{
-	display:none;
-}
-
-#tabContent1Table{
-	border: 1px solid black;
-}
-
-#tabContent2Table{
-	border: 1px solid black;
-}
-
-#tabContent3Table{
+#tabContentTable{
 	border: 1px solid black;
 }
 

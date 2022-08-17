@@ -26,7 +26,7 @@
 id="createAreaModal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1>관광타입</h1>
+				<h1>지역</h1>
 				<button type="button" class="btn-close" id="areaModalCloseBtn"
 					data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
@@ -235,7 +235,7 @@ id="createAreaModal">
 		console.log('areaName = ' + areaName);
 
 		$.ajax({
-					url : 'callAreaCode.do',
+					url : '${pageContext.request.contextPath}/widget/callAreaCode.do',
 					type : 'get',
 					data : {
 						areaCode : areaCode
@@ -407,7 +407,7 @@ id="createAreaModal">
 		console.log('cat1Name = ' + cat1Name);
 		
 		$.ajax({
-			url : 'callCat2Code.do',
+			url : '${pageContext.request.contextPath}/widget/docallCat2Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1
@@ -454,7 +454,7 @@ id="createAreaModal">
 		console.log('cat2Name = ' + cat2Name);
 		
 		$.ajax({
-			url : 'callCat3Code.do',
+			url : '${pageContext.request.contextPath}/widget/callCat3Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1, 
@@ -542,7 +542,7 @@ id="createAreaModal">
 		$('#contentArea2').show();
 		
 		$.ajax({
-			url : 'callAreaBasedListlength.do',
+			url : '${pageContext.request.contextPath}/widget/callAreaBasedListlength.do',
 			type : 'get',
 			data : {
 				
@@ -566,7 +566,7 @@ id="createAreaModal">
 				console.log("totalCount = " + totalCount);
 				
 				$.ajax({
-					url : 'callAreaBasedList.do',
+					url : '${pageContext.request.contextPath}/widget/callAreaBasedList.do',
 					type : 'get',
 					data : {
 						
@@ -594,7 +594,7 @@ id="createAreaModal">
 							};
 							
 							var gallery = "";
-							gallery += '<a href="http://localhost:9090/TMI/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 							gallery += '<span class="thumbNailImage">';
 							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 							gallery += '</span>';
