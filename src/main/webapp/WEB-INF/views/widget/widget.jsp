@@ -186,7 +186,7 @@ id="createAreaModal">
 		<div id="contentArea2" style="display: none">
 			<div id="selectContent"></div>
 		</div>
-		<nav>${pagebar}</nav>
+	
 	</article>
 </div>
 
@@ -603,6 +603,9 @@ id="createAreaModal">
 							
 							$('#selectContent').append(gallery);
 						};
+							var pagebar = "";
+							pagebar += '<nav>${pagebar}</nav>';
+							$('#selectContent').append(pagebar);
 							console.log("검색 ajax 끝");
 					},
 					
