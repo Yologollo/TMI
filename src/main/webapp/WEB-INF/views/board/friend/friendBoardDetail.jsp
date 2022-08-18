@@ -17,7 +17,7 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
 <style>
 	#fb_content {
 		resize : none;
@@ -58,13 +58,57 @@
 		<c:forEach items="${insertFriendBoard.planner}" var="planner">
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
+			
 			<c:if test="${planner.PNo ne 0}">
 				<div class="form-control">
-					
-					${planner.PTitle}
+					<c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="status">
+						<div class="card-header">
+							<fmt:parseDate value="${plan.ppDate}" var="dayformat" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${dayformat}" pattern="yyyy.MM.dd E요일" />
+							
+							<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
+								<div class="plannerDetailCardBodyInfo">
+									<blockquote class="blockquote mb-0">
+										<div class="plannerDetailCardBodyTimeWrapper">
+											<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
+										</div>
+										<div class="plannerDetailCardBodyPlaceWrapper">
+											<span class="plannerDetailCardBodyPlaceNumber"></span>
+											<span class="plannerDetailCardBodyPlace">${plan.ppPlaceName}</span>
+										</div>
+										<footer class="blockquote-footer">
+											<span class="plannerDetailCardBodyMemo">${plan.ppMemo}</span>
+										</footer>
+									</blockquote>
+								</div>
+								<div class="plannerDetailCardBodyMap" id="map${status.count}-${plan_status.count}"></div>
+								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+								<script>
+								    /* 지도 생성 */
+								    var mapContainer = document.getElementById('map${status.count}-${plan_status.count}');
+								    var mapOption = {
+							    		center: new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX}),
+								        level: 3
+								    };
+								    var map = new kakao.maps.Map(mapContainer, mapOption);
+								
+								    /* 마커 생성 */
+								    var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+								    var marker = new kakao.maps.Marker({
+								        position: markerPosition
+								    });
+								    marker.setMap(map);
+								</script>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</c:if>
+			
 		</c:forEach>
+		
+
+		
 		
 	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
 		<br /><br />
