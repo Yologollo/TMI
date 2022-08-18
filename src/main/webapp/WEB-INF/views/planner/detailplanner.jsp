@@ -76,8 +76,8 @@ $(document).ready(function () {
 		<div id="plannerContainer">
 				<div id="plannerInfo" data-no="${planner.PNo}">
 					<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg" data-no="${planner.PNo}">삭제</button>			
-					<button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg" 
-						onclick="location.href='${pageContext.request.contextPath}/planner/createplan.do?pNo=${planner.PNo}'">수정</button>
+					<%-- <button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg" 
+						onclick="location.href='${pageContext.request.contextPath}/planner/updateplan.do?pNo=${planner.PNo}'">수정</button> --%>
 				</div>
 			
 			<form action="${pageContext.request.contextPath}/planner/deletePlanner.do" name="plannerDelFrm" method="POST">
