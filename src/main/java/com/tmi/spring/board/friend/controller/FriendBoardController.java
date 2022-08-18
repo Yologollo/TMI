@@ -196,8 +196,6 @@ public class FriendBoardController {
 				int result = friendBoardService.updateReadCount(no);
 			}
 			
-			
-			
 //	        int result = friendBoardService.updateReadCount(no);
 			mav.addObject("insertFriendBoard", insertFriendBoard);
 			mav.setViewName("board/friend/friendBoardDetail");

@@ -17,6 +17,7 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css">
 <style>
 	#fb_content {
 		resize : none;
@@ -54,14 +55,16 @@
 				</c:forEach>
 			</c:if>
 		
-		<div class="form-control">
-			<c:forEach items="${insertFriendBoard.planner}" var="planner">
+		<c:forEach items="${insertFriendBoard.planner}" var="planner">
+			<c:if test="${planner.PNo eq 0}">
+			</c:if>
+			<c:if test="${planner.PNo ne 0}">
+				<div class="form-control">
+					
 					${planner.PTitle}
-			</c:forEach>
-			<c:forEach items="${insertFriendBoard.plans}" var="plans">
-					${plans.ppPlaceName}
-			</c:forEach>
-		</div>
+				</div>
+			</c:if>
+		</c:forEach>
 		
 	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
 		<br /><br />
