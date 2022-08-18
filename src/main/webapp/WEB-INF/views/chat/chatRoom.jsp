@@ -17,6 +17,7 @@
 <sec:authentication property="principal" var="loginMember" scope="page"/>
 <script>
 const loginMemberEmail = '${loginMember.MEmail}';
+
 </script>
 <!-- 
 	생성 : 최윤서
@@ -41,17 +42,8 @@ const loginMemberEmail = '${loginMember.MEmail}';
 		          </div>
 
 		          <div class="inbox_chat">
-		          	  <c:forEach items="${chatMember}" var="chatContent">
-			            <div class="chat_list" data-chatroom-id="${chatContent.ccCrId}" data-member-email="${chatContent.ccMEmail}">
-			              <div class="chat_people">
-			                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-			                <div class="chat_ib">
-			                  <h5>${chatContent.ccMEmail} <span class="chat_date">${chatContent.ccTime}</span></h5>
-			                  <p>${chatContent.ccMessage}</p>
-			                </div>
-			              </div>
-			            </div>
-			          </c:forEach>
+		          	  
+		          	  
 		          </div>
 		        </div>
 		        <div class="mesgs">
@@ -91,6 +83,7 @@ const loginMemberEmail = '${loginMember.MEmail}';
 
 
 <script>
+/* 채팅목록리스트 */
 var contentNo = 0;
 $(document).ready(function(){
 	
@@ -114,15 +107,15 @@ $(document).ready(function(){
 				let messageContent = list[i]['messageContent']
 				let messageTime = list[i]['messageTime']
 				console.log(contentNo, roomId, receive, send, messageContent, messageTime);
-				html += `<div class="chat_list" data-chatroom-id=\${roomId} data-member-email=\${receive}>
-								  <div class="chat_people">
-								      <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-								      <div class="chat_ib">
-									      <h5> \${receive} <span class="chat_date">\${messageTime}</span></h5>
-									      <p>\${messageContent}</p>
-								      </div>
-								  </div>
-							  </div> `;
+				html += `<div class="chat_list" data-room-id=\${roomId} data-room-email=\${receive}>
+							 <div class="chat_people">
+							     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+							     <div class="chat_ib">
+								     <h5> \${receive} <span class="chat_date">\${messageTime}</span></h5>
+								     <p>\${messageContent}</p>
+							     </div>
+							 </div>
+						 </div> `;
 			chatRoomList.insertAdjacentHTML('beforeend', html);
 			}
 			
@@ -134,18 +127,61 @@ $(document).ready(function(){
 	});
 });
 
+/* 목록 선택시 */
+$(document).on('click', '.chat_list', function(){
+    var roomId = $(this).data('roomId');
+    var roomEmail = $(this).data('roomEmail');
+    console.log(roomId, roomEmail);
+    
+    $.ajax({
+    	
+    	url : `${pageContext.request.contextPath}/chat/room.do`,
+    	data : {
+    		roomId : roomId
+    	},
+    	contentType : 'application/jason;',
+    	type : "GET",
+    	success : function(list){
+    		console.log(list);
+    		$('.msg_history').html('');
+    		const container = document.querySelector('.msg_history');
+    		for(var i = 0; list.length > i; i++){
+    			let html = "";
+				let contentNo = list[i]['contentNo']
+				let roomId = list[i]['chatroomId']
+				let receive = list[i]['sendEmail'] == loginMemberEmail ? list[i]['receiveEmail'] : list[i]['sendEmail'];
+				let send = list[i]['receiveEmail'] == loginMemberEmail ? list[i]['receiveEmail'] : list[i]['sendEmail'];
+				let messageContent = list[i]['messageContent']
+				let messageTime = list[i]['messageTime']
+				console.log(contentNo, roomId, receive, send, messageContent, messageTime);
+				
+			    html +=`<div class="outgoing_msg">
+			               <div class="sent_msg">
+			                 <p>\${messageContent}</p>
+			                 <span class="time_date"> \${sendEmail} | \${messageTime} </span> 
+		                   </div>
+			           </div>
+					   <div class="incoming_msg">
+			               <div class="received_msg">
+			                 <div class="received_withd_msg">
+			                   <p>\${messageContent}</p>
+			                   <span class="time_date"> ${receive} | \${messageTime} </span></div>
+			               </div>
+		               </div>`;
+		               
+				container.insertAdjacentHTML('beforeend', html);
+    		};
+    	},
+    	error : function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status : " + textStatus);
+            alert("Error : " + errorThrown);
+        }
+    });
+});
 
-<c:forEach items="${chatMember}" var="chatContent">
-<div class="chat_list" data-chatroom-id="${chatContent.ccCrId}" data-member-email="${chatContent.ccMEmail}">
-  <div class="chat_people">
-    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-    <div class="chat_ib">
-      <h5>${chatContent.ccMEmail} <span class="chat_date">${chatContent.ccTime}</span></h5>
-      <p>${chatContent.ccMessage}</p>
-    </div>
-  </div>
-</div>
-</c:forEach>
+/* const url = `${pageContext.request.contextPath}/chat/\${chatroomId}/\${memberEmail}/chat.do`; */
+
+
 
 const chatroomId = '${chatroomId}';
 const sendEmail = '${loginMember.MEmail}';

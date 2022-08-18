@@ -54,5 +54,9 @@ public class ChatServiceImpl implements ChatService{
 	public List<ChatContent> findRecentChatRoomList(String loginMemberEmail) {
 		return chatDao.findRecentChatRoomList(loginMemberEmail);
 	}
+	@Override
+	public List<ChatContent> findChatRoomList(String roomId) {
+		return chatDao.findChatRoomList(roomId);
+	}
 
 }
