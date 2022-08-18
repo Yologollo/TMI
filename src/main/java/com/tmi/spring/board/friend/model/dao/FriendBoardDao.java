@@ -1,5 +1,6 @@
 package com.tmi.spring.board.friend.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -64,5 +65,5 @@ public interface FriendBoardDao {
 
 	@Select("select pp_no, pp_p_no, pp_time, pp_place_name, pp_memo, pp_x, pp_y, pp_date from tmi_friend_board fb, tmi_planner p, tmi_planner_plan pp where fb.fb_p_no = p.p_no and fb_no = #{no}")
 	List<PlannerPlan> findBoardPlanByNo(int no);
-	
+
 }
