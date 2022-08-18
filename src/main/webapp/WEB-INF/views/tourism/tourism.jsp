@@ -1,4 +1,4 @@
-a<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -20,8 +20,26 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+	
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b">
+</script>
 
-
+<div class="createMapModalForm">
+	<div class="modal-dialog-centered" id="createMapModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>지도</h1>
+				<button type="button" class="btn-close" id="btnModalCloseUp"
+					data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body1" id="mapModalBody">
+				<div class="modalInfo" id="mapData" style="border: 1px solid black; height:600px; width:700px;" >
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div id="commonMain">
 	<!-- 
@@ -34,16 +52,12 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<p id="info-box title">고사포해수욕장</p>
 		 -->
 			<div id="infoTop">
-				<div id="bigImg">
-				</div>
+				<div id="bigImg"></div>
 				<div id="tourismInfo">
-					<div id="tourismInfoTitle">
-					</div>
-					<div id="map"></div>
+					<div id="tourismInfoTitle"></div>
 					<div id="tourismInfoBox">
 
 						<table id="contentTable" class="table table-bordered">
-							<caption>관광데이터 기본정보</caption>
 							<tbody>
 								<tr id="zipCodeTr">
 								</tr>
@@ -53,29 +67,29 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 								</tr>
 							</tbody>
 						</table>
-
+					<button type="button" class="btn btn-info" id="mapBtn">지도보기</button>
 					</div>
 				</div>
 			</div>
-		</div>
-
 		<div id="infoBot">
 			<ul>
-				<li>
-				<strong>개요</strong>
-					<div id="overview">
-					</div>
-					</li>
+				<li><strong>개요</strong>
+					<div id="overview"></div></li>
 			</ul>
 		</div>
+		</div>
+
 	</div>
 	<div id="mainlist">
-		<a id="mainlistButton"
-			href="${pageContext.request.contextPath}">메인 화면</a>
+		<a id="mainlistButton" href="${pageContext.request.contextPath}">메인
+			화면</a>
 	</div>
 </div>
 
 <script>
+
+var mapx = "";
+var mapy = "";
 
 var contentId = location.href.split('?')[1];
 console.log("contentId = " + contentId);
@@ -108,6 +122,11 @@ $(document).ready(function(){
 				console.log(img);
 				$('#bigImg').append(img);
 				
+				mapx += myItem[i].mapx;
+				mapy += myItem[i].mapy;
+				console.log("mapx ! = " + mapx);
+				console.log("mapy ! = " + mapy);
+				
 				var title = "";
 				title += '<p id="title">' + myItem[i].title +'</p>';
 				console.log(title);
@@ -133,6 +152,22 @@ $(document).ready(function(){
 				console.log(overviewCode);
 				$('#overview').append(overviewCode);
 				
+				console.log("mapx @ = " + mapx);
+				console.log("mapy @ = " + mapy);
+				/* 지도 생성 */
+				var mapContainer = document.getElementById('mapData');
+				var mapOption = {
+					center : new kakao.maps.LatLng(mapy, mapx),
+					level : 3
+				};
+				var map = new kakao.maps.Map(mapContainer, mapOption);
+
+				/* 마커 생성 */
+				var markerPosition = new kakao.maps.LatLng(mapy, mapx);
+				var marker = new kakao.maps.Marker({
+					position : markerPosition
+				});
+				marker.setMap(map);
 				
 			};
 		},
@@ -145,6 +180,29 @@ $(document).ready(function(){
 
 });
 
+document.querySelector('.createMapModalForm').addEventListener('click', function(e) {
+	if (e.target == document.querySelector('.createMapModalForm')) {
+		document.querySelector('.createMapModalForm').classList.remove('show-modal');
+	}
+});
+
+$('#mapBtn').on('click', function() {
+	$('.createMapModalForm').addClass('show-modal');
+});
+
+$('#btnModalCloseUp').on('click', function() {
+ 
+	$('.createMapModalForm').removeClass('show-modal');
+	});
+	
+
 
 </script>
+
+
+
+<script>
+
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
