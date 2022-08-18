@@ -45,6 +45,9 @@
 const email = document.getElementById("loginMemberEmail").value;
 </script>
 
+
+
+
 <div id="commonMain">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
@@ -67,7 +70,7 @@ const email = document.getElementById("loginMemberEmail").value;
          <form
 			 action="${pageContext.request.contextPath}/board/review/reviewBoardLove.do" method="get" name="reviewBoardLoveFrm">
              <input type="hidden" name="loNo" value="${insertReviewBoard.rbNo}" />
-             <button type="submit" class="btn btn-primary btn-lg" id="love">추천</button>
+             <button type="submit" class="btn btn-primary btn-lg" id="love">추천${loveCount}</button>
             
          </form>
 		

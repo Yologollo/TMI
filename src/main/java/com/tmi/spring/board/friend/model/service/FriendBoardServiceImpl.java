@@ -1,5 +1,8 @@
 package com.tmi.spring.board.friend.model.service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -113,6 +116,11 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	@Override
 	public int updateReadCount(int no) {
 		return friendBoardDao.updateReadCount(no);
+	}
+	
+	@Override
+	public Planner findBoardPlannerByNoModel(int no) {
+		return friendBoardDao.findBoardPlannerByNoModel(no);
 	}
 	
 }

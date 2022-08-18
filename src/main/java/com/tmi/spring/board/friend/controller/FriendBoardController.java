@@ -155,7 +155,7 @@ public class FriendBoardController {
 	}
 	
 	@GetMapping("/board/friend/friendBoardDetail.do")
-	public ModelAndView FriendBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView FriendBoardDetail(@RequestParam int no, Model model, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			log.debug("no = {}", no);			
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
@@ -196,7 +196,22 @@ public class FriendBoardController {
 				int result = friendBoardService.updateReadCount(no);
 			}
 			
-			
+			Planner planner = friendBoardService.findBoardPlannerByNoModel(no);
+			log.debug("planner = {}", planner);
+
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
+	        
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("days = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        log.debug("days = {}", days);
+
+	        model.addAttribute("days", days);
 			
 //	        int result = friendBoardService.updateReadCount(no);
 			mav.addObject("insertFriendBoard", insertFriendBoard);
@@ -210,11 +225,22 @@ public class FriendBoardController {
 	}
 
 	@GetMapping("/board/friend/friendBoardUpdate.do")
-	public void friendBoardUpdate(@RequestParam int no, Model model) {
+	public void friendBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member,Planner planner, Model model) {
 		try {
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
 			log.debug("insertFriendBoard = {}", insertFriendBoard);
 			
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 			model.addAttribute("insertFriendBoard",insertFriendBoard);
 		} catch (Exception e) {
 			log.error("게시글 수정 폼 오류", e);

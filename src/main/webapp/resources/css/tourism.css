@@ -134,6 +134,26 @@
 	transition: all 1s;
 }
 
+.createMapModalForm{
+	width : 100%;
+	height : 100%;
+	position : fixed;
+	background : rgba(0,0,0,0.5);
+	z-index : 5;
+	padding: 30px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 1s;
+}
+
+#mapModalBody {
+	width : 700px;
+	height : 600px;
+	
+}
+
+
+
 .show-modal {
 	visibility: visible;
 	opacity: 1;
@@ -160,11 +180,20 @@
 	margin-right: 25%;
 }
 
+#createMapModal {
+	width : 700px;
+	height : 600px;
+	margin-left: 35%;
+	margin-right: 25%;
+}
+
 .modalInfo {
 	float: left;
 	margin-top: 30px;
 	margin: auto 0;
 }
+
+
 
 #title {
 	float: right;

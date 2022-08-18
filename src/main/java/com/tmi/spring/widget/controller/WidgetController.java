@@ -275,7 +275,7 @@ public class WidgetController {
 		int cPage = 1;
 		int numPerPage = 8;
 		int totalContent = Integer.parseInt(totalCount);
-		String url = "/#";
+		String url = "";
 		
 		String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
 		mav.addObject("pagebar", pagebar);
@@ -338,5 +338,4 @@ public class WidgetController {
 		JSONObject json = new JSONObject();
 		json.put("data", s);
 	}
-	
 }

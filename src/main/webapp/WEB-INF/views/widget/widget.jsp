@@ -186,7 +186,7 @@ id="createAreaModal">
 		<div id="contentArea2" style="display: none">
 			<div id="selectContent"></div>
 		</div>
-		<nav>${pagebar}</nav>
+	
 	</article>
 </div>
 
@@ -245,7 +245,9 @@ id="createAreaModal">
 
 						var myItem = data.response.body.items.item;
 						var titleLable = '<label for="title">시/군/구</label><br />';
-
+						sigunguCode = 0;
+						sigunguCode += 0;
+						
 						$('#sigunguList').empty();
 
 						$('#sigunguList').append(titleLable);
@@ -261,20 +263,8 @@ id="createAreaModal">
 							$('#sigunguList').append(output);
 
 						}
-						
-						for (var i = 0; myItem.length > i; i++) {
 
-							var output = '';
-							output += '<button type="button" class="btn btn-light" value="'
-									+ myItem[i].code
-									+ '" onClick="insertSigungu(this);">'
-									+ myItem[i].name + '</button>';
-
-							$('#sigunguList').append(output);
-
-						}
 					},
-
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						alert("Status : " + textStatus);
 						alert("Error : " + errorThrown);
@@ -306,17 +296,20 @@ id="createAreaModal">
 		$('#areaCodeFinal').empty();
 
 		var finalArea = '';
-
-		if (sigunguName != '0') {
+		
+		if (sigunguCode != '0') {
 			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
+			
 		} else if (areaCode == '0') {
+			
 			alert('광역시/도 를 선택하십시요.');
+			
 		} else {
-			finalArea += '광역시/도 : ' + areaName
+			finalArea += '광역시/도 : ' + areaName 
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
@@ -603,6 +596,9 @@ id="createAreaModal">
 							
 							$('#selectContent').append(gallery);
 						};
+							var pagebar = "";
+							pagebar += '<nav>${pagebar}</nav>';
+							$('#selectContent').append(pagebar);
 							console.log("검색 ajax 끝");
 					},
 					

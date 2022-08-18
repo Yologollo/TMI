@@ -34,6 +34,10 @@ public interface ReviewBoardService {
 
 	int updateReadCount(int no);
 
-	int insertLove(ReviewBoardLove love);
+	int insertLove(int loNo, String email);
+
+	String selectFindLove(int loNo, String email);
+
+	int loveCount(int no);
 
 }
