@@ -191,7 +191,10 @@ public class ReviewBoardController {
 				response.addCookie(cookie1);
 				int result = reviewBoardService.updateReadCount(no);
 			}
+			int loveCount = reviewBoardService.loveCount(no);
+			log.debug("loveCount= {}", loveCount);
 			
+			mav.addObject("loveCount",loveCount);
 			mav.addObject("insertReviewBoard", insertReviewBoard);
 			mav.setViewName("board/review/reviewBoardDetail");
 
@@ -347,15 +350,25 @@ public class ReviewBoardController {
 	}
 	
 	@GetMapping("/board/review/reviewBoardLove.do")
-	public String reviewBoardLove(@RequestParam int loNo, @AuthenticationPrincipal Member member, Model model) {
+	public String reviewBoardLove(@RequestParam int loNo, @AuthenticationPrincipal Member member, RedirectAttributes redirectAttr) {
 		log.debug("loNo = {}", loNo);
+		int result = 0;
 		
 		String email = member.getMEmail();
 		log.debug("email = {}", email);
 		
-		ReviewBoardLove love = new ReviewBoardLove(0, loNo, email, 0);
+		String Find = reviewBoardService.selectFindLove(loNo, email);			
 		
-		int result = reviewBoardService.insertLove(love);
+		if(Find == null)
+		{			
+			result = reviewBoardService.insertLove(loNo, email);			
+		}
+		else
+		{
+//			String msg = "이미 좋아요한 글입니다.";
+			redirectAttr.addFlashAttribute("msg", "이미 좋아요한 글입니다.");
+//			return "redirect:/login/findPwUpdate.do";
+		}
 		
 		return "redirect:/board/review/reviewBoardDetail.do?no=" + loNo;
 	}

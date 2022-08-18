@@ -56,7 +56,7 @@
 		insert into 
 			tmi_review_board_love 
 		values
-			(seq_rbl_love_no.nextval, #{rblRbNo}, #{rblMEmail}, 1)
+			(seq_rbl_love_no.nextval, #{loNo}, #{email}, 1)
 	</insert>
 	
 	<resultMap id="ReviewBoardMap" type="reviewBoard">

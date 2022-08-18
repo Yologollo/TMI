@@ -110,8 +110,18 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 	}
 	
 	@Override
-	public int insertLove(ReviewBoardLove love) {
-		return reviewBoardDao.insertLove(love);
+	public int insertLove(int loNo, String email) {
+		return reviewBoardDao.insertLove(loNo, email);
+	}
+	
+	@Override
+	public String selectFindLove(int loNo, String email) {
+		return reviewBoardDao.selectFindLove(loNo, email);
+	}
+	
+	@Override
+	public int loveCount(int no) {
+		return reviewBoardDao.loveCount(no);
 	}
 	
 }
