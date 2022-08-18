@@ -43,7 +43,7 @@ public interface FriendBoardDao {
 	@Delete("delete from tmi_friend_board_attachment where fba_no = #{attachNo}")
 	int deleteAttachment(int attachNo);
 
-	@Update("update tmi_friend_board set fb_title = #{fbTitle}, fb_content = #{fbContent}, fb_updated_at = sysdate where fb_no = #{fbNo}")
+	@Update("update tmi_friend_board set fb_p_no = #{fbPNo}, fb_title = #{fbTitle}, fb_content = #{fbContent}, fb_updated_at = sysdate where fb_no = #{fbNo}")
 	int updateFriendBoard(InsertFriendBoard insertFriendBoard);
 
 	@Delete("delete from tmi_friend_board where fb_no = #{no}")

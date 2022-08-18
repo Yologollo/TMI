@@ -225,11 +225,22 @@ public class FriendBoardController {
 	}
 
 	@GetMapping("/board/friend/friendBoardUpdate.do")
-	public void friendBoardUpdate(@RequestParam int no, Model model) {
+	public void friendBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member,Planner planner, Model model) {
 		try {
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
 			log.debug("insertFriendBoard = {}", insertFriendBoard);
 			
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 			model.addAttribute("insertFriendBoard",insertFriendBoard);
 		} catch (Exception e) {
 			log.error("게시글 수정 폼 오류", e);
