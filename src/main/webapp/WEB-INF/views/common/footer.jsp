@@ -43,20 +43,20 @@
 		height:10px;
 		margin:0 auto;
 	}
-	#title {
+	#title2 {
 		font-size : 50px;
 		
 	}
-	#title2 {
+	#title3 {
 		margin-top : 5vh;
 		margin-left : 12%;
 	}
 	</style>
 	<div id="footer">
 		<img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="" id="logo"/>
-		<span id="title">TMI</span>
+		<span id="title2">TMI</span>
 		<span>Travel Making Imagine</span>
-		<span id="title2"> &#169; 2022. FINAL TEAM PROJECT : YOLO-GOLO</span>
+		<span id="title3"> &#169; 2022. FINAL TEAM PROJECT : YOLO-GOLO</span>
 		<img src="${pageContext.request.contextPath}/resources/images/github.png" alt="" id="github"/>
 		<img src="${pageContext.request.contextPath}/resources/images/notion.png" alt="" id="notion"/>
 		<img src="${pageContext.request.contextPath}/resources/images/youtube.png" alt="" id="youtube"/>
