@@ -1,6 +1,8 @@
 package com.tmi.spring.board.review.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,6 +107,11 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 	@Override
 	public int updateReadCount(int no) {
 		return reviewBoardDao.updateReadCount(no);
+	}
+	
+	@Override
+	public int insertLove(ReviewBoardLove love) {
+		return reviewBoardDao.insertLove(love);
 	}
 	
 }

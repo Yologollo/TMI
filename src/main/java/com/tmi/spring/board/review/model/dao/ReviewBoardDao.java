@@ -1,6 +1,7 @@
 package com.tmi.spring.board.review.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,7 @@ import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 
 @Mapper
 public interface ReviewBoardDao {
@@ -53,5 +55,7 @@ public interface ReviewBoardDao {
 
 	@Update("update tmi_review_board set rb_read_count = rb_read_count + 1 where rb_no = #{no}")
 	int updateReadCount(int no);
+
+	int insertLove(ReviewBoardLove love);
 	
 }
