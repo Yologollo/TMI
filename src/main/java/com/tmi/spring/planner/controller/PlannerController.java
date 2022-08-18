@@ -58,7 +58,7 @@ public class PlannerController {
 			model.addAttribute("plans", plans);
 						
 		} catch (Exception e) {
-			log.error("Planner 조회 오류", e);
+			log.error("MyPlanner 조회 오류", e);
 			throw e;
 		}
 		return "/planner/myplanner";
@@ -101,7 +101,7 @@ public class PlannerController {
 	        model.addAttribute("days", days);
 			model.addAttribute("planner", planner);
 		} catch (Exception e){
-			log.error("플래너 조회 오류", e);
+			log.error("Plan 조회 오류", e);
 		}
 	}
 
@@ -133,7 +133,7 @@ public class PlannerController {
 	        model.addAttribute("plans", plans);
 						
 		} catch (Exception e) {
-			log.error("Planner 조회 오류", e);
+			log.error("PlannerDetail 조회 오류", e);
 			throw e;
 		}
 		return "/planner/detailplanner";
