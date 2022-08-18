@@ -27,4 +27,6 @@ public interface ChatService {
 
 	List<ChatContent> findRecentChatRoomList(String loginMemberEmail);
 
+	List<ChatContent> findChatRoomList(String roomId);
+
 }
