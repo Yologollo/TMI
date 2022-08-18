@@ -28,7 +28,7 @@
   
 	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	    </ul>
 </div>
     

@@ -65,11 +65,9 @@ public class NoticeBoardController {
 		return mav;
 	}
 	// 공지사항 추가폼
-	@GetMapping("notice/noticeBoardForm.do")
-	public void NoticeBoardform() {	
-		log.info("GET/요청!");
-		
-	}
+	@GetMapping("/admin/noitce/noticeBoardForm.do")
+	public void NoticeBoardform() {	}
+	
 	
 	@PostMapping("/admin/notice/noticeBoardEnroll.do")
 	public String NoticeBoardEnroll(InsertNoticeBoard insertNoticeBoard, 

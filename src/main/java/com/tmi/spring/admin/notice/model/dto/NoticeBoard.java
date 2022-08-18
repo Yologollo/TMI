@@ -2,8 +2,6 @@ package com.tmi.spring.admin.notice.model.dto;
 
 import java.time.LocalDateTime;
 
-import com.tmi.spring.board.friend.model.dto.FriendBoard;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,7 +18,7 @@ public class NoticeBoard extends NoticeBoardEntity {
 			LocalDateTime nb_updated_at, int nb_read_count, int attachCount, int commentCount) {
 		super(nb_no, m_nickname, nb_title, nb_content, nb_created_at, nb_updated_at, nb_read_count);
 		this.attachCount = attachCount;
-		this.commentCount = commentCount;
+		
 	}
 	
 	
