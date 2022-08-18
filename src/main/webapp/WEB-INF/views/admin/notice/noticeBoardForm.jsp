@@ -24,15 +24,15 @@
 </style>
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
-		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="rbTitle" id="title" required>
-		<input type="text" class="form-control" name="rbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
+		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="nbTitle" id="title" required>
+		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		
-	  	<textarea id="summernote" name="rbContent"></textarea>
+	  	<textarea id="summernote" name="nbContent"></textarea>
 	  	
 		<br /><br />
 		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >

@@ -37,7 +37,8 @@
       <div id="adminboard-head">
       	<h2>공지사항</h2>
       	<div id="btn-sort-wrap">
-          <button onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>추가하기</button>
+   <%--        <button onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>추가하기</button> --%>
+          <input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
         </div>
       </div>
       
@@ -56,10 +57,10 @@
         <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
         <tr data-no="${noticeBoard.nb_no}">
 					<td>${noticeBoard.nb_no}</td>
-					<td>${noticeBoard.nb_title}<c:if test="${noticeBoard.commentCount > 0}"> (${noticeBoard.commentCount})</c:if></td>
+					<td>${noticeBoard.nb_title}</td>
 					<td>${noticeBoard.m_nickname}</td>
 					<td>
-						<fmt:parseDate value="${noticeBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${noticeBoard.nb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
 					<td>
@@ -67,7 +68,7 @@
 							<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
 						</c:if>
 					</td>
-					<td>${noticeBoard.fb_read_count}</td>
+					<td>${noticeBoard.nb_read_count}</td>
 				</tr>
 			</c:forEach>
       	</table>

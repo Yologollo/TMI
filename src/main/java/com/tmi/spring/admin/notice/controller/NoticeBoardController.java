@@ -28,7 +28,7 @@ import com.tmi.spring.common.HelloSpringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/notice")
+/* @RequestMapping("/notice") */
 @Slf4j
 public class NoticeBoardController {
 	
@@ -37,6 +37,7 @@ public class NoticeBoardController {
 	
 	@Autowired
 	ServletContext application;
+	
 	
 	@GetMapping("/admin/notice/noticeBoard.do")
 	public ModelAndView noticeBoard(@RequestParam(defaultValue = "1") int cPage,ModelAndView mav, HttpServletRequest request) {
@@ -65,10 +66,11 @@ public class NoticeBoardController {
 		return mav;
 	}
 	// 공지사항 추가폼
-	@GetMapping("/admin/noitce/noticeBoardForm.do")
+	
+	@GetMapping("/admin/notice/noticeBoardForm.do")
 	public void NoticeBoardform() {	}
 	
-	
+
 	@PostMapping("/admin/notice/noticeBoardEnroll.do")
 	public String NoticeBoardEnroll(InsertNoticeBoard insertNoticeBoard, 
 									@RequestParam("upFile")MultipartFile[] upFiles, 

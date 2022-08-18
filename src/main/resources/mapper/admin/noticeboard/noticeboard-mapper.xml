@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmi.spring.admin.notice.model.dao.NoticeBoardDao">
 <!-- <mapper namespace="dao 경로"> -->
- 	<select id="selectNoticeBoardList" resultType="noticeBoard">
+ 	<select id="selectNoticeBoardList" parameterType="String" resultMap="NoticeBoardMap">
  	<!-- parameterType="String" resultMap="NoticeBoard -->
 		select
 		    nb.nb_no,
@@ -14,10 +14,10 @@
 		    nb.nb_created_at,
 		    nb.nb_update_at,
 		    nb.nb_read_count,
-		    (select count(*) from tmi_notice_board_attachment where nba_nb_no = nb.nb_no) attachCount,
-		    (select count(*) from tmi_notice_board_comment where nbc_nb_no = nb.nb_no) commentCount
+		    (select count(*) from tmi_notice_board_attachment where nba_nb_no = nb.nb_no) attachCount
+		    
 		from
-		    tmi_friend_board nb join tmi_member m
+		    tmi_notice_board nb join tmi_member m
 		        on nb_m_email = m.m_email
 		order by
 			nb.nb_no desc
@@ -27,11 +27,11 @@
 		insert into 
 			tmi_notice_board 
 		values 
-			(seq_pb_no.nextval, null, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0, #{nbContent})
+			(seq_nb_no.nextval, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0, #{nbContent})
 			
 		<selectKey keyProperty="nbNo" resultType="_int" order="AFTER">
 			select
-				seq_pb_no.currval
+				seq_nb_no.currval
 			from
 				dual
 		</selectKey>
