@@ -309,6 +309,8 @@ id="createAreaModal">
 
 						var myItem = data.response.body.items.item;
 						var titleLable = '<label for="title">시/군/구</label><br />';
+						sigunguCode = 0;
+						sigunguCode += 0;
 
 						$('#sigunguList').empty();
 
@@ -371,7 +373,7 @@ id="createAreaModal">
 
 		var finalArea = '';
 
-		if (sigunguName != '0') {
+		if (sigunguCode != '0') {
 			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
 			console.log('finalArea = ' + finalArea);
