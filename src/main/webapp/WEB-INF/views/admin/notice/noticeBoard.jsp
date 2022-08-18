@@ -15,10 +15,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
 <div id="commonMain"> 
-<!-- 
-	생성 : 권민지
-	작업 : 권민지
- -->
+
+<script>
+window.addEventListener('load', (e) => {
+	document.querySelectorAll("tr[data-no]").forEach((tr) => {
+		tr.addEventListener('click', (e) => {
+			console.log(e.target);
+			const tr = e.target.parentElement;
+			console.log(tr);
+			if(tr.matches('tr[data-no]')) {
+				const no = tr.dataset.no;
+				location.href = '${pageContext.request.contextPath}/admin/notice/noticeBoardDetail.do?no=' + no;
+			}
+		});
+	});
+});
+</script>
+
+
 
 <div class="top-logo">
   <span>관리자</span>

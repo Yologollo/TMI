@@ -15,5 +15,11 @@ public interface NoticeBoardService {
 	
 	int insertNoticeBoard(InsertNoticeBoard insertNoticeBoard);
 
+	InsertNoticeBoard selectOneNoticeBoard(int no);
+
+	int updateReadCount(int no);
+
+	int deleteNoticeBoard(int no);
+
  
 }

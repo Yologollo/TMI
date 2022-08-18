@@ -10,7 +10,12 @@ import com.tmi.spring.admin.notice.model.dao.NoticeBoardDao;
 import com.tmi.spring.admin.notice.model.dto.InsertNoticeBoard;
 import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
 import com.tmi.spring.admin.notice.model.dto.NoticeBoardAttachment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
+import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.board.friend.model.service.FriendBoardServiceImpl;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,4 +58,30 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		}
 		return result;
 	}
+
+	@Override
+	public InsertNoticeBoard selectOneNoticeBoard(int no) {
+		InsertNoticeBoard insertNoticeBoard = noticeBoardDao.selectOneNoticeBoard(no);
+		List<NoticeBoardAttachment> attachments = noticeBoardDao.selectAttachmentListByNo(no);
+		
+		
+		insertNoticeBoard.setAttachments(attachments);
+		
+		
+		return insertNoticeBoard;
+		
+	}
+
+	@Override
+	public int updateReadCount(int no) {
+		return noticeBoardDao.updateReadCount(no);
+	}
+
+	@Override
+	public int deleteNoticeBoard(int no) {
+		return noticeBoardDao.deleteNoticeBoard(no);
+	}
+	
+	
+	
 }

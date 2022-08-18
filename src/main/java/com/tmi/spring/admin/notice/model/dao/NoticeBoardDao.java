@@ -2,8 +2,10 @@ package com.tmi.spring.admin.notice.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.admin.notice.model.dto.InsertNoticeBoard;
@@ -31,6 +33,12 @@ public interface NoticeBoardDao {
 
 	@Select("select * from tmi_notice_board_attachment where nba_no = #{attachNo}")
 	NoticeBoardAttachment selectOneAttachment(int attachNo);
+	
+	@Update("update tmi_notice_board set nb_read_count = nb_read_count + 1 where nb_no = #{no}")
+	int updateReadCount(int no);
+
+	@Delete("delete from tmi_notice_board where nb_no = #{no}")
+	int deleteNoticeBoard(int no);
 
 
 }

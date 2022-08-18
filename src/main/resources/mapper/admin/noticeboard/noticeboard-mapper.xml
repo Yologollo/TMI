@@ -23,11 +23,12 @@
 			nb.nb_no desc
 	</select> 
 	
+	
 	<insert id="insertNoticeBoard">
 		insert into 
 			tmi_notice_board 
 		values 
-			(seq_nb_no.nextval, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0, #{nbContent})
+			(seq_nb_no.nextval, #{nbMEmail}, #{nbTitle}, #{nbContent}, sysdate, sysdate, 0)
 			
 		<selectKey keyProperty="nbNo" resultType="_int" order="AFTER">
 			select
