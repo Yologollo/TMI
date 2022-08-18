@@ -6,6 +6,7 @@ import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
+import com.tmi.spring.planner.model.dto.Planner;
 
 public interface FriendBoardService {
 
@@ -30,5 +31,7 @@ public interface FriendBoardService {
 	int deleteFriendBoardComment(int fbcNo);
 
 	int updateReadCount(int no);
+
+	Planner findBoardPlannerByNoModel(int no);
 
 }

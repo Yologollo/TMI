@@ -118,4 +118,9 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 		return friendBoardDao.updateReadCount(no);
 	}
 	
+	@Override
+	public Planner findBoardPlannerByNoModel(int no) {
+		return friendBoardDao.findBoardPlannerByNoModel(no);
+	}
+	
 }
