@@ -32,11 +32,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/chat")
 public class ChatController {
-	/**
-	 * crId : 채팅방 아이디
-	 */
+	
 	@Autowired
 	ChatService chatService;
+	
+	@GetMapping(value = "/room.do", produces = "application/json")
+	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String roomId) {
+		try {
+			log.debug("------중요------roomId = {}", roomId);
+			List<ChatContent> list = chatService.findChatRoomList(roomId);
+			log.debug("list = {}", list);
+			return ResponseEntity.ok(list);
+		} catch(Exception e) {
+			log.error("채팅방 내용 조회 오류", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		
+	}
+	
 	@GetMapping(value = "/roomList.do", produces = "application/json")
 	public ResponseEntity<?> chatRoomList(Map<String, Object> chatRoomList, @RequestParam String loginMemberEmail) {
 		try {
