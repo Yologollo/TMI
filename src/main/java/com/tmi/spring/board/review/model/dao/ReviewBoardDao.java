@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
@@ -53,5 +54,14 @@ public interface ReviewBoardDao {
 
 	@Update("update tmi_review_board set rb_read_count = rb_read_count + 1 where rb_no = #{no}")
 	int updateReadCount(int no);
+
+	int insertLove(@Param("loNo") int loNo, @Param("email") String email);
+
+	@Select("select rbl_type from tmi_review_board_love where rbl_rb_no = #{loNo} and rbl_m_email = #{email}")
+	String selectFindLove(@Param("loNo")int loNo, @Param("email") String email);
+
+	
+	@Select("select count(*) from tmi_review_board_love where rbl_rb_no = #{no}")
+	int loveCount(int no);
 	
 }

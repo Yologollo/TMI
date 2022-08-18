@@ -8,6 +8,7 @@ import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 
 public interface ReviewBoardService {
 
@@ -32,5 +33,11 @@ public interface ReviewBoardService {
 	int deleteReviewBoardComment(int rbcNo);
 
 	int updateReadCount(int no);
+
+	int insertLove(int loNo, String email);
+
+	String selectFindLove(int loNo, String email);
+
+	int loveCount(int no);
 
 }

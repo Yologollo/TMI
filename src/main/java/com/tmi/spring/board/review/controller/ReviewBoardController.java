@@ -24,6 +24,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -148,16 +150,13 @@ public class ReviewBoardController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/board/review/reviewBoardDetail.do")
-	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
-										  @AuthenticationPrincipal Member member, Model model) {
+	@RequestMapping(value = "/board/review/reviewBoardDetail.do" , method = {RequestMethod.GET, RequestMethod.POST})
+//	@GetMapping("/board/review/reviewBoardDetail.do")
+	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			log.debug("no = {}", no);			
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
 			log.debug("insertReviewBoard = {}", insertReviewBoard);		
-			
-			String email = member.getMEmail();
-			log.debug("email = {}", email);
 			
 			Cookie[] cookies = request.getCookies();
 			int visitor = 0;
@@ -192,13 +191,10 @@ public class ReviewBoardController {
 				response.addCookie(cookie1);
 				int result = reviewBoardService.updateReadCount(no);
 			}
+			int loveCount = reviewBoardService.loveCount(no);
+			log.debug("loveCount= {}", loveCount);
 			
-//			ReviewBoardLove heart = new ReviewBoardLove();
-//			// 좋아요가 되있는지 찾기위해 게시글번호와 회원번호를 보냄.
-//			heart = reviewBoardService.findHeart(email, m_number);
-//			// 찾은 정보를 heart로 담아서 보냄
-//			model.addAttribute("heart",heart);
-			
+			mav.addObject("loveCount",loveCount);
 			mav.addObject("insertReviewBoard", insertReviewBoard);
 			mav.setViewName("board/review/reviewBoardDetail");
 
@@ -351,7 +347,31 @@ public class ReviewBoardController {
 			throw e;
 		}
 		return "redirect:/board/review/reviewBoardDetail.do?no=" + rbcRbNo;
-	}		
+	}
+	
+	@GetMapping("/board/review/reviewBoardLove.do")
+	public String reviewBoardLove(@RequestParam int loNo, @AuthenticationPrincipal Member member, RedirectAttributes redirectAttr) {
+		log.debug("loNo = {}", loNo);
+		int result = 0;
+		
+		String email = member.getMEmail();
+		log.debug("email = {}", email);
+		
+		String Find = reviewBoardService.selectFindLove(loNo, email);			
+		
+		if(Find == null)
+		{			
+			result = reviewBoardService.insertLove(loNo, email);			
+		}
+		else
+		{
+//			String msg = "이미 좋아요한 글입니다.";
+			redirectAttr.addFlashAttribute("msg", "이미 좋아요한 글입니다.");
+//			return "redirect:/login/findPwUpdate.do";
+		}
+		
+		return "redirect:/board/review/reviewBoardDetail.do?no=" + loNo;
+	}
 	
 }
 

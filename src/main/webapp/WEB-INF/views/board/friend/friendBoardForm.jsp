@@ -113,7 +113,7 @@
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
 		<button type="button" id="createPlannerModalbtn" class="btn btn-primary btn-lg">플래너 불러오기</button>
-		<input type="hidden" id="modalPlannerNo" name="fbPNo" value=""/>
+		<input type="text" id="modalPlannerNo" name="fbPNo" value="0"/>
 		
 	  	<textarea id="summernote" name="fbContent"></textarea>
 	  	

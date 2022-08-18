@@ -61,8 +61,12 @@ img{ max-width:100%;}
 }
 .chat_list:hover {
 	background:#ebebeb;
+	cursor: pointer;
 }
-.inbox_chat { height: 550px; overflow-y: scroll;}
+.inbox_chat { 
+	height: 550px; 
+	overflow-y: scroll;
+	}
 
 
 .incoming_msg_img {

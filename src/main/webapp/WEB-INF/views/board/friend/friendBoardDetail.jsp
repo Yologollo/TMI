@@ -17,6 +17,7 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
 <style>
 	#fb_content {
 		resize : none;
@@ -29,7 +30,33 @@
 		width : 100%;
 	}
 </style>
+<script>
+//DAY 1 지도 도출
+$(document).ready(function () {
+	
+	var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
+    var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
+    var index = 0;
 
+    function show(n){
+    	
+        for(var i = 0; i < dayAllMapClass.length; i++){
+        	dayAllMapClass[i].style.display = "none";
+        }
+        
+        dayAllMapClass[n].style.display = "block";
+
+        for(var j = 0; j < dayAllMapInfo.length; j++){
+        	dayAllMapInfo[j].style.display = "none";
+        }
+        
+        dayAllMapInfo[n].style.display = "block";
+    }
+    
+    show(index);
+    
+});
+</script>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
 	<script>
@@ -46,26 +73,191 @@
  		<input type="text" class="form-control" name="fbMEmail" value="${insertFriendBoard.fbMEmail}" readonly required>
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
-			<c:if test="${not empty insertFriendBoard.attachments}">
-				<c:forEach items="${insertFriendBoard.attachments}" var="attach">
-					<div class="btn-group-toggle pb-1" data-toggle="buttons">
-						<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
-					</div>
-				</c:forEach>
+		<c:if test="${not empty insertFriendBoard.attachments}">
+			<c:forEach items="${insertFriendBoard.attachments}" var="attach">
+				<div class="btn-group-toggle pb-1" data-toggle="buttons">
+					<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:forEach items="${insertFriendBoard.planner}" var="planner">	
+			<c:if test="${planner.PNo eq 0}">
 			</c:if>
+			
+			<c:if test="${planner.PNo ne 0}">
+			<div id="plannerContainerWrapper">
+				<div id="plannerDetailWrapper">
+					<div id="plannerTitle">${planner.PTitle}</div>
+					<div id="plannerDetailCardWrapper">
+					<div class="plannerDetailCard card">
+						<c:forEach items="${days}" var="day" varStatus="status">
+							<div class="card-header">
+								<span class="plannerDetailCardDay">DAY ${status.count}</span>
+								<span class="plannerDetailCardTime">
+									<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${dayformat}" pattern="yyyy.MM.dd E요일" />
+								</span>
+							</div>
+						
+							<% int i = 1;%>
+							<c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="plan_status">
+								<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
+
+                            	<c:if test="${nowDate eq openDate}">
+                            
+								<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
+									<div class="plannerDetailCardBodyInfo">
+										<blockquote class="blockquote mb-0">
+											<div class="plannerDetailCardBodyTimeWrapper">
+												<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
+											</div>
+											<div class="plannerDetailCardBodyPlaceWrapper">
+												<span class="plannerDetailCardBodyPlaceNumber"><%=i%>. </span>
+												<span class="plannerDetailCardBodyPlace">${plan.ppPlaceName}</span>
+											</div>
+											<footer class="blockquote-footer">
+												<span class="plannerDetailCardBodyMemo">${plan.ppMemo}</span>
+											</footer>
+										</blockquote>
+									</div>
+									<div class="plannerDetailCardBodyMap" id="map${status.count}-${plan_status.count}"></div>
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+									<script>
+									    /* 지도 생성 */
+									    var mapContainer = document.getElementById('map${status.count}-${plan_status.count}');
+									    var mapOption = {
+								    		center: new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX}),
+									        level: 3
+									    };
+									    var map = new kakao.maps.Map(mapContainer, mapOption);
+									
+									    /* 마커 생성 */
+									    var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+									    var marker = new kakao.maps.Marker({
+									        position: markerPosition
+									    });
+									    marker.setMap(map);
+									</script>
+								</div>
+							 <% ++i;%>
+							 	</c:if>
+							</c:forEach>
+						</c:forEach>
+					</div>
+					</div>
+				</div>
+				
+				<div id="plannerAllWrapper">
+					<div class="allMap">
+					
+						<c:forEach items="${days}" var="day" varStatus="status">
+						
+							<div class="dayAllMapClass" id="dayAllMap${status.count}"></div>
+							
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+							<script>
+								var mapContainer = document.getElementById('dayAllMap${status.count}');
+							    var mapOption = {
+						    		center: new kakao.maps.LatLng(36.25, 127.75),
+							        level: 14
+							    };
+							    var map = new kakao.maps.Map(mapContainer, mapOption);
+							    
+							    var polyline = new kakao.maps.Polyline({
+				                       map: map,
+				                       path: [],
+				                       strokeWeight: 3,
+				                       strokeColor: '#5882fa',
+				                       strokeOpacity: 1,
+				                       strokeStyle: 'solid'
+				                   });
+								 
+								 var a = 0;
+							    
+							    
+								 <c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="plan_status">
+								 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+									 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+									 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
+									 <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+									 <fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
+	
 		
-		<div class="form-control">
-			<c:forEach items="${insertFriendBoard.planner}" var="planner">
-					${planner.PTitle}
-			</c:forEach>
-			<c:forEach items="${insertFriendBoard.plans}" var="plans">
-					${plans.ppPlaceName}
-			</c:forEach>
+									 <c:if test="${nowDate eq openDate}">
+									 	var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+									 	var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png',
+									 	imageSize = new kakao.maps.Size(36, 37),
+									 	
+									 	imgOptions =  {
+		                                    spriteSize : new kakao.maps.Size(36, 691),
+		                                    spriteOrigin : new kakao.maps.Point(0, (a*46)+10),
+		                                    offset: new kakao.maps.Point(13, 37) 
+	                                	},
+	                                	
+		                                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+		                                marker = new kakao.maps.Marker({
+		                                    position: markerPosition,
+		                                    image: markerImage
+	                                	});
+									 	
+	                           			marker.setMap(map);
+	
+	
+			                            var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                            var path = polyline.getPath();
+			                            path.push(point);
+			                            polyline.setPath(path);
+	
+	                       				++a;
+	                        		</c:if>
+	                			</c:forEach>		    
+							</script>
+						</c:forEach>
+						
+						<div class="dayAllMapSelectWrapper">
+                            <select id="dayAllMapSelectId" class="dayAllMapSelectClass" onchange="mapChange()">
+                                <c:forEach items="${days}" var="day" varStatus="status">
+                                    <option value="${status.index}">DAY ${status.count}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+						
+						<div class="card">
+	                        <c:forEach items="${days}" var="day" varStatus="status">
+	                            <div class="card-body dayAllMapInfo">
+	
+	                                <% int j = 1;%>
+	
+	                                     <c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="plan_status">
+	                                        <!-- 화면에서 보이면 주석처리 -->
+	                                        <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+	                                        <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+	                                        <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+	                            			<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
+	
+	                                        <c:if test="${nowDate eq openDate}">
+	                                            <div class="dayAllMapInfoNo" data-no="${plan.ppNo}">
+	                                                <span class="dayAllMapInfoSpan"><%=j%>. ${plan.ppPlaceName}</span>
+	                                            </div>
+	                                <% ++j;%>
+	                                        </c:if>
+	
+	                                    </c:forEach>
+	                            </div>
+	                        </c:forEach>
+	                    </div>
+					</div>
+				</div>
+			</c:if>
+		</c:forEach>
 		</div>
 		
-	  	${insertFriendBoard.fbContent} <!-- summernote 출력 -->
-		<br /><br />
-		<hr />
+		<div style="width:100%;">
+		  	${insertFriendBoard.fbContent} dsadass<!-- summernote 출력 -->
+		</div>
 		
 		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
 		<c:if test="${not empty loginMember}">
@@ -79,6 +271,7 @@
 		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
 		            </form>
 		        </div>
+		    </div>
 		</c:if>
 				<!--table#tbl-comment-->
 				 <c:if test="${insertFriendBoard.comments ne null && not empty insertFriendBoard.comments}">
@@ -114,8 +307,11 @@
 		</c:if>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
-		<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
+		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertFriendBoard.fbMEmail))}">
+			<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
+		</c:if>
 		<br /><br /><br />
+	</div>
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
@@ -167,6 +363,25 @@
  		});
  	}); 
 
+  	function mapChange(){
+  		
+  	    var dayAllMapSelectId = document.getElementById("dayAllMapSelectId");
+  	    var index = dayAllMapSelectId.options[dayAllMapSelectId.selectedIndex].value;
+  	    var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
+  	    var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
+
+  	    for(var i = 0; i < dayAllMapClass.length; i++){
+  	    	dayAllMapClass[i].style.display = "none";
+  	    }
+  	    
+  	    dayAllMapClass[index].style.display = "block";
+
+  	    for(var j = 0; j < dayAllMapInfo.length; j++){
+  	    	dayAllMapInfo[j].style.display = "none";
+  	    }
+  	    
+  	    dayAllMapInfo[index].style.display = "block";
+  	}
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

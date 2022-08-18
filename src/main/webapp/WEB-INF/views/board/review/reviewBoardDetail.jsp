@@ -45,6 +45,9 @@
 const email = document.getElementById("loginMemberEmail").value;
 </script>
 
+
+
+
 <div id="commonMain">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
@@ -64,6 +67,13 @@ const email = document.getElementById("loginMemberEmail").value;
 		<br /><br />
 		<hr />
 		
+         <form
+			 action="${pageContext.request.contextPath}/board/review/reviewBoardLove.do" method="get" name="reviewBoardLoveFrm">
+             <input type="hidden" name="loNo" value="${insertReviewBoard.rbNo}" />
+             <button type="submit" class="btn btn-primary btn-lg" id="love">추천${loveCount}</button>
+            
+         </form>
+		
 		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
 		<c:if test="${not empty loginMember}">
 			<div class="comment-container">
@@ -78,12 +88,6 @@ const email = document.getElementById("loginMemberEmail").value;
 		        </div>
 		</c:if>
 		
-		<div>
-			<a class="text-dark heart" style="text-decoration-line: none;">
-				<img id="heart" src="${pageContext.request.contextPath}/resources/images/noImage.png">
-				좋아요
-			</a>
-		</div>
 				<!--table#tbl-comment-->
 				 <c:if test="${insertReviewBoard.comments ne null && not empty insertReviewBoard.comments}">
 					<table id="tbl-comment">
@@ -158,6 +162,14 @@ const email = document.getElementById("loginMemberEmail").value;
  		{
  			alert("댓글 내용을 입력하세요.");
  			return false;
+ 		}
+ 	};
+ 	
+ 	document.reviewBoardLoveFrm.onsubmit = (e) => {
+ 		if( ==1)
+ 		{
+ 			alert("이미 추천하였습니다.");
+ 			e.preventDefault();
  		}
  	};
  	

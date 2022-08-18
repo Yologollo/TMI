@@ -52,6 +52,13 @@
 			(seq_rbc_no.nextval, #{rbcRbNo}, #{rbcMEmail}, sysdate, #{rbcContent})
 	</insert>
 	
+	<insert id="insertLove">
+		insert into 
+			tmi_review_board_love 
+		values
+			(seq_rbl_love_no.nextval, #{loNo}, #{email}, 1)
+	</insert>
+	
 	<resultMap id="ReviewBoardMap" type="reviewBoard">
 		<result column="rb_no" property="rb_no"/>
 		<result column="rb_p_no" property="rb_p_no"/>
