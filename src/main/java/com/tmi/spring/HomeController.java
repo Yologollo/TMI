@@ -153,9 +153,9 @@ public class HomeController {
 			}
 			
 			log.debug("totalContent = {}", totalContent);
-			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
-			log.debug("pagebar = {}", pagebar);
-			mav.addObject("pagebar", pagebar);
+//			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+//			log.debug("pagebar = {}", pagebar);
+//			mav.addObject("pagebar", pagebar);
 			
 			mav.setViewName("forward:/index.jsp");	
 			
