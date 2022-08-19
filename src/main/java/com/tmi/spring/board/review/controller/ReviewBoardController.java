@@ -93,10 +93,7 @@ public class ReviewBoardController {
 			log.debug("pagebar = {}", pagebar);
 			mav.addObject("pagebar", pagebar);
 			
-			mav.setViewName("board/review/reviewBoard");
-			
-			
-			
+			mav.setViewName("board/review/reviewBoard");	
 			
 		} catch (Exception e) {
 			log.error("게시글 목록 조회 오류",e);
@@ -373,6 +370,123 @@ public class ReviewBoardController {
 		return "redirect:/board/review/reviewBoardDetail.do?no=" + loNo;
 	}
 	
+	@GetMapping("/board/bestreview/bestReview.do")
+	public ModelAndView bestReview( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 8;
+			List<ReviewBoard> list2 = reviewBoardService.selectBestReviewBoardList(cPage, numPerPage);
+			Iterator<ReviewBoard> it = list2.iterator();
+
+			log.debug("list2 = {}", list2);
+			mav.addObject("list2", list2);
+			
+			int totalContent = reviewBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/bestreview/bestReview");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/board")
+	public ModelAndView mainBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 3;
+			List<ReviewBoard> list3 = reviewBoardService.selectMainReviewBoardList(cPage, numPerPage);
+			Iterator<ReviewBoard> it = list3.iterator();
+
+			log.debug("list3 = {}", list3);
+			mav.addObject("list3", list3);
+			
+			int totalContent = reviewBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/main/mainBoard");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/")
+	public ModelAndView index( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 3;
+			List<ReviewBoard> list4 = reviewBoardService.selectMainReviewBoardList(cPage, numPerPage);
+			Iterator<ReviewBoard> it = list4.iterator();
+
+			log.debug("list4 = {}", list4);
+			mav.addObject("list4", list4);
+			
+			int totalContent = reviewBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("forward:/index.jsp");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+
 }
 
 

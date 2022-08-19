@@ -57,11 +57,11 @@ public class HomeController {
 //		return "index";
 //	}
 	
-	@GetMapping("/")
-	public String index() {
-		log.info("GET / 요청!");
-		return "forward:/index.jsp";
-	}
+//	@GetMapping("/")
+//	public String index() {
+//		log.info("GET / 요청!");
+//		return "forward:/index.jsp";
+//	}
 	
 	
 	// 관광정보 위젯

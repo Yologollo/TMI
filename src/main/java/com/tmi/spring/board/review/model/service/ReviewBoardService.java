@@ -40,4 +40,8 @@ public interface ReviewBoardService {
 
 	int loveCount(int no);
 
+	List<ReviewBoard> selectBestReviewBoardList(int cPage, int numPerPage);
+
+	List<ReviewBoard> selectMainReviewBoardList(int cPage, int numPerPage);
+
 }
