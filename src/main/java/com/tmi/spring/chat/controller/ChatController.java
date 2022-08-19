@@ -42,11 +42,11 @@ public class ChatController {
 	}
 	
 	@GetMapping(value = "/room.do", produces = "application/json")
-	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String roomId) {
+	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String chatroomId) {
 		try {
-			log.debug("------중요------roomId = {}", roomId);
-			List<ChatContent> list = chatService.findChatRoomList(roomId);
-			log.debug("list = {}", list);
+			log.debug("------중요------chatroomId = {}", chatroomId);
+			List<ChatContent> list = chatService.findChatRoomList(chatroomId);
+			/* log.debug("list = {}", list); */
 			return ResponseEntity.ok(list);
 		} catch(Exception e) {
 			log.error("채팅방 내용 조회 오류", e);
@@ -58,9 +58,9 @@ public class ChatController {
 	@GetMapping(value = "/roomList.do", produces = "application/json")
 	public ResponseEntity<?> chatRoomList(Map<String, Object> chatRoomList, @RequestParam String loginMemberEmail) {
 		try {
-			log.debug("------중요------loginMemberEmail = {}", loginMemberEmail);
+			/* log.debug("------중요------loginMemberEmail = {}", loginMemberEmail); */
 			List<ChatContent> list = chatService.findRecentChatRoomList(loginMemberEmail);
-			log.debug("list = {}", list);
+			/* log.debug("list = {}", list); */
 			return ResponseEntity.ok(list);
 		} catch(Exception e) {
 			log.error("채팅목록조회오류", e);
