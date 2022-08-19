@@ -104,8 +104,8 @@ public class PlannerBoardController {
 		return mav;
 	}
 	
-	@GetMapping("/board/review/reviewBoardForm.do")
-	public void ReviewBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
+//	@GetMapping("/board/review/reviewBoardForm.do")
+//	public void ReviewBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
 //		try {
 //			String memberEmail = member.getMEmail();
 //			log.debug("memberEmail = {}", memberEmail);
@@ -123,7 +123,7 @@ public class PlannerBoardController {
 //			log.error("Planner 조회 오류", e);
 //			throw e;
 //		}
-	}
+//	}
 	
 //	@PostMapping("/board/planner/plannerBoardEnroll.do")
 //	public String ReviewBoardEnroll(InsertPlannerBoard insertPlannerBoard) {
@@ -213,12 +213,12 @@ public class PlannerBoardController {
 		return mav;
 	}
 	
-	@GetMapping("/board/planner/plannerBoardUpdate.do")
-	public void PlannerBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member, Planner planner, Model model) {
-		try {
-			InsertPlannerBoard insertPlannerBoard = plannerBoardService.selectOnePlannerBoard(no);
-			log.debug("insertReviewBoard = {}", insertPlannerBoard);
-			
+//	@GetMapping("/board/planner/plannerBoardUpdate.do")
+//	public void PlannerBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member, Planner planner, Model model) {
+//		try {
+//			InsertPlannerBoard insertPlannerBoard = plannerBoardService.selectOnePlannerBoard(no);
+//			log.debug("insertReviewBoard = {}", insertPlannerBoard);
+//			
 //			String memberEmail = member.getMEmail();
 //			log.debug("memberEmail = {}", memberEmail);
 //			
@@ -230,13 +230,13 @@ public class PlannerBoardController {
 //			
 //			model.addAttribute("plannerList", plannerList);
 //			model.addAttribute("plans", plans);
-			
-			model.addAttribute("insertPlannerBoard",insertPlannerBoard);
-		} catch (Exception e) {
-			log.error("게시글 수정 폼 오류", e);
-			throw e;
-		}
-	}
+//			
+//			model.addAttribute("insertPlannerBoard",insertPlannerBoard);
+//		} catch (Exception e) {
+//			log.error("게시글 수정 폼 오류", e);
+//			throw e;
+//		}
+//	}
 	
 //	@PostMapping("/board/planner/plannerBoardUpdate.do")
 //	public String plannerBoardUpdate(
