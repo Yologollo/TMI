@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdetail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdetail.css?after">
 <div id="commonMain">
 
 
@@ -79,9 +79,9 @@
 			</div>
 		</form>
 		
-		<h2>비밀번호 변경</h2>
 		<form:form name="memberUpdatePwFrm" action="${pageContext.request.contextPath}/mypage/memberUpdatePw.do" method="POST">
 			<div id="memberInfoPwWrapper">
+			<h2>비밀번호 변경</h2>
 				<div class="input-group mb-3 memberInfo">	
 					<span class="input-group-text" id="basic-addon1">비밀번호</span> 
 					<input type="password" class="form-control" id="mPassword" name="mPassword" placeholder="비밀번호" required>
@@ -100,7 +100,7 @@
 	                <span id="pw2_chk_already" style="color:red; display:none;">비밀번호가 일치하지 않습니다.</span>
 				</div>
 				
-				<input type="text" name="mEmail" id="mEmail" value="<sec:authentication property="principal.mEmail"/>"/> 
+				<input type="hidden" name="mEmail" id="mEmail" value="<sec:authentication property="principal.mEmail"/>"/> 
 				<div class="memberInfoBtn">
 					<input type="submit" class="btn btn-primary" id="submitButtonPw" value="수정">
 					<input type="reset" class="btn btn-danger" value="취소">

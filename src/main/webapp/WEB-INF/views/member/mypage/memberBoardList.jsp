@@ -12,6 +12,13 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+<style>
+#tbl-board {
+	float:right; 
+	width: 85%; 
+	border: 1px solid black;
+}
+</style>
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -38,6 +45,31 @@
 				<hr />
 			</ul>
 		</div>
+		
+		<section id="board-container" class="container">
+		<table id="tbl-board" class="table table-striped table-hover text-center">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+			</tr>
+			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
+				<tr data-no="${friendBoard.fb_no}">
+					<td>${friendBoard.fb_no}</td>
+					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
+					<td>${friendBoard.m_nickname}</td>
+					<td>
+						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
+					</td>
+					<td>${friendBoard.fb_read_count}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<nav>${pagebar}</nav>
+	</section> 
 		
 	</div>
 

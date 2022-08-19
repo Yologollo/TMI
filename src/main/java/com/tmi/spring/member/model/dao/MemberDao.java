@@ -1,7 +1,5 @@
 package com.tmi.spring.member.model.dao;
 
-import java.util.HashMap;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tmi.spring.member.model.dto.Member;
