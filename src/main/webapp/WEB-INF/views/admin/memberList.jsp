@@ -89,29 +89,18 @@
 		</div>
 
         
-       <%--  <%
-			for(int i = 0; i < list.size(); i++){ 
-		%> --%>
-       <%--    코드 수정하기!!!!!!!! ㅋㅋㅋㅋ
-        <tr class="" id="tr<%= list.get(i).getNo() %>" >
-          	<td><input type="checkbox" name="ck" class="ckbox" id="ck<%= list.get(i).getNo() %>" value="<%= list.get(i).getNo() %>"></td>
-            <td><%= list.get(i).getNo() %></td>
-            <td><a href="<%= request.getContextPath() %> memberlist <%= list.get(i).getNo() %>"><%= list.get(i).getTitle() %></a></td>
-            
-          </tr>
-  			<% 	} %>
-  			 --%>
+      
   			</tbody>
       	</table>
 		
 
       <div id="search-wrap">
-        <input type="text" id="search" name="search" placeholder="회원을 검색해보세요!"/>
+        <input type="text" id="search" name="search" placeholder="회원이름을 검색해보세요!"/>
         <button type="button" onclick="searchMember();" id="btn" class="btn">검색</button>
       </div> 
     </div>
 	<div id="pagebar">
-		<%-- <%= pagebar %>  --%>
+		<nav>${pagebar}</nav>
 	</div>
   </div>
 

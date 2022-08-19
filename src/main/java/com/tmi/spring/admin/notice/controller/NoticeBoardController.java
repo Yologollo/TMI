@@ -192,4 +192,84 @@ public String noticeBoardDelete(@RequestParam int no) {
 	
 	return "redirect:/admin/notice/noticeBoard.do";
 }
+
+@GetMapping("/admin/notice/noticeBoardUpdate.do")
+public void friendBoardUpdate(@RequestParam int no, Model model) {
+	try {
+		InsertNoticeBoard insertNoticeBoard = noticeBoardService.selectOneNoticeBoard(no);
+		log.debug("insertNoticeBoard = {}", insertNoticeBoard);
+		
+		model.addAttribute("insertNoticeBoard",insertNoticeBoard);
+	} catch (Exception e) {
+		log.error("게시글 수정 폼 오류", e);
+		throw e;
+	}
+}
+
+/*
+ * @PostMapping("/admin/notice/noticeBoardUpdate.do") public String
+ * noticeBoardUpdate(
+ * 
+ * @ModelAttribute InsertNoticeBoard insertNoticeBoard,
+ * 
+ * @RequestParam("upFile") MultipartFile[] upFiles,
+ * 
+ * @RequestParam(value="delFile", required=false) int[] delFiles,
+ * RedirectAttributes redirectAttr) throws Exception {
+ * 
+ * String saveDirectory =
+ * application.getRealPath("/resources/upload/friendboard");
+ * 
+ * try { if(delFiles != null) { for(int attachNo : delFiles) {
+ * NoticeBoardAttachment attach =
+ * friendBoardService.selectOneAttachment(attachNo); log.debug("attach= {}",
+ * attach); log.debug("insertNoticeBoard = {}", insertFriendBoard);
+ * 
+ * String renamedFilename = attach.getFbaRenamedFilename(); File delFile = new
+ * File(saveDirectory, renamedFilename); if(delFile.exists()) {
+ * delFile.delete(); log.debug("{}번 {}파일 삭제", attachNo, renamedFilename); }
+ * 
+ * int result = friendBoardService.deleteAttachment(attachNo);
+ * log.debug("{}번 Attachment 레코드 삭제", attachNo); } }
+ * 
+ * for(MultipartFile upFile : upFiles) { if(upFile.getSize() > 0) {
+ * NoticeBoardAttachment attach = new NoticeBoardAttachment();
+ * attach.setFbaOriginalFilename(upFile.getOriginalFilename());
+ * attach.setFbaRenamedFilename(HelloSpringUtils.getRenamedFilename(upFile.
+ * getOriginalFilename())); attach.setFbaFbNo(insertFriendBoard.getFbNo());
+ * insertFriendBoard.addAttachment(attach);
+ * 
+ * File destFile = new File(saveDirectory, attach.getFbaRenamedFilename());
+ * upFile.transferTo(destFile); } }
+ * 
+ * int result = friendBoardService.updateFriendBoard(insertNoticeBoard);
+ * 
+ * } catch(Exception e) { log.error("게시글 수정 오류", e); throw e; }
+ * 
+ * return "redirect:/board/friend/friendBoardDetail.do?no=" +
+ * insertNoticeBoard.getFbNo(); }
+ * 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
