@@ -27,4 +27,6 @@ public interface MemberDao {
 
 	int updateMember(Member updateMember);
 
+	int memberDelete(int mNo);
+
 }

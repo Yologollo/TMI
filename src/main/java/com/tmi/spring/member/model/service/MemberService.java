@@ -25,4 +25,6 @@ public interface MemberService {
 
 	int updateMember(Member updateMember);
 
+	int memberDelete(int mNo);
+
 }

@@ -63,6 +63,13 @@
 			m_email = #{mEmail}
 	</update>
 	
+	<delete id="memberDelete">
+		delete from
+			tmi_member
+		where
+			m_no = #{mNo}
+	</delete>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>
