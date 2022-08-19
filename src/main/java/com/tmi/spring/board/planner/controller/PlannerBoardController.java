@@ -33,6 +33,7 @@ import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.service.PlannerBoardService;
 import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
 import com.tmi.spring.planner.model.dto.Planner;
@@ -240,50 +241,13 @@ public class PlannerBoardController {
 //	@PostMapping("/board/planner/plannerBoardUpdate.do")
 //	public String plannerBoardUpdate(
 //			@ModelAttribute InsertPlannerBoard insertPlannerBoard,
-//			@RequestParam("upFile") MultipartFile[] upFiles,
-//			@RequestParam(value="delFile", required=false) int[] delFiles,
 //			RedirectAttributes redirectAttr) throws Exception {
 //		
 //		String saveDirectory = application.getRealPath("/resources/upload/reviewboard");
 //		
 //		try {
-//				if(delFiles != null)
-//				{
-//					for(int attachNo : delFiles)
-//					{
-//						ReviewBoardAttachment attach = reviewBoardService.selectOneAttachment(attachNo);
-//						log.debug("attach= {}", attach);
-//						log.debug("insertReviewBoard = {}", insertReviewBoard);
-//						
-//						String renamedFilename = attach.getRbaRenamedFilename();
-//						File delFile = new File(saveDirectory, renamedFilename);
-//						if(delFile.exists())
-//						{
-//							delFile.delete();
-//							log.debug("{}번 {}파일 삭제", attachNo, renamedFilename);
-//						}
-//						
-//						int result = reviewBoardService.deleteAttachment(attachNo);
-//						log.debug("{}번 Attachment 레코드 삭제", attachNo);
-//					}
-//				}
 //				
-//				for(MultipartFile upFile : upFiles)
-//				{
-//					if(upFile.getSize() > 0)
-//					{
-//						ReviewBoardAttachment attach = new ReviewBoardAttachment();
-//						attach.setRbaOriginalFilename(upFile.getOriginalFilename());
-//						attach.setRbaRenamedFilename(HelloSpringUtils.getRenamedFilename(upFile.getOriginalFilename()));
-//						attach.setRbaRbNo(insertReviewBoard.getRbNo());
-//						insertReviewBoard.addAttachment(attach);
-//						
-//						File destFile = new File(saveDirectory, attach.getRbaRenamedFilename());
-//						upFile.transferTo(destFile);
-//					}
-//				}
-//				
-//				int result = reviewBoardService.updateReviewBoard(insertReviewBoard);
+//				int result = plannerBoardService.updatePlannerBoard(insertPlannerBoard);
 //				
 //		}
 //		catch(Exception e) {
@@ -291,7 +255,78 @@ public class PlannerBoardController {
 //			throw e;
 //		}
 //
-//		return "redirect:/board/review/reviewBoardDetail.do?no=" + insertReviewBoard.getRbNo();
+//		return "redirect:/board/review/reviewBoardDetail.do?no=" + insertPlannerBoard.getPbNo();
+//	}
+//	
+//	@GetMapping("/board/review/reviewBoardDelete.do")
+//	public String plannerBoardDelete(@RequestParam int no) {
+//		try {
+//			log.debug("no = {}",no);
+//			int result = plannerBoardService.deletePlannerBoard(no);
+//			
+//		} catch (Exception e) {
+//			log.error("게시판 삭제 오류",e);
+//			throw e;
+//		}
+//		
+//		return "redirect:/board/review/reviewBoard.do";
+//	}
+//	
+//	@PostMapping("/board/review/reviewBoardCommentEnroll.do")
+//	public String reviewBoardCommentEnroll(@RequestParam int rbcRbNo, @RequestParam String rbcMEmail, @RequestParam String rbcContent) {
+//		try {
+//			log.debug("rbcRbNo = {}",rbcRbNo);
+//			log.debug("rbMEmail = {}",rbcMEmail);
+//			log.debug("rbcContent = {}",rbcContent);
+//			
+//			ReviewBoardComment rbComment = new ReviewBoardComment(0, rbcRbNo, rbcMEmail, null, rbcContent);
+//			
+//			int result = reviewBoardService.insertReviewComment(rbComment);
+//			
+//		} catch (Exception e) {
+//			log.error("댓글 작성 오류", e);
+//			throw e;
+//		}
+//		return  "redirect:/board/review/reviewBoardDetail.do?no=" + rbcRbNo;
+//	}
+//	
+//	@GetMapping("/board/review/deleteComment.do")
+//	public String reviewBoardDeleteComment(@RequestParam int rbcRbNo, @RequestParam int rbcNo) {
+//		try {
+//			log.debug("rbcRbNo = {}", rbcRbNo);
+//			log.debug("rbcNo = {}", rbcNo);
+//			
+//			int result = reviewBoardService.deleteReviewBoardComment(rbcNo);
+//			
+//		} catch (Exception e) {
+//			log.error("댓글 삭제 오류",e);
+//			throw e;
+//		}
+//		return "redirect:/board/review/reviewBoardDetail.do?no=" + rbcRbNo;
+//	}
+//	
+//	@GetMapping("/board/review/reviewBoardLove.do")
+//	public String reviewBoardLove(@RequestParam int loNo, @AuthenticationPrincipal Member member, RedirectAttributes redirectAttr) {
+//		log.debug("loNo = {}", loNo);
+//		int result = 0;
+//		
+//		String email = member.getMEmail();
+//		log.debug("email = {}", email);
+//		
+//		String Find = reviewBoardService.selectFindLove(loNo, email);			
+//		
+//		if(Find == null)
+//		{			
+//			result = reviewBoardService.insertLove(loNo, email);			
+//		}
+//		else
+//		{
+////			String msg = "이미 좋아요한 글입니다.";
+//			redirectAttr.addFlashAttribute("msg", "이미 좋아요한 글입니다.");
+////			return "redirect:/login/findPwUpdate.do";
+//		}
+//		
+//		return "redirect:/board/review/reviewBoardDetail.do?no=" + loNo;
 //	}
 	
 }
