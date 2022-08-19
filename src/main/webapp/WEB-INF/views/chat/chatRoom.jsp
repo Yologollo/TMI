@@ -17,7 +17,6 @@
 <sec:authentication property="principal" var="loginMember" scope="page"/>
 <script>
 const loginMemberEmail = '${loginMember.MEmail}';
-
 </script>
 <!-- 
 	생성 : 최윤서
@@ -182,7 +181,6 @@ $(document).on('click', '.chat_list', function(){
         }
     });
 });
-
 
 const chatroomId = '${chatroomId}';
 const sendEmail = '${loginMember.MEmail}';
