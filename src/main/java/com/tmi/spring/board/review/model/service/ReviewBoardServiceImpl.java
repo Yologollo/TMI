@@ -15,6 +15,8 @@ import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,9 +63,13 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 		InsertReviewBoard insertReviewBoard = reviewBoardDao.selectOneReviewBoard(no);
 		List<ReviewBoardAttachment> attachments = reviewBoardDao.selectAttachmentListByNo(no);
 		List<ReviewBoardComment> comments = reviewBoardDao.findBoardCommentByNo(no);
+		List<Planner> planner = reviewBoardDao.findBoardPlannerByNo(no);
+		List<PlannerPlan> plans = reviewBoardDao.findBoardPlanByNo(no);
 		
 		insertReviewBoard.setAttachments(attachments);
 		insertReviewBoard.setBoardComments(comments);
+		insertReviewBoard.setPlanner(planner);
+		insertReviewBoard.setPlans(plans);
 		
 		return insertReviewBoard;
 	}
@@ -122,6 +128,27 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 	@Override
 	public int loveCount(int no) {
 		return reviewBoardDao.loveCount(no);
+	}
+	
+	@Override
+	public List<ReviewBoard> selectBestReviewBoardList(int cPage, int numPerPage) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reviewBoardDao.selectBestReviewBoardList(rowBounds);
+	}
+	
+	@Override
+	public List<ReviewBoard> selectMainReviewBoardList(int cPage, int numPerPage) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reviewBoardDao.selectMainReviewBoardList(rowBounds);
+	}
+	
+	@Override
+	public Planner findBoardPlannerByNoModel(int no) {
+		return reviewBoardDao.findBoardPlannerByNoModel(no);
 	}
 	
 }

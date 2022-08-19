@@ -253,7 +253,7 @@ $(document).ready(function () {
 				</div>
 			</c:if>
 		</c:forEach>
-		</div>
+		
 		
 		<div style="width:100%;">
 		  	${insertFriendBoard.fbContent} dsadass<!-- summernote 출력 -->

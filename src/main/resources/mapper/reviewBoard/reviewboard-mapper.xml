@@ -27,7 +27,7 @@
 		insert into 
 			tmi_review_board 
 		values 
-			(seq_rb_no.nextval, null, #{rbMEmail}, #{rbTitle}, sysdate, sysdate, 0, #{rbContent})
+			(seq_rb_no.nextval, #{rbPNo}, #{rbMEmail}, #{rbTitle}, sysdate, sysdate, 0, #{rbContent})
 			
 		<selectKey keyProperty="rbNo" resultType="_int" order="AFTER">
 			select
@@ -58,6 +58,51 @@
 		values
 			(seq_rbl_love_no.nextval, #{loNo}, #{email}, 1)
 	</insert>
+	
+	
+	<select id="selectBestReviewBoardList" parameterType="String" resultMap="ReviewBoardMap">
+		select
+		    rb.rb_no,
+		    rb.rb_p_no,
+		    m.m_nickname,
+		    rb.rb_title,
+		    rb.rb_content,
+		    rb.rb_created_at,
+		    rb.rb_updated_at,
+		    rb.rb_read_count,
+		    (select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    (select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount,
+		    (select count(*) from tmi_review_board_love where rbl_rb_no = rb.rb_no) loveCount
+		from
+		    tmi_review_board rb join tmi_member m
+		        on rb_m_email = m.m_email
+		where
+		    (select count(*) from tmi_review_board_love where rbl_rb_no = rb.rb_no) >= 5
+		order by
+		    rb.rb_no desc
+	</select>
+	
+	<select id="selectMainReviewBoardList" parameterType="String" resultMap="ReviewBoardMap">
+		select
+		    rb.rb_no,
+		    rb.rb_p_no,
+		    m.m_nickname,
+		    rb.rb_title,
+		    rb.rb_content,
+		    rb.rb_created_at,
+		    rb.rb_updated_at,
+		    rb.rb_read_count,
+		    (select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    (select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount,
+		    (select count(*) from tmi_review_board_love where rbl_rb_no = rb.rb_no) loveCount
+		from
+		    tmi_review_board rb join tmi_member m
+		        on rb_m_email = m.m_email
+		where
+		    (select count(*) from tmi_review_board_love where rbl_rb_no = rb.rb_no) >= 5
+		order by
+		    loveCount desc
+	</select>
 	
 	<resultMap id="ReviewBoardMap" type="reviewBoard">
 		<result column="rb_no" property="rb_no"/>

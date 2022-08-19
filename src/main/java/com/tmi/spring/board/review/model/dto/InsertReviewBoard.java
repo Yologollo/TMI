@@ -7,6 +7,8 @@ import java.util.List;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +21,8 @@ import lombok.NonNull;
 public class InsertReviewBoard {
 	private List<ReviewBoardAttachment> attachments = new ArrayList<>();
 	private List<ReviewBoardComment> comments = new ArrayList<>();
+	private List<Planner> planner = new ArrayList<>();
+	private List<PlannerPlan> plans = new ArrayList<>();
 	
 	private int rbNo;
 	private int rbPNo;

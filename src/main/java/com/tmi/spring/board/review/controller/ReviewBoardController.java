@@ -3,6 +3,9 @@ package com.tmi.spring.board.review.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,13 +43,16 @@ import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 import com.tmi.spring.board.review.model.service.ReviewBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
+import com.tmi.spring.planner.model.service.PlannerService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
  * @생성 이경석
- * @작업 이경석
+ * @작업 이경석, 김용민
  *
  */
 
@@ -62,6 +68,9 @@ public class ReviewBoardController {
 	
 	@Autowired
 	ResourceLoader resourceLoader;
+	
+	@Autowired
+	PlannerService plannerService;
 	
 	@GetMapping("/board/review/reviewBoard.do")
 	public ModelAndView ReviewBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
@@ -93,10 +102,7 @@ public class ReviewBoardController {
 			log.debug("pagebar = {}", pagebar);
 			mav.addObject("pagebar", pagebar);
 			
-			mav.setViewName("board/review/reviewBoard");
-			
-			
-			
+			mav.setViewName("board/review/reviewBoard");	
 			
 		} catch (Exception e) {
 			log.error("게시글 목록 조회 오류",e);
@@ -106,7 +112,25 @@ public class ReviewBoardController {
 	}
 	
 	@GetMapping("/board/review/reviewBoardForm.do")
-	public void ReviewBoardForm() {}
+	public void ReviewBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
+		try {
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
+						
+		} catch (Exception e) {
+			log.error("Planner 조회 오류", e);
+			throw e;
+		}
+	}
 	
 	@PostMapping("/board/review/reviewBoardEnroll.do")
 	public String ReviewBoardEnroll(InsertReviewBoard insertReviewBoard, 
@@ -152,7 +176,7 @@ public class ReviewBoardController {
 	@ResponseBody
 	@RequestMapping(value = "/board/review/reviewBoardDetail.do" , method = {RequestMethod.GET, RequestMethod.POST})
 //	@GetMapping("/board/review/reviewBoardDetail.do")
-	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView ReviewBoardDetail(@RequestParam int no, Model model, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			log.debug("no = {}", no);			
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
@@ -194,6 +218,23 @@ public class ReviewBoardController {
 			int loveCount = reviewBoardService.loveCount(no);
 			log.debug("loveCount= {}", loveCount);
 			
+			Planner planner = reviewBoardService.findBoardPlannerByNoModel(no);
+			log.debug("planner = {}", planner);
+
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
+	        
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("days = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        log.debug("days = {}", days);
+
+	        model.addAttribute("days", days);
+			
 			mav.addObject("loveCount",loveCount);
 			mav.addObject("insertReviewBoard", insertReviewBoard);
 			mav.setViewName("board/review/reviewBoardDetail");
@@ -206,10 +247,22 @@ public class ReviewBoardController {
 	}
 	
 	@GetMapping("/board/review/reviewBoardUpdate.do")
-	public void ReviewBoardUpdate(@RequestParam int no, Model model) {
+	public void ReviewBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member, Planner planner, Model model) {
 		try {
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
 			log.debug("insertReviewBoard = {}", insertReviewBoard);
+			
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 			
 			model.addAttribute("insertReviewBoard",insertReviewBoard);
 		} catch (Exception e) {
@@ -373,6 +426,123 @@ public class ReviewBoardController {
 		return "redirect:/board/review/reviewBoardDetail.do?no=" + loNo;
 	}
 	
+	@GetMapping("/board/bestreview/bestReview.do")
+	public ModelAndView bestReview( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 8;
+			List<ReviewBoard> list2 = reviewBoardService.selectBestReviewBoardList(cPage, numPerPage);
+			Iterator<ReviewBoard> it = list2.iterator();
+
+			log.debug("list2 = {}", list2);
+			mav.addObject("list2", list2);
+			
+			int totalContent = reviewBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/bestreview/bestReview");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/board")
+	public ModelAndView mainBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 3;
+			List<ReviewBoard> list3 = reviewBoardService.selectMainReviewBoardList(cPage, numPerPage);
+			Iterator<ReviewBoard> it = list3.iterator();
+
+			log.debug("list3 = {}", list3);
+			mav.addObject("list3", list3);
+			
+			int totalContent = reviewBoardService.selectTotalContent();
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/main/mainBoard");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+//	@GetMapping("/")
+//	public ModelAndView index( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+//		try {
+//			int numPerPage = 3;
+//			List<ReviewBoard> list4 = reviewBoardService.selectMainReviewBoardList(cPage, numPerPage);
+//			Iterator<ReviewBoard> it = list4.iterator();
+//
+//			log.debug("list4 = {}", list4);
+//			mav.addObject("list4", list4);
+//			
+//			int totalContent = reviewBoardService.selectTotalContent();
+//			String url = request.getRequestURI();
+//			log.debug("url = {}", url);
+//
+//			while(it.hasNext()) {
+//				ReviewBoard boardEntity = it.next();
+//				
+//				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+//				Document doc = Jsoup.parse(boardEntity.getRb_content());
+//				if(doc.selectFirst("img") != null) {
+//					String src = doc.selectFirst("img").attr("src");
+//					boardEntity.setRb_content(src);
+//				}
+//			}
+//			
+//			log.debug("totalContent = {}", totalContent);
+//			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+//			log.debug("pagebar = {}", pagebar);
+//			mav.addObject("pagebar", pagebar);
+//			
+//			mav.setViewName("/");	
+//			
+//		} catch (Exception e) {
+//			log.error("게시글 목록 조회 오류",e);
+//			throw e;
+//		}
+//		return mav;
+//	}
+
 }
 
 
