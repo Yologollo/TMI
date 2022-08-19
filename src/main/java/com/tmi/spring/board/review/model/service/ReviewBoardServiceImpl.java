@@ -124,4 +124,20 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 		return reviewBoardDao.loveCount(no);
 	}
 	
+	@Override
+	public List<ReviewBoard> selectBestReviewBoardList(int cPage, int numPerPage) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reviewBoardDao.selectBestReviewBoardList(rowBounds);
+	}
+	
+	@Override
+	public List<ReviewBoard> selectMainReviewBoardList(int cPage, int numPerPage) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reviewBoardDao.selectMainReviewBoardList(rowBounds);
+	}
+	
 }

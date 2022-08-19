@@ -63,5 +63,11 @@ public interface ReviewBoardDao {
 	
 	@Select("select count(*) from tmi_review_board_love where rbl_rb_no = #{no}")
 	int loveCount(int no);
+
+	List<ReviewBoard> selectBestReviewBoardList(RowBounds rowBounds);
+
+	List<ReviewBoard> selectMainReviewBoardList(RowBounds rowBounds);
+	
+	
 	
 }
