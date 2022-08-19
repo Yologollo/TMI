@@ -23,7 +23,7 @@
 		    rb.rb_no desc
 	</select>
 	
-		<insert id="insertReviewBoard">
+	<insert id="insertReviewBoard">
 		insert into 
 			tmi_review_board 
 		values 

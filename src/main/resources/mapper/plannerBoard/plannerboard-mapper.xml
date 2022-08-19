@@ -22,6 +22,34 @@
 		    pb.pb_no desc
 	</select>
 	
+	<insert id="insertPlannerBoard">
+		insert into 
+			tmi_planner_board 
+		values 
+			(seq_pf_no.nextval, #{pbPNo}, #{pbMEmail}, #{pbTitle}, sysdate, sysdate, 0, #{pbContent})
+			
+		<selectKey keyProperty="pbNo" resultType="_int" order="AFTER">
+			select
+				seq_pf_no.currval
+			from
+				dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertPlannerComment">
+		insert into 
+			tmi_planner_board_comment 
+		values
+			(seq_pbc_no.nextval, #{pbcPbNo}, #{pbcMEmail}, sysdate, #{pbcContent})
+	</insert>
+	
+	<insert id="insertLove">
+		insert into 
+			tmi_planner_board_love 
+		values
+			(seq_pbl_love_no.nextval, #{email}, #{loNo}, 1)
+	</insert>
+	
  	<resultMap id="PlannerBoardMap" type="plannerBoard">
 		<result column="pb_no" property="pb_no"/>
 		<result column="pb_p_no" property="pb_p_no"/>
