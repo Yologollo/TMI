@@ -17,6 +17,7 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boardplannermodal.css">
 <style>
 	#content {
 		resize : none;
@@ -26,6 +27,82 @@
 		margin-left :45%;
 	}
 </style>
+
+<div class="createPlannerModalForm">
+	<div class="modal-dialog-centered" id="createPlannerModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>플래너 불러오기</h1>
+				<button type="button" class="btn-close" id="btnModalCloseUp" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				
+				<div id="cardWrapper">
+					<c:if test="${empty plannerList}">
+		    			<span>작성된 플래너가 없습니다.</span>
+	    			</c:if>
+
+			    	<c:if test="${not empty plannerList}">
+						<c:forEach items="${plannerList}" var="planner" varStatus="vs">
+							<div class="card" style="width: 18rem;" data-no="${planner.PNo}">
+								<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
+								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+								<script>
+									var mapContainer = document.getElementById('dayAllMap${vs.count}');
+									
+									var mapOption = {
+								    		center: new kakao.maps.LatLng(36.25, 127.75),
+									        level: 14
+									};
+									
+									var map = new kakao.maps.Map(mapContainer, mapOption);
+									
+									var polyline = new kakao.maps.Polyline({
+					                       map: map,
+					                       path: [],
+					                       strokeWeight: 3,
+					                       strokeColor: '#5882fa',
+					                       strokeOpacity: 1,
+					                       strokeStyle: 'solid'
+					                   });
+									
+									<c:forEach items="${plans}" var="plan" varStatus="status">
+										<c:if test="${planner.PNo eq plan.pppNo}">
+											var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                                var marker = new kakao.maps.Marker({
+			                                    position: markerPosition
+			                                });
+			                                marker.setMap(map);
+			                                
+			                                var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+			                                var path = polyline.getPath();
+			                                path.push(point);
+			                                polyline.setPath(path);
+										</c:if>
+									</c:forEach>
+								</script>
+								<div class="card-body">
+									<span class="cardDateSpan">${planner.PLeaveDate} ~ ${planner.PReturnDate}</span>
+									<span class="cardDaySpan">
+										<fmt:parseDate value="${planner.PLeaveDate}" var="leaveDateFormat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${leaveDateFormat}" pattern="dd" var="leaveDate" />
+										<fmt:parseDate value="${planner.PReturnDate}" var="returnDateFormat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${returnDateFormat}" pattern="dd" var="returnDate" />
+										${returnDate - leaveDate} DAY
+									</span><br />
+									<span class="cardTitleSpan">${planner.PTitle}</span><br />
+									<span class="cardExplanSpan">${planner.PExplan}</span><br />
+									<button type="button" class="btn btn-primary plannerChoose" value="${planner.PNo}/${planner.PTitle}">플래너 선택</button>
+								</div>
+							</div>
+			            </c:forEach>
+		            </c:if>
+	            </div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do" method="POST" enctype="multipart/form-data">
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
@@ -52,6 +129,15 @@
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>
+		
+		<div class="input-group mb-3">
+		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
+		  <c:forEach items="${insertReviewBoard.planner}" var="planner" varStatus="plan_status">
+ 			<input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="${planner.PTitle}" aria-describedby="inputGroup-sizing-default">
+		  </c:forEach>
+		</div>
+		  <input type="hidden" id="modalPlannerNo" name="rbPNo" value="${insertReviewBoard.rbPNo}"/>
+		
 		
 		<textarea id="summernote" name="rbContent">${insertReviewBoard.rbContent}</textarea>
 	  	
@@ -106,6 +192,35 @@
 			return;
 		}
 	});  */  
+	
+	document.querySelector('.createPlannerModalForm').addEventListener('click', function(e) {
+		if (e.target == document.querySelector('.createPlannerModalForm')) {
+			document.querySelector('.createPlannerModalForm').classList.remove('show-modal');
+		}
+	});
+
+	$('#createPlannerModalbtn').on('click', function() {
+		$('.createPlannerModalForm').addClass('show-modal');
+	});
+
+	$('#btnModalCloseUp').on('click', function() {
+	    $('.createPlannerModalForm').removeClass('show-modal');
+	});
+
+	$('#btnModalCloseDown').on('click', function() {
+	    $('.createPlannerModalForm').removeClass('show-modal');
+	});
+	
+	$('.plannerChoose').click(function(e){
+		var plannerNo = e.target.value
+		var plannerNoSplit = plannerNo.split('/');
+		console.log(plannerNoSplit);
+		
+		$('input[name=rbPNo]').attr('value', plannerNoSplit[0]);
+	 	$('#modalPlannerTitle').attr('value', plannerNoSplit[1]);
+		alert('플래너가 선택되었습니다 !');
+		$('.createPlannerModalForm').removeClass('show-modal');
+	})
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

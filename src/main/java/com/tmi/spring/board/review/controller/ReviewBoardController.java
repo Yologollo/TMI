@@ -3,6 +3,9 @@ package com.tmi.spring.board.review.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,13 +43,16 @@ import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
 import com.tmi.spring.board.review.model.service.ReviewBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
+import com.tmi.spring.planner.model.service.PlannerService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
  * @생성 이경석
- * @작업 이경석
+ * @작업 이경석, 김용민
  *
  */
 
@@ -62,6 +68,9 @@ public class ReviewBoardController {
 	
 	@Autowired
 	ResourceLoader resourceLoader;
+	
+	@Autowired
+	PlannerService plannerService;
 	
 	@GetMapping("/board/review/reviewBoard.do")
 	public ModelAndView ReviewBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
@@ -103,7 +112,25 @@ public class ReviewBoardController {
 	}
 	
 	@GetMapping("/board/review/reviewBoardForm.do")
-	public void ReviewBoardForm() {}
+	public void ReviewBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
+		try {
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
+						
+		} catch (Exception e) {
+			log.error("Planner 조회 오류", e);
+			throw e;
+		}
+	}
 	
 	@PostMapping("/board/review/reviewBoardEnroll.do")
 	public String ReviewBoardEnroll(InsertReviewBoard insertReviewBoard, 
@@ -149,7 +176,7 @@ public class ReviewBoardController {
 	@ResponseBody
 	@RequestMapping(value = "/board/review/reviewBoardDetail.do" , method = {RequestMethod.GET, RequestMethod.POST})
 //	@GetMapping("/board/review/reviewBoardDetail.do")
-	public ModelAndView ReviewBoardDetail(@RequestParam int no, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView ReviewBoardDetail(@RequestParam int no, Model model, ModelAndView mav, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			log.debug("no = {}", no);			
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
@@ -191,6 +218,23 @@ public class ReviewBoardController {
 			int loveCount = reviewBoardService.loveCount(no);
 			log.debug("loveCount= {}", loveCount);
 			
+			Planner planner = reviewBoardService.findBoardPlannerByNoModel(no);
+			log.debug("planner = {}", planner);
+
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
+	        
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("days = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        log.debug("days = {}", days);
+
+	        model.addAttribute("days", days);
+			
 			mav.addObject("loveCount",loveCount);
 			mav.addObject("insertReviewBoard", insertReviewBoard);
 			mav.setViewName("board/review/reviewBoardDetail");
@@ -203,10 +247,22 @@ public class ReviewBoardController {
 	}
 	
 	@GetMapping("/board/review/reviewBoardUpdate.do")
-	public void ReviewBoardUpdate(@RequestParam int no, Model model) {
+	public void ReviewBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member, Planner planner, Model model) {
 		try {
 			InsertReviewBoard insertReviewBoard = reviewBoardService.selectOneReviewBoard(no);
 			log.debug("insertReviewBoard = {}", insertReviewBoard);
+			
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 			
 			model.addAttribute("insertReviewBoard",insertReviewBoard);
 		} catch (Exception e) {

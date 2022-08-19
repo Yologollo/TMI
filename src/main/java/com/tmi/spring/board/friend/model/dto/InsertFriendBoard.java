@@ -1,11 +1,9 @@
 package com.tmi.spring.board.friend.model.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tmi.spring.member.model.dto.MemberEntity;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 

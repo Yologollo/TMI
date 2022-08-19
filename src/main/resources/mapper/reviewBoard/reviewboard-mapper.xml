@@ -27,7 +27,7 @@
 		insert into 
 			tmi_review_board 
 		values 
-			(seq_rb_no.nextval, null, #{rbMEmail}, #{rbTitle}, sysdate, sysdate, 0, #{rbContent})
+			(seq_rb_no.nextval, #{rbPNo}, #{rbMEmail}, #{rbTitle}, sysdate, sysdate, 0, #{rbContent})
 			
 		<selectKey keyProperty="rbNo" resultType="_int" order="AFTER">
 			select
