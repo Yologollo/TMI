@@ -44,6 +44,11 @@ public class MemberSeriveImpl implements MemberService {
 		return memberDao.findPwUpdate(member);
 	}
 
+	@Override
+	public int updateMember(Member updateMember) {
+		return memberDao.updateMember(updateMember);
+	}
+
 
 
 }

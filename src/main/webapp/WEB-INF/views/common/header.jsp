@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/mypage" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/mypage/memberDetail.do" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>

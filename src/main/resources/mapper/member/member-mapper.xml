@@ -52,6 +52,17 @@
 
 	</update>
 	
+	<update id="updateMember">
+		update
+			tmi_member
+		set
+			m_nickname = #{mNickName},
+			m_name = #{mName},
+			m_phone = #{mPhone}
+		where
+			m_email = #{mEmail}
+	</update>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>
