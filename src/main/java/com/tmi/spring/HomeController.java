@@ -111,7 +111,7 @@ public class HomeController {
 			log.debug("pagebar = {}", pagebar);
 			mav.addObject("pagebar", pagebar);
 			
-			mav.setViewName("/");	
+			mav.setViewName("index");	
 			
 		} catch (Exception e) {
 			log.error("게시글 목록 조회 오류",e);
