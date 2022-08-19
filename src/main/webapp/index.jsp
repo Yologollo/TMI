@@ -224,7 +224,7 @@ id="createAreaModal">
        <ul>
         <li><a href="#" class="item" onclick="javascript:window.scrollTo(0,0)"></a></li>
         <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
+        <li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do" class="item"></a></li>
         <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
     </ul>
 </div>

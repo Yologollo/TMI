@@ -38,6 +38,7 @@ setTimeout(() => {
 			                  </div>
 				          </div>`;
 			container.insertAdjacentHTML('beforeend', html);
+			msgHistory.scrollTop(msgHistory[0].scrollHeight); 
 		}
 		if(sendEmail != loginMemberEmail){
 			const html = `<div class="incoming_msg">
@@ -48,9 +49,9 @@ setTimeout(() => {
 				              </div>
 			              </div>`;
 			container.insertAdjacentHTML('beforeend', html);
+			msgHistory.scrollTop(msgHistory[0].scrollHeight); 
 		}
 		
 	});
-	msgHistory.scrollTop(msgHistory[0].scrollHeight); 
 	
 }, 500);

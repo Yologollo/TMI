@@ -36,6 +36,11 @@ public class ChatController {
 	@Autowired
 	ChatService chatService;
 	
+	@GetMapping("/chatMainPage.do")
+	public void chatMainPage() {
+		
+	}
+	
 	@GetMapping(value = "/room.do", produces = "application/json")
 	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String roomId) {
 		try {
@@ -61,7 +66,6 @@ public class ChatController {
 			log.error("채팅목록조회오류", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		
 	}
 	
 	@GetMapping("/chatRoom.do")
