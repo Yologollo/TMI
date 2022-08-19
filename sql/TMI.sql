@@ -273,3 +273,24 @@ create table tmi_chat_content(
 );
 
 create sequence seq_cc_no;
+
+select * from tmi_notice_board;
+
+
+
+
+
+
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (152,'ym1234@naver.com','테스트1','test',to_date('22/08/03','RR/MM/DD'),to_date('22/08/04','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (152,'ym1234@naver.com','테스트1','test',to_date('22/08/03','RR/MM/DD'),to_date('22/08/04','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (31,'honggd@naver.com','테스트1','test',to_date('22/08/03','RR/MM/DD'),to_date('22/08/04','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (144,'munji@naver.com','테스트2','test',to_date('22/08/04','RR/MM/DD'),to_date('22/08/04','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (147,'tan1234@naver.com','테스트3','test',to_date('22/08/04','RR/MM/DD'),to_date('22/08/05','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (172,'hb1234@naver.com','테스트4','test',to_date('22/08/05','RR/MM/DD'),to_date('22/08/06','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (74,'ys1234@naver.com','테스트5','test',to_date('22/08/05','RR/MM/DD'),to_date('22/08/07','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (171,'bbob@naver.com','테스트6','test',to_date('22/08/06','RR/MM/DD'),to_date('22/08/08','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (190,'ggy3381@naver.com','테스트7','test',to_date('22/08/07','RR/MM/DD'),to_date('22/08/08','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (173,'cat1234@naver.com','테스트8','test',to_date('22/08/08','RR/MM/DD'),to_date('22/08/09','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (175,'hari1234@naver.com','테스트9','test',to_date('22/08/08','RR/MM/DD'),to_date('22/08/10','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (189,'dddks1234@naver.com','테스트10','test',to_date('22/08/09','RR/MM/DD'),to_date('22/08/11','RR/MM/DD'),0);
+Insert into TMI_NOTICE_BOARD (NB_NO, NB_M_EMAIL, NB_TITLE, NB_CONTENT, NB_CREATED_AT, NB_UPDATE_AT, NB_READ_COUNT) values (174	,'egg1234@naver.com','테스트11','test',to_date('22/08/09','RR/MM/DD'),to_date('22/08/12','RR/MM/DD'),0);       

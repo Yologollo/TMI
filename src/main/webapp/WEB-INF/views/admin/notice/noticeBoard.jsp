@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
 
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp"> 
 	<jsp:param value="회원관리" name="title" />
 </jsp:include>
 
@@ -28,41 +28,55 @@
   
 	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a href="${pageContext.request.contextPath}/admin/noticeList" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-	      
+	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	    </ul>
 </div>
+    
   <div id="adminboard">
     <div>
       <div id="adminboard-head">
       	<h2>공지사항</h2>
       	<div id="btn-sort-wrap">
-          <button onclick="">추가하기</button>
+   <%--        <button onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>추가하기</button> --%>
+          <input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
         </div>
       </div>
       
       <table>
         <thead id="list-head">
           <tr>
-          	<th></th>
-            <th>관리자</th>
-            <th></th>
-            <th></th>
+	          	<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>첨부파일</th>
+				<th>조회수</th>
           </tr>
         </thead>
          <tbody id="list-content">
-         <td><input type="checkbox" ></td>
-         <td>hogged</td>
-         <td>홍쥐디</td>
-         <td>홍길동</td>
-        	</tbody>
+        <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+        <tr data-no="${noticeBoard.nb_no}">
+					<td>${noticeBoard.nb_no}</td>
+					<td>${noticeBoard.nb_title}</td>
+					<td>${noticeBoard.m_nickname}</td>
+					<td>
+						<fmt:parseDate value="${noticeBoard.nb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
+					</td>
+					<td>
+						<c:if test="${noticeBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
+						</c:if>
+					</td>
+					<td>${noticeBoard.nb_read_count}</td>
+				</tr>
+			</c:forEach>
       	</table>
-
+		<nav>${pagebar}</nav>
+  </section>
 		<br><br><br><br><br><br>
 		<br><br><br><br><br><br>
-		<br><br><br>
 		
-</section>
 
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
