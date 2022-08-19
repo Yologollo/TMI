@@ -25,4 +25,8 @@ public interface MemberDao {
 
 	int findPwUpdate(Member member);
 
+	int updateMember(Member updateMember);
+
+	int memberDelete(int mNo);
+
 }

@@ -75,11 +75,11 @@ create table tmi_planner_board (
     pb_content clob,
     
     constraint pk_pb_no primary key(pb_no),
-    constraint fk_planner_board_p_no foreign key(pb_p_no) references tmi_planner(p_no) on delete set null,
+    constraint fk_planner_board_p_no foreign key(pb_p_no) references tmi_planner(p_no) on delete cascade,
     constraint fk_planner_board_m_email foreign key(pb_m_email) references tmi_member(m_email) on delete cascade
 );
 
-create sequence seq_pb_no;
+create sequence seq_fb_no;
 
 -- 플래너 게시판 댓글
 create table tmi_planner_board_comment (
@@ -120,7 +120,7 @@ create table tmi_review_board (
     rb_content clob,
     
     constraint pk_rb_no primary key(rb_no),
-    constraint fk_review_board_p_no foreign key(rb_p_no) references tmi_planner(p_no) on delete set null,
+    constraint fk_review_board_p_no foreign key(rb_p_no) references tmi_planner(p_no) on delete cascade,
     constraint fk_review_board_m_email foreign key(rb_m_email) references tmi_member(m_email) on delete cascade
 );
 
@@ -181,7 +181,7 @@ Create table tmi_friend_board (
     fb_content clob,
     
     constraint pk_fb_no primary key(fb_no),
-    constraint fk_friend_board_p_no foreign key(fb_p_no) references tmi_planner(p_no) on delete set null,
+    constraint fk_friend_board_p_no foreign key(fb_p_no) references tmi_planner(p_no) on delete cascade,
     constraint fk_friend_board_m_email foreign key(fb_m_email) references tmi_member(m_email) on delete cascade
 );
 

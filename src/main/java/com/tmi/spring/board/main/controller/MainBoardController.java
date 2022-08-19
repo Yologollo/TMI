@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainBoardController {
 	
-	@GetMapping("/board/planner/plannerBoard.do")
-	public void plannerBoard() {
-		log.info("GET / 요청!");
-	}
+//	@GetMapping("/board/planner/plannerBoard.do")
+//	public void plannerBoard() {
+//		log.info("GET / 요청!");
+//	}
 	
 	@GetMapping("/board/bestplanner/bestPlanner.do")
 	public void bestPlanner() {

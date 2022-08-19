@@ -11,14 +11,36 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
- 	<h1>마이페이지</h1>
- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+ 	<div id="bannder">배너 / My게시글</div>
+ 	
+ 	<div id="wrapper">
+ 	
+	 	<div id="menuContainer">
+			<ul>
+				<li class="mypageMenuli">
+					<a href="${pageContext.request.contextPath}/mypage/memberDetail.do">My 페이지</a>
+				</li>
+				<hr />
+				<li class="mypageMenuli">
+					<a href="${pageContext.request.contextPath}/mypage/memberBoardList.do">My 게시글</a>
+				</li>
+				<hr />
+				<li class="mypageMenuli">
+					<a href="${pageContext.request.contextPath}/mypage/memberDelete.do">회원탈퇴</a>
+				</li>
+				<hr />
+			</ul>
+		</div>
+		
+	</div>
+
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

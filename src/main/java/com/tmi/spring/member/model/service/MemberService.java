@@ -23,4 +23,8 @@ public interface MemberService {
 
 	int findPwUpdate(Member member);
 
+	int updateMember(Member updateMember);
+
+	int memberDelete(int mNo);
+
 }
