@@ -15,6 +15,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 <div id="commonMain">
 <sec:authentication property="principal" var="loginMember" scope="page"/>
+
 <script>
 const loginMemberEmail = '${loginMember.MEmail}';
 </script>
@@ -188,6 +189,7 @@ const receiveEmail = '${receiveEmail}';
 console.log("chatroomId = " + chatroomId);
 console.log("sendEmail = " + sendEmail);
 console.log("receiveEmail = " + receiveEmail);
+
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/chat.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
