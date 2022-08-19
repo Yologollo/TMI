@@ -19,7 +19,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InsertPlannerBoard {
-	private List<ReviewBoardComment> comments = new ArrayList<>();
+	private List<PlannerBoardComment> comments = new ArrayList<>();
 	private List<Planner> planner = new ArrayList<>();
 	private List<PlannerPlan> plans = new ArrayList<>();
 	
@@ -32,7 +32,7 @@ public class InsertPlannerBoard {
 	private LocalDateTime pbUpdatedAt;
 	private int pbReadCount;
 
-public void setBoardComments(List<ReviewBoardComment> comments) {
+public void setBoardComments(List<PlannerBoardComment> comments) {
 		this.comments = comments;
 }
 }

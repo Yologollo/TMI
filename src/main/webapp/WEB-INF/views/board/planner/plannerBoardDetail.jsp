@@ -280,7 +280,7 @@ const email = document.getElementById("loginMemberEmail").value;
 		        <div class="comment-editor">
 		            <form
 						action="${pageContext.request.contextPath}/board/planner/plannerBoardCommentEnroll.do" method="post" name="plannerBoardCommentFrm">
-		                <input type="hidden" name="pbcFbNo" value="${insertPlannerBoard.pbNo}" />
+		                <input type="hidden" name="pbcPbNo" value="${insertPlannerBoard.pbNo}" />
 		                <input type="hidden" name="pbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 						<textarea name="pbcContent" cols="100" rows="3"></textarea>
 		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
@@ -356,7 +356,7 @@ const email = document.getElementById("loginMemberEmail").value;
  		});
  	});
 
- 	document.reviewBoardCommentFrm.onsubmit = (e) => {
+ 	document.plannerBoardCommentFrm.onsubmit = (e) => {
  		const contentVal = e.target.fbcContent.value.trim();
  		if(!/^(.|\n)+$/.test(contentVal))
  		{
@@ -364,19 +364,6 @@ const email = document.getElementById("loginMemberEmail").value;
  			return false;
  		}
  	};
- 	// 이 부분 고쳐주셔야지 제 함수가 돌아가요
- 	// 언능 고쳐주셈 징징징징징징징징징징징징징
- 	// 일단 주석처리 해놨어요 고 쳐 줘
- 	// 고
- 	// 쳐
- 	// 줘
-/*  	document.reviewBoardLoveFrm.onsubmit = (e) => {
- 		if( ==1)
- 		{
- 			alert("이미 추천하였습니다.");
- 			e.preventDefault();
- 		}
- 	}; */
  	
   	document.querySelectorAll("#deleteComment").forEach((del) => {
  		del.addEventListener("click", (e) => {		

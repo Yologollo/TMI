@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
+import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 
 public interface PlannerBoardService {
 
@@ -16,5 +17,19 @@ public interface PlannerBoardService {
 	int updateReadCount(int no);
 
 	int loveCount(int no);
+//----------------------
+	int insertPlannerBoard(InsertPlannerBoard insertPlannerBoard);
+
+	int updatePlannerBoard(InsertPlannerBoard insertPlannerBoard);
+
+	int deletePlannerBoard(int no);
+
+	int insertPlannerComment(PlannerBoardComment pbComment);
+
+	int deletePlannerBoardComment(int pbcNo);
+
+	String selectFindLove(int loNo, String email);
+
+	int insertLove(int loNo, String email);
 
 }
