@@ -11,17 +11,94 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<style>
+	tr[data-no] {
+		cursor: pointer;
+	}
+	.reviewBoard {
+		width : 200px;
+		height : 250px;
+		border: 1px solid red; 
+		margin: auto; 
+		margin-top:4.5rem;
+		overflow: hidden;
+		position: relative;
+	}
+	.imageReviewBoard {
+		width : 200px;
+		height : 180px;
+		border: 1px solid blue; 
+		margin: auto; 
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.thumbNailLink {
+		display: inline-block;
+		margin : 10px;
+		width : 300px;
+		height : 200px;
+		text-align: center;
+	}
+	
+	.thumbNailName {
+		display : inline-block;
+		width : 300px;
+		height : 65px;
+		text-align: center;
+	}
+	#contentArea2 {
+		width : 280px;
+		height : 330px;
+		border: 1px solid red; 
+		margin: auto; 
+		overflow: hidden;
+		display: inline-block;
+	}
+</style>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="loginMember" scope="page"/>
+	<script>
+		const mEmail = '${loginMember.MEmail}';
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
+</sec:authorize>
+
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
- 	<h1>플래너 게시판</h1>
  	<input type="button" value="플래너 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"/>
  	<input type="button" value="베스트 플레너" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/bestplanner/bestPlanner.do'"/>
  	<input type="button" value="후기 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'"/>
  	<input type="button" value="베스트 후기 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/bestreview/bestReview.do'"/>
  	<input type="button" value="여행친구 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'"/>
+ 	
+ 	<h1>플래너 게시판</h1>
+ 	<section id="board-container" class="container">
+ 		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'"/>
+			<article>
+				<c:forEach items="${list}" var="plannerBoard" varStatus="vs">
+						<div id="contentArea2">
+							<div id="selectContent">
+								<a href="${pageContext.request.contextPath}/board/planner/plannerBoardDetail.do?no=${plannerBoard.pb_no}">
+									<span class="thumbNailImage">
+										<img src="${plannerBoard.pb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
+									</span>
+									<strong class="thumbNailName">
+										${plannerBoard.pb_title}
+									</strong>
+								</a>
+							</div>
+						</div>
+				</c:forEach>
+			</article>
+ 		<nav>${pagebar}</nav>
+	</section> 
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
  </div>

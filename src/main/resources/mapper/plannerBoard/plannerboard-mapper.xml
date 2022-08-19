@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmi.spring.board.planner.model.dao.PlannerBoardDao">
+<!-- <mapper namespace="dao 경로"> -->
+	<select id="selectPlannerBoardList" parameterType="String" resultMap="PlannerBoardMap">
+		select
+		    pb.pb_no,
+		    pb.pb_p_no,
+		    m.m_nickname,
+		    pb.pb_title,
+		    pb.pb_content,
+		    pb.pb_created_at,
+		    pb.pb_updated_at,
+		    pb.pb_read_count,
+		    (select count(*) from tmi_planner_board_comment where pbc_pb_no = pb.pb_no) commentCount
+		from
+		    tmi_planner_board pb join tmi_member m
+		        on pb_m_email = m.m_email
+		order by
+		    pb.pb_no desc
+	</select>
+	
+ 	<resultMap id="PlannerBoardMap" type="plannerBoard">
+		<result column="pb_no" property="pb_no"/>
+		<result column="pb_p_no" property="pb_p_no"/>
+		<result column="m_nickname" property="m_nickname"/>
+		<result column="pb_title" property="pb_title"/>
+		<result column="pb_content" property="pb_content"/>
+		<result column="pb_created_at" property="pb_created_at"/>
+		<result column="pb_updated_at" property="pb_updated_at"/>
+		<result column="pb_read_count" property="pb_read_count"/>
+		<result column="commentCount" property="commentCount"/>
+	 </resultMap>
+</mapper>
