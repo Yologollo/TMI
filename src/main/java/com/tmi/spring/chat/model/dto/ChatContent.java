@@ -20,7 +20,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatContent {
-	@NonNull
+
 	private long contentNo;
 	@NonNull
 	private String chatroomId;

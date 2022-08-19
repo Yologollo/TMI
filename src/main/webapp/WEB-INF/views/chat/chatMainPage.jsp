@@ -17,7 +17,6 @@
 <sec:authentication property="principal" var="loginMember" scope="page"/>
 <script>
 const loginMemberEmail = '${loginMember.MEmail}';
-
 </script>
 <!-- 
 	생성 : 최윤서
@@ -129,6 +128,8 @@ $(document).ready(function(){
 });
 
 /* 목록 선택시 */
+ 
+let roomId = null;
 $(document).on('click', '.chat_list', function(){
     var roomId = $(this).data('roomId');
     var roomEmail = $(this).data('roomEmail');
@@ -146,6 +147,7 @@ $(document).on('click', '.chat_list', function(){
     		console.log(list);
     		$('.msg_history').html('');
     		const container = document.querySelector('.msg_history');
+    		const msgHistory = $('.msg_history');
     		for(var i = 0; list.length > i; i++){
     			let html = "";
 				let contentNo = list[i]['contentNo'];
@@ -161,20 +163,25 @@ $(document).on('click', '.chat_list', function(){
 						                <p>\${messageContent}</p>
 						                <span class="time_date"> \${send} | \${messageTime} </span> 
 					                  </div>
-						          </div>`;
+						          </div>
+						          <input type="hidden" class="roomId" value=\${roomId}>`;
 					container.insertAdjacentHTML('beforeend', html);
 				}
 				if(send != loginMemberEmail){
 					const html = `<div class="incoming_msg">
+									<div class="roomId">
 						              <div class="received_msg">
 						                <div class="received_withd_msg">
 						                  <p>\${messageContent}</p>
 						                  <span class="time_date"> \${send} | \${messageTime} </span></div>
 						              </div>
-					              </div>`;
+									</div>
+					              </div>
+					              <input type="hidden" class="receiveId" value=\${send}>`;
 					container.insertAdjacentHTML('beforeend', html);
 				}
     		};
+    		msgHistory.scrollTop(msgHistory[0].scrollHeight);
     	},
     	error : function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Status : " + textStatus);
@@ -183,10 +190,9 @@ $(document).on('click', '.chat_list', function(){
     });
 });
 
-
-const chatroomId = '${chatroomId}';
+const chatroomId = $('.roomId').val();
 const sendEmail = '${loginMember.MEmail}';
-const receiveEmail = '${receiveEmail}';
+const receiveEmail = $('.receiveId').val();
 console.log("chatroomId = " + chatroomId);
 console.log("sendEmail = " + sendEmail);
 console.log("receiveEmail = " + receiveEmail);

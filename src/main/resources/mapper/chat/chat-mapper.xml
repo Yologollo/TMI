@@ -5,25 +5,24 @@
 <mapper namespace="com.tmi.spring.chat.model.dao.ChatDao">
 <!-- <mapper namespace="dao 경로"> -->
 	<!-- <select id="findRecentChatRoomList" resultType="chatContent">
-	select 
-	    *
-	from(
-	    select 
-	        cc.*,
-	        row_number() over(partition by chatroom_id order by message_time desc) rnum
-	    from tmi_chat_content cc
-	    where send_email=#{loginMemberEmail} or receive_email = #{loginMemberEmail}) cc
-	where 
-	    rnum = 1
+		select 
+		    content_no,
+		    chatroom_id,
+		    send_email,
+		    receive_email,
+		    message_content,
+		    message_time,
+		    (select count(*) from tmi_chat_content where chatroom_id = cc.chatroom_id and message_time > (select last_check from tmi_chat_room where chatroom_id = cc.chatroom_id and receive_email = #{loginMemberEmail} and send_email = #{loginMemberEmail})) unread_count
+		from(
+		    select 
+		        cc.*,
+		        row_number() over(partition by chatroom_id order by message_time desc) rnum
+		    from tmi_chat_content cc
+		    where send_email=#{loginMemberEmail} or receive_email = #{loginMemberEmail}) cc
+		where 
+		    rnum = 1
+		order by 
+			message_time desc
+	
 	</select> -->
-	
-	
-	<resultMap type="chatContent" id="chatContentMap">
-		<id column="content_no" property="contentNo"/>
-		<result column="chatroom_id" property="chatroomId"/>
-		<result column="send_email" property="sendEmail"/>
-		<result column="receive_email" property="receiveEmail"/>
-		<result column="message_content" property="messageContent"/>
-		<result column="message_time" property="messageTime"/>
-	</resultMap>
 </mapper>
