@@ -1,0 +1,40 @@
+#memberInfoWrapper {
+	border: 1px solid #d3d3d3;
+	border-top: none;
+	border-left: none;
+	width: 85%;
+	height: 350px;
+	float: right;
+}
+
+.memberInfo{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 13px;
+}
+
+.memberInfoBtn {
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+	margin-top: 13px;
+}
+
+#memberInfoPwWrapper {
+	border: 1px solid #d3d3d3;
+	border-top: none;
+	border-left: none;
+	width: 85%;
+	height: 250px;
+	float: right;
+}
+
+.check{
+	font-size:13px;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}

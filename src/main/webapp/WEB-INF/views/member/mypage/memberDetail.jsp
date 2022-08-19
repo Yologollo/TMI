@@ -1,6 +1,3 @@
-<%@page import="org.springframework.security.core.Authentication"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.tmi.spring.member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,113 +15,8 @@
 </jsp:include>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<style>
-a {
-	color: black;
-	text-decoration:none;
-}
-
-a:hover {
-	color: black;
-	text-decoration:none;
-}
-
-a:link {
-	color: black;
-	text-decoration:none;
-}
-
-a:visited {
-	color: black;
-	text-decoration:none;
-}
-
-a:active {
-	color: black;
-	text-decoration:none;
-}
-
-h2 {
-	text-align: center;
-}
-
-#bannder {
-	border: 1px solid #d3d3d3;
-	height:300px;
-}
-
-#wrapper{
-	overflow: hidden;
-	position: relative;
-	height: 100%;
-}
-
-#menuContainer{
-	border: 1px solid #d3d3d3;
-	border-top: none;
-	float: left;
-	width: 15%;
-	height: 600px;
-	font-size: 30px;
-	text-align: center;
-	background-color: #F6F6F6;
-}
-
-#menuContainer > ul, #menuContainer > li {
-	list-style:none;
-	padding-left: 0px;
-}
-
-#menuContainer > li > a {
-	color: white;
-}
-
-.mypageMenuli {
-	margin-top:20px;
-	color: white;
-}
-
-#memberInfoWrapper {
-	border: 1px solid #d3d3d3;
-	border-top: none;
-	border-left: none;
-	width: 85%;
-	height: 350px;
-	float: right;
-}
-
-.memberInfo{
-	width: 50%;
-	margin-left: 25%;
-	margin-right: 25%;
-	margin-top: 13px;
-}
-
-.memberInfoBtn {
-	width: 50%;
-	margin-left: 25%;
-	margin-right: 25%;
-	text-align: center;
-	margin-top: 13px;
-}
-
-#memberInfoPwWrapper {
-	border: 1px solid #d3d3d3;
-	border-top: none;
-	border-left: none;
-	width: 85%;
-	height: 250px;
-	float: right;
-}
-
-.check{
-	font-size:13px;
-	width: 50%;
-	margin-left: 25%;
-	margin-right: 25%;
-	text-align: center;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdetail.css">
 <div id="commonMain">
 
 
@@ -136,6 +28,14 @@ h2 {
 			<ul>
 				<li class="mypageMenuli">
 					<a href="${pageContext.request.contextPath}/mypage/memberDetail.do">My 페이지</a>
+				</li>
+				<hr />
+				<li class="mypageMenuli">
+					<a href="${pageContext.request.contextPath}/mypage/memberBoardList.do">My 게시글</a>
+				</li>
+				<hr />
+				<li class="mypageMenuli">
+					<a href="${pageContext.request.contextPath}/mypage/memberDelete.do">회원탈퇴</a>
 				</li>
 				<hr />
 			</ul>

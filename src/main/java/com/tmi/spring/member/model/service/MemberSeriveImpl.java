@@ -49,6 +49,11 @@ public class MemberSeriveImpl implements MemberService {
 		return memberDao.updateMember(updateMember);
 	}
 
+	@Override
+	public int memberDelete(int mNo) {
+		return memberDao.memberDelete(mNo);
+	}
+
 
 
 }

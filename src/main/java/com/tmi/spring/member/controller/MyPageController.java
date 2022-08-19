@@ -3,6 +3,8 @@ package com.tmi.spring.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.member.model.dto.Member;
@@ -135,14 +138,34 @@ public class MyPageController {
 		}
 		return "redirect:/mypage/memberDetail.do";
 	}
+
+	@GetMapping("/memberBoardList.do")
+	public String memberBoardList(@AuthenticationPrincipal Member member, Model model) {
+		log.debug("member = {}", member);
+		
+		model.addAttribute(member);
+		return "/member/mypage/memberBoardList";
+	}
 	
-//	@GetMapping("/memberUpdate.do")
-//	public ResponseEntity<?> memberUpdate(Member updateMember, @AuthenticationPrincipal Member loginMember) {
-//		log.debug("updateMember = {}", updateMember);
-//		log.debug("loginMember = {}", loginMember);
-//
-//		
-//		return ResponseEntity.ok(map);
-//	}
+	@GetMapping("/memberDelete.do")
+	public String memberDelete() {
+		return "/member/mypage/memberDelete";
+	}
+	
+	@PostMapping("/memberDelete.do")
+	public String memberDelete(@AuthenticationPrincipal Member member, HttpSession session) {
+		try {
+			int result = memberService.memberDelete(member.getMNo());
+			session.invalidate();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type", "text/html; charset=utf-8");
+
+		} catch (Exception e) {
+			log.error("회원 탈퇴 오류 오류", e);
+			throw e;
+		}
+		return "redirect:/";
+	}
 
 }
