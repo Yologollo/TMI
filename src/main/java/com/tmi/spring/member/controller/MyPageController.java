@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.member.model.dto.Member;
@@ -125,7 +125,7 @@ public class MyPageController {
 			log.debug("mPassword = {}",mPassword);
 			Member member = memberService.emailChk(mEmail);
 			String rawPassword = member.getMPassword();
-			String encryptedPassword = bcryptPasswordEncoder.encode(rawPassword);
+			String encryptedPassword = bcryptPasswordEncoder.encode(mPassword);
 			member.setMPassword(encryptedPassword);
 			log.debug("member = {}",member);
 			if(member != null) {
@@ -141,9 +141,7 @@ public class MyPageController {
 
 	@GetMapping("/memberBoardList.do")
 	public String memberBoardList(@AuthenticationPrincipal Member member, Model model) {
-		log.debug("member = {}", member);
-		
-		model.addAttribute(member);
+
 		return "/member/mypage/memberBoardList";
 	}
 	

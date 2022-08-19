@@ -1,8 +1,8 @@
 package com.tmi.spring.member.model.service;
 
-import java.util.HashMap;
 
 import com.tmi.spring.member.model.dto.Member;
+
 
 /**
  * 
@@ -26,5 +26,6 @@ public interface MemberService {
 	int updateMember(Member updateMember);
 
 	int memberDelete(int mNo);
+
 
 }

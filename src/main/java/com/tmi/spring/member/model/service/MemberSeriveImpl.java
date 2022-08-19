@@ -1,6 +1,5 @@
 package com.tmi.spring.member.model.service;
 
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,5 @@ public class MemberSeriveImpl implements MemberService {
 	public int memberDelete(int mNo) {
 		return memberDao.memberDelete(mNo);
 	}
-
-
-
+	
 }
