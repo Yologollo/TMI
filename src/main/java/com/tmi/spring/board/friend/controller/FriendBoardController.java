@@ -225,7 +225,7 @@ public class FriendBoardController {
 	}
 
 	@GetMapping("/board/friend/friendBoardUpdate.do")
-	public void friendBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member,Planner planner, Model model) {
+	public void friendBoardUpdate(@RequestParam int no, @AuthenticationPrincipal Member member, Planner planner, Model model) {
 		try {
 			InsertFriendBoard insertFriendBoard = friendBoardService.selectOneFriendBoard(no);
 			log.debug("insertFriendBoard = {}", insertFriendBoard);
