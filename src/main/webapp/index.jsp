@@ -243,6 +243,7 @@ id="createAreaModal">
 				<article>
 					<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
 							<div id="contentArea2">
+							
 								<div id="selectContent">
 									<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 										<span class="thumbNailImage">
