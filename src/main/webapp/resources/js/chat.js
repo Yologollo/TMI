@@ -1,21 +1,23 @@
-
-document.querySelector(".msg_send_btn").addEventListener('click', (e) => {
-	const msg = document.querySelector("#msg").value;
-	if(!msg) return;
-	
-	
-	const payload = {
-		chatroomId,
-		sendEmail,
-		receiveEmail,
-		msg,
-		time : new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/,''),
-		type : 'CHAT'
-	};
-	
-	stompClient.send(`/app/chat/${chatroomId}`, {}, JSON.stringify(payload));
-	document.querySelector("#msg").value = '';
-	
+$('#msg').on('keydown', function(e) {
+    if (event.keyCode == 13)
+        if (!event.shiftKey){
+            event.preventDefault();
+            
+			const msg = document.querySelector("#msg").value;
+			if(!msg) return;
+			
+			const payload = {
+				chatroomId,
+				sendEmail,
+				receiveEmail,
+				msg,
+				time : new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/,''),
+				type : 'CHAT'
+			};
+			
+			stompClient.send(`/app/chat/${chatroomId}`, {}, JSON.stringify(payload));
+			document.querySelector("#msg").value = '';
+        }
 });
 
 setTimeout(() => {

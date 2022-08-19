@@ -35,9 +35,8 @@ const loginMemberEmail = '${loginMember.MEmail}';
 		            </div>
 		          </div>
 
-		          <div class="inbox_chat">
-		          	  
-		          	  
+		          <div class="inbox_chat" id="chatListload">
+		          	     	  
 		          </div>
 		        </div>
 		        <div class="mesgs">
@@ -77,6 +76,7 @@ const loginMemberEmail = '${loginMember.MEmail}';
 
 
 <script>
+
 /* 채팅목록리스트 */
 setInterval(function() {
 	$(document).ready(function(){
@@ -106,7 +106,10 @@ setInterval(function() {
 								     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
 								     <div class="chat_ib">
 									     <h5> \${receive} <span class="chat_date">\${messageTime}</span></h5>
-									     <p>\${messageContent}</p>
+									     <p>
+									     \${messageContent}
+									     <button type="button" class="btn btn-outline-danger" id="deleteChatRoom" style="float:right;font-size:12px;" data-room-id=\${roomId}>나가기</button>
+									     </p>
 								     </div>
 								 </div>
 							 </div> `;
@@ -120,10 +123,35 @@ setInterval(function() {
 	        }
 		});
 	});
-}, 500);
+}, 1000);
+
+/* 채팅방 삭제 */
+$(document).on('click', '#deleteChatRoom', function(){
+	var chatroomId = $(this).data('roomId');
+	console.log(chatroomId);
+	
+	if(confirm("상대방의 채팅방도 나가집니다. 나가시겠습니까?")){
+		$.ajax({
+			
+			url : `${pageContext.request.contextPath}/chat/deleteChatRoom.do`,
+			data : {
+				chatroomId : chatroomId
+			},
+			contentType : 'application/jason;',
+			type : "GET",
+			success(response){
+				console.log(response);
+				alert(response.msg);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+	            alert("Status : " + textStatus);
+	            alert("Error : " + errorThrown);
+			}
+		});
+	}
+});
 
 /* 목록 선택시 */
- 
 $(document).on('click', '.chat_list', function(){
     var chatroomId = $(this).data('roomId');
     var receiveEmail = $(this).data('roomEmail');
@@ -180,25 +208,27 @@ $(document).on('click', '.chat_list', function(){
             alert("Error : " + errorThrown);
         }
     });
-    
-    document.querySelector(".msg_send_btn").addEventListener('click', (e) => {
-    	const msg = document.querySelector("#msg").value;
-    	if(!msg) return;
-    	
-    	
-    	const payload = {
-    		chatroomId,
-    		sendEmail,
-    		receiveEmail,
-    		msg,
-    		time : new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/,''),
-    		type : 'CHAT'
-    	};
-    	
-    	stompClient.send(`/app/chat/\${chatroomId}`, {}, JSON.stringify(payload));
-    	document.querySelector("#msg").value = '';
-    	
-    });
+$('#msg').on('keydown', function(e) {
+    if (event.keyCode == 13)
+        if (!event.shiftKey){
+            event.preventDefault();
+
+	    	const msg = document.querySelector("#msg").value;
+	    	if(!msg) return;
+	    	
+	    	const payload = {
+	    		chatroomId,
+	    		sendEmail,
+	    		receiveEmail,
+	    		msg,
+	    		time : new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/,''),
+	    		type : 'CHAT'
+	    	};
+	    	
+	    	stompClient.send(`/app/chat/\${chatroomId}`, {}, JSON.stringify(payload));
+	    	document.querySelector("#msg").value = '';
+        }
+});
     
     setTimeout(() => {
     	const container = document.querySelector('.msg_history');
@@ -233,12 +263,9 @@ $(document).on('click', '.chat_list', function(){
     			container.insertAdjacentHTML('beforeend', html);
     			msgHistory.scrollTop(msgHistory[0].scrollHeight); 
     		}
-    		
     	});
-    	
     }, 500);
 });
-
 const sendEmail = '${loginMember.MEmail}';
 /* 
 console.log("chatroomId = " + chatroomId);
