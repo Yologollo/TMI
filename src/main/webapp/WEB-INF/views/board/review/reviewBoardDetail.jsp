@@ -262,7 +262,6 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:if>
 		</c:forEach>
-		</div>
 		
 		<div style="width:100%;">
 	  		${insertReviewBoard.rbContent} <!-- summernote 출력 -->
