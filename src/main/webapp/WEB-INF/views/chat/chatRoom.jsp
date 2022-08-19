@@ -113,7 +113,10 @@ setInterval(function() {
 								     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
 								     <div class="chat_ib">
 									     <h5> \${receive} <span class="chat_date">\${messageTime}</span></h5>
-									     <p>\${messageContent}</p>
+									     <p>
+									     \${messageContent}
+									     <button type="button" class="btn btn-outline-danger" id="deleteChatRoom" style="float:right;font-size:12px;" data-room-id=\${roomId}>나가기</button>
+									     </p>
 								     </div>
 								 </div>
 							 </div> `;
@@ -127,7 +130,33 @@ setInterval(function() {
 	        }
 		});
 	});
-}, 500);
+}, 1000);
+
+/* 채팅방 삭제 */
+$(document).on('click', '#deleteChatRoom', function(){
+	var chatroomId = $(this).data('roomId');
+	console.log(chatroomId);
+	
+	if(confirm("상대방의 채팅방도 나가집니다. 나가시겠습니까?")){
+		$.ajax({
+			
+			url : `${pageContext.request.contextPath}/chat/deleteChatRoom.do`,
+			data : {
+				chatroomId : chatroomId
+			},
+			contentType : 'application/jason;',
+			type : "GET",
+			success(response){
+				console.log(response);
+				alert(response.msg);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+	            alert("Status : " + textStatus);
+	            alert("Error : " + errorThrown);
+			}
+		});
+	}
+});
 
 /* 목록 선택시 */
 $(document).on('click', '.chat_list', function(){

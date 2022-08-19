@@ -1,5 +1,6 @@
 package com.tmi.spring.chat.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -39,6 +40,21 @@ public class ChatController {
 	@GetMapping("/chatMainPage.do")
 	public void chatMainPage() {
 		
+	}
+	
+	@GetMapping(value ="/deleteChatRoom.do", produces = "application/json")
+	public ResponseEntity<?> deleteChatRoom(@RequestParam String chatroomId){
+		log.debug("------삭제삭제------chatroomId = {}", chatroomId);
+		Map<String, Object> map = new HashMap<>();
+		try {
+			int result = chatService.deleteChatRoom(chatroomId);
+			map.put("msg", "채팅방을 나가셨습니다.");
+			return ResponseEntity.ok(map);
+
+		} catch(Exception e) {
+			log.error("채팅방 삭제 오류", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 	
 	@GetMapping(value = "/room.do", produces = "application/json")

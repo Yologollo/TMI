@@ -58,5 +58,9 @@ public class ChatServiceImpl implements ChatService{
 	public List<ChatContent> findChatRoomList(String roomId) {
 		return chatDao.findChatRoomList(roomId);
 	}
+	@Override
+	public int deleteChatRoom(String chatroomId) {
+		return chatDao.deleteChatRoom(chatroomId);
+	}
 
 }
