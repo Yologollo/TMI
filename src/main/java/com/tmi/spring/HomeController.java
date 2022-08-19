@@ -85,7 +85,7 @@ public class HomeController {
 //		log.info("GET / 요청!");
 //		return "forward:/index.jsp";
 //	}
-	
+//	
 //	@GetMapping("/")
 //	public ModelAndView index( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
 //		try {
