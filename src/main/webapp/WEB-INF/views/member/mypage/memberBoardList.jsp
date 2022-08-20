@@ -17,8 +17,27 @@
 	float:right; 
 	width: 85%; 
 	border: 1px solid black;
+	height: 300px;
+}
+tr[data-no] {
+	cursor: pointer;
 }
 </style>
+<script>
+window.addEventListener('load', (e) => {
+	document.querySelectorAll("tr[data-no]").forEach((tr) => {
+		tr.addEventListener('click', (e) => {
+			console.log(e.target);
+			const tr = e.target.parentElement;
+			console.log(tr);
+			if(tr.matches('tr[data-no]')) {
+				const no = tr.dataset.no;
+				location.href = '${pageContext.request.contextPath}/board/friend/friendBoardDetail.do?no=' + no;
+			}
+		});
+	});
+});
+</script>
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -55,20 +74,22 @@
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
-				<tr data-no="${friendBoard.fb_no}">
-					<td>${friendBoard.fb_no}</td>
-					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
-					<td>${friendBoard.m_nickname}</td>
+			<c:forEach items="${memberBoardList}" var="board" varStatus="vs">
+				<tr data-no="${board.pbNo}">
+					<td>${fn:length(memberBoardList) - vs.index}</td>
+					<td>${board.pbTitle}</td>
+					<td>${board.pbMEmail}</td>
 					<td>
-						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${board.pbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
-					<td>${friendBoard.fb_read_count}</td>
+					<td>${board.pbReadCount}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<nav>${pagebar}</nav>
+		<div style="width:300px; height: 300px; float: right; text-align: center; border: 1px solid black;">
+			<nav>${pagebar}</nav>		
+		</div>
 	</section> 
 		
 	</div>

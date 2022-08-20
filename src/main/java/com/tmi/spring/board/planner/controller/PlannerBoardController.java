@@ -1,5 +1,8 @@
 package com.tmi.spring.board.planner.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,6 +36,7 @@ import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 import com.tmi.spring.planner.model.service.PlannerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -101,23 +105,23 @@ public class PlannerBoardController {
 	
 	@GetMapping("/board/planner/plannerBoardForm.do")
 	public void PlannerBoardForm(@AuthenticationPrincipal Member member, Planner planner, Model model) {
-//		try {
-//			String memberEmail = member.getMEmail();
-//			log.debug("memberEmail = {}", memberEmail);
-//			
-//			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
-//			log.debug("plannerList = {}", plannerList);
-//			
-//			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
-//			log.debug("plans = {}", plans);
-//			
-//			model.addAttribute("plannerList", plannerList);
-//			model.addAttribute("plans", plans);
-//						
-//		} catch (Exception e) {
-//			log.error("Planner 조회 오류", e);
-//			throw e;
-//		}
+		try {
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
+						
+		} catch (Exception e) {
+			log.error("Planner 조회 오류", e);
+			throw e;
+		}
 	}
 	
 	@PostMapping("/board/planner/plannerBoardEnroll.do")
@@ -180,22 +184,22 @@ public class PlannerBoardController {
 			int loveCount = plannerBoardService.loveCount(no);
 			log.debug("loveCount= {}", loveCount);
 			
-//			Planner planner = plannerBoardService.findBoardPlannerByNoModel(no);
-//			log.debug("planner = {}", planner);
+			Planner planner = plannerBoardService.findBoardPlannerByNoModel(no);
+			log.debug("planner = {}", planner);
 
-//			LocalDate start = planner.getPLeaveDate();
-//	        LocalDate end = planner.getPReturnDate();
+			LocalDate start = planner.getPLeaveDate();
+	        LocalDate end = planner.getPReturnDate();
 	        
-//	        Period period = Period.between(start, end); // 날짜차이 조회
-//	        log.debug("days = {}", period.getDays());
-//
-//	        List<LocalDate> days = new ArrayList<>();
-//	        for(int i = 0; i < period.getDays(); i++){
-//	            days.add(start.plusDays(i)); // 몇일후
-//	        }
-//	        log.debug("days = {}", days);
-//
-//	        model.addAttribute("days", days);
+	        Period period = Period.between(start, end); // 날짜차이 조회
+	        log.debug("days = {}", period.getDays());
+
+	        List<LocalDate> days = new ArrayList<>();
+	        for(int i = 0; i < period.getDays(); i++){
+	            days.add(start.plusDays(i)); // 몇일후
+	        }
+	        log.debug("days = {}", days);
+
+	        model.addAttribute("days", days);
 			
 			mav.addObject("loveCount",loveCount);
 			mav.addObject("insertPlannerBoard", insertPlannerBoard);
@@ -214,17 +218,17 @@ public class PlannerBoardController {
 			InsertPlannerBoard insertPlannerBoard = plannerBoardService.selectOnePlannerBoard(no);
 			log.debug("insertPlannerBoard = {}", insertPlannerBoard);
 			
-//			String memberEmail = member.getMEmail();
-//			log.debug("memberEmail = {}", memberEmail);
-//			
-//			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
-//			log.debug("plannerList = {}", plannerList);
-//			
-//			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
-//			log.debug("plans = {}", plans);
-//			
-//			model.addAttribute("plannerList", plannerList);
-//			model.addAttribute("plans", plans);
+			String memberEmail = member.getMEmail();
+			log.debug("memberEmail = {}", memberEmail);
+			
+			List<Planner> plannerList = plannerService.findPlannerByEmail(memberEmail);
+			log.debug("plannerList = {}", plannerList);
+			
+			List<PlannerPlan> plans = plannerService.findPlansList(plannerList);
+			log.debug("plans = {}", plans);
+			
+			model.addAttribute("plannerList", plannerList);
+			model.addAttribute("plans", plans);
 			
 			model.addAttribute("insertPlannerBoard",insertPlannerBoard);
 		} catch (Exception e) {
