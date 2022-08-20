@@ -2,10 +2,93 @@
 	생성 : 전인찬
 	작업 : 전인찬
 */
+
+/* 관광정보 css폼 시작 */
+#mainpage_wrap{
+	width:86%;
+	position: relative;
+}
+#mainpage_content{
+	margin-left:14%;
+	border: 2px solid red;
+}
 #commonMain2{
 	border: 2px solid black;
 	margin-bottom: 5%;
 }
+
+#tourism_title {
+    text-align: center;
+    font-weight: 600;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 10px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-blue-outline {
+    border: 2px solid rgba(112, 185, 233, 0.75);
+    color: #6e6e6e;
+    background-color: #fff;
+}
+.w-btn-blue-outline:hover {
+    background-color: #70B9E9;
+    color: #ededed;
+}
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#area {
+    display: block;
+}
+
+#tourism_type {
+    display: block;
+    margin-top: 10px;
+}
+
+#tourism_search_wrap {
+    max-width: 580px;
+    top: 50%;
+    left: 30%;
+    width: 50%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#tourism_search_input {
+    margin-top: 10px;
+    border: 2px solid rgba(144, 144, 144, 0.75);
+    background-color: rgba(183, 183, 183, 0.75)
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+    padding: 10px 20px;
+    border-radius: 10px;
+    height: auto;
+    width: 100%;
+}
+
+
+#tourism_search_input:focus {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 28px;
+    height: auto;
+    outline-color: rgba(144, 144, 144, 0.95);
+}
+
+
+#search_wrap {
+    top: 50%;
+    left: 50%;
+}
+/* 관광정보 css폼 끝 */
 
 #infoBox{
 	border: 2px solid black;
