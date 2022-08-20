@@ -1,116 +1,27 @@
-@charset "UTF-8";
-.body div div#featured h3{
-	font-family: 'Nanum+Gothic';
-	color:rgb(17, 9, 9);
-	font-size:28px;
-	line-height:28px;
-	text-shadow: 0 10px 3px #58afed;
-	margin:75px 0 20px 280px;
-	width:360px;
-	
-		} 
-
-/*중간버튼*/
-.body div div#featured a{
-
-	border:0;
-    height:102px;
-    width:392px;
-	font-family: 'Nanum+Gothic';
-	color:#32617f;
-	font-size:20px;
-	font-weight:bold;
-	margin:0;
-	outline:none;
-	display:block;
-	text-decoration:none;
-	text-align:center;
-	line-height:95px;
-	text-shadow: 0 1px 0 #1885ea;
+.intro_top {
+    width: 100%;
+    height: 330px;
+    background-color: #70B9E9;
+    text-align: center;
+    position: relative;
+    margin-top:4.5rem;
+    overflow: hidden;
 }
-
-
-.body div ul.blog{
-	margin:0 auto;	
-	width:1440px;
-	font-family: 'Nanum+Gothic';
+.intro_top img {
+	position: absolute;
+    left: 50%;
+    margin-left: -800px;
 }
-
-.body div ul.blog li{
-	margin:0 0 0 495px;
-	height:auto;
-	padding:0;
-	text-align:center;
-	width:290px;
-    list-style: none;
-	font-weight:bold;
-	font-family: 'Nanum+Gothic';
+.wrap{
+	width:70%; 
+	hegiht:100%; 
+	margin: auto; 
+	overflow: hidden;
+	position: relative;
+	text-align: center;
 }
-
-.body div ul.blog li a:first-child{
-	margin:25px 0 0;
-	padding:0;
-	background:none;
-	width:auto;
-	height:auto;
-	font-family: 'Nanum+Gothic';
+.wrap img{
+	margin: 0;
+    padding: 0;
+    border: 0;
 }
-
-.body div ul.blog li a{
-	color:#1199e8;
-	font-family: 'Nanum+Gothic';
-	text-decoration:none;
-	display:block;
-	margin:40px auto;
-	width: 218px;
-	height:180px;
-	outline:none;
-	font-size:30px;
-	font-weight:bold;
-	line-height:70px;
-	text-shadow: 0 1px 0 #bae0f4;
-
-	transform: scale(1.2);
-  display: block;
-  transition: 0.6s;
-  background-color: #fff;
-  -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
-}
-
-.body div ul.blog li a:hover{
-	transition: 0.1s;
-	font-family: 'Nanum+Gothic';
-	transform: scale(1);
-	background-color: #1c445e;
-	color: transparent;
-	text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
-	-webkit-background-clip: text;
-	   -moz-background-clip: text;
-			background-clip: text;
-		
-}
-
-
-.body div h3{
-	font-family: 'Nanum+Gothic';
-	font-size:33px;
-	font-weight:bold;
-	color:#000988;
-	margin:55px 0 0;
-	line-height:21px;
-}
-
-
-
-/*제목*/
-
-.body div div{
-	font-family: 'Nanum+Gothic';
-	width:940px;
-	padding: 0 10px 54px !important; 
-	margin:0 auto;
-	overflow:hidden;
-}
-
