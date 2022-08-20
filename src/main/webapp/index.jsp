@@ -6,74 +6,125 @@
 <fmt:requestEncoding value="utf-8" />
 
 <style>
-#video_area{
-    width:25%;
-    border: 1px solid red;
-}
-#background_video {
-    max-width:100%;
-    height: auto;
-    border: 1px solid black;
+#video_area {
+	width: 25%;
+	border: 1px solid red;
 }
 
-	#bestPlanner {
-		width:100%;
-		height : 500px;
-		border: 1px solid green; 
-		margin: auto; 
-		overflow: hidden;
-	}
-	
-	#bestReview {
-		width:100%;
-		height : 500px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-	}
-		tr[data-no] {
-		cursor: pointer;
-	}
-	.reviewBoard {
-		width : 200px;
-		height : 250px;
-		border: 1px solid red; 
-		margin: auto; 
-		margin-top:4.5rem;
-		overflow: hidden;
-		position: relative;
-	}
-	.imageReviewBoard {
-		width : 200px;
-		height : 180px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-		position: relative;
-	}
-	
-	.thumbNailLink {
-		display: inline-block;
-		margin : 10px;
-		width : 300px;
-		height : 200px;
-		text-align: center;
-	}
-	
-	.thumbNailName {
-		display : inline-block;
-		width : 300px;
-		height : 65px;
-		text-align: center;
-	}
-	#contentArea2 {
-		width : 280px;
-		height : 330px;
-		border: 1px solid red; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}
+#background_video {
+	max-width: 100%;
+	height: auto;
+	border: 1px solid black;
+}
+
+#bestPlanner {
+	width: 100%;
+	height: 500px;
+	border: 1px solid green;
+	margin: auto;
+	overflow: hidden;
+}
+
+#bestReview {
+	width: 100%;
+	height: 500px;
+	border: 1px solid blue;
+	margin: auto;
+	overflow: hidden;
+}
+
+tr[data-no] {
+	cursor: pointer;
+}
+
+.reviewBoard {
+	width: 200px;
+	height: 250px;
+	border: 1px solid red;
+	margin: auto;
+	margin-top: 4.5rem;
+	overflow: hidden;
+	position: relative;
+}
+
+.imageReviewBoard {
+	width: 200px;
+	height: 180px;
+	border: 1px solid blue;
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.thumbNailLink {
+	display: inline-block;
+	margin: 10px;
+	width: 300px;
+	height: 200px;
+	text-align: center;
+}
+
+.thumbNailName {
+	display: inline-block;
+	width: 300px;
+	height: 65px;
+	text-align: center;
+}
+
+#contentArea2 {
+	width: 280px;
+	height: 330px;
+	border: 1px solid red;
+	margin: auto;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.quickmenu {
+	position: absolute;
+	width: 90px;
+	top: 50%;
+	margin-top: -50px;
+	right: 20px;
+	background: #fff;
+}
+
+.quickmenu ul {
+	position: relative;
+	float: left;
+	width: 100%;
+	display: inline-block;
+	*display: inline;
+	border: 1px solid #ddd;
+}
+
+.quickmenu ul li {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+	display: inline-block;
+	*display: inline;
+}
+
+.quickmenu ul li a {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #999;
+	font-size: 9.5pt;
+}
+
+.quickmenu ul li a:hover {
+	color: #000;
+}
+
+.quickmenu ul li:last-child {
+	border-bottom: 0;
+}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
@@ -306,34 +357,25 @@ id="createAreaModal">
      
 
     
-    <div class="menu">
-       <ul>
-        <li><a href="#" class="item" onclick="javascript:window.scrollTo(0,0)"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
-        <li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do" class="item"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
-    </ul>
-</div>
+	<div class="quickmenu"
+		style="position: absolute; right: 10px; top: 400px;">
+		<ul>
+			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
+			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
+			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
+		</ul>
+	</div>
 
     <script>
-  //side menu
-    console.clear();
-    $(window).scroll(function() {
-        let scrollTop = $(this).scrollTop();
-        console.log(scrollTop)
-        
-        if ( scrollTop < 1000) {
-            scrollTop = 1000;
-        }
-        else if ( scrollTop > 96000 ) {
-            scrollTop = 96000;
-        }
-        
-        let duration = 1000;
-        $('.menu').stop().animate({top:scrollTop}, duration);
-        
-        //console.log(scrollTop);
-    });
+  //side bar
+  
+$(document).ready(function(){
+	  $(window).scroll(function() {
+	    var position = $(window).scrollTop() + 500; 
+	    $(".quickmenu").stop().animate({"top":position+"px"},400);
+	  });
+	});
+  
     </script>
     
     <!-- 
