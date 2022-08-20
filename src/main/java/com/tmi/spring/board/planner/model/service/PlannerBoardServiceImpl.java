@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tmi.spring.board.planner.model.dao.PlannerBoardDao;
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
+import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
@@ -41,13 +42,13 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	@Override
 	public InsertPlannerBoard selectOnePlannerBoard(int no) {
 		InsertPlannerBoard insertPlannerBoard = plannerBoardDao.selectOneReviewBoard(no);
-		List<ReviewBoardComment> comments = plannerBoardDao.findBoardCommentByNo(no);
-//		List<Planner> planner = plannerBoardDao.findBoardPlannerByNo(no);
-//		List<PlannerPlan> plans = plannerBoardDao.findBoardPlanByNo(no);
+		List<PlannerBoardComment> comments = plannerBoardDao.findBoardCommentByNo(no);
+		List<Planner> planner = plannerBoardDao.findBoardPlannerByNo(no);
+		List<PlannerPlan> plans = plannerBoardDao.findBoardPlanByNo(no);
 		
 		insertPlannerBoard.setBoardComments(comments);
-//		insertReviewBoard.setPlanner(planner);
-//		insertReviewBoard.setPlans(plans);
+		insertPlannerBoard.setPlanner(planner);
+		insertPlannerBoard.setPlans(plans);
 		
 		return insertPlannerBoard;
 	}
@@ -61,5 +62,70 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	public int loveCount(int no) {
 		return plannerBoardDao.loveCount(no);
 	}
+	//----------------------
+	
+	@Override
+	public int deletePlannerBoard(int no) {
+		return plannerBoardDao.deletePlannerBoard(no);
+	}
+	
+	@Override
+	public int deletePlannerBoardComment(int pbcNo) {
+		return plannerBoardDao.deletePlannerBoardComment(pbcNo);
+	}
+	
+	@Override
+	public int insertLove(int loNo, String email) {
+		return plannerBoardDao.insertLove(loNo, email);
+	}
+	@Override
+	public int insertPlannerBoard(InsertPlannerBoard insertPlannerBoard) {
+		int result = plannerBoardDao.insertPlannerBoard(insertPlannerBoard);
+		log.debug("insertReviewBoard = {}", insertPlannerBoard.getPbNo());
+		
+		return result;
+	}
+	
+	@Override
+	public int insertPlannerComment(PlannerBoardComment pbComment) {
+		return plannerBoardDao.insertPlannerComment(pbComment);
+	}
+	
+	@Override
+	public String selectFindLove(int loNo, String email) {
+		return plannerBoardDao.selectFindLove(loNo, email);
+	}
+	
+	@Override
+	public int updatePlannerBoard(InsertPlannerBoard insertPlannerBoard) {
+		int result = plannerBoardDao.updatePlannerBoard(insertPlannerBoard);
+
+		return result;
+	}	
+	
+	@Override
+	public Planner findBoardPlannerByNoModel(int no) {
+		return plannerBoardDao.findBoardPlannerByNoModel(no);
+	}
+	
+	@Override
+	public List<PlannerPlan> findPlansList(List<PlannerBoard> list) {
+		return plannerBoardDao.findPlansList(list);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

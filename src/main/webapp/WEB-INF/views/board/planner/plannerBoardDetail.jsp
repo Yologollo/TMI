@@ -89,7 +89,7 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:forEach>
 		</c:if>  --%>
-<%-- 	 	<c:forEach items="${insertReviewBoard.planner}" var="planner">	
+ 	 	<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
 			
@@ -109,7 +109,7 @@ const email = document.getElementById("loginMemberEmail").value;
 							</div>
 						
 							<% int i = 1;%>
-							<c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+							<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 								<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
@@ -187,7 +187,7 @@ const email = document.getElementById("loginMemberEmail").value;
 								 var a = 0;
 							    
 							    
-								 <c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+								 <c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 								 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 									 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 									 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
@@ -240,7 +240,7 @@ const email = document.getElementById("loginMemberEmail").value;
 	
 	                                <% int j = 1;%>
 	
-	                                     <c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+	                                     <c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 	                                        <!-- 화면에서 보이면 주석처리 -->
 	                                        <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 	                                        <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
@@ -261,7 +261,7 @@ const email = document.getElementById("loginMemberEmail").value;
 					</div>
 				</div>
 			</c:if>
-		</c:forEach> --%>
+		</c:forEach>
 		
 		<div style="width:100%;">
 	  		${insertPlannerBoard.pbContent} <!-- summernote 출력 -->
@@ -280,7 +280,7 @@ const email = document.getElementById("loginMemberEmail").value;
 		        <div class="comment-editor">
 		            <form
 						action="${pageContext.request.contextPath}/board/planner/plannerBoardCommentEnroll.do" method="post" name="plannerBoardCommentFrm">
-		                <input type="hidden" name="pbcFbNo" value="${insertPlannerBoard.pbNo}" />
+		                <input type="hidden" name="pbcPbNo" value="${insertPlannerBoard.pbNo}" />
 		                <input type="hidden" name="pbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 						<textarea name="pbcContent" cols="100" rows="3"></textarea>
 		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
@@ -356,7 +356,7 @@ const email = document.getElementById("loginMemberEmail").value;
  		});
  	});
 
- 	document.reviewBoardCommentFrm.onsubmit = (e) => {
+ 	document.plannerBoardCommentFrm.onsubmit = (e) => {
  		const contentVal = e.target.fbcContent.value.trim();
  		if(!/^(.|\n)+$/.test(contentVal))
  		{
@@ -364,19 +364,6 @@ const email = document.getElementById("loginMemberEmail").value;
  			return false;
  		}
  	};
- 	// 이 부분 고쳐주셔야지 제 함수가 돌아가요
- 	// 언능 고쳐주셈 징징징징징징징징징징징징징
- 	// 일단 주석처리 해놨어요 고 쳐 줘
- 	// 고
- 	// 쳐
- 	// 줘
-/*  	document.reviewBoardLoveFrm.onsubmit = (e) => {
- 		if( ==1)
- 		{
- 			alert("이미 추천하였습니다.");
- 			e.preventDefault();
- 		}
- 	}; */
  	
   	document.querySelectorAll("#deleteComment").forEach((del) => {
  		del.addEventListener("click", (e) => {		

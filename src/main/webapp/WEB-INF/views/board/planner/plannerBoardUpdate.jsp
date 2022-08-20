@@ -8,11 +8,11 @@
 <fmt:requestEncoding value="utf-8" />
 <!-- 
 	생성 : 이경석
-	작업 : 이경석, 김용민
+	작업 : 이경석
  -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="글 작성" name="title" />
+	<jsp:param value="게시글 수정" name="title" />
 </jsp:include>
 <!-- include libraries(jQuery, bootstrap) -->
 
@@ -104,26 +104,26 @@
 </div>
 
 <div id="commonMain">
- 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/review/reviewBoardEnroll.do" method="POST" enctype="multipart/form-data">
-		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="rbTitle" id="title" required>
-		<input type="text" class="form-control" name="rbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
-		
-		<div class="input-group mb-3">
-		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
-		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
-		</div>
+ 	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do" method="POST" enctype="multipart/form-data">
+		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
+		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" required>
+		<input type="text" class="form-control" name="pbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
 		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
-		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default" readonly>
+		  <c:forEach items="${insertPlannerBoard.planner}" var="planner" varStatus="plan_status">
+ 			<input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="${planner.PTitle}" aria-describedby="inputGroup-sizing-default">
+		  </c:forEach>
 		</div>
-		  <input type="hidden" id="modalPlannerNo" name="rbPNo" value="0"/>
+		  <input type="hidden" id="modalPlannerNo" name="pbPNo" value="${insertPlannerBoard.pbPNo}"/>
 		
-	  	<textarea id="summernote" name="rbContent"></textarea>
+		
+		<textarea id="summernote" name="pbContent">${insertPlannerBoard.pbContent}</textarea>
 	  	
 		<br /><br />
+		<input type="hidden" name="pbNo" value="${insertPlannerBoard.pbNo}" />
 		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
-		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
+		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 	</form:form>
 </div>
@@ -200,7 +200,6 @@
 		alert('플래너가 선택되었습니다 !');
 		$('.createPlannerModalForm').removeClass('show-modal');
 	})
-	
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

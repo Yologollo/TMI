@@ -1,8 +1,11 @@
 package com.tmi.spring.member.model.service;
 
-import java.util.HashMap;
+
+import java.util.List;
 
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.member.model.dto.MemberBoard;
+
 
 /**
  * 
@@ -26,5 +29,10 @@ public interface MemberService {
 	int updateMember(Member updateMember);
 
 	int memberDelete(int mNo);
+
+	List<MemberBoard> findByBoardAllListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectTotalContent(String memberEmail);
+
 
 }

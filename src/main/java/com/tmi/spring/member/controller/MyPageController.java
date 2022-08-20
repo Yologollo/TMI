@@ -1,8 +1,10 @@
 package com.tmi.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.member.model.dto.MemberBoard;
 import com.tmi.spring.member.model.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -119,13 +123,10 @@ public class MyPageController {
 	@PostMapping("/memberUpdatePw.do")
 	public String findPwUpdate(@RequestParam String mEmail, @RequestParam String mPassword, RedirectAttributes redirectAttr) {
 		try {
-			log.debug("mEmail1 = {}",mEmail);
 			mEmail = mEmail.replace(",", "");
-			log.debug("mEmail2 = {}",mEmail);
-			log.debug("mPassword = {}",mPassword);
 			Member member = memberService.emailChk(mEmail);
 			String rawPassword = member.getMPassword();
-			String encryptedPassword = bcryptPasswordEncoder.encode(rawPassword);
+			String encryptedPassword = bcryptPasswordEncoder.encode(mPassword);
 			member.setMPassword(encryptedPassword);
 			log.debug("member = {}",member);
 			if(member != null) {
@@ -133,17 +134,34 @@ public class MyPageController {
 				redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("비밀번호 변경 오류", e);
 			throw e;
 		}
 		return "redirect:/mypage/memberDetail.do";
 	}
 
 	@GetMapping("/memberBoardList.do")
-	public String memberBoardList(@AuthenticationPrincipal Member member, Model model) {
-		log.debug("member = {}", member);
-		
-		model.addAttribute(member);
+	public String memberBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
+		try {
+			int numPerPage = 5;
+			String memberEmail = member.getMEmail();
+			List<MemberBoard> boardList = memberService.findByBoardAllListByEmail(cPage, numPerPage, memberEmail);
+			log.debug("boardList = {}", boardList);
+			int totalContent = memberService.selectTotalContent(memberEmail);
+			String url = request.getRequestURI();
+
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			
+			
+			model.addAttribute(boardList);
+			model.addAttribute(pagebar);
+			
+		} catch (Exception e) {
+			log.error("게시글 조회 오류", e);
+			throw e;
+		}
 		return "/member/mypage/memberBoardList";
 	}
 	
@@ -162,7 +180,7 @@ public class MyPageController {
 			headers.add("Content-Type", "text/html; charset=utf-8");
 
 		} catch (Exception e) {
-			log.error("회원 탈퇴 오류 오류", e);
+			log.error("회원 탈퇴 오류", e);
 			throw e;
 		}
 		return "redirect:/";

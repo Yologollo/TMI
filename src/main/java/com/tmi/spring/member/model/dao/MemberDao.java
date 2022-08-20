@@ -1,10 +1,12 @@
 package com.tmi.spring.member.model.dao;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.member.model.dto.MemberBoard;
 
 /**
  * 
@@ -28,5 +30,9 @@ public interface MemberDao {
 	int updateMember(Member updateMember);
 
 	int memberDelete(int mNo);
+
+	List<MemberBoard> findByBoardAllListByEmail(String memberEmail, RowBounds rowBounds);
+
+	int selectTotalContent(String memberEmail);
 
 }
