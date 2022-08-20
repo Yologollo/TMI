@@ -1,5 +1,6 @@
 package com.tmi.spring.chat.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -41,12 +42,27 @@ public class ChatController {
 		
 	}
 	
-	@GetMapping(value = "/room.do", produces = "application/json")
-	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String roomId) {
+	@GetMapping(value ="/deleteChatRoom.do", produces = "application/json")
+	public ResponseEntity<?> deleteChatRoom(@RequestParam String chatroomId){
+		log.debug("------삭제삭제------chatroomId = {}", chatroomId);
+		Map<String, Object> map = new HashMap<>();
 		try {
-			log.debug("------중요------roomId = {}", roomId);
-			List<ChatContent> list = chatService.findChatRoomList(roomId);
-			log.debug("list = {}", list);
+			int result = chatService.deleteChatRoom(chatroomId);
+			map.put("msg", "채팅방을 나가셨습니다.");
+			return ResponseEntity.ok(map);
+
+		} catch(Exception e) {
+			log.error("채팅방 삭제 오류", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@GetMapping(value = "/room.do", produces = "application/json")
+	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String chatroomId) {
+		try {
+			log.debug("------중요------chatroomId = {}", chatroomId);
+			List<ChatContent> list = chatService.findChatRoomList(chatroomId);
+			/* log.debug("list = {}", list); */
 			return ResponseEntity.ok(list);
 		} catch(Exception e) {
 			log.error("채팅방 내용 조회 오류", e);
@@ -58,9 +74,9 @@ public class ChatController {
 	@GetMapping(value = "/roomList.do", produces = "application/json")
 	public ResponseEntity<?> chatRoomList(Map<String, Object> chatRoomList, @RequestParam String loginMemberEmail) {
 		try {
-			log.debug("------중요------loginMemberEmail = {}", loginMemberEmail);
+			/* log.debug("------중요------loginMemberEmail = {}", loginMemberEmail); */
 			List<ChatContent> list = chatService.findRecentChatRoomList(loginMemberEmail);
-			log.debug("list = {}", list);
+			/* log.debug("list = {}", list); */
 			return ResponseEntity.ok(list);
 		} catch(Exception e) {
 			log.error("채팅목록조회오류", e);

@@ -71,8 +71,7 @@ public class MemberSecurityController {
 		try {
 			mEmail = mEmail.replace(",", "");
 			Member member = memberService.emailChk(mEmail);
-			String rawPassword = member.getMPassword();
-			String encryptedPassword = bcryptPasswordEncoder.encode(rawPassword);
+			String encryptedPassword = bcryptPasswordEncoder.encode(mPassword);
 			member.setMPassword(encryptedPassword);
 			log.debug("member = {}",member);
 			if(member != null) {

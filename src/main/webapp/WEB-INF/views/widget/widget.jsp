@@ -184,7 +184,9 @@ id="createAreaModal">
 
 	<article id="contentArea">
 		<div id="contentArea2" style="display: none">
-			<div id="selectContent"></div>
+			<div id="selectContent">
+			
+			</div>
 		</div>
 	
 	</article>
@@ -207,7 +209,7 @@ id="createAreaModal">
 	var cat3 = 0;
 	var cat3Name = 0;
 	var totalCount = 0;
-	
+	var pagebar = "";
 
 	// areaModal
 
@@ -575,19 +577,27 @@ id="createAreaModal">
 					dataType : 'json',
 					success : function(data) {
 						
-						var myItem = data.response.body.items.item;
-						console.log(myItem);
+						
+						console.log(data);
+						console.log("Cpage = " + data.CPage);
+						console.log("totalContent = " + data.totalContent);
+						var CPage = data.CPage;
+						var numPerPage = data.numPerPage;
+						var totalContent = data.totalContent;
+						var url = data.url;
+						console.log('CPage = ' + CPage);
+						var myItem = data.items;
 						
 						$('#selectContent').empty();
 				
 						for(var i = 0; myItem.length > i; i++){
 							
 							if(myItem[i].firstimage2 == ""){
-								myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+								myItem[i].firstimage2 = '\${pageContext.request.contextPath}/resources/images/noImage.png';
 							};
 							
 							var gallery = "";
-							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 							gallery += '<span class="thumbNailImage">';
 							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 							gallery += '</span>';
@@ -596,10 +606,42 @@ id="createAreaModal">
 							
 							$('#selectContent').append(gallery);
 						};
-							var pagebar = "";
-							pagebar += '<nav>${pagebar}</nav>';
+							pagebar += '<nav id="pagebar"></nav>';
 							$('#selectContent').append(pagebar);
-							console.log("검색 ajax 끝");
+							
+						$.ajax({
+							url : '${pageContext.request.contextPath}/widget/callPagebar.do',
+							type : 'get',
+							
+							data : {
+								CPage : CPage,
+								numPerPage : numPerPage,
+								totalContent : totalContent,
+								url : url,
+							},
+							
+							datatype : 'json',
+							
+							success : function(data) {
+								
+								console.log("data = " + data);
+								
+								
+								var pagebar = "";
+								pagebar += data;
+								$('#pagebar').append(pagebar);
+								console.log("검색 ajax 끝");
+	
+								
+							},
+							
+							error : function(XMLHttpRequest, textStatus, errorThrown) {
+								alert("Status : " + textStatus);
+								alert("Error : " + errorThrown);
+							}
+							
+						});
+							
 					},
 					
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -612,9 +654,10 @@ id="createAreaModal">
 					
 			},
 
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
+				console.log("data = " + data);
 			}
 
 		});

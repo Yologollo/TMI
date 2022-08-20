@@ -3,6 +3,7 @@ package com.tmi.spring.chat.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -48,4 +49,7 @@ public interface ChatDao {
 	// 채팅목록 클릭시 채팅내용 조회
 	@Select("select * from tmi_chat_content where chatroom_id = #{roomId} order by content_no")
 	List<ChatContent> findChatRoomList(String roomId);
+
+	@Delete("delete from tmi_chat_room where chatroom_id = #{chatroomId}")
+	int deleteChatRoom(@Param("chatroomId") String chatroomId);
 }

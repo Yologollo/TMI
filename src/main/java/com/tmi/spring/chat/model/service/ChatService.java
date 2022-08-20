@@ -29,4 +29,6 @@ public interface ChatService {
 
 	List<ChatContent> findChatRoomList(String roomId);
 
+	int deleteChatRoom(String chatroomId);
+
 }

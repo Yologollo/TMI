@@ -1,8 +1,13 @@
 package com.tmi.spring.member.model.service;
 
-import java.util.HashMap;
+
+import java.util.List;
 
 import com.tmi.spring.member.model.dto.Member;
+import com.tmi.spring.member.model.dto.MemberFriendBoard;
+import com.tmi.spring.member.model.dto.MemberPlannerBoard;
+import com.tmi.spring.member.model.dto.MemberReviewBoard;
+
 
 /**
  * 
@@ -22,5 +27,22 @@ public interface MemberService {
 	Member NickNameChk(String mNickName);
 
 	int findPwUpdate(Member member);
+
+	int updateMember(Member updateMember);
+
+	int memberDelete(int mNo);
+
+	List<MemberFriendBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectFriendBoardTotalContent(String memberEmail);
+
+	List<MemberPlannerBoard> findByPlannerBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectPlannerBoardTotalContent(String memberEmail);
+
+	List<MemberReviewBoard> findByReviewBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectReviewBoardTotalContent(String memberEmail);
+
 
 }

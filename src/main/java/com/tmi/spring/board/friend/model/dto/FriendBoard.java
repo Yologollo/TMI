@@ -2,12 +2,14 @@ package com.tmi.spring.board.friend.model.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 public class FriendBoard extends FriendBoardEntity {
 	private int attachCount;

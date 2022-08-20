@@ -6,74 +6,81 @@
 <fmt:requestEncoding value="utf-8" />
 
 <style>
-#video_area{
-    width:25%;
-    border: 1px solid red;
-}
-#background_video {
-    max-width:100%;
-    height: auto;
-    border: 1px solid black;
+#video_area {
+	width: 25%;
+	border: 1px solid red;
 }
 
-	#bestPlanner {
-		width:100%;
-		height : 500px;
-		border: 1px solid green; 
-		margin: auto; 
-		overflow: hidden;
-	}
-	
-	#bestReview {
-		width:100%;
-		height : 500px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-	}
-		tr[data-no] {
-		cursor: pointer;
-	}
-	.reviewBoard {
-		width : 200px;
-		height : 250px;
-		border: 1px solid red; 
-		margin: auto; 
-		margin-top:4.5rem;
-		overflow: hidden;
-		position: relative;
-	}
-	.imageReviewBoard {
-		width : 200px;
-		height : 180px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-		position: relative;
-	}
-	
-	.thumbNailLink {
-		display: inline-block;
-		margin : 10px;
-		width : 300px;
-		height : 200px;
-		text-align: center;
-	}
-	
-	.thumbNailName {
-		display : inline-block;
-		width : 300px;
-		height : 65px;
-		text-align: center;
-	}
-	#contentArea2 {
-		width : 280px;
-		height : 330px;
-		border: 1px solid red; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}
+#background_video {
+	max-width: 100%;
+	height: auto;
+	border: 1px solid black;
+}
+
+#bestPlanner {
+	width: 100%;
+	height: 500px;
+	border: 1px solid green;
+	margin: auto;
+	overflow: hidden;
+}
+
+#bestReview {
+	width: 100%;
+	height: 500px;
+	border: 1px solid blue;
+	margin: auto;
+	overflow: hidden;
+}
+
+tr[data-no] {
+	cursor: pointer;
+}
+
+.reviewBoard {
+	width: 200px;
+	height: 250px;
+	border: 1px solid red;
+	margin: auto;
+	margin-top: 4.5rem;
+	overflow: hidden;
+	position: relative;
+}
+
+.imageReviewBoard {
+	width: 200px;
+	height: 180px;
+	border: 1px solid blue;
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.thumbNailLink {
+	display: inline-block;
+	margin: 10px;
+	width: 300px;
+	height: 200px;
+	text-align: center;
+}
+
+.thumbNailName {
+	display: inline-block;
+	width: 300px;
+	height: 65px;
+	text-align: center;
+}
+
+#contentArea2 {
+	width: 280px;
+	height: 330px;
+	border: 1px solid red;
+	margin: auto;
+	overflow: hidden;
+	display: inline-block;
+}
+
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
@@ -243,6 +250,7 @@ id="createAreaModal">
 				<article>
 					<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
 							<div id="contentArea2">
+							
 								<div id="selectContent">
 									<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 										<span class="thumbNailImage">
@@ -302,38 +310,6 @@ id="createAreaModal">
 	
 	</article>
     </div>
-     
-
-    
-    <div class="menu">
-       <ul>
-        <li><a href="#" class="item" onclick="javascript:window.scrollTo(0,0)"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
-        <li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do" class="item"></a></li>
-        <li><a href="#" class="item" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"></a></li>
-    </ul>
-</div>
-
-    <script>
-  //side menu
-    console.clear();
-    $(window).scroll(function() {
-        let scrollTop = $(this).scrollTop();
-        console.log(scrollTop)
-        
-        if ( scrollTop < 1000) {
-            scrollTop = 1000;
-        }
-        else if ( scrollTop > 96000 ) {
-            scrollTop = 96000;
-        }
-        
-        let duration = 1000;
-        $('.menu').stop().animate({top:scrollTop}, duration);
-        
-        //console.log(scrollTop);
-    });
-    </script>
     
     <!-- 
     

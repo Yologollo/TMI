@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li class="nav_item">
-                            <a href="${pageContext.request.contextPath}/mypage" class="nav_link" id="nav_color">
+                            <a href="${pageContext.request.contextPath}/mypage/memberDetail.do" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
@@ -127,6 +127,20 @@
             </c:if>
 
 	</header>
+	
+		<!-- 
+		side bar
+	 -->
+    
+	<div class="quickmenu" style="position: absolute; right: 10px; top: 50%;">
+		<ul>
+			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
+			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
+			<li><a href="/#">공지사항</a></li>
+			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
+		</ul>
+	</div>
+	
 	<script>
 	/* 로그아웃 a태그를 submit 폼제출 */
 	function logoutFrm() {
@@ -146,4 +160,17 @@
 	}
 	window.addEventListener('scroll', scrollHeader)
 	</script>
+	
+	<script>
+    
+  	//side bar
+  
+	$(document).ready(function(){
+	  	$(window).scroll(function() {
+	    	var position = $(window).scrollTop() + 500; 
+	    	$(".quickmenu").stop().animate({"top":position+"px"},400);
+	  	});
+	});
+  
+    </script>
 <section id="content">

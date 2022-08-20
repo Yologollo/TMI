@@ -1,0 +1,60 @@
+a {
+	color: black;
+	text-decoration:none;
+}
+
+a:hover {
+	color: black;
+	text-decoration:none;
+}
+
+a:link {
+	color: black;
+	text-decoration:none;
+}
+
+a:visited {
+	color: black;
+	text-decoration:none;
+}
+
+a:active {
+	color: black;
+	text-decoration:none;
+}
+
+#bannder {
+	border: 1px solid #d3d3d3;
+	height:300px;
+}
+
+#wrapper{
+	overflow: hidden;
+	position: relative;
+	height: 100%;
+}
+
+#menuContainer{
+	border: 1px solid #d3d3d3;
+	border-top: none;
+	float: left;
+	width: 15%;
+	height: 600px;
+	font-size: 30px;
+	text-align: center;
+	background-color: #F6F6F6;
+}
+
+#menuContainer > ul, #menuContainer > li {
+	list-style:none;
+	padding-left: 0px;
+}
+
+#menuContainer > li > a {
+	color: white;
+}
+
+.mypageMenuli {
+	margin-top:20px;
+	color: white;
+}

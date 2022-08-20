@@ -52,6 +52,90 @@
 
 	</update>
 	
+	<update id="updateMember">
+		update
+			tmi_member
+		set
+			m_nickname = #{mNickName},
+			m_name = #{mName},
+			m_phone = #{mPhone}
+		where
+			m_email = #{mEmail}
+	</update>
+	
+	<delete id="memberDelete">
+		delete from
+			tmi_member
+		where
+			m_no = #{mNo}
+	</delete>
+	
+	<select id="findByFriendBoardListByEmail" resultType="com.tmi.spring.member.model.dto.MemberFriendBoard">
+		select
+		    fb.fb_no,
+		    fb.fb_p_no,
+		    m.m_nickname,
+		    fb.fb_title,
+		    fb.fb_content,
+		    fb.fb_created_at,
+		    fb.fb_updated_at,
+		    fb.fb_read_count
+		from
+		    tmi_friend_board fb join tmi_member m
+		        on fb_m_email = m.m_email
+		where fb_m_email = #{fbMEmail}
+		order by
+			fb.fb_no desc
+	</select>
+	
+	<select id="selectFriendBoardTotalContent" resultType="Integer" parameterType="com.tmi.spring.member.model.dto.MemberFriendBoard">
+		select count(*) from tmi_friend_board where fb_m_email = #{fbMEmail}
+	</select>
+	
+	<select id="findByPlannerBoardListByEmail" resultType="com.tmi.spring.member.model.dto.MemberPlannerBoard">
+		select
+		    pb.pb_no,
+		    pb.pb_p_no,
+		    m.m_nickname,
+		    pb.pb_title,
+		    pb.pb_content,
+		    pb.pb_created_at,
+		    pb.pb_updated_at,
+		    pb.pb_read_count
+		from
+		    tmi_planner_board pb join tmi_member m
+		        on pb_m_email = m.m_email
+		where pb_m_email = #{pbMEmail}
+		order by
+			pb.pb_no desc
+	</select>
+	
+	<select id="selectPlannerBoardTotalContent" resultType="Integer" parameterType="com.tmi.spring.member.model.dto.MemberPlannerBoard">
+		select count(*) from tmi_planner_board where pb_m_email = #{pbMEmail}
+	</select>
+	
+	<select id="findByReviewBoardListByEmail" resultType="com.tmi.spring.member.model.dto.MemberReviewBoard">
+		select
+		    rb.rb_no,
+		    rb.rb_p_no,
+		    m.m_nickname,
+		    rb.rb_title,
+		    rb.rb_content,
+		    rb.rb_created_at,
+		    rb.rb_updated_at,
+		    rb.rb_read_count
+		from
+		    tmi_review_board rb join tmi_member m
+		        on rb_m_email = m.m_email
+		where rb_m_email = #{rbMEmail}
+		order by
+			rb.rb_no desc
+	</select>
+	
+	<select id="selectReviewBoardTotalContent" resultType="Integer" parameterType="com.tmi.spring.member.model.dto.MemberReviewBoard">
+		select count(*) from tmi_review_board where rb_m_email = #{rbMEmail}
+	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>
