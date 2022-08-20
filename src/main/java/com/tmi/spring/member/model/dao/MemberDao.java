@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.member.model.dto.Member;
-import com.tmi.spring.member.model.dto.MemberBoard;
+import com.tmi.spring.member.model.dto.MemberFriendBoard;
+import com.tmi.spring.member.model.dto.MemberPlannerBoard;
+import com.tmi.spring.member.model.dto.MemberReviewBoard;
 
 /**
  * 
@@ -31,8 +33,16 @@ public interface MemberDao {
 
 	int memberDelete(int mNo);
 
-	List<MemberBoard> findByBoardAllListByEmail(String memberEmail, RowBounds rowBounds);
+	List<MemberFriendBoard> findByFriendBoardListByEmail(String memberEmail, RowBounds rowBounds);
 
-	int selectTotalContent(String memberEmail);
+	int selectFriendBoardTotalContent(String memberEmail);
+
+	List<MemberPlannerBoard> findByPlannerBoardListByEmail(String memberEmail, RowBounds rowBounds);
+
+	int selectPlannerBoardTotalContent(String memberEmail);
+
+	List<MemberReviewBoard> findByReviewBoardListByEmail(String memberEmail, RowBounds rowBounds);
+
+	int selectReviewBoardTotalContent(String memberEmail);
 
 }

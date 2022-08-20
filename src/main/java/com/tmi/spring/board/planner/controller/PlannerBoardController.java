@@ -1,5 +1,6 @@
 package com.tmi.spring.board.planner.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.board.planner.model.service.PlannerBoardService;
-import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
 import com.tmi.spring.planner.model.dto.Planner;
@@ -329,4 +329,31 @@ public class PlannerBoardController {
 		return "redirect:/board/planner/plannerBoardDetail.do?no=" + loNo;
 	}
 	
+	@PostMapping("board/planner/plannerBoardSave.do")
+	public String plannerBoardSave(@AuthenticationPrincipal Member member, 
+								   @RequestParam int ppNo, 
+								   @RequestParam String ppTitle,
+								   @RequestParam String ppExplan,
+								   @RequestParam String ppleaveDate
+//								   @RequestParam LocalDate ppReturnDate
+								   /*@RequestParam Date ppwriteDate*/) {
+		
+		log.debug("PNo = {}", ppNo);
+		log.debug("PTitle = {}", ppTitle);
+		log.debug("PExplan = {}", ppExplan);
+		log.debug("PleaveDate = {}", ppleaveDate);
+//		log.debug("PReturnDate = {}", ppReturnDate);
+//		log.debug("PwriteDate = {}", ppwriteDate);
+		
+		
+		// 일단 스트링으로 받고 LocalDate로 변환
+		return "redirect:/planner/myplanner";
+	}
+	
 }
+
+
+
+
+
+

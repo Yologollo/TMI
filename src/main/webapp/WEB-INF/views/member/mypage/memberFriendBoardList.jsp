@@ -12,17 +12,7 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
-<style>
-#tbl-board {
-	float:right; 
-	width: 85%; 
-	border: 1px solid black;
-	height: 300px;
-}
-tr[data-no] {
-	cursor: pointer;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypageboard.css">
 <script>
 window.addEventListener('load', (e) => {
 	document.querySelectorAll("tr[data-no]").forEach((tr) => {
@@ -55,7 +45,7 @@ window.addEventListener('load', (e) => {
 				</li>
 				<hr />
 				<li class="mypageMenuli">
-					<a href="${pageContext.request.contextPath}/mypage/memberBoardList.do">My 게시글</a>
+					<a href="${pageContext.request.contextPath}/mypage/memberPlannerBoardList.do">My 게시글</a>
 				</li>
 				<hr />
 				<li class="mypageMenuli">
@@ -64,7 +54,12 @@ window.addEventListener('load', (e) => {
 				<hr />
 			</ul>
 		</div>
-		
+		<div id="boardChangeWrapper">
+			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberPlannerBoardList.do'">플래너 게시판</button>
+			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberReviewBoardList.do'">리뷰 게시판</button>
+			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberFriendBoardList.do'">여행 친구 게시판</button>
+		</div>
+		<h1>여행 친구 게시판</h1>
 		<section id="board-container" class="container">
 		<table id="tbl-board" class="table table-striped table-hover text-center">
 			<tr>
@@ -74,20 +69,20 @@ window.addEventListener('load', (e) => {
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${memberBoardList}" var="board" varStatus="vs">
-				<tr data-no="${board.pbNo}">
-					<td>${fn:length(memberBoardList) - vs.index}</td>
-					<td>${board.pbTitle}</td>
-					<td>${board.pbMEmail}</td>
+			<c:forEach items="${boardList}" var="friendBoard" varStatus="vs">
+				<tr data-no="${friendBoard.fbNo}">
+ 					<td>${friendBoard.fbNo}</td>
+					<td>${friendBoard.fbTitle}</td>
+					<td>${friendBoard.MNickName}</td>
 					<td>
-						<fmt:parseDate value="${board.pbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${friendBoard.fbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
-					<td>${board.pbReadCount}</td>
+					<td>${friendBoard.fbReadCount}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<div style="width:300px; height: 300px; float: right; text-align: center; border: 1px solid black;">
+		<div id="pagebar">
 			<nav>${pagebar}</nav>		
 		</div>
 	</section> 

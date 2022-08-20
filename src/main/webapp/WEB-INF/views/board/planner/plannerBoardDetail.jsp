@@ -94,6 +94,12 @@ const email = document.getElementById("loginMemberEmail").value;
 			</c:if>
 			
 			<c:if test="${planner.PNo ne 0}">
+ 			<input type="text" value="${planner.PNo}"/>
+			<input type="text" value="${planner.PTitle}"/>
+			<input type="text" value="${planner.PExplan}"/>
+			<input type="text" value="${planner.PLeaveDate}"/>
+			<input type="text" value="${planner.PReturnDate}"/>
+			<input type="text" value="${planner.PWriteDate}"/><!-- sysdate -->
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
@@ -114,7 +120,17 @@ const email = document.getElementById("loginMemberEmail").value;
 								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
 								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
-
+								
+								<input type="text" value="${plan.ppNo}"/>
+								<input type="text" value="${plan.pppNo}"/>
+								<input type="text" value="${plan.ppTime}"/>
+								<input type="text" value="${plan.ppPlaceName}"/>
+								<input type="text" value="${plan.ppMemo}"/>
+								<input type="text" value="${plan.ppX}"/>
+								<input type="text" value="${plan.ppY}"/>
+								<input type="text" value="${plan.ppDate}"/>
+								<!-- 생일 선물 ^^ -->
+								
                             	<c:if test="${nowDate eq openDate}">
                             
 								<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
@@ -320,6 +336,23 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
+		<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
+			<c:if test="${planner.PNo eq 0}">
+			</c:if>
+				<c:if test="${planner.PNo ne 0}">
+					<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
+						<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
+								<input type="hidden"  name="ppNo" id="no11" value="${planner.PNo}" required>
+								<input type="hidden"  name="ppTitle" id="no2" value="${planner.PTitle}" required>
+								<input type="hidden"  name="ppExplan" id="no3" value="${planner.PExplan}" required>
+								<input type="hidden"  name="ppleaveDate" id="no4" value="${planner.PLeaveDate}" required>
+								<input type="hidden"  name="ppReturnDate" id="no5" value="${planner.PReturnDate}" required>
+								<input type="hidden"  name="ppwriteDate" id="no6" value="${planner.PWriteDate}" required>
+								<button type="submit" class="btn btn-primary btn-lg">저장하기</button>
+						</form>
+					</c:if>
+				</c:if>
+			</c:forEach>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
