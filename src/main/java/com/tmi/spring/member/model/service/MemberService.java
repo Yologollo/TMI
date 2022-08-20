@@ -4,7 +4,9 @@ package com.tmi.spring.member.model.service;
 import java.util.List;
 
 import com.tmi.spring.member.model.dto.Member;
-import com.tmi.spring.member.model.dto.MemberBoard;
+import com.tmi.spring.member.model.dto.MemberFriendBoard;
+import com.tmi.spring.member.model.dto.MemberPlannerBoard;
+import com.tmi.spring.member.model.dto.MemberReviewBoard;
 
 
 /**
@@ -30,13 +32,17 @@ public interface MemberService {
 
 	int memberDelete(int mNo);
 
-	List<MemberBoard> findByBoardAllListByEmail(int cPage, int numPerPage, String memberEmail);
-
-	int selectTotalContent(String memberEmail);
-
-	List<MemberBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+	List<MemberFriendBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail);
 
 	int selectFriendBoardTotalContent(String memberEmail);
+
+	List<MemberPlannerBoard> findByPlannerBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectPlannerBoardTotalContent(String memberEmail);
+
+	List<MemberReviewBoard> findByReviewBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectReviewBoardTotalContent(String memberEmail);
 
 
 }

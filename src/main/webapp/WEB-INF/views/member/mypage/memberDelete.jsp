@@ -51,7 +51,7 @@
 				</li>
 				<hr />
 				<li class="mypageMenuli">
-					<a href="${pageContext.request.contextPath}/mypage/memberBoardList.do">My 게시글</a>
+					<a href="${pageContext.request.contextPath}/mypage/memberPlannerBoardList.do">My 게시글</a>
 				</li>
 				<hr />
 				<li class="mypageMenuli">
