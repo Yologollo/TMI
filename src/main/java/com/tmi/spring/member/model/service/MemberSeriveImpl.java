@@ -70,4 +70,16 @@ public class MemberSeriveImpl implements MemberService {
 		return memberDao.selectTotalContent(memberEmail);
 	}
 	
+	@Override
+	public List<MemberBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return memberDao.findByFriendBoardListByEmail(memberEmail, rowBounds);
+	}
+	
+	@Override
+	public int selectFriendBoardTotalContent(String memberEmail) {
+		return memberDao.selectFriendBoardTotalContent(memberEmail);
+	}
 }

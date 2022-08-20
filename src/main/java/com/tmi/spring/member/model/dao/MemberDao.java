@@ -35,4 +35,8 @@ public interface MemberDao {
 
 	int selectTotalContent(String memberEmail);
 
+	List<MemberBoard> findByFriendBoardListByEmail(String memberEmail, RowBounds rowBounds);
+
+	int selectFriendBoardTotalContent(String memberEmail);
+
 }

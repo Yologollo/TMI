@@ -34,5 +34,9 @@ public interface MemberService {
 
 	int selectTotalContent(String memberEmail);
 
+	List<MemberBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail);
+
+	int selectFriendBoardTotalContent(String memberEmail);
+
 
 }
