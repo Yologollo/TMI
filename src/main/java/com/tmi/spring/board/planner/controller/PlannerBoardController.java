@@ -329,4 +329,15 @@ public class PlannerBoardController {
 		return "redirect:/board/planner/plannerBoardDetail.do?no=" + loNo;
 	}
 	
+	@GetMapping("board/planner/plannerBoardSave.do")
+	public String plannerBoardSave(@AuthenticationPrincipal Member member) {
+		return "redirect:/planner/myplanner";
+	}
+	
 }
+
+
+
+
+
+
