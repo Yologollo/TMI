@@ -32,7 +32,7 @@ window.addEventListener('load', (e) => {
 			console.log(tr);
 			if(tr.matches('tr[data-no]')) {
 				const no = tr.dataset.no;
-				/* location.href = '${pageContext.request.contextPath}/board/friend/friendBoardDetail.do?no=' + no; */
+				location.href = '${pageContext.request.contextPath}/board/friend/friendBoardDetail.do?no=' + no;
 			}
 		});
 	});
@@ -64,7 +64,9 @@ window.addEventListener('load', (e) => {
 				<hr />
 			</ul>
 		</div>
-		
+		<div style="height:100px; border:1px solid black; float:right; width: 80%;">
+		${boardList.fbNo}
+		</div>
 		<section id="board-container" class="container">
 		<table id="tbl-board" class="table table-striped table-hover text-center">
 			<tr>
@@ -72,18 +74,24 @@ window.addEventListener('load', (e) => {
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>첨부파일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${memberBoardList}" var="board" varStatus="vs">
-				<tr data-no="${board.pbNo}">
-					<td>${fn:length(memberBoardList) - vs.index}</td>
-					<td>${board.pbTitle}</td>
-					<td>${board.pbMEmail}</td>
+			<c:forEach items="${boardList}" var="friendBoard" varStatus="vs">
+				<tr data-no="${friendBoard.fbNo}">
+					<td>${friendBoard.fbNo}</td>
+					<td>${friendBoard.fbTitle}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
+					<td>${friendBoard.mNicknName}</td>
 					<td>
-						<fmt:parseDate value="${board.pbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
-					<td>${board.pbReadCount}</td>
+					<td>
+						<c:if test="${friendBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+						</c:if>
+					</td>
+					<td>${friendBoard.fb_read_count}</td>
 				</tr>
 			</c:forEach>
 		</table>

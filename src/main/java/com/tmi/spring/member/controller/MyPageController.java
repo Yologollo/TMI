@@ -187,5 +187,33 @@ public class MyPageController {
 		}
 		return "redirect:/";
 	}
+	
+	@GetMapping("/memberFriendBoardList.do")
+	public ModelAndView memberFriendBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+		try {
+			int numPerPage = 5;
+			String memberEmail = member.getMEmail();
+			log.debug("member.getMEmail() = {}", member.getMEmail());
+			List<MemberBoard> boardList = memberService.findByFriendBoardListByEmail(cPage, numPerPage, memberEmail);
+			log.debug("boardList = {}", boardList);
+			int totalContent = memberService.selectFriendBoardTotalContent(memberEmail);
+			String url = request.getRequestURI();
+
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			
+			
+			model.addAttribute(boardList);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("member/mypage/memberFriendBoardList");
+			
+		} catch (Exception e) {
+			log.error("게시글 조회 오류", e);
+			throw e;
+		}
+		return mav;
+	}
 
 }

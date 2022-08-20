@@ -85,6 +85,24 @@
 			select * from tmi_friend_board where fb_m_email = #{fbMEmail})
 	</select>
 	
+	<select id="findByFriendBoardListByEmail" resultType="com.tmi.spring.member.model.dto.MemberBoard">
+		select 
+			fb.fbNo,
+		    fb.fbPNo,
+		    m.mNickname,
+		    fb.fbTitle,
+		    fb.fbContent,
+		    fb.fbCreatedAt,
+		    fb.fbUpdatedAt,
+		    fb.fbReadCount,
+ from tmi_friend_board fb join tmi_member m on fb_m_email = m.m_email where fb_m_email = #{fbMEmail}
+		order by fb_created_at desc
+	</select>
+	
+	<select id="selectFriendBoardTotalContent" resultType="Integer" parameterType="com.tmi.spring.member.model.dto.MemberBoard">
+		select count(*) from tmi_friend_board where fb_m_email = #{fbMEmail}
+	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>

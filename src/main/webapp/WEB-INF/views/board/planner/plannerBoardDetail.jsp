@@ -120,7 +120,17 @@ const email = document.getElementById("loginMemberEmail").value;
 								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
 								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
-
+								
+								<input type="text" value="${plan.ppNo}"/>
+								<input type="text" value="${plan.pppNo}"/>
+								<input type="text" value="${plan.ppTime}"/>
+								<input type="text" value="${plan.ppPlaceName}"/>
+								<input type="text" value="${plan.ppMemo}"/>
+								<input type="text" value="${plan.ppX}"/>
+								<input type="text" value="${plan.ppY}"/>
+								<input type="text" value="${plan.ppDate}"/>
+								<!-- 생일 선물 ^^ -->
+								
                             	<c:if test="${nowDate eq openDate}">
                             
 								<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
