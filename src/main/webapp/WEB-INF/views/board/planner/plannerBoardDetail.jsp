@@ -332,7 +332,7 @@ const email = document.getElementById("loginMemberEmail").value;
 				<c:if test="${planner.PNo ne 0}">
 					<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
 						<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
-								<input type="hidden"  name="ppNo" id="no1" value="${planner.PNo}" required>
+								<input type="hidden"  name="ppNo" id="no11" value="${planner.PNo}" required>
 								<input type="hidden"  name="ppTitle" id="no2" value="${planner.PTitle}" required>
 								<input type="hidden"  name="ppExplan" id="no3" value="${planner.PExplan}" required>
 								<input type="hidden"  name="ppleaveDate" id="no4" value="${planner.PLeaveDate}" required>

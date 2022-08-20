@@ -345,6 +345,8 @@ public class PlannerBoardController {
 //		log.debug("PReturnDate = {}", ppReturnDate);
 //		log.debug("PwriteDate = {}", ppwriteDate);
 		
+		
+		// 일단 스트링으로 받고 LocalDate로 변환
 		return "redirect:/planner/myplanner";
 	}
 	
