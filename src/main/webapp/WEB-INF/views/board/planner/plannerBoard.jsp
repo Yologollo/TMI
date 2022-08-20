@@ -11,6 +11,7 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">
 <style>
 	tr[data-no] {
 		cursor: pointer;
@@ -53,7 +54,6 @@
 		border: 1px solid red; 
 		margin: auto; 
 		overflow: hidden;
-		display: inline-block;
 	}
 </style>
 
@@ -79,23 +79,69 @@
  	<input type="button" value="여행친구 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'"/>
  	
  	<h1>플래너 게시판</h1>
+ 	<h2>
+ 	test
+ 	</h2>
  	<section id="board-container" class="container">
  		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'"/>
 			<article>
+				<div id="wrapper" style="border: 1px solid black; ">
+				<div id="plannerContainer" style="border: 1px solid blue;">
 				<c:forEach items="${list}" var="plannerBoard" varStatus="vs">
-						<div id="contentArea2">
-							<div id="selectContent">
-								<a href="${pageContext.request.contextPath}/board/planner/plannerBoardDetail.do?no=${plannerBoard.pb_no}">
-									<span class="thumbNailImage">
-										<img src="${plannerBoard.pb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-									</span>
-									<strong class="thumbNailName">
-										${plannerBoard.pb_title}
-									</strong>
-								</a>
+					<div class="card" style="width: 18rem; display:inline-block" data-no="${plannerBoard.PNo}">
+						<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+							<script>
+								var mapContainer = document.getElementById('dayAllMap${vs.count}');
+								
+								var mapOption = {
+							    		center: new kakao.maps.LatLng(36.25, 127.75),
+								        level: 14
+								};
+								
+								var map = new kakao.maps.Map(mapContainer, mapOption);
+								
+								var polyline = new kakao.maps.Polyline({
+				                       map: map,
+				                       path: [],
+				                       strokeWeight: 3,
+				                       strokeColor: '#5882fa',
+				                       strokeOpacity: 1,
+				                       strokeStyle: 'solid'
+				                   });
+								
+								<c:forEach items="${plans}" var="plan" varStatus="status">
+									<c:if test="${plannerBoard.PNo eq plan.pppNo}">
+										var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+		                                var marker = new kakao.maps.Marker({
+		                                    position: markerPosition
+		                                });
+		                                marker.setMap(map);
+		                                
+		                                var point =  new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+		                                var path = polyline.getPath();
+		                                path.push(point);
+		                                polyline.setPath(path);
+									</c:if>
+								</c:forEach>
+							</script>
+		                <a href="${pageContext.request.contextPath}/board/planner/plannerBoardDetail.do?no=${plannerBoard.pb_no}">
+							<div class="card-body">
+								<span class="cardDateSpan">${plannerBoard.PLeaveDate} ~ ${plannerBoard.PReturnDate}</span>
+								<span class="cardDaySpan">
+									<fmt:parseDate value="${plannerBoard.PLeaveDate}" var="leaveDateFormat" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${leaveDateFormat}" pattern="dd" var="leaveDate" />
+									<fmt:parseDate value="${plannerBoard.PReturnDate}" var="returnDateFormat" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${returnDateFormat}" pattern="dd" var="returnDate" />
+									${returnDate - leaveDate} DAY
+								</span><br />
+								<span class="cardTitleSpan">${plannerBoard.pb_title}</span><br />
 							</div>
-						</div>
+						</a>
+					</div>
 				</c:forEach>
+				</div>
+				</div>
 			</article>
  		<nav>${pagebar}</nav>
 	</section> 

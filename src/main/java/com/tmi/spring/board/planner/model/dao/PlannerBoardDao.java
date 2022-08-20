@@ -64,4 +64,7 @@ public interface PlannerBoardDao {
 	@Select("select pp_no, pp_p_no, pp_time, pp_place_name, pp_memo, pp_x, pp_y, pp_date from tmi_planner_board pb, tmi_planner p, tmi_planner_plan pp where pb.pb_p_no = p.p_no and p.p_no = pp.pp_p_no and pb.pb_no = #{no}")
 	List<PlannerPlan> findBoardPlanByNo(int no);
 
+	@Select("select * from tmi_planner_plan")
+	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
+
 }

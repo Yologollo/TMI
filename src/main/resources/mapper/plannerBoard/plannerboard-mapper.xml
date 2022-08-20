@@ -6,6 +6,11 @@
 <!-- <mapper namespace="dao 경로"> -->
 	<select id="selectPlannerBoardList" parameterType="String" resultMap="PlannerBoardMap">
 		select
+		    p.p_no,
+		    p.p_title,
+		    p.p_explan,
+		    p.p_leave_date,
+		    p.p_return_date,
 		    pb.pb_no,
 		    pb.pb_p_no,
 		    m.m_nickname,
@@ -18,6 +23,8 @@
 		from
 		    tmi_planner_board pb join tmi_member m
 		        on pb_m_email = m.m_email
+		            join tmi_planner p
+		                on pb_p_no = p.p_no
 		order by
 		    pb.pb_no desc
 	</select>

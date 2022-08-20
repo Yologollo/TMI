@@ -107,6 +107,11 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	public Planner findBoardPlannerByNoModel(int no) {
 		return plannerBoardDao.findBoardPlannerByNoModel(no);
 	}
+	
+	@Override
+	public List<PlannerPlan> findPlansList(List<PlannerBoard> list) {
+		return plannerBoardDao.findPlansList(list);
+	}
 
 }
 
