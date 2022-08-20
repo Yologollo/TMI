@@ -65,14 +65,17 @@ public class PlannerBoardController {
 	PlannerService plannerService;
 	
 	@GetMapping("/board/planner/plannerBoard.do")
-	public ModelAndView PlannerBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request, Model model) {
+	public ModelAndView PlannerBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 8;
 			List<PlannerBoard> list = plannerBoardService.selectPlannerBoardList(cPage, numPerPage);
+			List<PlannerPlan> plans = plannerBoardService.findPlansList(list);
 			Iterator<PlannerBoard> it = list.iterator();
 
 			log.debug("list = {}", list);
+			log.debug("plans = {}", plans);
 			mav.addObject("list", list);
+			mav.addObject("plans", plans);
 			
 			int totalContent = plannerBoardService.selectTotalContent();
 			String url = request.getRequestURI();
@@ -88,6 +91,8 @@ public class PlannerBoardController {
 					boardEntity.setPb_content(src);
 				}
 			}
+			
+			
 			
 			log.debug("totalContent = {}", totalContent);
 			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);

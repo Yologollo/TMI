@@ -6,6 +6,7 @@ import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.planner.model.dto.Planner;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 
 public interface PlannerBoardService {
 
@@ -34,5 +35,7 @@ public interface PlannerBoardService {
 	int insertLove(int loNo, String email);
 
 	Planner findBoardPlannerByNoModel(int no);
+
+	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
 
 }
