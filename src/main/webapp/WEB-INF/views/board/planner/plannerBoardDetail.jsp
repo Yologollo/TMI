@@ -321,6 +321,10 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
 		
+		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardSave.do'">저장하기</button>
+		</c:if>
+		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 </div>
