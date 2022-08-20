@@ -141,7 +141,7 @@ public class MyPageController {
 	}
 
 	@GetMapping("/memberBoardList.do")
-	public String memberBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, Model model, HttpServletRequest request) {
+	public ModelAndView memberBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
@@ -156,13 +156,15 @@ public class MyPageController {
 			
 			
 			model.addAttribute(boardList);
-			model.addAttribute(pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("member/mypage/memberBoardList");
 			
 		} catch (Exception e) {
 			log.error("게시글 조회 오류", e);
 			throw e;
 		}
-		return "/member/mypage/memberBoardList";
+		return mav;
 	}
 	
 	@GetMapping("/memberDelete.do")

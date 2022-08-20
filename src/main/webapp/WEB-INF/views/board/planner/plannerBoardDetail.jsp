@@ -94,6 +94,12 @@ const email = document.getElementById("loginMemberEmail").value;
 			</c:if>
 			
 			<c:if test="${planner.PNo ne 0}">
+			<input type="text" value="${planner.PNo}"/>
+			<input type="text" value="${planner.PTitle}"/>
+			<input type="text" value="${planner.PExplan}"/>
+			<input type="text" value="${planner.PLeaveDate}"/>
+			<input type="text" value="${planner.PReturnDate}"/>
+			<input type="text" value="${planner.PWriteDate}"/><!-- sysdate -->
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
