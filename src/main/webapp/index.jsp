@@ -355,10 +355,12 @@ id="createAreaModal">
 	</article>
     </div>
      
-
+	<!-- 
+		side bar
+	 -->
     
 	<div class="quickmenu"
-		style="position: absolute; right: 10px; top: 400px;">
+		style="position: absolute; right: 10px; top: 50%;">
 		<ul>
 			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
 			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
@@ -367,6 +369,7 @@ id="createAreaModal">
 	</div>
 
     <script>
+    
   //side bar
   
 $(document).ready(function(){
