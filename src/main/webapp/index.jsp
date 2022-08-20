@@ -80,51 +80,7 @@ tr[data-no] {
 	display: inline-block;
 }
 
-.quickmenu {
-	position: absolute;
-	width: 90px;
-	top: 50%;
-	margin-top: -50px;
-	right: 20px;
-	background: #fff;
-}
 
-.quickmenu ul {
-	position: relative;
-	float: left;
-	width: 100%;
-	display: inline-block;
-	*display: inline;
-	border: 1px solid #ddd;
-}
-
-.quickmenu ul li {
-	float: left;
-	width: 100%;
-	border-bottom: 1px solid #ddd;
-	text-align: center;
-	display: inline-block;
-	*display: inline;
-}
-
-.quickmenu ul li a {
-	position: relative;
-	float: left;
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	color: #999;
-	font-size: 9.5pt;
-}
-
-.quickmenu ul li a:hover {
-	color: #000;
-}
-
-.quickmenu ul li:last-child {
-	border-bottom: 0;
-}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
@@ -354,32 +310,6 @@ id="createAreaModal">
 	
 	</article>
     </div>
-     
-	<!-- 
-		side bar
-	 -->
-    
-	<div class="quickmenu"
-		style="position: absolute; right: 10px; top: 50%;">
-		<ul>
-			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
-			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
-			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
-		</ul>
-	</div>
-
-    <script>
-    
-  //side bar
-  
-$(document).ready(function(){
-	  $(window).scroll(function() {
-	    var position = $(window).scrollTop() + 500; 
-	    $(".quickmenu").stop().animate({"top":position+"px"},400);
-	  });
-	});
-  
-    </script>
     
     <!-- 
     
