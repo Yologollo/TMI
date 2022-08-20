@@ -4,17 +4,31 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tmi.spring.common.HelloSpringUtils;
+import com.tmi.spring.widget.data.Item;
+import com.tmi.spring.widget.data.Response;
+import com.tmi.spring.widget.model.service.WidgetService;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
@@ -30,6 +44,9 @@ import net.sf.json.JSONObject;
 @Slf4j
 //@RequestMapping("/widget")
 public class WidgetController {
+	
+	@Autowired
+	WidgetService widgetService;
 
 	final String AREACODE_URL = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?";
 	final String CATEGORYCODE_URL = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/categoryCode?";
@@ -46,6 +63,7 @@ public class WidgetController {
 
 	final String SERVICE_KEY = "ServiceKey=WJrWhTS5sO0umKspB%2F6l3eIML4y24JazyOw7uenJR%2F%2FnZ6LQfNHV09G8L47Al%2BdjLJIxbskdBRU6Rx8qwkJWoQ%3D%3D";
 	final String LAST_URL = "&MobileOS=ETC&MobileApp=TMI&_type=json";
+	final String LAST_URL2 = "&MobileOS=ETC&MobileApp=TMI";
 	final String DETAILCOMMON_LAST_URL = "&defaultYN=Y&firstImageYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&MobileOS=ETC&MobileApp=TMI&_type=json";
 
 	@GetMapping("/widget")
@@ -265,34 +283,35 @@ public class WidgetController {
 	}
 	
 	@GetMapping("/widget/callAreaBasedList.do")
-	public void callAreaBasedList(HttpServletResponse request, HttpServletResponse response,
-			@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount, ModelAndView mav) throws Exception {
+	public ResponseEntity<?> callAreaBasedList(@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount, ModelAndView mav) throws Exception {
 		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		Map<String, Object> map = new HashMap<>();
 		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html, charset=utf-8");
-
 		int cPage = 1;
 		int numPerPage = 8;
 		int totalContent = Integer.parseInt(totalCount);
 		String url = "";
 		
-		String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
-		mav.addObject("pagebar", pagebar);
+		map.put("CPage", cPage);
+		map.put("numPerPage", numPerPage);
+		map.put("totalContent", totalContent);
+		map.put("url", url);		
+		
+//		String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+//		mav.addObject("pagebar", pagebar);
+		
 		
 		String addr = AREABASEDLIST_URL;
 		String parameter = "";
 		System.out.println("areaCode = " + areaCode);
 		System.out.println("sigunguCode = " + sigunguCode);
-
-		PrintWriter out = response.getWriter();
 		
 		if (areaCode.equals("0")) {
 			
 			parameter = parameter + "&" + "numOfRows=8";
 			parameter = parameter + "&" + "pageNo=1";
 			parameter = parameter + "&" + "listYN=Y";
-			parameter = parameter + LAST_URL;
+			parameter = parameter + LAST_URL2;
 
 			addr = addr + SERVICE_KEY + parameter;
 			
@@ -302,7 +321,7 @@ public class WidgetController {
 			parameter = parameter + "&" + "pageNo=1";
 			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
-			parameter = parameter + LAST_URL;
+			parameter = parameter + LAST_URL2;
 
 			addr = addr + SERVICE_KEY + parameter;
 
@@ -313,29 +332,38 @@ public class WidgetController {
 			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
-			parameter = parameter + LAST_URL;
+			parameter = parameter + LAST_URL2;
 			
 			addr = addr + SERVICE_KEY + parameter;
 			
 		};
 
-		URL url2 = new URL(addr);
-		System.out.println(addr);
-
-		InputStream in = url2.openStream();
-
-		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-		IOUtils.copy(in, bos1);
-		in.close();
-		bos1.close();
-
-		String mbos = bos1.toString("UTF-8");
-
-		byte[] b = mbos.getBytes("UTF-8");
-		String s = new String(b, "UTF-8");
-		out.println(s);
-
-		JSONObject json = new JSONObject();
-		json.put("data", s);
+		Response response = widgetService.getResponse(addr);
+		List<Item> items = response.getBody().getItems();
+		map.put("items", items);	
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+				.body(map);
 	}
+	
+	@GetMapping("/widget/callPagebar.do")
+	public ModelAndView callPagebar(@RequestParam String CPage, @RequestParam String numPerPage, @RequestParam String totalContent,  @RequestParam String url, Model model, HttpServletRequest request, ModelAndView mav) {
+		
+		int cPage = Integer.parseInt(CPage);
+		int numperPage = Integer.parseInt(numPerPage);
+		int TotalContent = Integer.parseInt(totalContent);
+		
+		String pagebar = HelloSpringUtils.getPagebar(cPage, numperPage, TotalContent, url);
+		log.debug("pagebar = {}", pagebar);
+		model.addAttribute(pagebar);
+		mav.addObject("pagebar", pagebar);
+		
+		mav.setViewName("widget");
+		
+		return mav;
+		
+	}
+	
 }
