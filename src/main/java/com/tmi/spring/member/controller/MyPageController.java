@@ -29,7 +29,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
-import com.tmi.spring.member.model.dto.MemberBoard;
+import com.tmi.spring.member.model.dto.MemberFriendBoard;
+import com.tmi.spring.member.model.dto.MemberPlannerBoard;
+import com.tmi.spring.member.model.dto.MemberReviewBoard;
 import com.tmi.spring.member.model.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -139,33 +141,6 @@ public class MyPageController {
 		}
 		return "redirect:/mypage/memberDetail.do";
 	}
-
-	@GetMapping("/memberBoardList.do")
-	public ModelAndView memberBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
-		try {
-			int numPerPage = 5;
-			String memberEmail = member.getMEmail();
-			List<MemberBoard> boardList = memberService.findByBoardAllListByEmail(cPage, numPerPage, memberEmail);
-			log.debug("boardList = {}", boardList);
-			int totalContent = memberService.selectTotalContent(memberEmail);
-			String url = request.getRequestURI();
-
-			log.debug("totalContent = {}", totalContent);
-			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
-			log.debug("pagebar = {}", pagebar);
-			
-			
-			model.addAttribute(boardList);
-			mav.addObject("pagebar", pagebar);
-			
-			mav.setViewName("member/mypage/memberBoardList");
-			
-		} catch (Exception e) {
-			log.error("게시글 조회 오류", e);
-			throw e;
-		}
-		return mav;
-	}
 	
 	@GetMapping("/memberDelete.do")
 	public String memberDelete() {
@@ -194,7 +169,7 @@ public class MyPageController {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
 			log.debug("member.getMEmail() = {}", member.getMEmail());
-			List<MemberBoard> boardList = memberService.findByFriendBoardListByEmail(cPage, numPerPage, memberEmail);
+			List<MemberFriendBoard> boardList = memberService.findByFriendBoardListByEmail(cPage, numPerPage, memberEmail);
 			log.debug("boardList = {}", boardList);
 			int totalContent = memberService.selectFriendBoardTotalContent(memberEmail);
 			String url = request.getRequestURI();
@@ -204,10 +179,66 @@ public class MyPageController {
 			log.debug("pagebar = {}", pagebar);
 			
 			
-			model.addAttribute(boardList);
+			mav.addObject("boardList", boardList);
 			mav.addObject("pagebar", pagebar);
 			
 			mav.setViewName("member/mypage/memberFriendBoardList");
+			
+		} catch (Exception e) {
+			log.error("게시글 조회 오류", e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/memberPlannerBoardList.do")
+	public ModelAndView memberPlannerBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+		try {
+			int numPerPage = 5;
+			String memberEmail = member.getMEmail();
+			log.debug("member.getMEmail() = {}", member.getMEmail());
+			List<MemberPlannerBoard> boardList = memberService.findByPlannerBoardListByEmail(cPage, numPerPage, memberEmail);
+			log.debug("boardList = {}", boardList);
+			int totalContent = memberService.selectPlannerBoardTotalContent(memberEmail);
+			String url = request.getRequestURI();
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			
+			
+			mav.addObject("boardList", boardList);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("member/mypage/memberPlannerBoardList");
+			
+		} catch (Exception e) {
+			log.error("게시글 조회 오류", e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/memberReviewBoardList.do")
+	public ModelAndView memberReviewBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+		try {
+			int numPerPage = 5;
+			String memberEmail = member.getMEmail();
+			log.debug("member.getMEmail() = {}", member.getMEmail());
+			List<MemberReviewBoard> boardList = memberService.findByReviewBoardListByEmail(cPage, numPerPage, memberEmail);
+			log.debug("boardList = {}", boardList);
+			int totalContent = memberService.selectReviewBoardTotalContent(memberEmail);
+			String url = request.getRequestURI();
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			
+			
+			mav.addObject("boardList", boardList);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("member/mypage/memberReviewBoardList");
 			
 		} catch (Exception e) {
 			log.error("게시글 조회 오류", e);

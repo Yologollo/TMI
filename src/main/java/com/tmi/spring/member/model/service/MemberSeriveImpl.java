@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tmi.spring.member.model.dao.MemberDao;
 import com.tmi.spring.member.model.dto.Member;
-import com.tmi.spring.member.model.dto.MemberBoard;
+import com.tmi.spring.member.model.dto.MemberFriendBoard;
+import com.tmi.spring.member.model.dto.MemberPlannerBoard;
+import com.tmi.spring.member.model.dto.MemberReviewBoard;
 
 /**
  * 
@@ -58,20 +60,7 @@ public class MemberSeriveImpl implements MemberService {
 	}
 	
 	@Override
-	public List<MemberBoard> findByBoardAllListByEmail(int cPage, int numPerPage, String memberEmail) {
-		int offset = (cPage -1) * numPerPage;
-		int limit = numPerPage;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return memberDao.findByBoardAllListByEmail(memberEmail, rowBounds);
-	}
-	
-	@Override
-	public int selectTotalContent(String memberEmail) {
-		return memberDao.selectTotalContent(memberEmail);
-	}
-	
-	@Override
-	public List<MemberBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail) {
+	public List<MemberFriendBoard> findByFriendBoardListByEmail(int cPage, int numPerPage, String memberEmail) {
 		int offset = (cPage -1) * numPerPage;
 		int limit = numPerPage;
 		RowBounds rowBounds = new RowBounds(offset, limit);
@@ -81,5 +70,31 @@ public class MemberSeriveImpl implements MemberService {
 	@Override
 	public int selectFriendBoardTotalContent(String memberEmail) {
 		return memberDao.selectFriendBoardTotalContent(memberEmail);
+	}
+
+	@Override
+	public List<MemberPlannerBoard> findByPlannerBoardListByEmail(int cPage, int numPerPage, String memberEmail) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return memberDao.findByPlannerBoardListByEmail(memberEmail, rowBounds);
+	}
+
+	@Override
+	public int selectPlannerBoardTotalContent(String memberEmail) {
+		return memberDao.selectPlannerBoardTotalContent(memberEmail);
+	}
+
+	@Override
+	public List<MemberReviewBoard> findByReviewBoardListByEmail(int cPage, int numPerPage, String memberEmail) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return memberDao.findByReviewBoardListByEmail(memberEmail, rowBounds);
+	}
+
+	@Override
+	public int selectReviewBoardTotalContent(String memberEmail) {
+		return memberDao.selectReviewBoardTotalContent(memberEmail);
 	}
 }

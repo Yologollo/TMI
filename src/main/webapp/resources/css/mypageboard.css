@@ -1,0 +1,27 @@
+#tbl-board {
+	float:right; 
+	width: 85%; 
+}
+
+tr[data-no] {
+	cursor: pointer;
+}
+
+#pagebar{
+	float: right;
+	width: 85%;
+}
+
+#boardChangeWrapper{
+	border: 1px solid #d3d3d3;
+	border-top: none;
+	height: 15vh;
+	margin-bottom: 5vh;
+	text-align: center;
+	padding-top: 43px;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 10px;
+}

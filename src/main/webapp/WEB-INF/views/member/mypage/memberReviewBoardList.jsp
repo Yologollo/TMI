@@ -22,7 +22,7 @@ window.addEventListener('load', (e) => {
 			console.log(tr);
 			if(tr.matches('tr[data-no]')) {
 				const no = tr.dataset.no;
-				location.href = '${pageContext.request.contextPath}/board/friend/friendBoardDetail.do?no=' + no;
+				location.href = '${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=' + no;
 			}
 		});
 	});
@@ -59,7 +59,7 @@ window.addEventListener('load', (e) => {
 			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberReviewBoardList.do'">리뷰 게시판</button>
 			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberFriendBoardList.do'">여행 친구 게시판</button>
 		</div>
-		<h1>여행 친구 게시판</h1>
+		<h1>리뷰 게시판</h1>
 		<section id="board-container" class="container">
 		<table id="tbl-board" class="table table-striped table-hover text-center">
 			<tr>
@@ -69,16 +69,16 @@ window.addEventListener('load', (e) => {
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${boardList}" var="friendBoard" varStatus="vs">
-				<tr data-no="${friendBoard.fbNo}">
- 					<td>${friendBoard.fbNo}</td>
-					<td>${friendBoard.fbTitle}</td>
-					<td>${friendBoard.MNickName}</td>
+			<c:forEach items="${boardList}" var="reviewBoard" varStatus="vs">
+				<tr data-no="${reviewBoard.rbNo}">
+ 					<td>${reviewBoard.rbNo}</td>
+					<td>${reviewBoard.rbTitle}</td>
+					<td>${reviewBoard.MNickName}</td>
 					<td>
-						<fmt:parseDate value="${friendBoard.fbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+						<fmt:parseDate value="${reviewBoard.rbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
-					<td>${friendBoard.fbReadCount}</td>
+					<td>${reviewBoard.rbReadCount}</td>
 				</tr>
 			</c:forEach>
 		</table>
