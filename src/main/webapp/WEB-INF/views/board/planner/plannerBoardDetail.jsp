@@ -89,7 +89,7 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:forEach>
 		</c:if>  --%>
-<%-- 	 	<c:forEach items="${insertReviewBoard.planner}" var="planner">	
+ 	 	<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
 			
@@ -109,7 +109,7 @@ const email = document.getElementById("loginMemberEmail").value;
 							</div>
 						
 							<% int i = 1;%>
-							<c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+							<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 								<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
@@ -187,7 +187,7 @@ const email = document.getElementById("loginMemberEmail").value;
 								 var a = 0;
 							    
 							    
-								 <c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+								 <c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 								 	 <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 									 <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 									 <fmt:formatDate value="${plan.ppDate}" pattern="yyyy-MM-dd" var="openDate" />
@@ -240,7 +240,7 @@ const email = document.getElementById("loginMemberEmail").value;
 	
 	                                <% int j = 1;%>
 	
-	                                     <c:forEach items="${insertReviewBoard.plans}" var="plan" varStatus="plan_status">
+	                                     <c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 	                                        <!-- 화면에서 보이면 주석처리 -->
 	                                        <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
 	                                        <fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
@@ -261,7 +261,7 @@ const email = document.getElementById("loginMemberEmail").value;
 					</div>
 				</div>
 			</c:if>
-		</c:forEach> --%>
+		</c:forEach>
 		
 		<div style="width:100%;">
 	  		${insertPlannerBoard.pbContent} <!-- summernote 출력 -->

@@ -70,6 +70,21 @@
 			m_no = #{mNo}
 	</delete>
 	
+	<select id="findByBoardAllListByEmail" resultType="com.tmi.spring.member.model.dto.MemberBoard">
+		select * from (
+			select * from tmi_planner_board where pb_m_email = #{pbMEmail} union all
+			select * from tmi_review_board where rb_m_email = #{rbMEmail} union all
+			select * from tmi_friend_board where fb_m_email = #{fbMEmail})
+		order by pb_created_at desc
+	</select>
+	
+	<select id="selectTotalContent" resultType="Integer" parameterType="com.tmi.spring.member.model.dto.MemberBoard">
+		select count(*) from (
+			select * from tmi_planner_board where pb_m_email = #{pbMEmail} union all
+			select * from tmi_review_board where rb_m_email = #{rbMEmail} union all
+			select * from tmi_friend_board where fb_m_email = #{fbMEmail})
+	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>

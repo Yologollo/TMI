@@ -115,7 +115,7 @@
 		
 		<div class="input-group mb-3">
 		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
-		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default">
+		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default" readonly>
 		</div>
 		  <input type="hidden" id="modalPlannerNo" name="fbPNo" value="0"/>
 

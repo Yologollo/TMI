@@ -43,12 +43,12 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	public InsertPlannerBoard selectOnePlannerBoard(int no) {
 		InsertPlannerBoard insertPlannerBoard = plannerBoardDao.selectOneReviewBoard(no);
 		List<PlannerBoardComment> comments = plannerBoardDao.findBoardCommentByNo(no);
-//		List<Planner> planner = plannerBoardDao.findBoardPlannerByNo(no);
-//		List<PlannerPlan> plans = plannerBoardDao.findBoardPlanByNo(no);
+		List<Planner> planner = plannerBoardDao.findBoardPlannerByNo(no);
+		List<PlannerPlan> plans = plannerBoardDao.findBoardPlanByNo(no);
 		
 		insertPlannerBoard.setBoardComments(comments);
-//		insertReviewBoard.setPlanner(planner);
-//		insertReviewBoard.setPlans(plans);
+		insertPlannerBoard.setPlanner(planner);
+		insertPlannerBoard.setPlans(plans);
 		
 		return insertPlannerBoard;
 	}
@@ -102,6 +102,11 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 
 		return result;
 	}	
+	
+	@Override
+	public Planner findBoardPlannerByNoModel(int no) {
+		return plannerBoardDao.findBoardPlannerByNoModel(no);
+	}
 
 }
 

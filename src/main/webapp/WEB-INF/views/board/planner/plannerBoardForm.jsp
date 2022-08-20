@@ -108,14 +108,14 @@
 		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="pbTitle" id="title" required>
 		<input type="text" class="form-control" name="pbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
-<!-- 		<div class="input-group mb-3">
+		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
-		</div> -->
+		</div> 
 		
 		<div class="input-group mb-3">
 		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
-		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default">
+		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default" readonly required>
 		</div>
 		  <input type="hidden" id="modalPlannerNo" name="pbPNo" value="0"/>
 		
@@ -195,7 +195,7 @@
 		var plannerNoSplit = plannerNo.split('/');
 		console.log(plannerNoSplit);
 		
-		$('input[name=rbPNo]').attr('value', plannerNoSplit[0]);
+		$('input[name=pbPNo]').attr('value', plannerNoSplit[0]);
 	 	$('#modalPlannerTitle').attr('value', plannerNoSplit[1]);
 		alert('플래너가 선택되었습니다 !');
 		$('.createPlannerModalForm').removeClass('show-modal');
