@@ -23,6 +23,7 @@ public interface NoticeBoardDao {
 	
 	int insertNoticeBoard(InsertNoticeBoard insertNoticeBoard);
 
+	
 	int insertAttachment(NoticeBoardAttachment attach);
 	
 	@Select("select * from tmi_notice_board where nb_no = #{no}")
@@ -30,15 +31,19 @@ public interface NoticeBoardDao {
 	
 	@Select("select * from tmi_notice_board_attachment where nba_nb_no = #{no}")
 	List<NoticeBoardAttachment> selectAttachmentListByNo(int no);
-
+	
 	@Select("select * from tmi_notice_board_attachment where nba_no = #{attachNo}")
 	NoticeBoardAttachment selectOneAttachment(int attachNo);
+
+	@Delete("delete from tmi_notice_board_attachment where nba_no = #{attachNo}")
+	int deleteAttachment(int attachNo);
+	
+	@Update("update tmi_notice_board set nb_title = #{nbTitle}, nb_content = #{nbContent}, nb_update_at = sysdate where nb_no = #{nbNo}")
+	int updateNoticeBoard(InsertNoticeBoard insertNoticeBoard);
+	
+	@Delete("delete from tmi_notice_board where nb_no = #{no}")
+	int deleteNoticeBoard(int no);
 	
 	@Update("update tmi_notice_board set nb_read_count = nb_read_count + 1 where nb_no = #{no}")
 	int updateReadCount(int no);
-
-	@Delete("delete from tmi_notice_board where nb_no = #{no}")
-	int deleteNoticeBoard(int no);
-
-
 }

@@ -1,131 +1,210 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="회원관리" name="title" />
 </jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css"> 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
-<div id="commonMain"> 
 
-<!-- 
-	생성 : 권민지
-	작업 : 권민지
- -->
- 	<!-- <h1>회원관리</h1> -->
- 
-<div class="top-logo">
-  <span>관리자</span>
-</div>
-<section id="container">
-  <div id="Tadminboard-submenu" class="submenu">
-  
-	    <ul id="sub">
-	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-	      
-	    </ul>
+<div id="commonMain">
 
-    
-  </div>
-  <div id="adminboard">
-    <div>
-      <div id="adminboard-head">
-      	<h2>회원목록</h2>
-        <!-- <div id="btn-sort-wrap">
-          <button onclick="deleteBoard();">삭제</button>
-        </div> -->
-      </div>
-      
-      <table>
-        <thead id="list-head">
-          <tr>
-          	<th></th>
-            <th>회원번호</th> 
-            <th>회원별명</th>
-            <th>회원이름</th>
-          </tr>
-        </thead>
-      
-        <tbody id="list-content">
-        <c:forEach items="${list}" var="adminList" varStatus="vs">
-        <td></td> 
-         <td>${adminList.m_no}</td>
-         <td>${adminList.m_nickname}</td>
-         <td>${adminList.m_name}</td>
-        
-         <td>
-           <div id="btn-sort-wrap">
-             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
-           </div>
-        </td>
-        
-        </c:forEach>
-        <!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5>회원탈퇴</h5> 
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        회원을 정말 탈퇴시키겠습니까?
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary">탈퇴하기</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-
-        
-      
-  			</tbody>
-      	</table>
-		
-
-      <div id="search-wrap">
-        <input type="text" id="search" name="search" placeholder="회원이름을 검색해보세요!"/>
-        <button type="button" onclick="searchMember();" id="btn" class="btn">검색</button>
-      </div> 
-    </div>
-	<div id="pagebar">
-		<nav>${pagebar}</nav>
+	<div class="top-logo">
+		<span>관리자</span>
 	</div>
-  </div>
+	
+	<section id="container">
+		<div id="Tadminboard-submenu" class="submenu">
+			<ul id="sub">
+				<li><a
+					href="${pageContext.request.contextPath}/admin/memberList.do"
+					onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"
+					onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+			</ul>
+		</div>
+		
+		<div id="adminboard">
+		
+				<div id="adminboard-head">
+					<h2>회원목록</h2>
+				</div>
 
- 
-</section>
- 	
-    </table>
-    
-    
+				<table>
+					<thead id="list-head">
+						<tr>
+							<th>회원번호</th>
+							<th>닉네임</th>
+							<th>회원 이름</th>
+							<th>회원 이메일</th>
+							<th>회원 핸드폰번호</th>
+							<th>탈퇴 여부</th>
+						</tr>
+					</thead>
 
- 	 
+					<tbody id="list-content">
+
+						<c:forEach items="${list}" var="adminList" varStatus="vs">
+							<tr>
+								<td>${adminList.m_no}</td>
+								<td>${adminList.m_nickname}</td>
+								<td>${adminList.m_name}</td>
+								<td>${adminList.m_email}</td>
+								<td>${adminList.m_phone}</td>
+								<td>
+									<div id="btn-sort-wrap">
+										<button type="submit" class="btn btn-primary"
+											data-bs-target="#exampleModal"
+											data-member-email=${adminList.m_email
+											}  	id="deleteBtn">회원탈퇴</button>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+						
+					<div id="pagebar">
+						<nav>${pagebar}</nav>
+					</div>
+	
+						<div id="search-wrap">
+							<form type='submit' id="memberSearchBtn">
+								<input type="text" id="memberSearchBtn" name="search"
+									placeholder="회원이름을 검색해보세요!" />
+								<button type="submit"
+									onclick="location.href=${pageContext.request.contextPath}/admin/memberListSearch.do"
+									id="memberSearchBtn" class="btn">검색</button>
+						</div>
+		</div>
+	</section>
 </div>
-<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 
 
 <script>
-/* 	function clickDel(formName) {
+$(document).on('click', '#deleteBtn', function(){
+	var memberEmail = $(this).data('memberEmail');
+	console.log(memberEmail);
+	
+	if(confirm(memberEmail + "님을 탈퇴시키겠습니까?")){
+		$.ajax({
+			
+			url : `${pageContext.request.contextPath}/admin/memeberDelete.do`,
+			data : {
+				memberEmail : memberEmail
+			},
+			contentType : 'application/jason;',
+			type : "GET",
+			success(response){
+				console.log(response);
+				alert(response.msg);
+				location.href = `${pageContext.request.contextPath}/admin/memberList.do`;
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+	            alert("Status : " + textStatus);
+	            alert("Error : " + errorThrown);
+			}
+		});
+	} 
+});
+
+
+
+
+
+
+
+ $(document).on( '#memberSearchBtn', function(){
+	var memberName = $(this).data('memberName');
+	console.log(memberName);
+	
+	if(confirm(memberName + "님이 검색되었습니다.")){
+		$.ajax({
+			
+			url : `${pageContext.request.contextPath}/admin/memberListSearch.do`,
+			data : {
+				membername : membername
+			},
+			contentType : 'application/jason;',
+			type : "GET",
+			success(response){
+				console.log(response);
+				alert(response.msg);
+				location.href = `${pageContext.request.contextPath}/admin/memberList.do`;
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+	            alert("Status : " + textStatus);
+	            alert("Error : " + errorThrown);
+			}
+		});
+	} 
+});
+ 
+
+
+
+
+
+
+
+
+/* /* $(document).on('click', '#memberSearchBtn', function(){
+	var memberName = $(this).data('memberName');
+	console.log(memberName);
+
+	
+		$.ajax({
+			
+			url : `${pageContext.request.contextPath}/admin/memeberList.do`,
+			data : {
+				memberName : memberName
+			},
+			contentType : 'application/jason;',
+			type : "GET",
+			success(response){
+				console.log(response);
+				alert(response.msg);
+				location.href = `${pageContext.request.contextPath}/admin/memberList.do`;
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+	            alert("Status : " + textStatus);
+	            alert("Error : " + errorThrown);
+			}
+		});
+	}  
+}); */ 
+
+
+
+/* 	
+function clickDel(formName) {
 		formName.action = "/board/contentDelAsk";
 		formName.method = "post";
 		formName.submit();
-	} */
+	} 
+*/
 	
 	
-	myModal.addEventListener('shown.bs.modal', function () {
-	  myInput.focus()
-	})
+/* 
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+}) 
+*/
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

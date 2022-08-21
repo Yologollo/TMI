@@ -16,7 +16,7 @@
 <style>
 	#content {
 		resize : none;
-		overflow-y:scroll;
+		
 	}
 	#save {
 		margin-left :45%;
@@ -24,7 +24,7 @@
 </style>
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
-		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="nbTitle" id="title" required>
+		<input type="text" class="form-control"  name="nbTitle" id="title" required>
 		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
@@ -66,7 +66,23 @@
 		]
 	});
 	
-
+	/*  	document.boardFrm.addEventListener('submit', (e) => {
+	const title = document.querySelector("#title");
+	const content = document.querySelector("#summernote");
+ 
+	if(!/^.+$/.test(title.value))
+	{
+		e.preventDefault();
+		alert("제목을 작성해주세요.");
+		return;
+	}
+	if(!/^(.|\n)+$/.test(content.value))
+	{
+		e.preventDefault();
+		alert("내용을 작성해주세요.");
+		return;
+	}
+});  */  
 
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>

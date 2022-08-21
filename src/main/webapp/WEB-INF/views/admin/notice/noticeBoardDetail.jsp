@@ -29,9 +29,9 @@
 
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
-	<script>
-		const mEmail = '${loginMember.MEmail}';
-	</script>
+	
+	<script>const mEmail = '${loginMember.MEmail}';</script>
+		
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
@@ -44,7 +44,7 @@
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
 			<c:if test="${not empty insertNoticeBoard.attachments}">
-				<c:forEach items="${insertNoticedBoard.attachments}" var="attach">
+				<c:forEach items="${insertNoticeBoard.attachments}" var="attach">
 					<div class="btn-group-toggle pb-1" data-toggle="buttons">
 						<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.nbaNo}">${attach.nbaOriginalFilename}</button>
 					</div>
@@ -71,12 +71,13 @@
 		<br /><br /><br />
 </div>
 <script>
+
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
 		input.addEventListener('change', (e) => {
 			const [file] = e.target.files;
 			console.log(file);
 		});
-	});
+	}); 
 
  	$('#summernote').summernote({
 		tabsize: 1, // 줄바꿈 간격
@@ -94,6 +95,15 @@
 		]
 	}); 
 
+ 	
+ 	document.querySelectorAll(".attach").forEach((btn) => {
+ 		btn.addEventListener("click", (e) => {
+ 			const attachNo = e.target.value;
+ 			console.log(attachNo);
+ 			location.href = `${pageContext.request.contextPath}/admin/notice/fileDownload.do?no=\${attachNo}`;
+ 		});
+ 	});
+ 	
  	
  	
  	document.querySelectorAll("#deleteComment").forEach((del) => {

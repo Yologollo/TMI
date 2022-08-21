@@ -13,10 +13,13 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 <style>
 	#content {
 		resize : none;
-		overflow-y:scroll;
+		
 	}
 	#save {
 		margin-left :45%;
@@ -24,9 +27,9 @@
 </style>
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardUpdate.do" method="POST" enctype="multipart/form-data">
-		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
-		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertNoticeBoard.nbTitle}" required>
-		<input type="text" class="form-control" name="fbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
+		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
+		<input type="text" class="form-control"  name="nbTitle" id="title" value="${insertNoticeBoard.nbTitle}" required > 
+		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<c:if test="${not empty insertNoticeBoard.attachments}">
 			<c:forEach items="${insertNoticeBoard.attachments}" var="attach" varStatus="vs">
@@ -47,9 +50,12 @@
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
+		  
 		</div>
 		
-		<textarea id="summernote" name="fbContent">${insertNoticeBoard.nbContent}</textarea>
+		<textarea id="summernote" name="nbContent">${insertNoticeBoard.nbContent}</textarea>
+	  	  	
+	  	
 	  	
 		<br /><br />
 		<input type="hidden" name="nbNo" value="${insertNoticeBoard.nbNo}" />
@@ -84,25 +90,8 @@
 		]
 	});
 	
-	  
-/*  	document.boardFrm.addEventListener('submit', (e) => {
-		const title = document.querySelector("#title");
-		const content = document.querySelector("#summernote");
-	 
-		if(!/^.+$/.test(title.value))
-		{
-			e.preventDefault();
-			alert("제목을 작성해주세요.");
-			return;
-		}
-		if(!/^(.|\n)+$/.test(content.value))
-		{
-			e.preventDefault();
-			alert("내용을 작성해주세요.");
-			return;
-		}
-	});  */  
-</script>
+
+	</script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
