@@ -265,11 +265,7 @@ tr[data-no] {
 	    	<div id="commonMain2">
 	    	
 	        <hr><h1 id="tourism_title">관광 정보</h1><hr>
-	        <div id="tourism_search_wrap">
-	            <input type="text" id="tourism_search_input" placeholder="검색">
-	            <!-- 버튼은 아이콘으로만 인찬씨가 맞춰서 넣어주세요 ㅎㅎㅎㅎㅎ-->
 
-	        </div>
 	        <div id="area">
 	            <button class="w-btn-outline w-btn-blue-outline" type="button">
 	                서울
