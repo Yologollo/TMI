@@ -63,31 +63,7 @@
     margin-bottom: 20px;
 }
 
-#tourism_search_input {
-    margin-top: 10px;
-    border: 2px solid rgba(144, 144, 144, 0.75);
-    background-color: rgba(183, 183, 183, 0.75)
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
-    padding: 10px 20px;
-    border-radius: 10px;
-    height: auto;
-    width: 100%;
-}
 
-
-#tourism_search_input:focus {
-    margin-top: 10px;
-    padding: 12px 20px;
-    border-radius: 28px;
-    height: auto;
-    outline-color: rgba(144, 144, 144, 0.95);
-}
-
-
-#search_wrap {
-    top: 50%;
-    left: 50%;
-}
 /* 관광정보 css폼 끝 */
 
 #infoBox{
