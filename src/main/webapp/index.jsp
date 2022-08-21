@@ -8,19 +8,16 @@
 <style>
 #video_area {
 	width: 25%;
-	border: 1px solid red;
 }
 
 #background_video {
 	max-width: 100%;
 	height: auto;
-	border: 1px solid black;
 }
 
 #bestPlanner {
 	width: 100%;
 	height: 500px;
-	border: 1px solid green;
 	margin: auto;
 	overflow: hidden;
 }
@@ -28,7 +25,6 @@
 #bestReview {
 	width: 100%;
 	height: 500px;
-	border: 1px solid blue;
 	margin: auto;
 	overflow: hidden;
 }
@@ -40,7 +36,6 @@ tr[data-no] {
 .reviewBoard {
 	width: 200px;
 	height: 250px;
-	border: 1px solid red;
 	margin: auto;
 	margin-top: 4.5rem;
 	overflow: hidden;
@@ -50,7 +45,6 @@ tr[data-no] {
 .imageReviewBoard {
 	width: 200px;
 	height: 180px;
-	border: 1px solid blue;
 	margin: auto;
 	overflow: hidden;
 	position: relative;
@@ -74,7 +68,6 @@ tr[data-no] {
 #contentArea2 {
 	width: 280px;
 	height: 330px;
-	border: 1px solid red;
 	margin: auto;
 	overflow: hidden;
 	display: inline-block;
@@ -92,224 +85,253 @@ tr[data-no] {
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
+<div id="mainpage_wrap">
+	<div id="mainpage_content">
+	
 <!-- 
-    생성 : 김용민, 최윤서
-    작업 : 김용민, 최윤서
+    생성 : 김용민, 최윤서, 전인찬, 이경석
+    작업 : 김용민, 최윤서, 전인찬, 이경석
  -->
- 
+
+  
  <!-- 
  
  	관광정보 위젯 모달
  
   -->
  
- <div class="createAreaModalForm">
-	<div class="modal-dialog-centered modal-dialog-scrollable"
-id="createAreaModal">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1>지역</h1>
-				<button type="button" class="btn-close" id="areaModalCloseBtn"
-					data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="modalInfo" id="areaList">
-					<label for="title">광역시/도</label><br />
-					<button type="button" class="btn btn-light" value="1"
-						onClick="insertArea(this);">서울</button>
-					<button type="button" class="btn btn-light" value="2"
-						onClick="insertArea(this);">인천</button>
-					<button type="button" class="btn btn-light" value="3"
-						onClick="insertArea(this);">대전</button>
-					<button type="button" class="btn btn-light" value="4"
-						onClick="insertArea(this);">대구</button>
-					<button type="button" class="btn btn-light" value="5"
-						onClick="insertArea(this);">광주</button>
-					<button type="button" class="btn btn-light" value="6"
-						onClick="insertArea(this);">부산</button>
-					<button type="button" class="btn btn-light" value="7"
-						onClick="insertArea(this);">울산</button>
-					<button type="button" class="btn btn-light" value="8"
-						onClick="insertArea(this);">세종특별자치시</button>
-					<button type="button" class="btn btn-light" value="31"
-						onClick="insertArea(this);">경기도</button>
-					<button type="button" class="btn btn-light" value="32"
-						onClick="insertArea(this);">강원도</button>
-					<button type="button" class="btn btn-light" value="33"
-						onClick="insertArea(this);">충청북도</button>
-					<button type="button" class="btn btn-light" value="34"
-						onClick="insertArea(this);">충청남도</button>
-					<button type="button" class="btn btn-light" value="35"
-						onClick="insertArea(this);">경상북도</button>
-					<button type="button" class="btn btn-light" value="36"
-						onClick="insertArea(this);">경상남도</button>
-					<button type="button" class="btn btn-light" value="37"
-						onClick="insertArea(this);">전라북도</button>
-					<button type="button" class="btn btn-light" value="38"
-						onClick="insertArea(this);">전라남도</button>
-					<button type="button" class="btn btn-light" value="39"
-						onClick="insertArea(this);">제주도</button>
+		 <div class="createAreaModalForm">
+			<div class="modal-dialog-centered modal-dialog-scrollable"
+		id="createAreaModal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1>지역</h1>
+						<button type="button" class="btn-close" id="areaModalCloseBtn"
+							data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="modalInfo" id="areaList">
+							<label for="title">광역시/도</label><br />
+							<button type="button" class="btn btn-light" value="1"
+								onClick="insertArea(this);">서울</button>
+							<button type="button" class="btn btn-light" value="2"
+								onClick="insertArea(this);">인천</button>
+							<button type="button" class="btn btn-light" value="3"
+								onClick="insertArea(this);">대전</button>
+							<button type="button" class="btn btn-light" value="4"
+								onClick="insertArea(this);">대구</button>
+							<button type="button" class="btn btn-light" value="5"
+								onClick="insertArea(this);">광주</button>
+							<button type="button" class="btn btn-light" value="6"
+								onClick="insertArea(this);">부산</button>
+							<button type="button" class="btn btn-light" value="7"
+								onClick="insertArea(this);">울산</button>
+							<button type="button" class="btn btn-light" value="8"
+								onClick="insertArea(this);">세종특별자치시</button>
+							<button type="button" class="btn btn-light" value="31"
+								onClick="insertArea(this);">경기도</button>
+							<button type="button" class="btn btn-light" value="32"
+								onClick="insertArea(this);">강원도</button>
+							<button type="button" class="btn btn-light" value="33"
+								onClick="insertArea(this);">충청북도</button>
+							<button type="button" class="btn btn-light" value="34"
+								onClick="insertArea(this);">충청남도</button>
+							<button type="button" class="btn btn-light" value="35"
+								onClick="insertArea(this);">경상북도</button>
+							<button type="button" class="btn btn-light" value="36"
+								onClick="insertArea(this);">경상남도</button>
+							<button type="button" class="btn btn-light" value="37"
+								onClick="insertArea(this);">전라북도</button>
+							<button type="button" class="btn btn-light" value="38"
+								onClick="insertArea(this);">전라남도</button>
+							<button type="button" class="btn btn-light" value="39"
+								onClick="insertArea(this);">제주도</button>
+						</div>
+		
+						<div class="modalInfo" id="sigunguList"></div>
+		
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
+						<button type="button" class="btn btn-secondary" id="areaCancelBtn"
+							data-bs-dismiss="modal">취소</button>
+					</div>
 				</div>
-
-				<div class="modalInfo" id="sigunguList"></div>
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary" id="areaCancelBtn"
-					data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
-	</div>
-</div>
-
-<div class="createContentModalForm">
-	<div class="modal-dialog-centered modal-dialog-scrollable"
-		id="createContentModal">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1>관광타입</h1>
-				<button type="button" class="btn-close" id="contentModalCloseBtn"
-					data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="modalInfo" id="contentList">
-					<label for="title">관광타입</label><br />
-					<button type="button" class="btn btn-light" value="A00"
-						onClick="insertContent(this);">전체</button>
-					<button type="button" class="btn btn-light" value="A01"
-						onClick="insertContent(this);">관광지(자연)</button>
-					<button type="button" class="btn btn-light" value="A02"
-						onClick="insertContent(this);">관광지(인문)</button>
-					<button type="button" class="btn btn-light" value="A03"
-						onClick="insertContent(this);">레포츠</button>
-					<button type="button" class="btn btn-light" value="A04"
-						onClick="insertContent(this);">쇼핑</button>
-					<button type="button" class="btn btn-light" value="A05"
-						onClick="insertContent(this);">음식</button>
-					<button type="button" class="btn btn-light" value="B02"
-						onClick="insertContent(this);">숙박</button>
-					<button type="button" class="btn btn-light" value="C01"
-						onClick="insertContent(this);">추천코스</button>
+		
+		<div class="createContentModalForm">
+			<div class="modal-dialog-centered modal-dialog-scrollable"
+				id="createContentModal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1>관광타입</h1>
+						<button type="button" class="btn-close" id="contentModalCloseBtn"
+							data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="modalInfo" id="contentList">
+							<label for="title">관광타입</label><br />
+							<button type="button" class="btn btn-light" value="A00"
+								onClick="insertContent(this);">전체</button>
+							<button type="button" class="btn btn-light" value="A01"
+								onClick="insertContent(this);">관광지(자연)</button>
+							<button type="button" class="btn btn-light" value="A02"
+								onClick="insertContent(this);">관광지(인문)</button>
+							<button type="button" class="btn btn-light" value="A03"
+								onClick="insertContent(this);">레포츠</button>
+							<button type="button" class="btn btn-light" value="A04"
+								onClick="insertContent(this);">쇼핑</button>
+							<button type="button" class="btn btn-light" value="A05"
+								onClick="insertContent(this);">음식</button>
+							<button type="button" class="btn btn-light" value="B02"
+								onClick="insertContent(this);">숙박</button>
+							<button type="button" class="btn btn-light" value="C01"
+								onClick="insertContent(this);">추천코스</button>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
+						<button type="button" class="btn btn-secondary"
+							id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary"
-					id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
-	</div>
-</div>
-
-<div class="createServiceModalForm">
-	<div class="modal-dialog-centered modal-dialog-scrollable"
-		id="createServiceModal">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1>서비스 분류 선택</h1>
-				<button type="button" class="btn-close" id="serviceModalCloseBtn"
-					data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="modalInfo" id="serviceCat1List">
-					
-				</div>
-				<div class="modalInfo" id="serviceCat2List">
-				</div>
-				<div class="modalInfo" id="serviceCat3List">
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary" id="serviceCancelBtn"
-					data-bs-dismiss="modal">취소</button>
-			</div>
-		</div>
-	</div>
-</div>
- 
- 
- 
-     <div style="width:auto; height:100vh; border:1px solid blue; display:flex; margin:auto 0;"></div>
-     
-    <div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    </div>
-    
-    <!-- 
-    	관광정보 위젯 파트
-     -->
-     
-         <div id="bestPlanner">
- 	
- 		</div>
-        <div id="bestReview">
- 			<h1>베스트 후기</h1>
- 			<section id="board-container" class="container">
-				<article>
-					<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
-							<div id="contentArea2">
+		
+		<div class="createServiceModalForm">
+			<div class="modal-dialog-centered modal-dialog-scrollable"
+				id="createServiceModal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1>서비스 분류 선택</h1>
+						<button type="button" class="btn-close" id="serviceModalCloseBtn"
+							data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="modalInfo" id="serviceCat1List">
 							
-								<div id="selectContent">
-									<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
-										<span class="thumbNailImage">
-											<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-										</span>
-										<strong class="thumbNailName">
-											${reviewBoard.rb_title}
-										</strong>
-									</a>
+						</div>
+						<div class="modalInfo" id="serviceCat2List">
+						</div>
+						<div class="modalInfo" id="serviceCat3List">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
+						<button type="button" class="btn btn-secondary" id="serviceCancelBtn"
+							data-bs-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	 
+	 
+	 
+	    <div style="width:auto; height:100vh; display:flex; margin:auto 0;"></div>
+	    
+	    <!-- 
+	    	관광정보 위젯 파트
+	     -->
+	     
+        <div id="bestPlanner">
+	 	
+	 		</div>
+	        <div id="bestReview">
+	 			<h1>베스트 후기</h1>
+	 			<section id="board-container" class="container">
+					<article>
+						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
+								<div id="contentArea2">
+								
+									<div id="selectContent">
+										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
+											<span class="thumbNailImage">
+												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
+											</span>
+											<strong class="thumbNailName">
+												${reviewBoard.rb_title}
+											</strong>
+										</a>
+									</div>
 								</div>
-							</div>
-					</c:forEach>
-				</article>
-	 		<%-- <nav>${pagebar}</nav> --%>
-		</section> 
-	    </div>
-    
-    	<div id="commonMain2">
-    	<div id="searchTable">
-		<table class="table table-bordered">
-			<tbody>
-				<tr>
-					<th class="col" id="searchTh">지역</th>
-					<td>
-						<div class="finalName" id="areaCodeFinal"></div>
-						<button type="button" class="btn btn-info" id="searchAreaBtn">지역선택</button>
-					</td>
-				</tr>
-				<tr>
-					<th id="searchTh">관광타입</th>
-					<td id="searchTd">
-						<div class="finalName" id="contentCodeFinal"></div>
-						<button type="button" class="btn btn-info" id="searchContentBtn">관광타입선택</button>
-					</td>
-				</tr>
-				<tr id="serviceTr" style="display: none">
-					<th id="searchTh">서비스분류</th>
-					<td id="searchTd">
-						<div class="finalName" id="serviceCodeFinal"></div>
-						<button type="button" class="btn btn-info" id="searchServiceBtn">서비스 분류 선택</button>
-					</td>
-				</tr>
-				<tr>
-					<th id="searchTh">검색</th>
-					<td>
-						<button type="button" class="btn btn-info" id="searchDataBtn">검색</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+						</c:forEach>
+					</article>
+		 		<%-- <nav>${pagebar}</nav> --%>
+			</section> 
+		    </div>
+	    
+	    	<!-- 관광정보 CSS 작업폼 시작(안에 폼 사용하면 됩니당.)-->
+	    	<div id="commonMain2">
+	    	
+	        <hr><h1 id="tourism_title">관광 정보</h1><hr>
+	        <div id="tourism_search_wrap">
+	            <input type="text" id="tourism_search_input" placeholder="검색">
+	            <!-- 버튼은 아이콘으로만 인찬씨가 맞춰서 넣어주세요 ㅎㅎㅎㅎㅎ-->
 
-	<article id="contentArea">
-		<div id="contentArea2" style="display: none">
-			<div id="selectContent"></div>
+	        </div>
+	        <div id="area">
+	            <button class="w-btn-outline w-btn-blue-outline" type="button">
+	                서울
+	            </button>
+	            <button class="w-btn-outline w-btn-blue-outline" type="button">
+	                인천
+	            </button>
+	        </div>
+	        <div id="tourism_type">
+	            <button class="w-btn-outline w-btn-blue-outline" type="button">
+	                전체
+	            </button>
+	            <button class="w-btn-outline w-btn-blue-outline" type="button">
+	                관광지(자연)
+	            </button>
+	        </div>
+			<!-- 관광정보 CSS 작업폼 끝-->
+	    	
+	    	
+	    	<div id="searchTable">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th class="col" id="searchTh">지역</th>
+						<td>
+							<div class="finalName" id="areaCodeFinal"></div>
+							<button type="button" class="btn btn-info" id="searchAreaBtn">지역선택</button>
+						</td>
+					</tr>
+					<tr>
+						<th id="searchTh">관광타입</th>
+						<td id="searchTd">
+							<div class="finalName" id="contentCodeFinal"></div>
+							<button type="button" class="btn btn-info" id="searchContentBtn">관광타입선택</button>
+						</td>
+					</tr>
+					<tr id="serviceTr" style="display: none">
+						<th id="searchTh">서비스분류</th>
+						<td id="searchTd">
+							<div class="finalName" id="serviceCodeFinal"></div>
+							<button type="button" class="btn btn-info" id="searchServiceBtn">서비스 분류 선택</button>
+						</td>
+					</tr>
+					<tr>
+						<th id="searchTh">검색</th>
+						<td>
+							<button type="button" class="btn btn-info" id="searchDataBtn">검색</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	
-	</article>
+		<article id="contentArea">
+			<div id="contentArea2" style="display: none">
+				<div id="selectContent"></div>
+			</div>
+		
+		</article>
+	    </div>
     </div>
+</div>
     
     <!-- 
     
