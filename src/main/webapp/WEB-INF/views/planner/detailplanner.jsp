@@ -6,7 +6,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 
+	생성 : 김용민
+	작업 : 김용민
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
@@ -57,10 +60,6 @@ $(document).ready(function () {
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
 <div id="commonMain">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민, 이경석
- -->
 	<div id="bannder">배너 / 플래너 디테일</div>
 	<div id="wrapper">
 		<div id="menuContainer">

@@ -10,6 +10,12 @@ import org.apache.ibatis.annotations.Select;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
+/**
+ * 
+ * @생성 김용민
+ * @작업 김용민
+ *
+ */
 @Mapper
 public interface PlannerDao {
 
