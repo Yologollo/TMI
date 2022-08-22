@@ -9,7 +9,7 @@
 
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"> 
-	<jsp:param value="회원관리" name="title" />
+	<jsp:param value="공지사항" name="title" />
 </jsp:include>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css"> 
@@ -42,8 +42,9 @@ window.addEventListener('load', (e) => {
 
 <section id="container">
   <div id="Tadminboard-submenu" class="submenu">
-  
-	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
+  			<sec:authorize access="hasRole('ADMIN')">
+	      		<li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)" >회원목록</a></li>
+	       </sec:authorize>     
 	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	    </ul>
 </div>
@@ -52,10 +53,11 @@ window.addEventListener('load', (e) => {
     <div>
       <div id="adminboard-head">
       	<h2>공지사항</h2>
-    	
-      			<div id="btn-sort-wrap">
-          			<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
-        		</div>
+		    <sec:authorize access="hasRole('ADMIN')">
+      				<div id="btn-sort-wrap">
+          				<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
+        			</div>
+        	 </sec:authorize>    
       		
       </div>
       
@@ -96,5 +98,7 @@ window.addEventListener('load', (e) => {
 		
 
 </div>
+<script>
+
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
