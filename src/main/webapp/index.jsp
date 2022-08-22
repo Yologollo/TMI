@@ -100,7 +100,7 @@ tr[data-no] {
  
   -->
  
-		 <div class="createAreaModalForm">
+		 		<div class="createAreaModalForm">
 			<div class="modal-dialog-centered modal-dialog-scrollable"
 		id="createAreaModal">
 				<div class="modal-content">
@@ -111,45 +111,10 @@ tr[data-no] {
 					</div>
 					<div class="modal-body">
 						<div class="modalInfo" id="areaList">
-							<label for="title">광역시/도</label><br />
-							<button type="button" class="btn btn-light" value="1"
-								onClick="insertArea(this);">서울</button>
-							<button type="button" class="btn btn-light" value="2"
-								onClick="insertArea(this);">인천</button>
-							<button type="button" class="btn btn-light" value="3"
-								onClick="insertArea(this);">대전</button>
-							<button type="button" class="btn btn-light" value="4"
-								onClick="insertArea(this);">대구</button>
-							<button type="button" class="btn btn-light" value="5"
-								onClick="insertArea(this);">광주</button>
-							<button type="button" class="btn btn-light" value="6"
-								onClick="insertArea(this);">부산</button>
-							<button type="button" class="btn btn-light" value="7"
-								onClick="insertArea(this);">울산</button>
-							<button type="button" class="btn btn-light" value="8"
-								onClick="insertArea(this);">세종특별자치시</button>
-							<button type="button" class="btn btn-light" value="31"
-								onClick="insertArea(this);">경기도</button>
-							<button type="button" class="btn btn-light" value="32"
-								onClick="insertArea(this);">강원도</button>
-							<button type="button" class="btn btn-light" value="33"
-								onClick="insertArea(this);">충청북도</button>
-							<button type="button" class="btn btn-light" value="34"
-								onClick="insertArea(this);">충청남도</button>
-							<button type="button" class="btn btn-light" value="35"
-								onClick="insertArea(this);">경상북도</button>
-							<button type="button" class="btn btn-light" value="36"
-								onClick="insertArea(this);">경상남도</button>
-							<button type="button" class="btn btn-light" value="37"
-								onClick="insertArea(this);">전라북도</button>
-							<button type="button" class="btn btn-light" value="38"
-								onClick="insertArea(this);">전라남도</button>
-							<button type="button" class="btn btn-light" value="39"
-								onClick="insertArea(this);">제주도</button>
 						</div>
-		
+
 						<div class="modalInfo" id="sigunguList"></div>
-		
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
@@ -171,23 +136,6 @@ tr[data-no] {
 					</div>
 					<div class="modal-body">
 						<div class="modalInfo" id="contentList">
-							<label for="title">관광타입</label><br />
-							<button type="button" class="btn btn-light" value="A00"
-								onClick="insertContent(this);">전체</button>
-							<button type="button" class="btn btn-light" value="A01"
-								onClick="insertContent(this);">관광지(자연)</button>
-							<button type="button" class="btn btn-light" value="A02"
-								onClick="insertContent(this);">관광지(인문)</button>
-							<button type="button" class="btn btn-light" value="A03"
-								onClick="insertContent(this);">레포츠</button>
-							<button type="button" class="btn btn-light" value="A04"
-								onClick="insertContent(this);">쇼핑</button>
-							<button type="button" class="btn btn-light" value="A05"
-								onClick="insertContent(this);">음식</button>
-							<button type="button" class="btn btn-light" value="B02"
-								onClick="insertContent(this);">숙박</button>
-							<button type="button" class="btn btn-light" value="C01"
-								onClick="insertContent(this);">추천코스</button>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -321,9 +269,11 @@ tr[data-no] {
 	
 		<article id="contentArea">
 			<div id="contentArea2" style="display: none">
-				<div id="selectContent"></div>
+				<div id="selectContent">
+				</div>
+				<div id="paging">
+				</div>
 			</div>
-		
 		</article>
 	    </div>
     </div>
@@ -335,7 +285,7 @@ tr[data-no] {
     
      -->
     
-    <script>
+<script>
 
 	var areaCode = 0;
 	var areaName = 0;
@@ -350,6 +300,9 @@ tr[data-no] {
 	var cat3 = 0;
 	var cat3Name = 0;
 	var totalCount = 0;
+	var pageStart = 0;
+	var pageNo = "";
+	var pagebar = "";
 	
 
 	// areaModal
@@ -368,6 +321,40 @@ tr[data-no] {
 
 	$('#searchAreaBtn').on('click', function() {
 		$('.createAreaModalForm').addClass('show-modal');
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callArea.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+
+				var myItem = data.response.body.items.item;
+				var areatitleLable = '<label for="title">광역시/도</label><br />';
+				
+				$('#areaList').empty();
+
+				$('#areaList').append(areatitleLable);
+
+				for (var i = 0; myItem.length > i; i++) {
+
+					var output = '';
+					output += '<button type="button" class="btn btn-light" value="'
+							+ myItem[i].code
+							+ '" onClick="insertArea(this);">'
+							+ myItem[i].name + '</button>';
+
+					$('#areaList').append(output);
+
+				}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+			}
+
+		});
+		
 	});
 
 	function insertArea(arg0) {
@@ -390,7 +377,7 @@ tr[data-no] {
 						var titleLable = '<label for="title">시/군/구</label><br />';
 						sigunguCode = 0;
 						sigunguCode += 0;
-
+						
 						$('#sigunguList').empty();
 
 						$('#sigunguList').append(titleLable);
@@ -406,20 +393,8 @@ tr[data-no] {
 							$('#sigunguList').append(output);
 
 						}
-						
-						for (var i = 0; myItem.length > i; i++) {
 
-							var output = '';
-							output += '<button type="button" class="btn btn-light" value="'
-									+ myItem[i].code
-									+ '" onClick="insertSigungu(this);">'
-									+ myItem[i].name + '</button>';
-
-							$('#sigunguList').append(output);
-
-						}
 					},
-
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						alert("Status : " + textStatus);
 						alert("Error : " + errorThrown);
@@ -451,17 +426,20 @@ tr[data-no] {
 		$('#areaCodeFinal').empty();
 
 		var finalArea = '';
-
+		
 		if (sigunguCode != '0') {
 			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
+			
 		} else if (areaCode == '0') {
+			
 			alert('광역시/도 를 선택하십시요.');
+			
 		} else {
-			finalArea += '광역시/도 : ' + areaName
+			finalArea += '광역시/도 : ' + areaName 
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
@@ -486,6 +464,39 @@ tr[data-no] {
 		
 		$('#serviceTr').hide();
 		$('#serviceCat1List').empty();
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callCat1Code.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+
+				var myItem = data.response.body.items.item;
+				var titleLable = '<label for="title">관광타입</label><br />';
+
+				$('#contentList').empty();
+
+				$('#contentList').append(titleLable);
+
+				for (var i = 0; myItem.length > i; i++) {
+
+					var output = '';
+					output += '<button type="button" class="btn btn-light" value="'
+							+ myItem[i].code
+							+ '" onClick="insertContent(this);">'
+							+ myItem[i].name + '</button>';
+
+					$('#contentList').append(output);
+
+				}
+			},
+
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+			}
+
+		});
 			
 	});
 
@@ -552,7 +563,7 @@ tr[data-no] {
 		console.log('cat1Name = ' + cat1Name);
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/widget/docallCat2Code.do',
+			url : '${pageContext.request.contextPath}/widget/callCat2Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1
@@ -727,10 +738,19 @@ tr[data-no] {
 					dataType : 'json',
 					success : function(data) {
 						
-						var myItem = data.response.body.items.item;
-						console.log(myItem);
+						
+						console.log(data);
+						console.log("Cpage = " + data.CPage);
+						console.log("totalContent = " + data.totalContent);
+						var cPage = data.CPage;
+						var numPerPage = data.numPerPage;
+						var totalcontent = data.totalContent;
+						var totalContent = parseFloat(totalcontent);
+						var url = data.url;
+						var myItem = data.items;
 						
 						$('#selectContent').empty();
+						$('#paging').empty();
 				
 						for(var i = 0; myItem.length > i; i++){
 							
@@ -739,7 +759,7 @@ tr[data-no] {
 							};
 							
 							var gallery = "";
-							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 							gallery += '<span class="thumbNailImage">';
 							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 							gallery += '</span>';
@@ -748,10 +768,63 @@ tr[data-no] {
 							
 							$('#selectContent').append(gallery);
 						};
-							var pagebar = "";
-							pagebar += '<nav>${pagebar}</nav>';
-							$('#selectContent').append(pagebar);
-							console.log("검색 ajax 끝");
+						
+							pagebar = "";
+							pageNo = "";
+							pageStart = "";
+							var pagebarsize = '5';
+							var pagebarSize = parseInt(pagebarsize);
+							url += '?cPage=';
+							var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+							pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+							var pageEnd = parseInt(pageStart + pagebarSize - 1);
+							pageNo = pageStart;
+							var previous = "";
+							var main = "";
+							var next = "";
+							
+							console.log("pagebarSize = " + pagebarSize);
+							console.log("totalPage = " + totalPage);
+							console.log("pageStart = " + pageStart);
+							console.log("pageEnd = " + pageEnd);
+							console.log("pageNo = " + pageNo);
+							console.log("previous = " + previous);
+							console.log("next = " + next);
+							
+							// previous
+							if(pageNo == 1) {
+								previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+								}
+							else {
+								previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+								}
+							
+							// pagingbar main
+							while(pageNo <= pageEnd && pageNo <= totalPage) {
+								if(pageNo == cPage) {
+									main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+									}
+								else {
+									main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" value="' + pageNo + '" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+									}
+								pageNo++;
+								}
+							
+							// next
+							if(pageNo > totalPage){
+								next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+								}
+							else{
+								next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+								}
+								
+							pagebar += '<nav id="pagebar">';
+							pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+							pagebar += previous;
+							pagebar += main;
+							pagebar += next;
+							$('#paging').append(pagebar);
+							
 					},
 					
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -764,15 +837,378 @@ tr[data-no] {
 					
 			},
 
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
+				console.log("data = " + data);
 			}
 
 		});
 
 	});
 	
+	function callPreviousList(arg0){
+		
+		console.log("pageStart = " + pageStart);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callPreviousList.do',
+			type : 'get',
+			data : {
+				
+				pageStart : pageStart,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					url += '?cPage=';
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id ="pagingMain"  href="javascript:void(0)" onclick=\"callMainList(this);\">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
+
+	function callMainList(arg0){
+		
+		var mainPageNo = $(arg0).text();
+		console.log("mainPageNo = " + mainPageNo);
+		console.log("pageStart = " + pageStart);
+		var start = pageStart;
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callMainList.do',
+			type : 'get',
+			data : {
+				
+				mainPageNo : mainPageNo,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = start;
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
+		
+	
+	function callNextList(arg0){
+		
+		console.log("pageStart = " + pageStart);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callNextList.do',
+			type : 'get',
+			data : {
+				
+				pageStart  : pageStart,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					url += '?cPage=';
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
 	
 </script>
     
