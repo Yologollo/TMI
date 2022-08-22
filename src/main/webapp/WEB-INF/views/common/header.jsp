@@ -75,18 +75,12 @@
                         <sec:authorize access="hasRole('ADMIN')">
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/admin/memberList.do" class="nav_link" id="nav_color">
-                                <i class="nav_icon"></i> 회원관리
+                                <i class="nav_icon"></i> 관리자메뉴
                             </a>
                         </li>
-                        </sec:authorize>
-                        <sec:authorize access="hasRole('ADMIN')">
-					    	<a data-bs-toggle="modal" href="#adminNoticeModal" role="button" class="nav_link" id="nav_color">
-                                <i class="nav_icon"></i> 채팅공지
-                            </a>
-				   		</sec:authorize>
-                        
+                        </sec:authorize>        
                         <!-- 로그인 후 -->
-						<sec:authorize access="isAuthenticated()">
+						<sec:authorize access="hasRole('USER')">
                         <li class="nav_item">
                             <a href="${pageContext.request.contextPath}/planner/myplanner" class="nav_link" id="nav_color">
                                 <i class="nav_icon"></i> 플래너
@@ -97,6 +91,8 @@
                                 <i class="nav_icon"></i> 마이페이지
                             </a>
                         </li>
+						</sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
                         <form:form id="logoutFrm" action="${pageContext.request.contextPath}/login/memberLogout.do" method="POST">
 	                        <li class="nav_item">
 	                            <a href="#" onclick="return logoutFrm()"class="nav_link" id="nav_color">
