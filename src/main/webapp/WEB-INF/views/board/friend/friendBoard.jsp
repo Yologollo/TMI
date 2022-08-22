@@ -14,7 +14,7 @@
 <style>
 	tr[data-no] {
 		cursor: pointer;
-	}
+	}+
 </style>
 <script>
 window.addEventListener('load', (e) => {

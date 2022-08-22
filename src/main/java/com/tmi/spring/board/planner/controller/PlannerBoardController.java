@@ -1,6 +1,7 @@
 package com.tmi.spring.board.planner.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -331,20 +333,41 @@ public class PlannerBoardController {
 	
 	@PostMapping("board/planner/plannerBoardSave.do")
 	public String plannerBoardSave(@AuthenticationPrincipal Member member, 
-								   @RequestParam int ppNo, 
-								   @RequestParam String ppTitle,
-								   @RequestParam String ppExplan,
-								   @RequestParam String ppleaveDate
-//								   @RequestParam LocalDate ppReturnDate
-								   /*@RequestParam Date ppwriteDate*/) {
+								   @RequestParam int PNo, 
+								   @RequestParam String PTitle,
+								   @RequestParam String PExplan,
+								   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate PleaveDate,
+								   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate PReturnDate,
+								   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date PwriteDate,
+								   
+								   @RequestParam (value = "ppTime") List<Date> ppTime,
+								   @RequestParam (value = "ppPlaceName") List<String> ppPlaceName,
+								   @RequestParam (value = "ppMemo") List<String> ppMemo,
+								   @RequestParam (value = "ppX") List<String> ppX,
+								   @RequestParam (value = "ppY") List<String> ppY,
+								   @RequestParam (value = "ppDate") List<Date> ppDate) {
 		
-		log.debug("PNo = {}", ppNo);
-		log.debug("PTitle = {}", ppTitle);
-		log.debug("PExplan = {}", ppExplan);
-		log.debug("PleaveDate = {}", ppleaveDate);
-//		log.debug("PReturnDate = {}", ppReturnDate);
-//		log.debug("PwriteDate = {}", ppwriteDate);
 		
+		String email = member.getMEmail();
+		
+		log.debug("ppTime = {}", ppTime);
+		log.debug("ppPlaceName = {}", ppPlaceName);
+		log.debug("ppMemo = {}", ppMemo);
+		log.debug("ppX = {}", ppX);
+		log.debug("ppY = {}", ppY);
+		log.debug("ppDate = {}", ppDate);
+		
+		Planner planner = new Planner(0, email, PTitle, PExplan, PleaveDate, PReturnDate, PwriteDate);
+		
+		int result = plannerBoardService.savePlanner(planner);
+		
+		
+		planner = plannerBoardService.findNo(planner.getPNo());
+
+		int saveNo = planner.getPNo();
+		log.debug("saveNo = {}", saveNo);
+		
+		List<PlannerPlan> plannerplan = plannerBoardService.savePlannerPlan(0, saveNo, ppTime, ppPlaceName, ppMemo, ppX, ppY, ppDate);
 		
 		// 일단 스트링으로 받고 LocalDate로 변환
 		return "redirect:/planner/myplanner";

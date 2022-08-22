@@ -21,7 +21,6 @@
 <style>
 	#fb_content {
 		resize : none;
-		overflow-y:scroll;
 	}
 	#save {
 		margin-left :45%;

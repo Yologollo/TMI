@@ -71,6 +71,41 @@ public class WidgetController {
 		log.info("GET / 요청!");
 		return "/widget/widget";
 	}
+	
+	@GetMapping("/widget/callArea.do")
+	public void callArea(HttpServletResponse request, HttpServletResponse response)
+			throws Exception {
+
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html, charset=utf-8");
+
+		String addr = AREACODE_URL;
+
+		PrintWriter out = response.getWriter();
+
+
+		addr = addr + SERVICE_KEY + "&numOfRows=17" + LAST_URL;
+
+
+		URL url = new URL(addr);
+
+		InputStream in = url.openStream();
+
+		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		IOUtils.copy(in, bos1);
+		in.close();
+		bos1.close();
+
+		String mbos = bos1.toString("UTF-8");
+
+		byte[] b = mbos.getBytes("UTF-8");
+		String s = new String(b, "UTF-8");
+		out.println(s);
+
+		JSONObject json = new JSONObject();
+		json.put("data", s);
+
+	}
 
 	@GetMapping("/widget/callAreaCode.do")
 	public void callAreaCode(HttpServletResponse request, HttpServletResponse response, @RequestParam String areaCode)
@@ -99,6 +134,42 @@ public class WidgetController {
 
 		}
 		;
+
+		URL url = new URL(addr);
+
+		InputStream in = url.openStream();
+
+		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		IOUtils.copy(in, bos1);
+		in.close();
+		bos1.close();
+
+		String mbos = bos1.toString("UTF-8");
+
+		byte[] b = mbos.getBytes("UTF-8");
+		String s = new String(b, "UTF-8");
+		out.println(s);
+
+		JSONObject json = new JSONObject();
+		json.put("data", s);
+
+	}
+	
+	@GetMapping("/widget/callCat1Code.do")
+	public void callCat1Code(HttpServletResponse request, HttpServletResponse response)
+			throws Exception {
+
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html, charset=utf-8");
+
+		String addr = CATEGORYCODE_URL;
+		String parameter = "";
+
+		PrintWriter out = response.getWriter();
+
+			parameter = parameter + LAST_URL;
+
+			addr = addr + SERVICE_KEY + "&numOfRows=8" + parameter;
 
 		URL url = new URL(addr);
 
@@ -283,23 +354,19 @@ public class WidgetController {
 	}
 	
 	@GetMapping("/widget/callAreaBasedList.do")
-	public ResponseEntity<?> callAreaBasedList(@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount, ModelAndView mav) throws Exception {
+	public ResponseEntity<?> callAreaBasedList(@RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount) throws Exception {
 		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
 		Map<String, Object> map = new HashMap<>();
 		
-		int cPage = 1;
+		int CPage = 1;
 		int numPerPage = 8;
 		int totalContent = Integer.parseInt(totalCount);
-		String url = "";
+		String url = "callAreaBasedList.do";
 		
-		map.put("CPage", cPage);
+		map.put("CPage", CPage);
 		map.put("numPerPage", numPerPage);
 		map.put("totalContent", totalContent);
 		map.put("url", url);		
-		
-//		String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
-//		mav.addObject("pagebar", pagebar);
-		
 		
 		String addr = AREABASEDLIST_URL;
 		String parameter = "";
@@ -309,7 +376,7 @@ public class WidgetController {
 		if (areaCode.equals("0")) {
 			
 			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "pageNo=" + CPage;
 			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + LAST_URL2;
 
@@ -318,7 +385,7 @@ public class WidgetController {
 		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
 			
 			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "pageNo=" + CPage;
 			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + LAST_URL2;
@@ -328,7 +395,7 @@ public class WidgetController {
 		} else {
 
 			parameter = parameter + "&" + "numOfRows=8";
-			parameter = parameter + "&" + "pageNo=1";
+			parameter = parameter + "&" + "pageNo=" + CPage;
 			parameter = parameter + "&" + "listYN=Y";
 			parameter = parameter + "&" + "areaCode=" + areaCode;
 			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
@@ -348,22 +415,189 @@ public class WidgetController {
 				.body(map);
 	}
 	
-	@GetMapping("/widget/callPagebar.do")
-	public ModelAndView callPagebar(@RequestParam String CPage, @RequestParam String numPerPage, @RequestParam String totalContent,  @RequestParam String url, Model model, HttpServletRequest request, ModelAndView mav) {
+	@GetMapping("/widget/callPreviousList.do")
+	public ResponseEntity<?> callPreviousList(@RequestParam String pageStart, @RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount) throws Exception {
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		Map<String, Object> map = new HashMap<>();
 		
-		int cPage = Integer.parseInt(CPage);
-		int numperPage = Integer.parseInt(numPerPage);
-		int TotalContent = Integer.parseInt(totalContent);
+		int CPage = Integer.parseInt(pageStart) - 5;
+		int numPerPage = 8;
+		int totalContent = Integer.parseInt(totalCount);
+		String url = "callAreaBasedList.do";
 		
-		String pagebar = HelloSpringUtils.getPagebar(cPage, numperPage, TotalContent, url);
-		log.debug("pagebar = {}", pagebar);
-		model.addAttribute(pagebar);
-		mav.addObject("pagebar", pagebar);
+		map.put("CPage", CPage);
+		map.put("numPerPage", numPerPage);
+		map.put("totalContent", totalContent);
+		map.put("url", url);		
 		
-		mav.setViewName("widget");
+		String addr = AREABASEDLIST_URL;
+		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);
 		
-		return mav;
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL2;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		};
+
+		Response response = widgetService.getResponse(addr);
+		List<Item> items = response.getBody().getItems();
+		map.put("items", items);	
 		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+				.body(map);
 	}
 	
+	@GetMapping("/widget/callMainList.do")
+	public ResponseEntity<?> callMainList(@RequestParam String mainPageNo, @RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount) throws Exception {
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		Map<String, Object> map = new HashMap<>();
+		
+		int CPage = Integer.parseInt(mainPageNo);
+		int numPerPage = 8;
+		int totalContent = Integer.parseInt(totalCount);
+		String url = "callAreaBasedList.do";
+		
+		map.put("CPage", CPage);
+		map.put("numPerPage", numPerPage);
+		map.put("totalContent", totalContent);
+		map.put("url", url);		
+		
+		String addr = AREABASEDLIST_URL;
+		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);
+		
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL2;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		};
+
+		Response response = widgetService.getResponse(addr);
+		List<Item> items = response.getBody().getItems();
+		map.put("items", items);	
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+				.body(map);
+	}
+	
+	@GetMapping("/widget/callNextList.do")
+	public ResponseEntity<?> callNextList(@RequestParam String pageStart, @RequestParam String areaCode, @RequestParam String sigunguCode, @RequestParam String totalCount) throws Exception {
+		// , @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3
+		Map<String, Object> map = new HashMap<>();
+		
+		int CPage = Integer.parseInt(pageStart) + 5;
+		int numPerPage = 8;
+		int totalContent = Integer.parseInt(totalCount);
+		String url = "callAreaBasedList.do";
+		
+		map.put("CPage", CPage);
+		map.put("numPerPage", numPerPage);
+		map.put("totalContent", totalContent);
+		map.put("url", url);		
+		
+		String addr = AREABASEDLIST_URL;
+		String parameter = "";
+		System.out.println("areaCode = " + areaCode);
+		System.out.println("sigunguCode = " + sigunguCode);
+		
+		if (areaCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+			
+		} else if (!areaCode.equals("0") && sigunguCode.equals("0")) {
+			
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + LAST_URL2;
+
+			addr = addr + SERVICE_KEY + parameter;
+
+		} else {
+
+			parameter = parameter + "&" + "numOfRows=8";
+			parameter = parameter + "&" + "pageNo=" + CPage;
+			parameter = parameter + "&" + "listYN=Y";
+			parameter = parameter + "&" + "areaCode=" + areaCode;
+			parameter = parameter + "&" + "sigunguCode=" + sigunguCode;
+			parameter = parameter + LAST_URL2;
+			
+			addr = addr + SERVICE_KEY + parameter;
+			
+		};
+
+		Response response = widgetService.getResponse(addr);
+		List<Item> items = response.getBody().getItems();
+		map.put("items", items);	
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+				.body(map);
+	}
 }

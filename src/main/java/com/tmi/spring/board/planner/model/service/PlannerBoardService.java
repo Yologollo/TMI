@@ -1,5 +1,6 @@
 package com.tmi.spring.board.planner.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
@@ -37,5 +38,13 @@ public interface PlannerBoardService {
 	Planner findBoardPlannerByNoModel(int no);
 
 	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
+
+	int savePlanner(Planner planner);
+
+	Planner findNo(int pNo);
+
+	List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
+			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate);
+
 
 }
