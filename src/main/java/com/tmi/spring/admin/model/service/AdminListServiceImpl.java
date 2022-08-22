@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.tmi.spring.admin.model.dao.AdminListDao;
 import com.tmi.spring.admin.model.dto.AdminList;
+import com.tmi.spring.member.model.dto.Member;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -37,7 +39,7 @@ public  class AdminListServiceImpl implements AdminListService {
 	}
 	
 	@Override
-	public int memberListSearch(String memberName) {
+	public Member memberListSearch(String memberName) {
 		return adminlistDao.memberListSearch(memberName);
 	}
 }

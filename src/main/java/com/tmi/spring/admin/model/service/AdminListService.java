@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tmi.spring.admin.model.dto.AdminList;
 import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
+import com.tmi.spring.member.model.dto.Member;
 
 public interface AdminListService {
 
@@ -13,7 +14,7 @@ public interface AdminListService {
 
 	int memeberDelete(String memberEmail);
 
-	int memberListSearch(String memberName);
+	Member memberListSearch(String memberName);
 
 	
 

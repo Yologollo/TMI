@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import
   org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import
   org.springframework.web.bind.annotation.GetMapping;
 import
@@ -20,11 +21,13 @@ import
   org.springframework.web.bind.annotation.RequestParam;
 import
   org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.admin.model.dto.AdminList;
 import
   com.tmi.spring.admin.model.service.AdminListService;
 import com.tmi.spring.common.HelloSpringUtils;
+import com.tmi.spring.member.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
   
@@ -85,24 +88,24 @@ import lombok.extern.slf4j.Slf4j;
   
 	
 	  @GetMapping("/memberListSearch.do")
-	  public ResponseEntity<?> memberListSearch(@RequestParam String membername) {
+	  public void memberListSearch(@RequestParam String membername, Model model, RedirectAttributes redirectAttr) {
 		  log.debug("membername = {}", membername);
-		  Map<String, Object> map = new HashMap<>();
 		  try { 
-				int result = adminListService.memberListSearch(membername);
-				map.put("msg", "회원조회가 되었습니다.");
-				return ResponseEntity.ok(map);
-
+				Member searchMember = adminListService.memberListSearch(membername);
+				log.info("membername = {}", membername);
+				model.addAttribute("searchMember", searchMember);
+				
 			} catch (Exception e) {
-				log.error("회원 조회 오류", e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+				e.printStackTrace();
+				throw e;
+				
 			}
 		  
 	
 	  }
 	 
 
-//     li
+
 	 
   
   

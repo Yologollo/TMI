@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.admin.model.dto.AdminList;
+import com.tmi.spring.member.model.dto.Member;
 
 @Mapper
 public interface AdminListDao {
@@ -21,8 +22,8 @@ public interface AdminListDao {
 	@Delete("delete from tmi_member where m_email = #{memberEmail}")
 	int memeberDelete(@Param("memberEmail") String memberEmail);
 
-	@Select("select * from tmi_member where m_name like #{%memberName%}")
-	int memberListSearch(@Param("memberName")String memberName);
+	@Select("select * from tmi_member where m_name like '%'||#{memberName}||'%'")
+	Member memberListSearch(@Param("memberName")String memberName);
 
 	
 	
