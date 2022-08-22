@@ -321,9 +321,11 @@ tr[data-no] {
 	
 		<article id="contentArea">
 			<div id="contentArea2" style="display: none">
-				<div id="selectContent"></div>
+				<div id="selectContent">
+				</div>
+				<div id="paging">
+				</div>
 			</div>
-		
 		</article>
 	    </div>
     </div>
@@ -727,10 +729,19 @@ tr[data-no] {
 					dataType : 'json',
 					success : function(data) {
 						
-						var myItem = data.response.body.items.item;
-						console.log(myItem);
+						
+						console.log(data);
+						console.log("Cpage = " + data.CPage);
+						console.log("totalContent = " + data.totalContent);
+						var cPage = data.CPage;
+						var numPerPage = data.numPerPage;
+						var totalcontent = data.totalContent;
+						var totalContent = parseFloat(totalcontent);
+						var url = data.url;
+						var myItem = data.items;
 						
 						$('#selectContent').empty();
+						$('#paging').empty();
 				
 						for(var i = 0; myItem.length > i; i++){
 							
@@ -739,7 +750,7 @@ tr[data-no] {
 							};
 							
 							var gallery = "";
-							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 							gallery += '<span class="thumbNailImage">';
 							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 							gallery += '</span>';
@@ -748,10 +759,63 @@ tr[data-no] {
 							
 							$('#selectContent').append(gallery);
 						};
-							var pagebar = "";
-							pagebar += '<nav>${pagebar}</nav>';
-							$('#selectContent').append(pagebar);
-							console.log("검색 ajax 끝");
+						
+							pagebar = "";
+							pageNo = "";
+							pageStart = "";
+							var pagebarsize = '5';
+							var pagebarSize = parseInt(pagebarsize);
+							url += '?cPage=';
+							var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+							pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+							var pageEnd = parseInt(pageStart + pagebarSize - 1);
+							pageNo = pageStart;
+							var previous = "";
+							var main = "";
+							var next = "";
+							
+							console.log("pagebarSize = " + pagebarSize);
+							console.log("totalPage = " + totalPage);
+							console.log("pageStart = " + pageStart);
+							console.log("pageEnd = " + pageEnd);
+							console.log("pageNo = " + pageNo);
+							console.log("previous = " + previous);
+							console.log("next = " + next);
+							
+							// previous
+							if(pageNo == 1) {
+								previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+								}
+							else {
+								previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+								}
+							
+							// pagingbar main
+							while(pageNo <= pageEnd && pageNo <= totalPage) {
+								if(pageNo == cPage) {
+									main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+									}
+								else {
+									main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" value="' + pageNo + '" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+									}
+								pageNo++;
+								}
+							
+							// next
+							if(pageNo > totalPage){
+								next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+								}
+							else{
+								next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+								}
+								
+							pagebar += '<nav id="pagebar">';
+							pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+							pagebar += previous;
+							pagebar += main;
+							pagebar += next;
+							$('#paging').append(pagebar);
+							
 					},
 					
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -764,15 +828,378 @@ tr[data-no] {
 					
 			},
 
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
+				console.log("data = " + data);
 			}
 
 		});
 
 	});
 	
+	function callPreviousList(arg0){
+		
+		console.log("pageStart = " + pageStart);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callPreviousList.do',
+			type : 'get',
+			data : {
+				
+				pageStart : pageStart,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					url += '?cPage=';
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id ="pagingMain"  href="javascript:void(0)" onclick=\"callMainList(this);\">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
+
+	function callMainList(arg0){
+		
+		var mainPageNo = $(arg0).text();
+		console.log("mainPageNo = " + mainPageNo);
+		console.log("pageStart = " + pageStart);
+		var start = pageStart;
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callMainList.do',
+			type : 'get',
+			data : {
+				
+				mainPageNo : mainPageNo,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = start;
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
+		
+	
+	function callNextList(arg0){
+		
+		console.log("pageStart = " + pageStart);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callNextList.do',
+			type : 'get',
+			data : {
+				
+				pageStart  : pageStart,
+				areaCode : areaCode,
+				sigunguCode : sigunguCode,
+				totalCount : totalCount
+				
+				// cat1 : cat1,
+				// cat2 : cat2,
+				// cat3 : cat3
+				
+			},
+			
+			dataType : 'json',
+			success : function(data) {
+				
+				console.log(data);
+				console.log("Cpage = " + data.CPage);
+				console.log("totalContent = " + data.totalContent);
+				var cPage = data.CPage;
+				var numPerPage = data.numPerPage;
+				var totalcontent = data.totalContent;
+				var totalContent = parseFloat(totalcontent);
+				var url = data.url;
+				var myItem = data.items;
+				
+				$('#selectContent').empty();
+				$('#paging').empty();
+		
+				for(var i = 0; myItem.length > i; i++){
+					
+					if(myItem[i].firstimage2 == ""){
+						myItem[i].firstimage2 = '${pageContext.request.contextPath}/resources/images/noImage.png';
+					};
+					
+					var gallery = "";
+					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<span class="thumbNailImage">';
+					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
+					gallery += '</span>';
+					gallery += '<strong class="thumbNailName">' + myItem[i].title + '</strong>';
+					gallery += '</a>';
+					
+					$('#selectContent').append(gallery);
+				};
+				
+					pagebar = "";
+					pageNo = "";
+					pageStart = "";
+					var pagebarsize = '5';
+					var pagebarSize = parseInt(pagebarsize);
+					url += '?cPage=';
+					var totalPage = parseInt(Math.ceil(totalContent / numPerPage));
+					pageStart = parseInt(((cPage - 1) / pagebarSize) * pagebarsize + 1);
+					var pageEnd = parseInt(pageStart + pagebarSize - 1);
+					pageNo = pageStart;
+					var previous = "";
+					var main = "";
+					var next = "";
+					
+					console.log("pagebarSize = " + pagebarSize);
+					console.log("totalPage = " + totalPage);
+					console.log("pageStart = " + pageStart);
+					console.log("pageEnd = " + pageEnd);
+					console.log("pageNo = " + pageNo);
+					console.log("previous = " + previous);
+					console.log("next = " + next);
+					
+					// previous
+					if(pageNo == 1) {
+						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					else {
+						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
+						}
+					
+					// pagingbar main
+					while(pageNo <= pageEnd && pageNo <= totalPage) {
+						if(pageNo == cPage) {
+							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
+							}
+						else {
+							main +='<li class=\"page-item\"><a class=\"page-link\" id = "pagingMain" href="javascript:void(0)" onclick="callMainList(this)">' + pageNo + '</a></li>'
+							}
+						pageNo++;
+						}
+					
+					// next
+					if(pageNo > totalPage){
+						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
+						}
+					else{
+						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span><span class=\"sr-only\">Next</span></a></li></ul>'
+						}
+						
+					pagebar += '<nav id="pagebar">';
+					pagebar += '<ul class=\"pagination  justify-content-center pagination-sm\">\r\n';
+					pagebar += previous;
+					pagebar += main;
+					pagebar += next;
+					$('#paging').append(pagebar);
+				
+			},
+			
+			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+				console.log("data = " + data);
+			}
+	});
+		
+	};
 	
 </script>
     
