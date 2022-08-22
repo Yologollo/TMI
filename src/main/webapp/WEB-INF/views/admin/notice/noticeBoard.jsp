@@ -46,7 +46,6 @@ window.addEventListener('load', (e) => {
 <section id="container">
   <div id="Tadminboard-submenu" class="submenu">
   
-	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
 	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	    </ul>
@@ -56,9 +55,11 @@ window.addEventListener('load', (e) => {
     <div>
       <div id="adminboard-head">
       	<h2>공지사항</h2>
-      	<div id="btn-sort-wrap">
-          <input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
-        </div>
+    	
+      			<div id="btn-sort-wrap">
+          			<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
+        		</div>
+      		
       </div>
       
       <table>

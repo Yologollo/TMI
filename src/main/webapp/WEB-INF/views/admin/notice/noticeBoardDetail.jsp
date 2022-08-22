@@ -60,7 +60,8 @@
 			<div class="comment-container">
 		        <div class="comment-editor"></div>
 		</c:if>
-								
+					
+					
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertNoticeBoard.nbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardUpdate.do?no=${insertNoticeBoard.nbNo}';">수정</button>
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardDelete.do?no=${insertNoticeBoard.nbNo}';">삭제</button>
