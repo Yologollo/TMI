@@ -133,13 +133,12 @@ public class MyPageController {
 			log.debug("member = {}",member);
 			if(member != null) {
 				int result = memberService.findPwUpdate(member);
-				redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 			}
 		} catch (Exception e) {
 			log.error("비밀번호 변경 오류", e);
 			throw e;
 		}
-		return "redirect:/mypage/memberDetail.do";
+		return "redirect:/login/memberLogout.do";
 	}
 	
 	@GetMapping("/memberDelete.do")

@@ -21,18 +21,17 @@
 	height: 600px;
 	float: right;
 	text-align: center;
+	font-size: 18px;
 }
 
 #memberDeleteInfoWrapper {
 	height: 70%;
-	border: 1px solid #d3d3d3;
-	padding-top: 5%;
+	padding-top: 20%;
 }
 
 #memberDeleteBtnWrapper {
-	border: 1px solid #d3d3d3;
 	height: 30%;
-	padding-top: 10%;
+	padding-top: 5%;
 }
 </style>
 <div id="commonMain">
@@ -63,15 +62,15 @@
 		
 		<div id="memberDeleteWrapper">
 			<div id="memberDeleteInfoWrapper">
-				회원탈퇴시 어쩌구 저쩌구..
+				회원탈퇴시 이미 작성하신 게시판 또는 플래너는 같이 파기되며,
 				<br />
-				불이익 어쩌구 저쩌구..
+				탈퇴 후 개인 정보 또한 파기됩니다.
 				<br />
-				정말로? 진짜로?
+				탈퇴 시, 파기된 정보는 복구 불가능 합니다.
 			</div>
 			<div id="memberDeleteBtnWrapper">
 				<form name="memberDeleteFrm" action="${pageContext.request.contextPath}/mypage/memberDelete.do" method="POST">
-					<button type="submit" value="${mNo}" class="btn btn-primary btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
+					<button type="submit" value="${mNo}" class="btn btn-danger btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
 				</form>
 			</div>
 		
