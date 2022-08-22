@@ -1,8 +1,10 @@
 package com.tmi.spring.board.planner.model.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -12,7 +14,6 @@ import org.apache.ibatis.session.RowBounds;
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
-import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
@@ -66,5 +67,14 @@ public interface PlannerBoardDao {
 
 	@Select("select * from tmi_planner_plan")
 	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
+
+	int savePlanner(Planner planner);
+
+	@Select("select p_no from tmi_planner where p_no = #{pNo}")
+	Planner findNo(int pNo);
+	
+
+	List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
+			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate);
 
 }

@@ -22,5 +22,5 @@ public class Planner {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate pReturnDate;
 	private Date pWriteDate;
-	private String pShare;
+//	private String pShare;
 }
