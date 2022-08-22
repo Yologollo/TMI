@@ -100,7 +100,7 @@ tr[data-no] {
  
   -->
  
-		 <div class="createAreaModalForm">
+		 		<div class="createAreaModalForm">
 			<div class="modal-dialog-centered modal-dialog-scrollable"
 		id="createAreaModal">
 				<div class="modal-content">
@@ -111,45 +111,10 @@ tr[data-no] {
 					</div>
 					<div class="modal-body">
 						<div class="modalInfo" id="areaList">
-							<label for="title">광역시/도</label><br />
-							<button type="button" class="btn btn-light" value="1"
-								onClick="insertArea(this);">서울</button>
-							<button type="button" class="btn btn-light" value="2"
-								onClick="insertArea(this);">인천</button>
-							<button type="button" class="btn btn-light" value="3"
-								onClick="insertArea(this);">대전</button>
-							<button type="button" class="btn btn-light" value="4"
-								onClick="insertArea(this);">대구</button>
-							<button type="button" class="btn btn-light" value="5"
-								onClick="insertArea(this);">광주</button>
-							<button type="button" class="btn btn-light" value="6"
-								onClick="insertArea(this);">부산</button>
-							<button type="button" class="btn btn-light" value="7"
-								onClick="insertArea(this);">울산</button>
-							<button type="button" class="btn btn-light" value="8"
-								onClick="insertArea(this);">세종특별자치시</button>
-							<button type="button" class="btn btn-light" value="31"
-								onClick="insertArea(this);">경기도</button>
-							<button type="button" class="btn btn-light" value="32"
-								onClick="insertArea(this);">강원도</button>
-							<button type="button" class="btn btn-light" value="33"
-								onClick="insertArea(this);">충청북도</button>
-							<button type="button" class="btn btn-light" value="34"
-								onClick="insertArea(this);">충청남도</button>
-							<button type="button" class="btn btn-light" value="35"
-								onClick="insertArea(this);">경상북도</button>
-							<button type="button" class="btn btn-light" value="36"
-								onClick="insertArea(this);">경상남도</button>
-							<button type="button" class="btn btn-light" value="37"
-								onClick="insertArea(this);">전라북도</button>
-							<button type="button" class="btn btn-light" value="38"
-								onClick="insertArea(this);">전라남도</button>
-							<button type="button" class="btn btn-light" value="39"
-								onClick="insertArea(this);">제주도</button>
 						</div>
-		
+
 						<div class="modalInfo" id="sigunguList"></div>
-		
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
@@ -171,23 +136,6 @@ tr[data-no] {
 					</div>
 					<div class="modal-body">
 						<div class="modalInfo" id="contentList">
-							<label for="title">관광타입</label><br />
-							<button type="button" class="btn btn-light" value="A00"
-								onClick="insertContent(this);">전체</button>
-							<button type="button" class="btn btn-light" value="A01"
-								onClick="insertContent(this);">관광지(자연)</button>
-							<button type="button" class="btn btn-light" value="A02"
-								onClick="insertContent(this);">관광지(인문)</button>
-							<button type="button" class="btn btn-light" value="A03"
-								onClick="insertContent(this);">레포츠</button>
-							<button type="button" class="btn btn-light" value="A04"
-								onClick="insertContent(this);">쇼핑</button>
-							<button type="button" class="btn btn-light" value="A05"
-								onClick="insertContent(this);">음식</button>
-							<button type="button" class="btn btn-light" value="B02"
-								onClick="insertContent(this);">숙박</button>
-							<button type="button" class="btn btn-light" value="C01"
-								onClick="insertContent(this);">추천코스</button>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -337,7 +285,7 @@ tr[data-no] {
     
      -->
     
-    <script>
+<script>
 
 	var areaCode = 0;
 	var areaName = 0;
@@ -352,6 +300,9 @@ tr[data-no] {
 	var cat3 = 0;
 	var cat3Name = 0;
 	var totalCount = 0;
+	var pageStart = 0;
+	var pageNo = "";
+	var pagebar = "";
 	
 
 	// areaModal
@@ -370,6 +321,40 @@ tr[data-no] {
 
 	$('#searchAreaBtn').on('click', function() {
 		$('.createAreaModalForm').addClass('show-modal');
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callArea.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+
+				var myItem = data.response.body.items.item;
+				var areatitleLable = '<label for="title">광역시/도</label><br />';
+				
+				$('#areaList').empty();
+
+				$('#areaList').append(areatitleLable);
+
+				for (var i = 0; myItem.length > i; i++) {
+
+					var output = '';
+					output += '<button type="button" class="btn btn-light" value="'
+							+ myItem[i].code
+							+ '" onClick="insertArea(this);">'
+							+ myItem[i].name + '</button>';
+
+					$('#areaList').append(output);
+
+				}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+			}
+
+		});
+		
 	});
 
 	function insertArea(arg0) {
@@ -392,7 +377,7 @@ tr[data-no] {
 						var titleLable = '<label for="title">시/군/구</label><br />';
 						sigunguCode = 0;
 						sigunguCode += 0;
-
+						
 						$('#sigunguList').empty();
 
 						$('#sigunguList').append(titleLable);
@@ -408,20 +393,8 @@ tr[data-no] {
 							$('#sigunguList').append(output);
 
 						}
-						
-						for (var i = 0; myItem.length > i; i++) {
 
-							var output = '';
-							output += '<button type="button" class="btn btn-light" value="'
-									+ myItem[i].code
-									+ '" onClick="insertSigungu(this);">'
-									+ myItem[i].name + '</button>';
-
-							$('#sigunguList').append(output);
-
-						}
 					},
-
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						alert("Status : " + textStatus);
 						alert("Error : " + errorThrown);
@@ -453,17 +426,20 @@ tr[data-no] {
 		$('#areaCodeFinal').empty();
 
 		var finalArea = '';
-
+		
 		if (sigunguCode != '0') {
 			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
+			
 		} else if (areaCode == '0') {
+			
 			alert('광역시/도 를 선택하십시요.');
+			
 		} else {
-			finalArea += '광역시/도 : ' + areaName
+			finalArea += '광역시/도 : ' + areaName 
 			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
@@ -488,6 +464,39 @@ tr[data-no] {
 		
 		$('#serviceTr').hide();
 		$('#serviceCat1List').empty();
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/widget/callCat1Code.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(data) {
+
+				var myItem = data.response.body.items.item;
+				var titleLable = '<label for="title">관광타입</label><br />';
+
+				$('#contentList').empty();
+
+				$('#contentList').append(titleLable);
+
+				for (var i = 0; myItem.length > i; i++) {
+
+					var output = '';
+					output += '<button type="button" class="btn btn-light" value="'
+							+ myItem[i].code
+							+ '" onClick="insertContent(this);">'
+							+ myItem[i].name + '</button>';
+
+					$('#contentList').append(output);
+
+				}
+			},
+
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status : " + textStatus);
+				alert("Error : " + errorThrown);
+			}
+
+		});
 			
 	});
 
@@ -554,7 +563,7 @@ tr[data-no] {
 		console.log('cat1Name = ' + cat1Name);
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/widget/docallCat2Code.do',
+			url : '${pageContext.request.contextPath}/widget/callCat2Code.do',
 			type : 'get',
 			data : {
 				cat1 : cat1
