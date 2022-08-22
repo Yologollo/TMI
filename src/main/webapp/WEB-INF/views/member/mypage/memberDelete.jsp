@@ -6,39 +6,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 
+	생성 : 김용민
+	작업 : 김용민
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
-<style>
-#memberDeleteWrapper{
-	border: 1px solid #d3d3d3;
-	border-top: none;
-	border-left: none;
-	width: 85%;
-	height: 600px;
-	float: right;
-	text-align: center;
-	font-size: 18px;
-}
-
-#memberDeleteInfoWrapper {
-	height: 70%;
-	padding-top: 20%;
-}
-
-#memberDeleteBtnWrapper {
-	height: 30%;
-	padding-top: 5%;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdelete.css">
 <div id="commonMain">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민
- -->
  	<div id="bannder">배너 / 회원탈퇴</div>
  	
  	<div id="wrapper">

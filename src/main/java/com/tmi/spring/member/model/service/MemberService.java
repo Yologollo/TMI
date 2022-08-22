@@ -12,7 +12,7 @@ import com.tmi.spring.member.model.dto.MemberReviewBoard;
 /**
  * 
  * @생성 최윤서
- * @작업 최윤서
+ * @작업 최윤서, 김용민
  *
  */
 public interface MemberService {
@@ -44,5 +44,5 @@ public interface MemberService {
 
 	int selectReviewBoardTotalContent(String memberEmail);
 
-
+	Member searchEmail(String mName, String mPhone);
 }

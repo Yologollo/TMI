@@ -6,7 +6,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 
+	생성 : 김용민
+	작업 : 김용민
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
@@ -29,11 +32,6 @@ window.addEventListener('load', (e) => {
 });
 </script>
 <div id="commonMain">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민
- -->
-
  	<div id="bannder">배너 / My게시글</div>
  	
  	<div id="wrapper">

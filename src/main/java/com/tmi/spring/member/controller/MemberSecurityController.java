@@ -30,8 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
- * @생성 김용민 최윤서
- * @작업 김용민 최윤서
+ * @생성 김용민, 최윤서
+ * @작업 최윤서
  *
  */
 
@@ -65,6 +65,31 @@ public class MemberSecurityController {
 	public String findPwUpdate() {
 		return "/member/login/findPwUpdate";
 	}
+	@GetMapping("/findEmail.do")
+	public String findEmail() {
+		return "/member/login/findEmail";
+	}
+	
+	@PostMapping("/findEmail.do")
+	public String findEmail(@RequestParam String mName, @RequestParam String mPhone, Model model, RedirectAttributes redirectAttr) {
+		try {
+//			log.debug("mName = {}",mName);
+//			log.debug("mPhone = {}",mPhone);
+			Member findEmailMember = memberService.searchEmail(mName, mPhone);
+			if(findEmailMember != null) {
+				String email = findEmailMember.getMEmail();
+				redirectAttr.addFlashAttribute("msg", "회원님의 이메일은 " + email + " 입니다. 로그인을 진행해주세요😊");
+				return "redirect:/login/memberLogin.do";
+				
+			} else {
+				redirectAttr.addFlashAttribute("msg", "가입하신 회원정보가 없습니다😥");
+				return "redirect:/login/findEmail.do";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 	
 	@PostMapping("/findPwUpdate.do")
 	public String findPwUpdate(@RequestParam String mEmail, @RequestParam String mPassword, RedirectAttributes redirectAttr) {
@@ -73,7 +98,7 @@ public class MemberSecurityController {
 			Member member = memberService.emailChk(mEmail);
 			String encryptedPassword = bcryptPasswordEncoder.encode(mPassword);
 			member.setMPassword(encryptedPassword);
-			log.debug("member = {}",member);
+//			log.debug("member = {}",member);
 			if(member != null) {
 				int result = memberService.findPwUpdate(member);
 				redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
@@ -90,7 +115,7 @@ public class MemberSecurityController {
 		log.debug("mEmail,mNickName = {}{}", mEmail, mNickName);
 		try {
 			Member member = memberService.emailChk(mEmail);
-			log.info("member = {}", member);
+//			log.info("member = {}", member);
 			
 			if(member != null && mNickName.equals(member.getMNickName())) {
 				redirectAttr.addAttribute("mEmail", mEmail);
@@ -110,9 +135,9 @@ public class MemberSecurityController {
 	
 	@PostMapping("/loginSuccess.do")
 	public String loginSuccess(@AuthenticationPrincipal Member member, HttpSession session, Model model, RedirectAttributes redirectAttr) {
-		log.debug("loginSuccess");
+//		log.debug("loginSuccess");
 
-		// security redirect사용하기
+		/* security redirect사용하기 */
 		SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 		String location = "/";
 		if(savedRequest != null)
@@ -127,7 +152,7 @@ public class MemberSecurityController {
 	public String memberEnroll(Member member, RedirectAttributes redirectAttr) {
 		log.debug("member = {}", member);
 		try {
-			// 암호화처리
+			/* 암호화처리 */
 			String rawPassword = member.getMPassword();
 			String encryptedPassword = bcryptPasswordEncoder.encode(rawPassword);
 			member.setMPassword(encryptedPassword);

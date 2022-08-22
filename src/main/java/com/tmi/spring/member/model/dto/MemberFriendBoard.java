@@ -7,6 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+/**
+ * 
+ * @생성 이경석
+ * @작업 이경석
+ *
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

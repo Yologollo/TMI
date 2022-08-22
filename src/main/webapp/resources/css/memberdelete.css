@@ -1,0 +1,20 @@
+#memberDeleteWrapper{
+	border: 1px solid #d3d3d3;
+	border-top: none;
+	border-left: none;
+	width: 85%;
+	height: 600px;
+	float: right;
+	text-align: center;
+	font-size: 18px;
+}
+
+#memberDeleteInfoWrapper {
+	height: 70%;
+	padding-top: 20%;
+}
+
+#memberDeleteBtnWrapper {
+	height: 30%;
+	padding-top: 5%;
+}
