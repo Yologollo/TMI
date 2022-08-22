@@ -61,25 +61,45 @@ window.addEventListener('load', (e) => {
 		</div>
 		<h1>여행 친구 게시판</h1>
 		<section id="board-container" class="container">
-		<table id="tbl-board" class="table table-striped table-hover text-center">
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
+		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+			<colgroup>
+                <col width="10%">
+                <col width="">
+                <col width="20%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+         		</colgroup>
+			<thead>
+				<tr>
+		            <th scope="col" lang="en">No</th>
+		            <th scope="col">제목</th>
+		            <th scope="col">작성자</th>
+		            <th scope="col">등록일</th>
+		            <th scope="col">첨부파일</th>
+		            <th scope="col">조회수</th>
+				</tr>
+			</thead>
 			<c:forEach items="${boardList}" var="friendBoard" varStatus="vs">
+				<tbody>
 				<tr data-no="${friendBoard.fbNo}">
  					<td>${friendBoard.fbNo}</td>
-					<td>${friendBoard.fbTitle}</td>
+					<td>${friendBoard.fbTitle}
+						<span style="color:red;"><c:if test="${friendBoard.commentCount > 0}"> [${friendBoard.commentCount}]</c:if></span>
+					</td>
 					<td>${friendBoard.MNickName}</td>
 					<td>
 						<fmt:parseDate value="${friendBoard.fbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
 					</td>
+					<td>
+						<c:if test="${friendBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+						</c:if>
+					</td>
 					<td>${friendBoard.fbReadCount}</td>
 				</tr>
+				</tbody>
 			</c:forEach>
 		</table>
 		<div id="pagebar">
