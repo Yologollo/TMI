@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.tmi.spring.admin.model.dao.AdminListDao;
 import com.tmi.spring.admin.model.dto.AdminList;
+import com.tmi.spring.member.model.dto.Member;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-public class AdminListServiceImpl implements AdminListService {
+@Slf4j
+public  class AdminListServiceImpl implements AdminListService {
 
 	@Autowired
 	AdminListDao adminlistDao;
@@ -21,5 +25,21 @@ public class AdminListServiceImpl implements AdminListService {
 		int limit = numPerPage;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return adminlistDao.selectAdminList(rowBounds);
+	}
+
+	@Override
+	public int selectTotalContent() {
+		return adminlistDao.selectTotalContent();
+	}
+
+	
+	@Override
+	public int memeberDelete(String memberEmail) {
+		return adminlistDao.memeberDelete(memberEmail);
+	}
+	
+	@Override
+	public Member memberListSearch(String memberName) {
+		return adminlistDao.memberListSearch(memberName);
 	}
 }

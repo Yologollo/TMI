@@ -2,7 +2,7 @@ package com.tmi.spring.admin.notice.model.dto;
 
 import java.time.LocalDateTime;
 
-import com.tmi.spring.board.friend.model.dto.FriendBoardEntity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data; 

@@ -23,11 +23,12 @@
 			nb.nb_no desc
 	</select> 
 	
+	
 	<insert id="insertNoticeBoard">
 		insert into 
 			tmi_notice_board 
 		values 
-			(seq_nb_no.nextval, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0, #{nbContent})
+			(seq_nb_no.nextval, #{nbMEmail}, #{nbTitle}, sysdate, sysdate, 0,#{nbContent})
 			
 		<selectKey keyProperty="nbNo" resultType="_int" order="AFTER">
 			select
@@ -42,13 +43,15 @@
 			tmi_notice_board_attachment 
 			(nba_no, nba_nb_no, nba_original_filename, nba_renamed_filename) 
 		values 
-			(seq_nba_no.nextval, #{nbaNbNo}, #{nbaOriginalFilename}, #{nbaRenamedFilename})
+			(seq_nba_no.nextval, 
+			#{nbaNbNo}, 
+			#{nbaOriginalFilename}, 
+			#{nbaRenamedFilename})
 	</insert>
 	
 	 
 	<resultMap id="NoticeBoardMap" type="noticeBoard">
 		<result column="nb_no" property="nb_no"/>
-		<result column="nb_p_no" property="nb_p_no"/>
 		<result column="m_nickname" property="m_nickname"/>
 		<result column="nb_title" property="nb_title"/>
 		<result column="nb_content" property="nb_content"/>

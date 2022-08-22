@@ -17,7 +17,6 @@ public class InsertNoticeBoard {
 	private List<NoticeBoardAttachment> attachments = new ArrayList<>();
 	
 	private int nbNo;
-	/* private int nbPNo; */
 	private String nbMEmail;
 	private String nbTitle;
 	private String nbContent;

@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NoticeBoardAttachment {
-	private int nbaNO;
-	private int nbaNbNo;
-	private String nbaOriginalFilename;
-	private String nbaRenamedFilename;
-	private LocalDateTime nbaCreatedAt;
+	private int nbaNo; 					//게시판 번호
+	private int nbaNbNo; 				//첨부파일 번호	
+	private String nbaOriginalFilename;	//업로드한 파일명
+	private String nbaRenamedFilename;	//저장된 파일명
+	private LocalDateTime nbaCreatedAt; //작성날짜
 	
 	
 		
