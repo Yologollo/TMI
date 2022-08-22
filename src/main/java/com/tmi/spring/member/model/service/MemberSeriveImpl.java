@@ -97,4 +97,10 @@ public class MemberSeriveImpl implements MemberService {
 	public int selectReviewBoardTotalContent(String memberEmail) {
 		return memberDao.selectReviewBoardTotalContent(memberEmail);
 	}
+	
+	@Override
+	public Member searchEmail(String mName, String mPhone) {
+		return memberDao.searchEmail(mName, mPhone);
+	}
+
 }

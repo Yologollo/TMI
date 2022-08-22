@@ -13,6 +13,54 @@
 	display: inline-block;
 	margin-top: 5%;
 }
+.find_container{
+	border: 1px solid #e3e3e3;
+	border-radius:0.6rem;
+	width: 40%;
+	height: 55%;
+	font-size: 30px;
+	display: inline-block;
+	margin-top: 5%;
+}
+.find_title > img {
+	width: 8%;
+	margin-right:5px;
+	margin-top: 5.2%;
+}
+.find_title > h1 {
+	color: #4a4a4a;
+	font-weight: 600;
+	font-size: 2rem;
+	margin-top: 5%;
+	font-family: 'Nanum+Gothic';
+}
+.sign_up_box{
+	text-align: center;
+	margin:20px 0px 10px 106px;
+	width:50%;
+}
+.sign_up_box > p {
+	float:left;
+	font-size:10px;
+	color:#7c7c7c;
+	margin-top: 5px;
+	font-family: 'Nanum+Gothic';
+    font-weight: 600;
+}
+.sign_up{
+    font-size:15px;
+    color:#7c7c7c;
+    float:right;
+    font-weight: bold;
+    font-family: 'Nanum+Gothic';
+    font-weight: 600;
+}
+
+.sign_up:hover {
+	color:#70B9E9;
+}
+
+
 .signup_title > img {
 	width: 8%;
 	margin-right:5px;

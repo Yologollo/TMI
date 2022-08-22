@@ -46,6 +46,9 @@
 			 			<div class="input-box">
 			                <input id="mPhone" type="number" name="mPhone" ng-focus="chkPhoneType('focus');" ng-blur="chkPhoneType('blur');" placeholder="예)010-1234-5678" required>
 			                <label for="mPhone">휴대폰</label>
+			                <div class="check">
+			                	<span class="mPhone_already" style="color:red; display:none;">번호를 입력해주세요.</span>
+			                </div>
 			            </div>
 			            
 			 			<div class="input-box">
@@ -312,7 +315,14 @@ $('#mName').blur(function() {
 	} else {
 		$('#name_chk_already').css('display', 'inline-block');
 	}
-})
+});
+$('#mPhone').blur(function() {
+	if(mPhoneRex.test($('#mPhone').val())){
+		$('#mPhone_already').css('display', 'none');
+	} else {
+		$('#mPhone_already').css('display', 'inline-block');
+	}
+});
 
 
 

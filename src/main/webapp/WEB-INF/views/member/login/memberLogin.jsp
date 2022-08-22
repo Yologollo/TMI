@@ -37,7 +37,8 @@
 						  <input type="checkbox" id="ex_chk2" name="remember-me"> 
 						  <label for="ex_chk2" name="">이메일저장</label> 
 						</div>
-			            <a href="${pageContext.request.contextPath}/login/findPw.do" class="find_pw">비밀번호 찾기</a>
+			            <a href="${pageContext.request.contextPath}/login/findPw.do" class="find"> 비밀번호 찾기</a>
+			            <a href="${pageContext.request.contextPath}/login/findEmail.do" class="find" style="margin-right:5px;">이메일 찾기 |</a>
 
 			            <input type="submit" value="로그인" onClick="location.href='${pageContext.request.contextPath}/login/memberLogin.do'">
 			            <div class="sign_up_box">
