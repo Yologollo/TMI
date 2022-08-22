@@ -5,6 +5,7 @@ import java.util.List;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardSearch;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.planner.model.dto.Planner;
 
@@ -14,6 +15,10 @@ public interface FriendBoardService {
 
 	int selectTotalContent();
 
+	List<FriendBoardSearch> selectFriendBoardSearchList(int cPage, int numPerPage, String searchtype, String keyWord);
+
+	int selectSearchTotalContent(String searchType, String keyword);
+	
 	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 
 	InsertFriendBoard selectOneFriendBoard(int no);
@@ -33,5 +38,7 @@ public interface FriendBoardService {
 	int updateReadCount(int no);
 
 	Planner findBoardPlannerByNoModel(int no);
+
+
 
 }

@@ -54,7 +54,13 @@ public class HelloSpringUtils {
 	public static String getPagebar(int cPage, int numPerPage, int totalContent, String url) {
 		final int pagebarSize = 5;
 		StringBuilder pagebar = new StringBuilder();
-		url += "?cPage=";
+		
+		if(url.contains("Search")) {
+			url += "&cPage=";
+		} else {
+			url += "?cPage=";
+		};
+		
 		int totalPage = (int) Math.ceil((double) totalContent / numPerPage); 
 		int pageStart = ((cPage - 1) / pagebarSize) * pagebarSize + 1;  
 		int pageEnd = pageStart + pagebarSize - 1;

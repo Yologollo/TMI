@@ -2,6 +2,7 @@ package com.tmi.spring.board.friend.model.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardSearch;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
@@ -23,6 +25,10 @@ public interface FriendBoardDao {
 
 	@Select("select count(*) from tmi_friend_board")
 	int selectTotalContent();
+	
+	List<FriendBoardSearch> selectFriendBoardSearchList(RowBounds rowBounds, Map<String, String> map);
+	
+	int selectSearchTotalContent(Map<String, String> map);
 
 	int insertFriendBoard(InsertFriendBoard insertFriendBoard);
 

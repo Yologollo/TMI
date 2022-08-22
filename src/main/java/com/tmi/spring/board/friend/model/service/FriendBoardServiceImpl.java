@@ -3,7 +3,9 @@ package com.tmi.spring.board.friend.model.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.tmi.spring.board.friend.model.dao.FriendBoardDao;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardSearch;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
@@ -39,6 +42,26 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	@Override
 	public int selectTotalContent() {
 		return friendBoardDao.selectTotalContent();
+	}
+	
+	@Override
+	public List<FriendBoardSearch> selectFriendBoardSearchList(int cPage, int numPerPage, String searchType,
+			String keyword) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return friendBoardDao.selectFriendBoardSearchList(rowBounds, map);
+	}
+	
+	@Override
+	public int selectSearchTotalContent(String searchType, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return friendBoardDao.selectSearchTotalContent(map);
 	}
 	
 	@Override
@@ -122,5 +145,8 @@ public class FriendBoardServiceImpl implements FriendBoardService {
 	public Planner findBoardPlannerByNoModel(int no) {
 		return friendBoardDao.findBoardPlannerByNoModel(no);
 	}
+
+
+
 	
 }
