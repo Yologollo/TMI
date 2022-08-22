@@ -12,6 +12,13 @@ import com.tmi.spring.chat.model.service.ChatService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @생성 최윤서
+ * @작업 최윤서
+ *
+ */
+
 @Controller
 @Slf4j
 public class StompController {
@@ -29,7 +36,7 @@ public class StompController {
 	@MessageMapping("/chat/{chatroomId}")
 	@SendTo("/app/chat/{chatroomId}")
 	public Map<String, Object> sendChat(Map<String, Object> payload, @DestinationVariable String chatroomId) {
-		log.debug("payload = {}",payload);
+//		log.debug("payload = {}",payload);
 		int result = chatService.insertChatContentSend(payload);
 		return payload;
 	}
