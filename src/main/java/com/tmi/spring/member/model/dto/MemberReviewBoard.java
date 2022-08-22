@@ -19,9 +19,12 @@ public class MemberReviewBoard extends MemberEntity {
 	private LocalDateTime rbUpdatedAt;
 	private int rbReadCount;
 	
+	private int attachCount;
+	private int commentCount;
+	
 	public MemberReviewBoard(String mNickName, int mNo, String mEmail, String mPassword,
 			String mName, String mPhone, LocalDateTime mCreatedAt, int rbNo, int rbPNo, String rbTitle, String rbContent,
-			LocalDateTime rbCreatedAt, LocalDateTime rbUpdatedAt, int rbReadCount) {
+			LocalDateTime rbCreatedAt, LocalDateTime rbUpdatedAt, int rbReadCount, int attachCount, int commentCount) {
 		super(mNickName, mNo, mEmail, mPassword, mName, mPhone, mCreatedAt);
 		this.rbNo = rbNo;
 		this.rbPNo = rbPNo;
@@ -31,6 +34,8 @@ public class MemberReviewBoard extends MemberEntity {
 		this.rbCreatedAt = rbCreatedAt;
 		this.rbUpdatedAt = rbUpdatedAt;
 		this.rbReadCount = rbReadCount;
+		this.attachCount = attachCount;
+		this.commentCount = commentCount;
 	}
 
 }

@@ -56,23 +56,22 @@
 
 					<tbody id="list-content">
 
-						<c:forEach items="${list}" var="adminList" varStatus="vs">
+						
 							<tr>
-								<td>${adminList.m_no}</td>
-								<td>${adminList.m_nickname}</td>
-								<td>${adminList.m_name}</td>
-								<td>${adminList.m_email}</td>
-								<td>${adminList.m_phone}</td>
+								<td>${searchMember.MNo}</td>
+								<td>${searchMember.MNickName}</td>
+								<td>${searchMember.MName}</td>
+								<td>${searchMember.MEmail}</td>
+								<td>${searchMember.MPhone}</td>
 								<td>
 									<div id="btn-sort-wrap">
 										<button type="submit" class="btn btn-primary"
 											data-bs-target="#exampleModal"
-											data-member-email=${adminList.m_email
-											}  	id="deleteBtn">회원탈퇴</button>
+											data-member-email=${searchMember.MEmail}
+											id="deleteBtn">회원탈퇴</button>
 									</div>
 								</td>
 							</tr>
-						</c:forEach>
 
 					</tbody>
 				</table>
@@ -86,16 +85,17 @@
 								<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
 								<button type="submit" id="memberSearchBtn" class="btn">검색</button>
 							</form>
+							<button type="button" id="memberListBtn" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/memberList.do'">전체회원</button>
 						</div>
 		</div>
 	</section>
 </div>
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 
 
 <script>
+
+/* 회원 탈퇴 */
 $(document).on('click', '#deleteBtn', function(){
 	var memberEmail = $(this).data('memberEmail');
 	console.log(memberEmail);
@@ -122,47 +122,6 @@ $(document).on('click', '#deleteBtn', function(){
 	} 
 });
 
-/* /* $(document).on('click', '#memberSearchBtn', function(){
-	var memberName = $(this).data('memberName');
-	console.log(memberName);
-
-	
-		$.ajax({
-			
-			url : `${pageContext.request.contextPath}/admin/memeberList.do`,
-			data : {
-				memberName : memberName
-			},
-			contentType : 'application/jason;',
-			type : "GET",
-			success(response){
-				console.log(response);
-				alert(response.msg);
-				location.href = `${pageContext.request.contextPath}/admin/memberList.do`;
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-	            alert("Status : " + textStatus);
-	            alert("Error : " + errorThrown);
-			}
-		});
-	}  
-}); */ 
-
-
-
-/* 	
-function clickDel(formName) {
-		formName.action = "/board/contentDelAsk";
-		formName.method = "post";
-		formName.submit();
-	} 
-*/
-	
-	
-/* 
-myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-}) 
-*/
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

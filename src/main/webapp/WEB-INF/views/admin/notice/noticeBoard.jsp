@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
 
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"> 
 	<jsp:param value="회원관리" name="title" />
 </jsp:include>
@@ -15,10 +16,29 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
 <div id="commonMain"> 
-<!-- 
-	생성 : 권민지
-	작업 : 권민지
- -->
+<style>
+	tr[data-no] {
+		cursor: pointer;
+	}
+</style>
+<script>
+window.addEventListener('load', (e) => {
+	document.querySelectorAll("tr[data-no]").forEach((tr) => {
+		tr.addEventListener('click', (e) => {
+			console.log(e.target);
+			const tr = e.target.parentElement;
+			console.log(tr);
+			// 특정 선택자 일치 여부
+			if(tr.matches('tr[data-no]')) {
+				const no = tr.dataset.no;
+				location.href = '${pageContext.request.contextPath}/admin/notice/noticeBoardDetail.do?no=' + no;
+			}
+		});
+	});
+});
+</script>
+
+
 
 <div class="top-logo">
   <span>관리자</span>
@@ -26,9 +46,8 @@
 <section id="container">
   <div id="Tadminboard-submenu" class="submenu">
   
-	    <ul id="sub">
 	      <li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 	    </ul>
 </div>
     
@@ -36,10 +55,11 @@
     <div>
       <div id="adminboard-head">
       	<h2>공지사항</h2>
-      	<div id="btn-sort-wrap">
-   <%--        <button onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>추가하기</button> --%>
-          <input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
-        </div>
+    	
+      			<div id="btn-sort-wrap">
+          			<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
+        		</div>
+      		
       </div>
       
       <table>

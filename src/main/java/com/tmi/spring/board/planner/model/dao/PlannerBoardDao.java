@@ -74,7 +74,10 @@ public interface PlannerBoardDao {
 	Planner findNo(int pNo);
 	
 
-	List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
-			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate);
+//	List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
+//			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate);
+
+	@Insert("insert into tmi_planner_plan values (seq_pp_no.nextval, #{pppNo}, #{ppTime}, #{ppPlaceName}, #{ppMemo}, #{ppX}, #{ppY}, #{ppDate})")
+	void insertPlannerPlan(PlannerPlan pp);
 
 }

@@ -72,7 +72,7 @@ public class FriendBoardController {
 	@GetMapping("/board/friend/friendBoard.do")
 	public ModelAndView FriendBoard( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
-			int numPerPage = 5;
+			int numPerPage = 10;
 			List<FriendBoard> list = friendBoardService.selectFriendBoardList(cPage, numPerPage);
 			log.debug("list = {}", list);
 			mav.addObject("list", list);

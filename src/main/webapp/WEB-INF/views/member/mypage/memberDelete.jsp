@@ -6,40 +6,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 
+	생성 : 김용민
+	작업 : 김용민
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
-<style>
-#memberDeleteWrapper{
-	border: 1px solid #d3d3d3;
-	border-top: none;
-	border-left: none;
-	width: 85%;
-	height: 600px;
-	float: right;
-	text-align: center;
-}
-
-#memberDeleteInfoWrapper {
-	height: 70%;
-	border: 1px solid #d3d3d3;
-	padding-top: 5%;
-}
-
-#memberDeleteBtnWrapper {
-	border: 1px solid #d3d3d3;
-	height: 30%;
-	padding-top: 10%;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdelete.css">
 <div id="commonMain">
-<!-- 
-	생성 : 김용민
-	작업 : 김용민
- -->
  	<div id="bannder">배너 / 회원탈퇴</div>
  	
  	<div id="wrapper">
@@ -63,15 +40,15 @@
 		
 		<div id="memberDeleteWrapper">
 			<div id="memberDeleteInfoWrapper">
-				회원탈퇴시 어쩌구 저쩌구..
+				회원탈퇴시 이미 작성하신 게시판 또는 플래너는 같이 파기되며,
 				<br />
-				불이익 어쩌구 저쩌구..
+				탈퇴 후 개인 정보 또한 파기됩니다.
 				<br />
-				정말로? 진짜로?
+				탈퇴 시, 파기된 정보는 복구 불가능 합니다.
 			</div>
 			<div id="memberDeleteBtnWrapper">
 				<form name="memberDeleteFrm" action="${pageContext.request.contextPath}/mypage/memberDelete.do" method="POST">
-					<button type="submit" value="${mNo}" class="btn btn-primary btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
+					<button type="submit" value="${mNo}" class="btn btn-danger btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
 				</form>
 			</div>
 		

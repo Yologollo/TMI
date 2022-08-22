@@ -17,7 +17,7 @@ import com.tmi.spring.member.model.dto.MemberReviewBoard;
 /**
  * 
  * @생성 최윤서
- * @작업 최윤서
+ * @작업 최윤서, 김용민
  *
  */
 @Service
@@ -97,4 +97,10 @@ public class MemberSeriveImpl implements MemberService {
 	public int selectReviewBoardTotalContent(String memberEmail) {
 		return memberDao.selectReviewBoardTotalContent(memberEmail);
 	}
+	
+	@Override
+	public Member searchEmail(String mName, String mPhone) {
+		return memberDao.searchEmail(mName, mPhone);
+	}
+
 }
