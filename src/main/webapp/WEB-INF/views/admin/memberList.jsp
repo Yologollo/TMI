@@ -20,9 +20,7 @@
 
 <div id="commonMain">
 
-	<div class="top-logo">
-		<span>관리자</span>
-	</div>
+	
 	
 	<section id="container">
 		<div id="Tadminboard-submenu" class="submenu">
@@ -40,6 +38,12 @@
 		
 				<div id="adminboard-head">
 					<h2>회원목록</h2>
+				<div id="search-wrap">
+							<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
+								<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
+								<button type="submit" id="memberSearchBtn" class="btn">검색</button>
+							</form>
+						</div>
 				</div>
 
 				<table>
@@ -81,12 +85,7 @@
 						<nav>${pagebar}</nav>
 					</div>
 	
-						<div id="search-wrap">
-							<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
-								<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
-								<button type="submit" id="memberSearchBtn" class="btn">검색</button>
-							</form>
-						</div>
+						
 		</div>
 	</section>
 </div>

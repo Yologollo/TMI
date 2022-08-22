@@ -4,23 +4,7 @@
     justify-content: center;
     margin: 0 130px 0 30px;
   } */
-  .top-logo{
-    height: 100px;
-    background: #c2e59c; 
-	background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);  
-	background: linear-gradient(to right, #64b3f4, #c2e59c);
-    position: relative;
-  }
-  .top-logo span {
-    position: absolute;
-    left: 45%;
-    bottom: 18%;
-   /*  color: white; */
-    font-family: 'KyoboHand';
-    font-weight: 800;
-    font-size: 280%;
-    letter-spacing:10px
-  }
+
   
   #Tadminboard-submenu {
     margin-top: 100px;
@@ -47,7 +31,7 @@
     /* 여기까지 submenu */
   
   #adminboard{
-    margin: -135px 0px 0px 190px;
+    margin: -260px 0px 0px 190px;
     width: 80%;
     
     display: flex;
@@ -58,8 +42,8 @@
   #adminboard h2 {
   
     font-size: 45px;
-    padding: 10px;
-    margin: -5px 20px 9px;
+    padding: 0px;
+    margin: 122px 46px 0px;
   }
   #adminboard table {
     width: 100%;
@@ -137,7 +121,7 @@
       }
       #btn-sort-wrap button {
         font-size: 1rem;
-        font-family: 'KyoboHand';
+    
         margin: 15px -35px 10px 10px;
         letter-spacing: 6px;
         border: none;
