@@ -135,7 +135,7 @@
 	<div class="quickmenu" style="position: absolute; right: 10px; top: 50%;">
 		<ul>
 			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
-			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
+			<li><a href="https://forms.gle/5uodCWt4YiVenixp7" target="_blank">문의</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do">공지사항</a></li>
 			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
 		</ul>

@@ -28,6 +28,7 @@
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/aboutus" access="permitAll"/>
 		<intercept-url pattern="/admin/notice/noticeBoard.do" access="permitAll"/>
+		<intercept-url pattern="/admin/notice/noticeBoardForm.do" access="permitAll"/>
 
 		<intercept-url pattern="/tourism/**" access="permitAll"/>
 		<intercept-url pattern="/widget/**" access="permitAll"/>
