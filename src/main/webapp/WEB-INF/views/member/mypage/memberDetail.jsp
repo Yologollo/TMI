@@ -93,7 +93,7 @@
 				
 				<div class="input-group mb-3 memberInfo">	
 					<span class="input-group-text" id="basic-addon1">비밀번호 확인</span> 
-					<input type="password" class="form-control" id="passwordCheck" name="password" placeholder="비밀번호 확인" required>
+					<input type="password" class="form-control" id="passwordCheck" name="passwordCheck" placeholder="비밀번호 확인" required>
 				</div>
 				<div class="check">
 	                <span id="pw2_chk_ok" style="color:green; display:none;">일치</span>
@@ -114,7 +114,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <script>
 $("#submitButtonPw").click(function(){
-	console.log($("#mPassword").val());
 	if ($("#mPassword").val() == '') {
 		alert("새로운 비밀번호를 입력해주세요.")
 		$("#mPassword").select().focus();
@@ -124,10 +123,8 @@ $("#submitButtonPw").click(function(){
 		alert("위 입력한 비밀번호를 확인해주세요.")
 		$("#passwordCheck").select().focus();
 		return false;
-	} 
-/* 	else {
-		location.href = "location.href='${pageContext.request.contextPath}/mypage/memberUpdatePw.do'";
-	}; */
+	}
+	alert("비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 });
 
 const mPasswordRex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,16}$/;
@@ -142,13 +139,17 @@ $('#mPassword').blur(function() {
 	}
 });
 $('#passwordCheck').blur(function() {
+	var button_joinus = document.getElementById('submitButtonPw');
+	
 	if($('#mPassword').val() != $(this).val()){
 		$('#pw2_chk_already').css('display', 'inline-block');
 		$('#pw2_chk_ok').css('display', 'none');
+		submitButtonPw.disabled = true;
 		$("#passwordCheck").select().focus();
 	} else {
 		$('#pw2_chk_ok').css('display', 'inline-block');
 		$('#pw2_chk_already').css('display', 'none');
+		submitButtonPw.disabled = false;
 	}
 });
 
