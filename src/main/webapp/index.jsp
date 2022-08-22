@@ -65,15 +65,13 @@ tr[data-no] {
 	text-align: center;
 }
 
-#contentArea2 {
+#contentArea3 {
 	width: 280px;
 	height: 330px;
 	margin: auto;
 	overflow: hidden;
 	display: inline-block;
 }
-
-
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
@@ -190,9 +188,9 @@ tr[data-no] {
 	 			<section id="board-container" class="container">
 					<article>
 						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
-								<div id="contentArea2">
+								<div id="contentArea3">
 								
-									<div id="selectContent">
+									<div id="selectContent2">
 										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 											<span class="thumbNailImage">
 												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
