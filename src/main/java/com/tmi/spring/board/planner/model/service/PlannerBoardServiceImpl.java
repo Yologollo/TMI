@@ -125,9 +125,22 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	}
 	
 	@Override
-	public List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
+	public List<PlannerPlan> savePlannerPlan(int n, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
 			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate) {
-		return plannerBoardDao.savePlannerPlan(i, saveNo, ppTime, ppPlaceName, ppMemo, ppX, ppY, ppDate);
+		PlannerPlan pp = new PlannerPlan();
+		
+		for(int i = 0; i < ppMemo.size(); i++) {
+			log.debug("i = {}", i);
+			pp.setPppNo(saveNo);
+			pp.setPpTime(ppTime.get(i));
+			pp.setPpPlaceName(ppPlaceName.get(i));
+			pp.setPpMemo(ppMemo.get(i));
+			pp.setPpX(Float.parseFloat(ppX.get(i)));
+			pp.setPpY(Float.parseFloat(ppY.get(i)));
+			pp.setPpDate(ppDate.get(i));
+			plannerBoardDao.insertPlannerPlan(pp);
+		}
+		return null;
 	}
 
 }

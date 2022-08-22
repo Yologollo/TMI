@@ -361,7 +361,6 @@ public class PlannerBoardController {
 		
 		int result = plannerBoardService.savePlanner(planner);
 		
-		
 		planner = plannerBoardService.findNo(planner.getPNo());
 
 		int saveNo = planner.getPNo();
