@@ -8,6 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 
+ * @생성 최윤서
+ * @작업 최윤서
+ *
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

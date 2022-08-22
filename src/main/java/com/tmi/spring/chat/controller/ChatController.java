@@ -44,7 +44,7 @@ public class ChatController {
 	
 	@GetMapping(value ="/deleteChatRoom.do", produces = "application/json")
 	public ResponseEntity<?> deleteChatRoom(@RequestParam String chatroomId){
-		log.debug("------삭제삭제------chatroomId = {}", chatroomId);
+//		log.debug("chatroomId = {}", chatroomId);
 		Map<String, Object> map = new HashMap<>();
 		try {
 			int result = chatService.deleteChatRoom(chatroomId);
@@ -60,7 +60,7 @@ public class ChatController {
 	@GetMapping(value = "/room.do", produces = "application/json")
 	public ResponseEntity<?> roomContentList(Map<String, Object> chatRoomList, @RequestParam String chatroomId) {
 		try {
-			log.debug("------중요------chatroomId = {}", chatroomId);
+//			log.debug("chatroomId = {}", chatroomId);
 			List<ChatContent> list = chatService.findChatRoomList(chatroomId);
 			/* log.debug("list = {}", list); */
 			return ResponseEntity.ok(list);
@@ -88,12 +88,12 @@ public class ChatController {
 	public void chatRoom(@AuthenticationPrincipal Member member, @RequestParam String email, Model model) {
 		String sendEmail = member.getMEmail();
 		String receiveEmail = email;
-		log.debug("sendEmail = {}", sendEmail);
-		log.debug("receiveEmail = {}", email);
+//		log.debug("sendEmail = {}", sendEmail);
+//		log.debug("receiveEmail = {}", email);
 		
 		// send와 receive 둘 다 확인		
 		ChatRoom chatRoom = chatService.findChatRoomByMemberEmail(sendEmail, receiveEmail);
-		log.debug("chatRoom = {}", chatRoom);
+//		log.debug("chatRoom = {}", chatRoom);
 		String chatroomId = null;
 		if(chatRoom != null) {
 			// 채팅방이 존재하는 경우
@@ -112,7 +112,7 @@ public class ChatController {
 			// 채팅방 생성 
 			int result = chatService.createChatRoom(chatroomId, sendEmail, receiveEmail);
 		}
-		log.debug("chatroomId = {}", chatroomId);
+//		log.debug("chatroomId = {}", chatroomId);
 		model.addAttribute("chatroomId",chatroomId);
 		model.addAttribute("receiveEmail",receiveEmail);
 	

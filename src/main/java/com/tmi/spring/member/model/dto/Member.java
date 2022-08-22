@@ -10,6 +10,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+/**
+ * 
+ * @생성 최윤서
+ * @작업 최윤서
+ *
+ */
+
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
