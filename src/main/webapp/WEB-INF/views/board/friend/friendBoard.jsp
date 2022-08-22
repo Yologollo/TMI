@@ -14,7 +14,7 @@
 <style>
 	tr[data-no] {
 		cursor: pointer;
-	}+
+	}
 </style>
 <script>
 window.addEventListener('load', (e) => {
@@ -76,7 +76,23 @@ window.addEventListener('load', (e) => {
 			</c:forEach>
 		</table>
 		<nav>${pagebar}</nav>
-	</section> 
+		
+		<form action="${pageContext.request.contextPath}/board/friend/friendBoardSearch.do" method="get">
+		<div class="search">
+    		<select name="searchType">
+      			<option value="n"<c:out value="${friendBoardSearch.searchType == null ? 'selected' : ''}"/>>-----</option>
+      			<option value="t"<c:out value="${friendBoardSearch.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+      			<option value="c"<c:out value="${friendBoardSearch.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+      			<option value="w"<c:out value="${friendBoardSearch.searchType eq 'e' ? 'selected' : ''}"/>>작성자</option>
+      			<option value="tc"<c:out value="${friendBoardSearch.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+    		</select>
+    		<input type="text" name="keyword" id="keywordInput" value="${friendBoardSearch.keyword}"/>
+    	
+    		<button id="searchBtn" type="submit">검색</button>
+  		</div> 
+  		</form>
+
+		</section> 
  	
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

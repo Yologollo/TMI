@@ -23,6 +23,47 @@
 			fb.fb_no desc
 	</select> 
 	
+	 	<select id="selectFriendBoardSearchList" parameterType="String" resultMap="FriendBoardMap">
+		select
+		    fb.fb_no,
+		    fb.fb_p_no,
+		    m.m_nickname,
+		    fb.fb_title,
+		    fb.fb_content,
+		    fb.fb_created_at,
+		    fb.fb_updated_at,
+		    fb.fb_read_count,
+		    (select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount,
+		    (select count(*) from tmi_friend_board_comment where fbc_fb_no = fb.fb_no) commentCount
+		from 
+		   	tmi_friend_board fb join tmi_member m
+		        on fb_m_email = m.m_email
+		<include refid="search"></include>
+		order by
+			fb.fb_no desc
+	</select> 
+	
+	<select id="selectSearchTotalContent" parameterType="map" resultType="int">
+		select
+		    count(*)
+		from (
+			select
+		    	fb.fb_no,
+		    	fb.fb_p_no,
+		    	m.m_nickname,
+		    	fb.fb_title,
+		    	fb.fb_content,
+		    	fb.fb_created_at,
+		    	fb.fb_updated_at,
+		    	fb.fb_read_count,
+		    	(select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount,
+		    	(select count(*) from tmi_friend_board_comment where fbc_fb_no = fb.fb_no) commentCount
+			from 
+		   		tmi_friend_board fb join tmi_member m
+		        	on fb_m_email = m.m_email
+			<include refid="search"></include>)
+	</select> 
+	
 	<insert id="insertFriendBoard">
 		insert into 
 			tmi_friend_board 
@@ -51,6 +92,15 @@
 		values
 			(seq_fbc_no.nextval, #{fbcMEmail}, #{fbcFbNo}, sysdate, #{fbcContent})
 	</insert>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">where fb.fb_title LIKE '%${keyword}%'</if>
+			<if test="searchType == 'c'.toString()">where fb.fb_content LIKE '%${keyword}%'</if>
+			<if test="searchType == 'w'.toString()">where m.m_nickname LIKE '%${keyword}%'</if>
+			<if test="searchType == 'tc'.toString()">where (fb.fb_title LIKE '%${keyword}%') or (fb.fb_content LIKE '%${keyword}%')</if>
+		</if>
+	</sql>
 	 
 	<resultMap id="FriendBoardMap" type="friendBoard">
 		<result column="fb_no" property="fb_no"/>
