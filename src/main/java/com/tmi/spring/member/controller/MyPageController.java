@@ -164,7 +164,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberFriendBoardList.do")
-	public ModelAndView memberFriendBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberFriendBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
@@ -192,7 +192,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberPlannerBoardList.do")
-	public ModelAndView memberPlannerBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberPlannerBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
@@ -220,7 +220,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberReviewBoardList.do")
-	public ModelAndView memberReviewBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberReviewBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();

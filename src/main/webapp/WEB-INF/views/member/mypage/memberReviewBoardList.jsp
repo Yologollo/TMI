@@ -61,22 +61,40 @@ window.addEventListener('load', (e) => {
 		</div>
 		<h1>리뷰 게시판</h1>
 		<section id="board-container" class="container">
-		<table id="tbl-board" class="table table-striped table-hover text-center">
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
+		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+				<colgroup>
+					<col width="10%">
+	                <col width="">
+	                <col width="20%">
+	                <col width="20%">
+	                <col width="10%">
+	                <col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col" lang="en">No</th>
+			            <th scope="col">제목</th>
+			            <th scope="col">작성자</th>
+			            <th scope="col">등록일</th>
+			            <th scope="col">첨부파일</th>
+			            <th scope="col">조회수</th>
+					</tr>
+				</thead>
 			<c:forEach items="${boardList}" var="reviewBoard" varStatus="vs">
 				<tr data-no="${reviewBoard.rbNo}">
  					<td>${reviewBoard.rbNo}</td>
 					<td>${reviewBoard.rbTitle}</td>
-					<td>${reviewBoard.MNickName}</td>
+					<td>${reviewBoard.MNickName}
+						<span style="color:red;"><c:if test="${reviewBoard.commentCount > 0}"> [${reviewBoard.commentCount}]</c:if></span>
+					</td>
 					<td>
 						<fmt:parseDate value="${reviewBoard.rbCreatedAt}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
 						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
+					</td>
+					<td>
+						<c:if test="${reviewBoard.attachCount gt 0}">
+							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+						</c:if>
 					</td>
 					<td>${reviewBoard.rbReadCount}</td>
 				</tr>
