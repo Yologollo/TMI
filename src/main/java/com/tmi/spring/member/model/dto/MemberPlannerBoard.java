@@ -18,10 +18,13 @@ public class MemberPlannerBoard extends MemberEntity {
 	private LocalDateTime pbCreatedAt;
 	private LocalDateTime pbUpdatedAt;
 	private int pbReadCount;
+	
+	private int attachCount;
+	private int commentCount;
 
 	public MemberPlannerBoard(String mNickName, int mNo, String mEmail, String mPassword,
 			String mName, String mPhone, LocalDateTime mCreatedAt, int pbNo, int pbPNo, String pbTitle, String pbContent,
-			LocalDateTime pbCreatedAt, LocalDateTime pbUpdatedAt, int pbReadCount) {
+			LocalDateTime pbCreatedAt, LocalDateTime pbUpdatedAt, int pbReadCount, int attachCount, int commentCount) {
 		super(mNickName, mNo, mEmail, mPassword, mName, mPhone, mCreatedAt);
 		this.pbNo = pbNo;
 		this.pbPNo = pbPNo;
@@ -31,5 +34,7 @@ public class MemberPlannerBoard extends MemberEntity {
 		this.pbCreatedAt = pbCreatedAt;
 		this.pbUpdatedAt = pbUpdatedAt;
 		this.pbReadCount = pbReadCount;
+		this.attachCount = attachCount;
+		this.commentCount = commentCount;
 	}
 }

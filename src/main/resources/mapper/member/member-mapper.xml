@@ -79,7 +79,9 @@
 		    fb.fb_content,
 		    fb.fb_created_at,
 		    fb.fb_updated_at,
-		    fb.fb_read_count
+		    fb.fb_read_count,
+		    (select count(*) from tmi_friend_board_attachment where fba_fb_no = fb.fb_no) attachCount,
+		    (select count(*) from tmi_friend_board_comment where fbc_fb_no = fb.fb_no) commentCount
 		from
 		    tmi_friend_board fb join tmi_member m
 		        on fb_m_email = m.m_email
@@ -101,7 +103,8 @@
 		    pb.pb_content,
 		    pb.pb_created_at,
 		    pb.pb_updated_at,
-		    pb.pb_read_count
+		    pb.pb_read_count,
+		    (select count(*) from tmi_planner_board_comment where pbc_pb_no = pb.pb_no) commentCount
 		from
 		    tmi_planner_board pb join tmi_member m
 		        on pb_m_email = m.m_email
@@ -123,7 +126,9 @@
 		    rb.rb_content,
 		    rb.rb_created_at,
 		    rb.rb_updated_at,
-		    rb.rb_read_count
+		    rb.rb_read_count,
+		    (select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    (select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount
 		from
 		    tmi_review_board rb join tmi_member m
 		        on rb_m_email = m.m_email

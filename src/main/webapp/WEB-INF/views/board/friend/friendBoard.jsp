@@ -47,33 +47,48 @@ window.addEventListener('load', (e) => {
     <!-- 메뉴버튼 끝 -->
 
 	<section id="board-container" class="container">
-		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'"/>
-		<table id="tbl-board" class="table table-striped table-hover text-center">
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>첨부파일</th>
-				<th>조회수</th>
-			</tr>
-			<c:forEach items="${list}" var="friendBoard" varStatus="vs">
-				<tr data-no="${friendBoard.fb_no}">
-					<td>${friendBoard.fb_no}</td>
-					<td>${friendBoard.fb_title}<c:if test="${friendBoard.commentCount > 0}"> (${friendBoard.commentCount})</c:if></td>
-					<td>${friendBoard.m_nickname}</td>
-					<td>
-						<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
-						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
-					</td>
-					<td>
-						<c:if test="${friendBoard.attachCount gt 0}">
-							<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
-						</c:if>
-					</td>
-					<td>${friendBoard.fb_read_count}</td>
+		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+		<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'">글쓰기</button>
+			<colgroup>
+		          <col width="10%">
+		          <col width="">
+		          <col width="20%">
+		          <col width="20%">
+		          <col width="10%">
+		          <col width="10%">
+		    </colgroup>
+			<thead>
+				<tr>
+				<th scope="col" lang="en">No</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성자</th>
+				<th scope="col">등록일</th>
+				<th scope="col">첨부파일</th>
+				<th scope="col">조회수</th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="friendBoard" varStatus="vs">
+					<tr data-no="${friendBoard.fb_no}">
+						<td>${friendBoard.fb_no}</td>
+						<td style="color:#000;">
+							${friendBoard.fb_title}
+							<span style="color:red;"><c:if test="${friendBoard.commentCount > 0}"> [${friendBoard.commentCount}]</c:if></span>
+						</td>
+						<td>${friendBoard.m_nickname}</td>
+						<td>
+							<fmt:parseDate value="${friendBoard.fb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
+							<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
+						</td>
+						<td>
+							<c:if test="${friendBoard.attachCount gt 0}">
+								<img src="${pageContext.request.contextPath}/resources/images/board/file.png" width="16px" />
+							</c:if>
+						</td>
+						<td>${friendBoard.fb_read_count}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 		<nav>${pagebar}</nav>
 	</section> 

@@ -133,13 +133,12 @@ public class MyPageController {
 			log.debug("member = {}",member);
 			if(member != null) {
 				int result = memberService.findPwUpdate(member);
-				redirectAttr.addFlashAttribute("msg", "비밀번호를 성공적으로 수정하였습니다. 로그인을 해주세요😃");
 			}
 		} catch (Exception e) {
 			log.error("비밀번호 변경 오류", e);
 			throw e;
 		}
-		return "redirect:/mypage/memberDetail.do";
+		return "redirect:/login/memberLogout.do";
 	}
 	
 	@GetMapping("/memberDelete.do")
@@ -164,7 +163,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberFriendBoardList.do")
-	public ModelAndView memberFriendBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberFriendBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
@@ -192,7 +191,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberPlannerBoardList.do")
-	public ModelAndView memberPlannerBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberPlannerBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();
@@ -220,7 +219,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/memberReviewBoardList.do")
-	public ModelAndView memberReviewBoardList(@AuthenticationPrincipal Member member, Model model, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView memberReviewBoardList(@AuthenticationPrincipal Member member, @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, HttpServletRequest request) {
 		try {
 			int numPerPage = 5;
 			String memberEmail = member.getMEmail();

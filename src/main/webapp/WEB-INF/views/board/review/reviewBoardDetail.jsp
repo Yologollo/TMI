@@ -280,7 +280,7 @@ const email = document.getElementById("loginMemberEmail").value;
 		        <div class="comment-editor">
 		            <form
 						action="${pageContext.request.contextPath}/board/review/reviewBoardCommentEnroll.do" method="post" name="reviewBoardCommentFrm">
-		                <input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
+		                <input type="hidden" name="rbcRbNo" value="${insertReviewBoard.rbNo}" />
 		                <input type="hidden" name="rbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 						<textarea name="rbcContent" cols="100" rows="3"></textarea>
 		                <button type="submit" class="btn btn-primary btn-lg">등록</button>

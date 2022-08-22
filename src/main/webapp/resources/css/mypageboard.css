@@ -25,3 +25,9 @@ h1 {
 	text-align: center;
 	margin-bottom: 10px;
 }
+
+#notice-table {
+	float:right; 
+	width: 85%;
+}
+

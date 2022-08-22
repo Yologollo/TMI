@@ -20,9 +20,13 @@ public class MemberFriendBoard extends MemberEntity{
 	private LocalDateTime fbUpdatedAt;
 	private int fbReadCount;
 	
+	private int attachCount;
+	private int commentCount;
+	
 	public MemberFriendBoard(String mNickName, int mNo, String mEmail, String mPassword,
 			String mName, String mPhone, LocalDateTime mCreatedAt, int fbNo, int fbPNo, 
-			String fbTitle, String fbContent, LocalDateTime fbCreatedAt, LocalDateTime fbUpdatedAt, int fbReadCount) {
+			String fbTitle, String fbContent, LocalDateTime fbCreatedAt, LocalDateTime fbUpdatedAt, 
+			int fbReadCount, int attachCount, int commentCount) {
 		super(mNickName, mNo, mEmail, mPassword, mName, mPhone, mCreatedAt);
 		this.fbNo = fbNo;
 		this.fbPNo = fbPNo;
@@ -32,6 +36,8 @@ public class MemberFriendBoard extends MemberEntity{
 		this.fbCreatedAt = fbCreatedAt;
 		this.fbUpdatedAt = fbUpdatedAt;
 		this.fbReadCount = fbReadCount;
+		this.attachCount = attachCount;
+		this.commentCount = commentCount;
 	}
 
 }
