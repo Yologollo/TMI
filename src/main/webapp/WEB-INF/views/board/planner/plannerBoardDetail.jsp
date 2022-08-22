@@ -21,7 +21,6 @@
 <style>
 	#fb_content {
 		resize : none;
-		overflow-y:scroll;
 	}
 	#save {
 		margin-left :45%;
@@ -120,16 +119,6 @@ const email = document.getElementById("loginMemberEmail").value;
 								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
 	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
 								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
-								
-								<input type="text" value="${plan.ppNo}"/>
-								<input type="text" value="${plan.pppNo}"/>
-								<input type="text" value="${plan.ppTime}"/>
-								<input type="text" value="${plan.ppPlaceName}"/>
-								<input type="text" value="${plan.ppMemo}"/>
-								<input type="text" value="${plan.ppX}"/>
-								<input type="text" value="${plan.ppY}"/>
-								<input type="text" value="${plan.ppDate}"/>
-								<!-- 생일 선물 ^^ -->
 								
                             	<c:if test="${nowDate eq openDate}">
                             
@@ -336,23 +325,34 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
+		
+	<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
+		<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
+			<input type="hidden"  name="ppTime"  value="${plan.ppTime}" required>
+			<input type="hidden"  name="ppPlaceName"  value="${plan.ppPlaceName}" required>
+			<input type="hidden"  name="ppMemo"  value="${plan.ppMemo}" required>
+			<input type="hidden"  name="ppX"  value="${plan.ppX}" required>
+			<input type="hidden"  name="ppY"  value="${plan.ppY}" required>
+			<input type="hidden"  name="ppDate"  value="${plan.ppDate}" required>
+		</c:forEach>
+		
+		
 		<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
 				<c:if test="${planner.PNo ne 0}">
 					<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
-						<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
-								<input type="hidden"  name="ppNo" id="no11" value="${planner.PNo}" required>
-								<input type="hidden"  name="ppTitle" id="no2" value="${planner.PTitle}" required>
-								<input type="hidden"  name="ppExplan" id="no3" value="${planner.PExplan}" required>
-								<input type="hidden"  name="ppleaveDate" id="no4" value="${planner.PLeaveDate}" required>
-								<input type="hidden"  name="ppReturnDate" id="no5" value="${planner.PReturnDate}" required>
-								<input type="hidden"  name="ppwriteDate" id="no6" value="${planner.PWriteDate}" required>
-								<button type="submit" class="btn btn-primary btn-lg">저장하기</button>
-						</form>
+						<input type="hidden"  name="PNo" id="no11" value="${planner.PNo}" required>
+						<input type="hidden"  name="PTitle" id="no2" value="${planner.PTitle}" required>
+						<input type="hidden"  name="PExplan" id="no3" value="${planner.PExplan}" required>
+						<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
+						<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
+						<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
+						<button type="submit" class="btn btn-primary btn-lg">저장하기</button>
 					</c:if>
 				</c:if>
-			</c:forEach>
+		</c:forEach>
+	</form>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />

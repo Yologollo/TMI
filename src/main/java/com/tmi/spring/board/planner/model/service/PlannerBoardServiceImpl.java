@@ -1,5 +1,6 @@
 package com.tmi.spring.board.planner.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -111,6 +112,22 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	@Override
 	public List<PlannerPlan> findPlansList(List<PlannerBoard> list) {
 		return plannerBoardDao.findPlansList(list);
+	}
+	
+	@Override
+	public int savePlanner(Planner planner) {
+		return plannerBoardDao.savePlanner(planner);
+	}
+	
+	@Override
+	public Planner findNo(int pNo) {
+		return plannerBoardDao.findNo(pNo);
+	}
+	
+	@Override
+	public List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
+			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate) {
+		return plannerBoardDao.savePlannerPlan(i, saveNo, ppTime, ppPlaceName, ppMemo, ppX, ppY, ppDate);
 	}
 
 }
