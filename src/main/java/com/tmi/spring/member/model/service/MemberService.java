@@ -44,5 +44,5 @@ public interface MemberService {
 
 	int selectReviewBoardTotalContent(String memberEmail);
 
-
+	Member searchEmail(String mName, String mPhone);
 }

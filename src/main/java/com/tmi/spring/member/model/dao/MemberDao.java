@@ -3,6 +3,7 @@ package com.tmi.spring.member.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.member.model.dto.Member;
@@ -45,4 +46,5 @@ public interface MemberDao {
 
 	int selectReviewBoardTotalContent(String memberEmail);
 
+	Member searchEmail(@Param("mName") String mName, @Param("mPhone") String mPhone);
 }

@@ -141,6 +141,17 @@
 		select count(*) from tmi_review_board where rb_m_email = #{rbMEmail}
 	</select>
 	
+	<select id="searchEmail" resultType="member">
+		select
+			*
+		from 
+			tmi_member
+		where
+			m_name = #{mName}
+		  and
+		  	m_phone = #{mPhone}
+	</select>
+	
 	<resultMap type="member" id="memberMap">
 		<id column="m_email" property="mEmail"/>
 		<result column="m_password" property="mPassword"/>

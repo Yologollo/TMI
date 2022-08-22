@@ -65,6 +65,31 @@ public class MemberSecurityController {
 	public String findPwUpdate() {
 		return "/member/login/findPwUpdate";
 	}
+	@GetMapping("/findEmail.do")
+	public String findEmail() {
+		return "/member/login/findEmail";
+	}
+	
+	@PostMapping("/findEmail.do")
+	public String findEmail(@RequestParam String mName, @RequestParam String mPhone, Model model, RedirectAttributes redirectAttr) {
+		try {
+			log.debug("mName = {}",mName);
+			log.debug("mPhone = {}",mPhone);
+			Member findEmailMember = memberService.searchEmail(mName, mPhone);
+			if(findEmailMember != null) {
+				String email = findEmailMember.getMEmail();
+				redirectAttr.addFlashAttribute("msg", "회원님의 이메일은 " + email + " 입니다. 로그인을 진행해주세요😊");
+				return "redirect:/login/memberLogin.do";
+				
+			} else {
+				redirectAttr.addFlashAttribute("msg", "가입하신 회원정보가 없습니다😥");
+				return "redirect:/login/findEmail.do";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 	
 	@PostMapping("/findPwUpdate.do")
 	public String findPwUpdate(@RequestParam String mEmail, @RequestParam String mPassword, RedirectAttributes redirectAttr) {

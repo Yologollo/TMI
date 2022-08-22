@@ -100,7 +100,7 @@ input[type=submit]{
 input[type=submit]:hover{
     background-color: #70B9E9;
 }
-.find_pw{
+.find{
     text-align: right;
     font-size:10pt;
     color:#7c7c7c;
@@ -110,7 +110,7 @@ input[type=submit]:hover{
     font-weight: 600;
     cursor: pointer;
 }
-.find_pw:hover {
+.find:hover {
 	color:#70B9E9;
 }
 .checks {
