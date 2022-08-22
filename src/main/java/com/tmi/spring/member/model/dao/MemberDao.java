@@ -13,7 +13,7 @@ import com.tmi.spring.member.model.dto.MemberReviewBoard;
 /**
  * 
  * @생성 최윤서
- * @작업 최윤서
+ * @작업 최윤서, 김용민
  *
  */
 @Mapper

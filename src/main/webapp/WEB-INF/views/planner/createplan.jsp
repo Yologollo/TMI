@@ -6,22 +6,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="Travel Making Imagine" name="title" />
-</jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
 <!-- 
 	생성 : 김용민
 	작업 : 김용민
  -->
- 
- 
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="Travel Making Imagine" name="title" />
+</jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/createplanner.css?after">
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
 			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}" onclick="location.href='${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}'">저장</button>
-			<%-- <button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}">저장</button> --%>
 			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 			<input type="hidden" id="planner-No" value="${planner.PNo}"/>
 				
@@ -43,7 +39,6 @@
 			<c:forEach items="${days}" var="day" varStatus="status">
                 <div class="plannerDateInfo" data-date="${day}" onclick="plansChange(${status.count})">
                     <span class="palnnerDateInfoSpanClass">DAY${status.count}</span><br />
-                    <%-- <fmt:formatDate value="${day}" pattern="MM.dd" /> --%>
                     <fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
                     <fmt:formatDate value="${dayformat}" pattern="MM.dd" /> 
                 </div> 
@@ -101,10 +96,9 @@ document.querySelectorAll("#btnPlannerClose").forEach((btn) => {
 		console.log(e.target);
 		console.log(e.target.dataset.pNo);
 		document.plannerCancelFrm.pNo.value = e.target.dataset.no;
-		document.plannerCancelFrm.submit(); // submit 이벤트핸들러를 호출하지 않는다.
+		document.plannerCancelFrm.submit();
 	});
 });
-
 
 // DAY 버튼 클릭시 해당하는 날짜의 일정만 보여주는 함수
 var planslide =  document.querySelectorAll(".plannerDetailDateInfoFirstId");
@@ -145,7 +139,7 @@ function planInsert(place_name, place_y, place_x){
 // 일정 추가시 일정 관련 <div> 코드 생성해주는 함수
 function getHtml(place_name, place_y, place_x, num, data_date){
 	
-    var div = "<div class=\"plannerDetailDateInfo\" data-date=\"" + data_date + "\" data-y=\"" + place_y + "\" data-x=\"" + place_x + "\" data-planNo=\"\">";
+    var div = "<div class=\"plannerDetailDateInfo\">";
     div += "<span class=\"data_dateSpan\" hidden=\"hidden\">" + data_date + "</span>";
     div += "<span class=\"place_ySpan\" hidden=\"hidden\">" + place_y + "</span>";
     div += "<span class=\"place_xSpan\" hidden=\"hidden\">" + place_x + "</span>";
@@ -440,7 +434,7 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;font-size:12px;">' + title + '</div>';
+    var content = '<div style="padding:5px; z-index:1; font-size:18px;">' + title + '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
