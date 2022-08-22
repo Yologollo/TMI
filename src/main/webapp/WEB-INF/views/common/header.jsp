@@ -136,7 +136,7 @@
 		<ul>
 			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
 			<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSezP8AhwJtgqKQaRaCXSvznfgkgz40teH5CcDdINAhpoaSWcA/viewform?usp=sf_link">문의</a></li>
-			<li><a href="/#">공지사항</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do">공지사항</a></li>
 			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
 		</ul>
 	</div>
