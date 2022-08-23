@@ -47,21 +47,22 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-lg" id="btnModalCreateModal">플래너 작성</button>
-					<button type="button" class="btn btn-danger btn-lg" id="btnModalCloseDown" data-bs-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-lg" id="btnModalCreateModal">플래너 작성</button>
+					<button type="button" class="btn btn-lg" id="btnModalCloseDown" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </form>
 
-
-<div id="commonMain">
-	<div id="bannder">배너 / My플래너</div>
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
 	<div id="wrapper">
 		<div id="plannerContainer">
 			<div id="plannerInfo">
-				<button type="button" id="createPlannerModalbtn" class="btn btn-primary btn-lg">플래너 작성</button>
+				<button type="button" id="createPlannerModalbtn" class="btn btn-lg">플래너 작성</button>
 			</div>
 			
 			<div id="cardWrapper">

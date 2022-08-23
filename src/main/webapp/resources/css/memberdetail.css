@@ -43,3 +43,10 @@ h2 {
 	margin-right: 25%;
 	text-align: center;
 }
+
+.btn {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
+}

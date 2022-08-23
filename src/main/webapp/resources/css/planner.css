@@ -23,9 +23,15 @@ a:active {
 	text-decoration:none;
 }
 
-#bannder {
-	border: 1px solid #d3d3d3;
-	height:300px;
+.intro_top {
+    width: 100%;
+    height: 600px;
+    background-color: #F4E35F;
+    text-align: center;
+    position: relative;
+    margin-top:4.5rem;
+    overflow: hidden;
+     z-index: -1;
 }
 
 #wrapper{

@@ -16,8 +16,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdelete.css">
-<div id="commonMain">
- 	<div id="bannder">배너 / 회원탈퇴</div>
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
  	
  	<div id="wrapper">
  	
@@ -48,7 +50,7 @@
 			</div>
 			<div id="memberDeleteBtnWrapper">
 				<form name="memberDeleteFrm" action="${pageContext.request.contextPath}/mypage/memberDelete.do" method="POST">
-					<button type="submit" value="${mNo}" class="btn btn-danger btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
+					<button type="submit" value="${mNo}" class="btn btn-lg" id="memberDeleteBtn">회원 탈퇴</button>			
 				</form>
 			</div>
 		

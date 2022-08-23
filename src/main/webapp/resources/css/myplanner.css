@@ -135,3 +135,10 @@ a:active {
 	border: 1px solid #d3d3d3;
 	height: 25vh;
 }
+
+.btn {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
+}

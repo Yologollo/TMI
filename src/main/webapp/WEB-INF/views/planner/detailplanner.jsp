@@ -59,8 +59,10 @@ $(document).ready(function () {
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
-<div id="commonMain">
-	<div id="bannder">배너 / 플래너 디테일</div>
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
 	<div id="wrapper">
 		<div id="menuContainer">
 			<ul>
@@ -74,7 +76,7 @@ $(document).ready(function () {
 		
 		<div id="plannerContainer">
 				<div id="plannerInfo" data-no="${planner.PNo}">
-					<button type="button" id="btnDeletePlanner" class="btn btn-danger btn-lg" data-no="${planner.PNo}">삭제</button>			
+					<button type="button" id="btnDeletePlanner" class="btn btn-lg" data-no="${planner.PNo}">삭제</button>			
 					<%-- <button type="button" id="btnUpdatePlanner" class="btn btn-primary btn-lg" 
 						onclick="location.href='${pageContext.request.contextPath}/planner/updateplan.do?pNo=${planner.PNo}'">수정</button> --%>
 				</div>
