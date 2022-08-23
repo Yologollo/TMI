@@ -116,6 +116,22 @@ window.addEventListener('load', (e) => {
 				</c:forEach>
 			</article>
  		<nav>${pagebar}</nav>
+ 		
+ 		<form action="${pageContext.request.contextPath}/board/review/reviewBoardSearch.do" method="get">
+		<div class="search">
+    		<select name="searchType">
+      			<option value="n"<c:out value="${reviewBoardSearch.searchType == null ? 'selected' : ''}"/>>-----</option>
+      			<option value="t"<c:out value="${reviewBoardSearch.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+      			<option value="c"<c:out value="${reviewBoardSearch.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+      			<option value="w"<c:out value="${reviewBoardSearch.searchType eq 'e' ? 'selected' : ''}"/>>작성자</option>
+      			<option value="tc"<c:out value="${reviewBoardSearch.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+    		</select>
+    		<input type="text" name="keyword" id="keywordInput" value="${reviewBoardSearch.keyword}"/>
+    	
+    		<button id="searchBtn" type="submit">검색</button>
+  		</div> 
+  		</form>
+  		
 	</section> 
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>

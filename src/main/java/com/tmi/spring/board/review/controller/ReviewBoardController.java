@@ -37,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
+import com.tmi.spring.board.review.model.dto.ReviewBoardSearch;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
@@ -88,6 +89,45 @@ public class ReviewBoardController {
 
 			while(it.hasNext()) {
 				ReviewBoard boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getRb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setRb_content(src);
+				}
+			}
+			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/review/reviewBoard");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/board/review/reviewBoardSearch.do")
+	public ModelAndView ReviewBoardSearch( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, HttpServletRequest request, Model model) {
+		try {
+			int numPerPage = 8;
+			List<ReviewBoardSearch> list = reviewBoardService.selectReviewBoardSearchList(cPage, numPerPage, searchType, keyword);
+			Iterator<ReviewBoardSearch> it = list.iterator();
+
+			log.debug("list = {}", list);
+			mav.addObject("list", list);
+			
+			int totalContent = reviewBoardService.selectSearchTotalContent(searchType, keyword);
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+
+			while(it.hasNext()) {
+				ReviewBoardSearch boardEntity = it.next();
 				
 				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
 				Document doc = Jsoup.parse(boardEntity.getRb_content());
