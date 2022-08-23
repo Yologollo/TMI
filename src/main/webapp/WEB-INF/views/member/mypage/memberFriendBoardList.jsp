@@ -31,8 +31,10 @@ window.addEventListener('load', (e) => {
 	});
 });
 </script>
-<div id="commonMain">
- 	<div id="bannder">배너 / My게시글</div>
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
  	
  	<div id="wrapper">
  	
@@ -53,9 +55,9 @@ window.addEventListener('load', (e) => {
 			</ul>
 		</div>
 		<div id="boardChangeWrapper">
-			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberPlannerBoardList.do'">플래너 게시판</button>
-			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberReviewBoardList.do'">리뷰 게시판</button>
-			<button type="button" class="btn btn-outline-secondary btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberFriendBoardList.do'">여행 친구 게시판</button>
+			<button type="button" class="btn btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberPlannerBoardList.do'">플래너 게시판</button>
+			<button type="button" class="btn btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberReviewBoardList.do'">리뷰 게시판</button>
+			<button type="button" class="btn btn-lg" onclick="location.href='${pageContext.request.contextPath}/mypage/memberFriendBoardList.do'">여행 친구 게시판</button>
 		</div>
 		<h1>여행 친구 게시판</h1>
 		<section id="board-container" class="container">

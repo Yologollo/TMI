@@ -17,13 +17,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberdetail.css?after">
-<div id="commonMain">
-
-
- 	<div id="bannder">배너 / My페이지</div>
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
  	
  	<div id="wrapper">
- 	
+ 		
 	 	<div id="menuContainer">
 			<ul>
 				<li class="mypageMenuli">
@@ -72,8 +72,8 @@
 				</div>
 
 				<div class="memberInfoBtn">
-					<input type="submit" class="btn btn-primary" id="submitButton" value="수정">
-					<input type="reset" class="btn btn-danger" value="취소">
+					<input type="submit" class="btn" id="submitButton" value="수정">
+					<input type="reset" class="btn" value="취소">
 				</div>
 
 			</div>
@@ -102,8 +102,8 @@
 				
 				<input type="hidden" name="mEmail" id="mEmail" value="<sec:authentication property="principal.mEmail"/>"/> 
 				<div class="memberInfoBtn">
-					<input type="submit" class="btn btn-primary" id="submitButtonPw" value="수정">
-					<input type="reset" class="btn btn-danger" value="취소">
+					<input type="submit" class="btn" id="submitButtonPw" value="수정">
+					<input type="reset" class="btn" value="취소">
 				</div>
 			</div>
 		</form:form>

@@ -3,7 +3,7 @@
 	border-top: none;
 	border-left: none;
 	width: 85%;
-	height: 600px;
+	height: 800px;
 	float: right;
 	text-align: center;
 	font-size: 18px;
@@ -11,10 +11,17 @@
 
 #memberDeleteInfoWrapper {
 	height: 70%;
-	padding-top: 20%;
+	padding-top: 10%;
 }
 
 #memberDeleteBtnWrapper {
 	height: 30%;
 	padding-top: 5%;
+}
+
+.btn {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
 }
