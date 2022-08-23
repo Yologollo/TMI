@@ -41,25 +41,6 @@ const loginMemberEmail = '${loginMember.MEmail}';
 		        </div>
 		        <div class="mesgs">
 		          <div class="msg_history">
-		            <c:forEach items="${chatContentList}" var="chatContent">
-		            <c:if test="${loginMember.MEmail ne chatContent.sendEmail}">
-				            <div class="incoming_msg">
-				              <div class="received_msg">
-				                <div class="received_withd_msg">
-				                  <p>${chatContent.messageContent}</p>
-				                  <span class="time_date"> ${chatContent.sendEmail} | ${chatContent.messageTime} </span></div>
-				              </div>
-				            </div>
-		            </c:if>
-		            <c:if test="${loginMember.MEmail eq chatContent.sendEmail}">
-				            <div class="outgoing_msg">
-				              <div class="sent_msg">
-				                <p>${chatContent.messageContent}</p>
-				                <span class="time_date"> ${chatContent.sendEmail} | ${chatContent.messageTime} </span> 
-			                  </div>
-				            </div>
-		            </c:if>
-		            </c:forEach>
 		             
 		          </div>
 		          <div class="type_msg">

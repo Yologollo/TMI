@@ -2,6 +2,7 @@ package com.tmi.spring.member.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tmi.spring.email.model.service.EmailService;
 import com.tmi.spring.member.model.dto.Member;
 import com.tmi.spring.member.model.service.MemberService;
 
@@ -45,6 +47,9 @@ public class MemberSecurityController {
 	
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	EmailService emailService;
 	
 	@GetMapping("/memberLogin.do")
 	public String memberLogin() {
@@ -111,16 +116,27 @@ public class MemberSecurityController {
 	}
 	
 	@PostMapping("/findPw.do")
-	public String findPw(@RequestParam String mEmail, @RequestParam String mNickName,RedirectAttributes redirectAttr) {
-		log.debug("mEmail,mNickName = {}{}", mEmail, mNickName);
+	public String findPw(@RequestParam String mEmail, @RequestParam String mPhone,RedirectAttributes redirectAttr) {
+		log.debug("mEmail, mPhone = {}{}", mEmail, mPhone);
 		try {
 			Member member = memberService.emailChk(mEmail);
 //			log.info("member = {}", member);
 			
-			if(member != null && mNickName.equals(member.getMNickName())) {
-				redirectAttr.addAttribute("mEmail", mEmail);
-				redirectAttr.addFlashAttribute("msg", "인증성공🎉 비밀번호를 변경해주세요.");
-				return "redirect:/login/findPwUpdate.do";
+			if(member != null && mPhone.equals(member.getMPhone())) {
+				
+				// 임시비밀번호 생성 및 BCryptPasswordEncoder 해싱
+				String tempPw = UUID.randomUUID().toString();
+				String encodedPassword = bcryptPasswordEncoder.encode(tempPw);
+				member.setMPassword(encodedPassword);
+				int result = memberService.findPwUpdate(member);
+				
+				String tempPassword = "안녕하세요 TMI 여행플래너입니다." + "\n임시비밀번호 : " + tempPw + "\n로그인 후 비밀번호를 수정해주세요.😊"; 
+				
+				// 메일 발송
+				emailService.sendMail(member.getMEmail(), "[TMI 여행플래너] 임시비밀번호 발송", tempPassword);
+				
+				redirectAttr.addFlashAttribute("msg", "인증성공🎉" + mEmail +"에서 임시 비밀번호를 확인하세요.");
+				return "redirect:/";
 			}
 			else {
 				redirectAttr.addFlashAttribute("msg", "조회된 회원이 없습니다.");
