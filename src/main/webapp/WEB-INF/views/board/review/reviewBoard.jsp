@@ -12,50 +12,29 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <style>
-	tr[data-no] {
-		cursor: pointer;
-	}
-	.reviewBoard {
-		width : 200px;
-		height : 250px;
-		border: 1px solid red; 
-		margin: auto; 
-		margin-top:4.5rem;
-		overflow: hidden;
-		position: relative;
-	}
-	.imageReviewBoard {
-		width : 200px;
-		height : 180px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-		position: relative;
-	}
-	
-	.thumbNailLink {
-		display: inline-block;
-		margin : 10px;
-		width : 300px;
-		height : 200px;
-		text-align: center;
-	}
-	
 	.thumbNailName {
 		display : inline-block;
-		width : 300px;
-		height : 65px;
+		width : 280px;
+		height : 30px;
 		text-align: center;
 	}
 	#contentArea2 {
 		width : 280px;
 		height : 330px;
-		border: 1px solid red; 
+		border: 1px solid black; 
 		margin: auto; 
 		overflow: hidden;
 		display: inline-block;
 	}
 	
+	#thumbNail {
+		width : 280px;
+		height : 250px;
+		border: 1px solid black; 
+		margin: auto; 
+		overflow: hidden;
+		display: inline-block;
+	}	
 </style>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
@@ -67,24 +46,9 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<script>
-window.addEventListener('load', (e) => {
-	document.querySelectorAll("tr[data-no]").forEach((tr) => {
-		tr.addEventListener('click', (e) => {
-			console.log(e.target);
-			const tr = e.target.parentElement;
-			console.log(tr);
-			if(tr.matches('tr[data-no]')) {
-				const no = tr.dataset.no;
-				location.href = '${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=' + no;
-			}
-		});
-	});
-});
-</script>
 <div id="commonMain">
 <!-- 
-	생성 : 김용민
+	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
 
@@ -97,41 +61,32 @@ window.addEventListener('load', (e) => {
       <li><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
     </ul>
     <!-- 메뉴버튼 끝 -->
-	<section id="board-container" class="container">
- 		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'"/>
-			<article>
+    
+		<c:if test="${empty loginMember}">
+			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
+		</c:if>
+		<c:if test="${not empty loginMember}">
+			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'">글쓰기</button>
+		</c:if>
+	<section id="board-container" class="container">	
+			<article style="border: 1px solid green;">
 				<c:forEach items="${list}" var="reviewBoard" varStatus="vs">
 						<div id="contentArea2">
 							<div id="selectContent">
 								<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
-									<span class="thumbNailImage">
-										<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-									</span>
+									<div id="thumbNail">
+										<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
+									</div>
 									<strong class="thumbNailName">
 										${reviewBoard.rb_title}
 									</strong>
+									<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 								</a>
 							</div>
 						</div>
 				</c:forEach>
 			</article>
- 		<nav>${pagebar}</nav>
- 		
- 		<form action="${pageContext.request.contextPath}/board/review/reviewBoardSearch.do" method="get">
-		<div class="search">
-    		<select name="searchType">
-      			<option value="n"<c:out value="${reviewBoardSearch.searchType == null ? 'selected' : ''}"/>>-----</option>
-      			<option value="t"<c:out value="${reviewBoardSearch.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-      			<option value="c"<c:out value="${reviewBoardSearch.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-      			<option value="w"<c:out value="${reviewBoardSearch.searchType eq 'e' ? 'selected' : ''}"/>>작성자</option>
-      			<option value="tc"<c:out value="${reviewBoardSearch.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-    		</select>
-    		<input type="text" name="keyword" id="keywordInput" value="${reviewBoardSearch.keyword}"/>
-    	
-    		<button id="searchBtn" type="submit">검색</button>
-  		</div> 
-  		</form>
-  		
+			<nav>${pagebar}</nav>
 	</section> 
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>

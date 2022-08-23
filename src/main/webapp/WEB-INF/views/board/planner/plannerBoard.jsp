@@ -69,21 +69,28 @@
 
 <div id="commonMain">
 <!-- 
-	생성 : 김용민
-	작업 : 김용민
+	생성 : 김용민, 이경석
+	작업 : 김용민, 이경석
  -->
- 	<input type="button" value="플래너 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'"/>
- 	<input type="button" value="베스트 플레너" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/bestplanner/bestPlanner.do'"/>
- 	<input type="button" value="후기 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'"/>
- 	<input type="button" value="베스트 후기 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/bestreview/bestReview.do'"/>
- 	<input type="button" value="여행친구 게시판" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'"/>
+ 	 <!-- 메뉴버튼 시작 -->
+	<ul class="menuBtn" id="menuBtn">
+      <li class="current"><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
+      <li><a href="${pageContext.request.contextPath}/board/bestplanner/bestPlanner.do" data-hover="베스트 플래너">베스트 플래너</a></li>
+      <li><a href="${pageContext.request.contextPath}/board/review/reviewBoard.do" data-hover="후기 게시판">후기 게시판</a></li>
+      <li><a href="${pageContext.request.contextPath}/board/bestreview/bestReview.do" data-hover="베스트 후기 게시판">베스트 후기 게시판</a></li>
+      <li><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
+    </ul>
+    <!-- 메뉴버튼 끝 -->
+ 	
  	
  	<h1>플래너 게시판</h1>
- 	<h2>
- 	test
- 	</h2>
  	<section id="board-container" class="container">
- 		<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'"/>
+ 		<c:if test="${empty loginMember}">
+			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
+		</c:if>
+		<c:if test="${not empty loginMember}">
+			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'">글쓰기</button>
+		</c:if>
 			<article>
 				<div id="wrapper" style="border: 1px solid black; ">
 				<div id="plannerContainer" style="border: 1px solid blue;">
@@ -144,22 +151,6 @@
 				</div>
 			</article>
  		<nav>${pagebar}</nav>
- 		
- 		<form action="${pageContext.request.contextPath}/board/planner/plannerBoardSearch.do" method="get">
-		<div class="search">
-    		<select name="searchType">
-      			<option value="n"<c:out value="${plannerBoardSearch.searchType == null ? 'selected' : ''}"/>>-----</option>
-      			<option value="t"<c:out value="${plannerBoardSearch.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-      			<option value="c"<c:out value="${plannerBoardSearch.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-      			<option value="w"<c:out value="${plannerBoardSearch.searchType eq 'e' ? 'selected' : ''}"/>>작성자</option>
-      			<option value="tc"<c:out value="${plannerBoardSearch.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-    		</select>
-    		<input type="text" name="keyword" id="keywordInput" value="${plannerBoardSearch.keyword}"/>
-    	
-    		<button id="searchBtn" type="submit">검색</button>
-  		</div> 
-  		</form>
- 		
 	</section> 
  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

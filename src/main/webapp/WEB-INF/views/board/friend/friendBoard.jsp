@@ -31,6 +31,16 @@ window.addEventListener('load', (e) => {
 	});
 });
 </script>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="loginMember" scope="page"/>
+	<script>
+		const mEmail = '${loginMember.MEmail}';
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js" integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
+</sec:authorize>
+
 <div id="commonMain">
 <!-- 
 	생성 : 김용민
@@ -48,7 +58,12 @@ window.addEventListener('load', (e) => {
 
 	<section id="board-container" class="container">
 		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
-		<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'">글쓰기</button>
+		<c:if test="${empty loginMember}">
+			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
+		</c:if>
+		<c:if test="${not empty loginMember}">
+			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'">글쓰기</button>
+		</c:if>
 			<colgroup>
 		          <col width="10%">
 		          <col width="">
