@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
-import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.planner.model.dto.Planner;
@@ -17,10 +16,6 @@ public interface PlannerBoardService {
 
 	int selectTotalContent();
 	
-	List<PlannerBoardSearch> selectPlannerBoardSearchList(int cPage, int numPerPage, String searchType, String keyword);
-
-	int selectSearchTotalContent(String searchType, String keyword);
-
 	InsertPlannerBoard selectOnePlannerBoard(int no);
 
 	int updateReadCount(int no);
@@ -45,8 +40,6 @@ public interface PlannerBoardService {
 
 	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
 
-	List<PlannerPlan> findPlansSearchList(List<PlannerBoardSearch> list);
-	
 	int savePlanner(Planner planner);
 
 	Planner findNo(int pNo);

@@ -690,7 +690,7 @@ tr[data-no] {
 							};
 							
 							var gallery = "";
-							gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+							gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 							gallery += '<span class="thumbNailImage">';
 							gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 							gallery += '</span>';
@@ -801,7 +801,7 @@ tr[data-no] {
 					};
 					
 					var gallery = "";
-					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 					gallery += '<span class="thumbNailImage">';
 					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 					gallery += '</span>';
@@ -907,7 +907,7 @@ tr[data-no] {
 					};
 					
 					var gallery = "";
-					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 					gallery += '<span class="thumbNailImage">';
 					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 					gallery += '</span>';
@@ -1008,7 +1008,7 @@ tr[data-no] {
 					};
 					
 					var gallery = "";
-					gallery += '<a href="\${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
+					gallery += '<a href="${pageContext.request.contextPath}/tourism/?'+ myItem[i].contentid +'":" class="thumbNailLink" id="' + myItem[i].contentid + '" >';
 					gallery += '<span class="thumbNailImage">';
 					gallery += '<img src="' + myItem[i].firstimage2 +'" width="300" height="200" />';
 					gallery += '</span>';

@@ -92,12 +92,8 @@ var mapx = "";
 var mapy = "";
 
 var contentId = location.href.split('?')[1];
-console.log("contentId = " + contentId);
-
 
 $(document).ready(function(){
-	
-	console.log("contentId = " + contentId);
 
 	$.ajax({
 		url : '${pageContext.request.contextPath}/tourism/callDetailCommon.do',
@@ -109,7 +105,6 @@ $(document).ready(function(){
 		success : function(data) {
 
 			var myItem = data.response.body.items.item;
-			console.log(myItem);
 
 			for(var i = 0; myItem.length > i; i++){
 			
@@ -119,41 +114,31 @@ $(document).ready(function(){
 			
 				var img = "";
 				img += '<img src=' + myItem[i].firstimage + ' alt="" id="bigImg2" />';
-				console.log(img);
 				$('#bigImg').append(img);
 				
 				mapx += myItem[i].mapx;
 				mapy += myItem[i].mapy;
-				console.log("mapx ! = " + mapx);
-				console.log("mapy ! = " + mapy);
 				
 				var title = "";
 				title += '<p id="title">' + myItem[i].title +'</p>';
-				console.log(title);
 				$('#tourismInfoTitle').append(title);
 				
 				var zipCode = "";
 				zipCode += '<th id="contentTableTh">우편번호</th> <td>' + myItem[i].zipcode +'</td>';
-				console.log(zipCode);
 				$('#zipCodeTr').append(zipCode);
 				
 				var homepageCode = "";
 				homepageCode += '<th>홈페이지</th> <td> <div id="contentTableHomepage">' + myItem[i].homepage + '</div> </td>';
-				console.log(homepageCode);
 				$('#homepageTr').append(homepageCode);
 				
 				var addrCode = "";
 				addrCode += '<th>주소</th> <td> <div>' + myItem[i].addr1 + myItem[i].addr2 + '</div> </td>'
-				console.log(addrCode);
 				$('#addrTr').append(addrCode);
 				
 				var overviewCode = "";
 				overviewCode += myItem[i].overview;
-				console.log(overviewCode);
 				$('#overview').append(overviewCode);
 				
-				console.log("mapx @ = " + mapx);
-				console.log("mapy @ = " + mapy);
 				/* 지도 생성 */
 				var mapContainer = document.getElementById('mapData');
 				var mapOption = {

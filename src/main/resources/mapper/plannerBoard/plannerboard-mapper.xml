@@ -29,59 +29,6 @@
 		    pb.pb_no desc
 	</select>
 	
-	<select id="selectPlannerBoardSearchList" parameterType="String" resultMap="PlannerBoardMap">
-		select
-		    p.p_no,
-		    p.p_title,
-		    p.p_explan,
-		    p.p_leave_date,
-		    p.p_return_date,
-		    pb.pb_no,
-		    pb.pb_p_no,
-		    m.m_nickname,
-		    pb.pb_title,
-		    pb.pb_content,
-		    pb.pb_created_at,
-		    pb.pb_updated_at,
-		    pb.pb_read_count,
-		    (select count(*) from tmi_planner_board_comment where pbc_pb_no = pb.pb_no) commentCount
-		from
-		    tmi_planner_board pb join tmi_member m
-		        on pb_m_email = m.m_email
-		            join tmi_planner p
-		                on pb_p_no = p.p_no
-		<include refid="search"></include>       
-		order by
-		    pb.pb_no desc
-	</select>
-	
-	<select id="selectSearchTotalList" parameterType="map" resultType="int">
-		select
-			count(*)
-		from (
-			select
-		    	p.p_no,
-		    	p.p_title,
-		    	p.p_explan,
-		    	p.p_leave_date,
-		    	p.p_return_date,
-		    	pb.pb_no,
-		    	pb.pb_p_no,
-		    	m.m_nickname,
-		    	pb.pb_title,
-		    	pb.pb_content,
-		    	pb.pb_created_at,
-		    	pb.pb_updated_at,
-		    	pb.pb_read_count,
-		    	(select count(*) from tmi_planner_board_comment where pbc_pb_no = pb.pb_no) commentCount
-			from
-		    	tmi_planner_board pb join tmi_member m
-		       	 on pb_m_email = m.m_email
-		            	join tmi_planner p
-		                	on pb_p_no = p.p_no
-			<include refid="search"></include>)       
-	</select>
-	
 	<insert id="insertPlannerBoard">
 		insert into 
 			tmi_planner_board 
@@ -122,16 +69,7 @@
 				dual
 		</selectKey>
 	</insert>
-	
-	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">where pb.pb_title LIKE '%${keyword}%'</if>
-			<if test="searchType == 'c'.toString()">where pb.pb_content LIKE '%${keyword}%'</if>
-			<if test="searchType == 'w'.toString()">where m.m_nickname LIKE '%${keyword}%'</if>
-			<if test="searchType == 'tc'.toString()">where (pb.pb_title LIKE '%${keyword}%') or (pb.pb_content LIKE '%${keyword}%')</if>
-		</if>
-	</sql>
-	
+
 	<select id="selectBestPlannerBoardList" parameterType="String" resultMap="PlannerBoardMap">
 		select
 		    p.p_no,
