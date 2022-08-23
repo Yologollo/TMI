@@ -35,9 +35,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tmi.spring.board.planner.model.dto.PlannerBoard;
+import com.tmi.spring.board.planner.model.service.PlannerBoardService;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.service.ReviewBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
+import com.tmi.spring.planner.model.dto.PlannerPlan;
 import com.tmi.spring.planner.model.service.PlannerService;
 import com.tmi.spring.test.controller.TestController;
 import com.tmi.spring.widget.data.Item;
@@ -60,6 +63,9 @@ public class HomeController {
 	
 	@Autowired
 	ReviewBoardService reviewBoardService;
+	
+	@Autowired
+	PlannerBoardService plannerBoardService;
 	
 	@Autowired
 	ServletContext application;
@@ -146,6 +152,18 @@ public class HomeController {
 //            mav.addObject("list4", list4);
             model.addAttribute("list4", list4);
             
+			int numPerPage2 = 4;
+			List<PlannerBoard> plannerList = plannerBoardService.selectMainPlannerBoardList(cPage, numPerPage2);
+			List<PlannerPlan> plans = plannerBoardService.findPlansList(plannerList);
+			Iterator<PlannerBoard> it2 = plannerList.iterator();
+			
+			log.debug("plannerList = {}", plannerList);
+			log.debug("plans = {}", plans);
+			mav.addObject("plannerList", plannerList);
+			mav.addObject("plans", plans);
+            
+            
+            
             int totalContent = reviewBoardService.selectTotalContent();
             String url = request.getRequestURI();
             log.debug("url = {}", url);
@@ -160,6 +178,17 @@ public class HomeController {
                     boardEntity.setRb_content(src);
                 }
             }
+            
+			while(it2.hasNext()) {
+				PlannerBoard boardEntity2 = it2.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc2 = Jsoup.parse(boardEntity2.getPb_content());
+				if(doc2.selectFirst("img") != null) {
+					String src2 = doc2.selectFirst("img").attr("src");
+					boardEntity2.setPb_content(src2);
+				}
+			}
             
             log.debug("totalContent = {}", totalContent);
 //            String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);

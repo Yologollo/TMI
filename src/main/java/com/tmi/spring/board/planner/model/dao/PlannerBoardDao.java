@@ -84,8 +84,6 @@ public interface PlannerBoardDao {
 
 	List<PlannerBoard> selectBestPlannerBoardList(RowBounds rowBounds);
 
-	
-
-	
+	List<PlannerBoard> selectMainPlannerBoardList(RowBounds rowBounds);
 
 }

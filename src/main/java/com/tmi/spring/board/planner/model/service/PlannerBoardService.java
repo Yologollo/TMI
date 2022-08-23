@@ -49,6 +49,8 @@ public interface PlannerBoardService {
 
 	List<PlannerBoard> selectBestPlannerBoardList(int cPage, int numPerPage);
 
+	List<PlannerBoard> selectMainPlannerBoardList(int cPage, int numPerPage2);
+
 
 
 }
