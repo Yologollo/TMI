@@ -42,7 +42,6 @@ import net.sf.json.JSONObject;
 
 @Controller
 @Slf4j
-//@RequestMapping("/widget")
 public class WidgetController {
 	
 	@Autowired
@@ -66,12 +65,6 @@ public class WidgetController {
 	final String LAST_URL2 = "&MobileOS=ETC&MobileApp=TMI";
 	final String DETAILCOMMON_LAST_URL = "&defaultYN=Y&firstImageYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&MobileOS=ETC&MobileApp=TMI&_type=json";
 
-	@GetMapping("/widget")
-	public String index() {
-		log.info("GET / 요청!");
-		return "/widget/widget";
-	}
-	
 	@GetMapping("/widget/callArea.do")
 	public void callArea(HttpServletResponse request, HttpServletResponse response)
 			throws Exception {

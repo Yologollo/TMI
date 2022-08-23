@@ -33,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
+import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.board.planner.model.service.PlannerBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
@@ -94,7 +95,47 @@ public class PlannerBoardController {
 				}
 			}
 			
+			log.debug("totalContent = {}", totalContent);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
 			
+			mav.setViewName("board/planner/plannerBoard");	
+			
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/board/planner/plannerBoardSearch.do")
+	public ModelAndView PlannerBoardSearch( @RequestParam(defaultValue = "1") int cPage, ModelAndView mav, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, HttpServletRequest request) {
+		try {
+			int numPerPage = 8;
+			List<PlannerBoardSearch> list = plannerBoardService.selectPlannerBoardSearchList(cPage, numPerPage, searchType, keyword);
+			List<PlannerPlan> plans = plannerBoardService.findPlansSearchList(list);
+			Iterator<PlannerBoardSearch> it = list.iterator();
+			
+			log.debug("list = {}", list);
+			log.debug("plans = {}", plans);
+			mav.addObject("list", list);
+			mav.addObject("plans", plans);
+			
+			int totalContent = plannerBoardService.selectSearchTotalContent(searchType, keyword);
+			String url = request.getRequestURI();
+			log.debug("url = {}", url);
+			
+			while(it.hasNext()) {
+				PlannerBoardSearch boardEntity = it.next();
+				
+				//Jsoup를 이용해서 첫번째 img의 src의 값을 팡싱한 후 값을 저장
+				Document doc = Jsoup.parse(boardEntity.getPb_content());
+				if(doc.selectFirst("img") != null) {
+					String src = doc.selectFirst("img").attr("src");
+					boardEntity.setPb_content(src);
+				}
+			}
 			
 			log.debug("totalContent = {}", totalContent);
 			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
