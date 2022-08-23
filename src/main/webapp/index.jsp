@@ -92,112 +92,86 @@ tr[data-no] {
  -->
 
   
- <!-- 
- 
- 	관광정보 위젯 모달
- 
-  -->
- 
-		 		<div class="createAreaModalForm">
-			<div class="modal-dialog-centered modal-dialog-scrollable"
-		id="createAreaModal">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1>지역</h1>
-						<button type="button" class="btn-close" id="areaModalCloseBtn"
-							data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="modalInfo" id="areaList">
-						</div>
+<!-- 관광정보 위젯 모달 -->
 
-						<div class="modalInfo" id="sigunguList"></div>
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
-						<button type="button" class="btn btn-secondary" id="areaCancelBtn"
-							data-bs-dismiss="modal">취소</button>
-					</div>
-				</div>
+<!-- 지역 선택 모달 -->
+<div class="createAreaModalForm">
+	<div class="modal-dialog-centered modal-dialog-scrollable" id="createAreaModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>지역</h1>
+				<button type="button" class="btn-close" id="areaModalCloseBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="modalInfo" id="areaList"></div>
+				<div class="modalInfo" id="sigunguList"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
+				<button type="button" class="btn btn-secondary" id="areaCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
+	</div>
+</div>
 		
-		<div class="createContentModalForm">
-			<div class="modal-dialog-centered modal-dialog-scrollable"
-				id="createContentModal">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1>관광타입</h1>
-						<button type="button" class="btn-close" id="contentModalCloseBtn"
-							data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="modalInfo" id="contentList">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
-						<button type="button" class="btn btn-secondary"
-							id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
-					</div>
-				</div>
+<!-- 관광지역 선택 모달 -->		
+<div class="createContentModalForm">
+	<div class="modal-dialog-centered modal-dialog-scrollable" id="createContentModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>관광타입</h1>
+				<button type="button" class="btn-close" id="contentModalCloseBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="modalInfo" id="contentList"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
+				<button type="button" class="btn btn-secondary" id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
-		
-		<div class="createServiceModalForm">
-			<div class="modal-dialog-centered modal-dialog-scrollable"
-				id="createServiceModal">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1>서비스 분류 선택</h1>
-						<button type="button" class="btn-close" id="serviceModalCloseBtn"
-							data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="modalInfo" id="serviceCat1List">
-							
-						</div>
-						<div class="modalInfo" id="serviceCat2List">
-						</div>
-						<div class="modalInfo" id="serviceCat3List">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
-						<button type="button" class="btn btn-secondary" id="serviceCancelBtn"
-							data-bs-dismiss="modal">취소</button>
-					</div>
-				</div>
+	</div>
+</div>
+
+<!-- 서비스분류 선택 모달 -->		
+<div class="createServiceModalForm">
+	<div class="modal-dialog-centered modal-dialog-scrollable" id="createServiceModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>서비스 분류 선택</h1>
+				<button type="button" class="btn-close" id="serviceModalCloseBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="modalInfo" id="serviceCat1List"></div>
+				<div class="modalInfo" id="serviceCat2List"></div>
+				<div class="modalInfo" id="serviceCat3List"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
+				<button type="button" class="btn btn-secondary" id="serviceCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
-	 
-	 
-	 
-	    <div style="width:auto; height:100vh; display:flex; margin:auto 0;"></div>
+	</div>
+</div>
+
+<div style="width:auto; height:100vh; display:flex; margin:auto 0;"></div>
 	    
-	    <!-- 
-	    	관광정보 위젯 파트
-	     -->
+	    <!-- 베스트 게시판 파트 -->
 	     
-        <div id="bestPlanner">
-	 	
-	 		</div>
+        <div id="bestPlanner"></div>
 	        <div id="bestReview">
 	 			<h1>베스트 후기</h1>
 	 			<section id="board-container" class="container">
 					<article>
 						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
 								<div id="contentArea3">
-								
 									<div id="selectContent2">
 										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 											<span class="thumbNailImage">
 												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
 											</span>
-											<strong class="thumbNailName">
-												${reviewBoard.rb_title}
-											</strong>
+											<strong class="thumbNailName">${reviewBoard.rb_title}</strong>
 										</a>
 									</div>
 								</div>
@@ -206,12 +180,11 @@ tr[data-no] {
 		 		<%-- <nav>${pagebar}</nav> --%>
 			</section> 
 		    </div>
-	    
-	    	<!-- 관광정보 CSS 작업폼 시작(안에 폼 사용하면 됩니당.)-->
-	    	<div id="commonMain2">
-	    	
-	        <hr><h1 id="tourism_title">관광 정보</h1><hr>
 
+
+<!-- 관광정보 CSS 작업폼 시작(안에 폼 사용하면 됩니당.)-->
+	    	
+	<hr><h1 id="tourism_title">관광 정보</h1><hr>
 	        <div id="area">
 	            <button class="w-btn-outline w-btn-blue-outline" type="button">
 	                서울
@@ -228,63 +201,65 @@ tr[data-no] {
 	                관광지(자연)
 	            </button>
 	        </div>
-			<!-- 관광정보 CSS 작업폼 끝-->
+<!-- 관광정보 CSS 작업폼 끝-->
 	    	
 	    	
+<!-- 관광정보 위젯 -->
+	    	
+	    	
+<!-- 관광정보 위젯 검색 파트 -->
+		<div id="commonMain2">
 	    	<div id="searchTable">
-			<table class="table table-bordered">
-				<tbody>
-					<tr>
-						<th class="col" id="searchTh">지역</th>
-						<td>
-							<div class="finalName" id="areaCodeFinal"></div>
-							<button type="button" class="btn btn-info" id="searchAreaBtn">지역선택</button>
-						</td>
-					</tr>
-					<tr>
-						<th id="searchTh">관광타입</th>
-						<td id="searchTd">
-							<div class="finalName" id="contentCodeFinal"></div>
-							<button type="button" class="btn btn-info" id="searchContentBtn">관광타입선택</button>
-						</td>
-					</tr>
-					<tr id="serviceTr" style="display: none">
-						<th id="searchTh">서비스분류</th>
-						<td id="searchTd">
-							<div class="finalName" id="serviceCodeFinal"></div>
-							<button type="button" class="btn btn-info" id="searchServiceBtn">서비스 분류 선택</button>
-						</td>
-					</tr>
-					<tr>
-						<th id="searchTh">검색</th>
-						<td>
-							<button type="button" class="btn btn-info" id="searchDataBtn">검색</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	
-		<article id="contentArea">
-			<div id="contentArea2" style="display: none">
-				<div id="selectContent">
-				</div>
-				<div id="paging">
-				</div>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<th class="col" id="searchTh">지역</th>
+							<td>
+								<div class="finalName" id="areaCodeFinal"></div>
+								<button type="button" class="btn btn-info" id="searchAreaBtn">지역선택</button>
+							</td>
+						</tr>
+						<tr>
+							<th id="searchTh">관광타입</th>
+							<td id="searchTd">
+								<div class="finalName" id="contentCodeFinal"></div>
+								<button type="button" class="btn btn-info" id="searchContentBtn">관광타입선택</button>
+							</td>
+						</tr>
+						<tr id="serviceTr" style="display: none">
+							<th id="searchTh">서비스분류</th>
+							<td id="searchTd">
+								<div class="finalName" id="serviceCodeFinal"></div>
+								<button type="button" class="btn btn-info" id="searchServiceBtn">서비스 분류 선택</button>
+							</td>
+						</tr>
+						<tr>
+							<th id="searchTh">검색</th>
+							<td>
+								<button type="button" class="btn btn-info" id="searchDataBtn">검색</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		</article>
-	    </div>
-    </div>
+	
+<!-- 관광정보 위젯 컨텐츠 파트 -->
+			<article id="contentArea">
+				<div id="contentArea2" style="display: none">
+					<div id="selectContent">
+					</div>
+					<div id="paging">
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
 </div>
     
-    <!-- 
-    
-    	관광정보 위젯 스크립트
-    
-     -->
-    
+<!-- 관광정보 위젯 스크립트 -->
 <script>
 
+// 전역변수
 	var areaCode = 0;
 	var areaName = 0;
 	var sigunguCode = 0;
@@ -303,8 +278,7 @@ tr[data-no] {
 	var pagebar = "";
 	
 
-	// areaModal
-
+// 지역선택 모달
 	document
 			.querySelector('.createAreaModalForm')
 			.addEventListener(
@@ -317,7 +291,9 @@ tr[data-no] {
 						}
 					});
 
+// 지역선택 리스트 생성
 	$('#searchAreaBtn').on('click', function() {
+		
 		$('.createAreaModalForm').addClass('show-modal');
 		
 		$.ajax({
@@ -336,31 +312,26 @@ tr[data-no] {
 				for (var i = 0; myItem.length > i; i++) {
 
 					var output = '';
-					output += '<button type="button" class="btn btn-light" value="'
+					output += '<button type="button" class="w-btn-outline w-btn-blue-outlinet" value="'
 							+ myItem[i].code
 							+ '" onClick="insertArea(this);">'
 							+ myItem[i].name + '</button>';
 
 					$('#areaList').append(output);
-
 				}
-
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
 			}
-
 		});
-		
 	});
-
+	
+// 시군구 리스트 생성	
 	function insertArea(arg0) {
 
 		areaCode = $(arg0).val();
 		areaName = $(arg0).html();
-		console.log('areaCode = ' + areaCode);
-		console.log('areaName = ' + areaName);
 
 		$.ajax({
 					url : '${pageContext.request.contextPath}/widget/callAreaCode.do',
@@ -383,32 +354,25 @@ tr[data-no] {
 						for (var i = 0; myItem.length > i; i++) {
 
 							var output = '';
-							output += '<button type="button" class="btn btn-light" value="'
+							output += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'
 									+ myItem[i].code
 									+ '" onClick="insertSigungu(this);">'
 									+ myItem[i].name + '</button>';
 
 							$('#sigunguList').append(output);
-
 						}
-
 					},
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						alert("Status : " + textStatus);
 						alert("Error : " + errorThrown);
 					}
-
 				});
-
-	};
-
+			};
+			
+// 지역선택 정보 전역변수에 저장
 	function insertSigungu(arg0) {
-
 		sigunguCode = $(arg0).val();
-		console.log('sigunguCode = ' + sigunguCode);
 		sigunguName = $(arg0).html();
-		console.log('sigunguName = ' + sigunguName);
-
 	};
 
 	$('#areaModalCloseBtn').on('click', function() {
@@ -418,7 +382,8 @@ tr[data-no] {
 	$('#areaCancelBtn').on('click', function() {
 		$('.createAreaModalForm').removeClass('show-modal');
 	});
-
+	
+// 지역선택 정보 최종선택
 	$('#areaConfirmBtn').on('click', function() {
 
 		$('#areaCodeFinal').empty();
@@ -428,7 +393,6 @@ tr[data-no] {
 		if (sigunguCode != '0') {
 			
 			finalArea += '광역시/도 : ' + areaName + ', 시/군/구 : ' + sigunguName;
-			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
 			
@@ -438,14 +402,12 @@ tr[data-no] {
 			
 		} else {
 			finalArea += '광역시/도 : ' + areaName 
-			console.log('finalArea = ' + finalArea);
 			$('.createAreaModalForm').removeClass('show-modal');
 			$('#areaCodeFinal').append(finalArea);
 		}
 	});
 
-	// contentModal
-
+// 관광타입선택 모달
 	document.querySelector('.createContentModalForm').addEventListener(
 			'click',
 			function(e) {
@@ -456,6 +418,7 @@ tr[data-no] {
 				}
 			});
 
+// 관광타입선택 리스트 생성	
 	$('#searchContentBtn').on('click', function() {
 		
 		$('.createContentModalForm').addClass('show-modal');
@@ -479,7 +442,7 @@ tr[data-no] {
 				for (var i = 0; myItem.length > i; i++) {
 
 					var output = '';
-					output += '<button type="button" class="btn btn-light" value="'
+					output += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'
 							+ myItem[i].code
 							+ '" onClick="insertContent(this);">'
 							+ myItem[i].name + '</button>';
@@ -493,17 +456,14 @@ tr[data-no] {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
 			}
-
 		});
-			
 	});
-
+	
+// 관광타입선택 정보 전역변수에 저장
 	function insertContent(arg0) {
 
 		contentName = $(arg0).html();
-		console.log('contentName = ' + contentName);
 		contentCode = $(arg0).val();
-		console.log('contentCode = ' + contentCode);
 
 	};
 
@@ -514,14 +474,14 @@ tr[data-no] {
 	$('#contentCancelBtn').on('click', function() {
 		$('.createContentModalForm').removeClass('show-modal');
 	});
-
+	
+// 관광타입선택 정보 최종선택
 	$('#contentConfirmBtn').on('click', function() {
 
 		$('#contentCodeFinal').empty();
 
 		var finalContent = '';
 		finalContent += '관광타입 : ' + contentName;
-		console.log('finalContent = ' + finalContent);
 
 		$('.createContentModalForm').removeClass('show-modal');
 		$('#contentCodeFinal').append(finalContent);
@@ -530,14 +490,14 @@ tr[data-no] {
 		
 		var cat1 = '';
 		cat1 += '<label for="title">' + '대분류' + '</label>' + '<br />'
-		cat1 += '<button type="button" class="btn btn-light" value="' + contentCode + '" onClick="insertCat1(this);">' + contentName + '</button>';
+		cat1 += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'; 
+		cat1 += contentCode + '" onClick="insertCat1(this);">' + contentName + '</button>';
 		
 		$('#serviceCat1List').append(cat1);
 		
 	});
 
-	// serviceModal
-	
+// 서비스 분류 선택 모달	
 		document.querySelector('.createServiceModalForm').addEventListener(
 			'click',
 			function(e) {
@@ -551,14 +511,12 @@ tr[data-no] {
 	$('#searchServiceBtn').on('click', function() {
 		$('.createServiceModalForm').addClass('show-modal');
 	});
-
+	
+// 서비스 분류 선택 | 중분류 리스트 생성 (대분류 = 관광타입선택)
 	function insertCat1(arg0) {
 		
 		cat1 = contentCode;
 		cat1Name = contentName;
-		
-		console.log('cat1 = ' + cat1);
-		console.log('cat1Name = ' + cat1Name);
 		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/widget/callCat2Code.do',
@@ -579,13 +537,12 @@ tr[data-no] {
 				for (var i = 0; myItem.length > i; i++) {
 
 					var output = '';
-					output += '<button type="button" class="btn btn-light" value="'
+					output += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'
 							+ myItem[i].code
 							+ '" onClick="insertCat2(this);">'
 							+ myItem[i].name + '</button>';
 
 					$('#serviceCat2List').append(output);
-
 				}
 			},
 
@@ -593,19 +550,14 @@ tr[data-no] {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
 			}
-
 		});
-		
 	};
 	
+// 서비스 분류 선택 | 소분류 리스트 생성	
 	function insertCat2(arg0) {
 		
 		cat2 = $(arg0).val();
 		cat2Name = $(arg0).html();
-		
-		console.log('cat1 = ' + cat1);
-		console.log('cat2 = ' + cat2);
-		console.log('cat2Name = ' + cat2Name);
 		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/widget/callCat3Code.do',
@@ -627,7 +579,7 @@ tr[data-no] {
 				for (var i = 0; myItem.length > i; i++) {
 
 					var output = '';
-					output += '<button type="button" class="btn btn-light" value="'
+					output += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'
 							+ myItem[i].code
 							+ '" onClick="insertCat3(this);">'
 							+ myItem[i].name + '</button>';
@@ -641,18 +593,13 @@ tr[data-no] {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
 			}
-
 		});
-		
 	};
 	
+// 서비스 분류 선택 정보 전역변수에 저장	
 	function insertCat3(arg0){
-		
 		cat3 = $(arg0).val();
 		cat3Name = $(arg0).html();
-		console.log('cat3 = ' + cat3);
-		console.log('cat3Name = ' + cat3Name);
-		
 	}
 	
 	$('#serviceModalCloseBtn').on('click', function() {
@@ -662,39 +609,30 @@ tr[data-no] {
 	$('#serviceCancelBtn').on('click', function() {
 		$('.serviceContentModalForm').removeClass('show-modal');
 	});
-
+	
+// 서비스 분류 선택 정보 최종선택
 	$('#serviceConfirmBtn').on('click', function() {
 		
 		$('#serviceCodeFinal').empty();
 
 		if (cat2 == '0') {
 			finalService += '대분류 : ' + cat1Name;
-			console.log('finalService = ' + finalService);
 		} else if (cat2 != '0' && cat3 == '0') {
 			finalService += '대분류 : ' + cat1Name + '중분류 : ' + cat2Name;
-			console.log('finalService = ' + finalService);
 		} else {
 			finalService += '대분류 : ' + cat1Name + '중분류 : ' + cat2Name + '소분류 : ' + cat3Name;
-			console.log('finalService = ' + finalService);
 		}
 		
 		$('.createServiceModalForm').removeClass('show-modal');
 		$('#ServiceCodeFinal').append(finalService);
 	});
 	
-	// search
-
+// 검색 파트
 	$('#searchDataBtn').on('click', function() {
-		
-		console.log('areaCode = ' + areaCode);
-		console.log('sigunguCode = ' + sigunguCode);
-		console.log('cat1 = ' + cat1);
-		console.log('cat2 = ' + cat2);
-		console.log('cat3 = ' + cat3);
-		console.log("검색 실행");
 		
 		$('#contentArea2').show();
 		
+// 조건에 맞는 컨텐츠의 수 정보 요청
 		$.ajax({
 			url : '${pageContext.request.contextPath}/widget/callAreaBasedListlength.do',
 			type : 'get',
@@ -702,7 +640,7 @@ tr[data-no] {
 				
 				areaCode : areaCode,
 				sigunguCode : sigunguCode,
-				// cat1 : cat1,
+				// cat1 : cat1, - 대, 중, 소 분류 현재 api버그로 인하여 사용불가
 				// cat2 : cat2,
 				// cat3 : cat3
 				
@@ -712,13 +650,11 @@ tr[data-no] {
 			success : function(data) {
 
 				var myItem = data.response.body.items.item;
-				console.log(myItem);
-				console.log("1차 ajax 성공");
 				for (var i = 0; myItem.length > i; i++) {
 						totalCount = myItem[i].totalCnt;
 				};
-				console.log("totalCount = " + totalCount);
-				
+
+//조건에 맞는 컨텐츠 리스트 요청 
 				$.ajax({
 					url : '${pageContext.request.contextPath}/widget/callAreaBasedList.do',
 					type : 'get',
@@ -736,10 +672,6 @@ tr[data-no] {
 					dataType : 'json',
 					success : function(data) {
 						
-						
-						console.log(data);
-						console.log("Cpage = " + data.CPage);
-						console.log("totalContent = " + data.totalContent);
 						var cPage = data.CPage;
 						var numPerPage = data.numPerPage;
 						var totalcontent = data.totalContent;
@@ -749,7 +681,8 @@ tr[data-no] {
 						
 						$('#selectContent').empty();
 						$('#paging').empty();
-				
+
+		// 컨텐츠 썸네일 형태로 출력
 						for(var i = 0; myItem.length > i; i++){
 							
 							if(myItem[i].firstimage2 == ""){
@@ -766,7 +699,7 @@ tr[data-no] {
 							
 							$('#selectContent').append(gallery);
 						};
-						
+		// 페이지바 생성
 							pagebar = "";
 							pageNo = "";
 							pageStart = "";
@@ -781,15 +714,7 @@ tr[data-no] {
 							var main = "";
 							var next = "";
 							
-							console.log("pagebarSize = " + pagebarSize);
-							console.log("totalPage = " + totalPage);
-							console.log("pageStart = " + pageStart);
-							console.log("pageEnd = " + pageEnd);
-							console.log("pageNo = " + pageNo);
-							console.log("previous = " + previous);
-							console.log("next = " + next);
-							
-							// previous
+		// 페이지바 이전 버튼
 							if(pageNo == 1) {
 								previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 								}
@@ -797,7 +722,7 @@ tr[data-no] {
 								previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 								}
 							
-							// pagingbar main
+		// 페이지바 숫자 버튼
 							while(pageNo <= pageEnd && pageNo <= totalPage) {
 								if(pageNo == cPage) {
 									main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
@@ -808,7 +733,7 @@ tr[data-no] {
 								pageNo++;
 								}
 							
-							// next
+		// 페이지바 다음 버튼
 							if(pageNo > totalPage){
 								next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
 								}
@@ -829,25 +754,17 @@ tr[data-no] {
 						alert("Status : " + textStatus);
 						alert("Error : " + errorThrown);
 					}
-					
 				});
-				
-					
 			},
-
 			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
-				console.log("data = " + data);
 			}
-
 		});
-
 	});
 	
+// 페이지바 이전 버튼 선택시, 컨텐츠 리스트 요청
 	function callPreviousList(arg0){
-		
-		console.log("pageStart = " + pageStart);
 		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/widget/callPreviousList.do',
@@ -858,7 +775,6 @@ tr[data-no] {
 				areaCode : areaCode,
 				sigunguCode : sigunguCode,
 				totalCount : totalCount
-				
 				// cat1 : cat1,
 				// cat2 : cat2,
 				// cat3 : cat3
@@ -868,9 +784,6 @@ tr[data-no] {
 			dataType : 'json',
 			success : function(data) {
 				
-				console.log(data);
-				console.log("Cpage = " + data.CPage);
-				console.log("totalContent = " + data.totalContent);
 				var cPage = data.CPage;
 				var numPerPage = data.numPerPage;
 				var totalcontent = data.totalContent;
@@ -912,15 +825,6 @@ tr[data-no] {
 					var main = "";
 					var next = "";
 					
-					console.log("pagebarSize = " + pagebarSize);
-					console.log("totalPage = " + totalPage);
-					console.log("pageStart = " + pageStart);
-					console.log("pageEnd = " + pageEnd);
-					console.log("pageNo = " + pageNo);
-					console.log("previous = " + previous);
-					console.log("next = " + next);
-					
-					// previous
 					if(pageNo == 1) {
 						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
@@ -928,7 +832,6 @@ tr[data-no] {
 						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick=\"callPreviousList(this)\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
 					
-					// pagingbar main
 					while(pageNo <= pageEnd && pageNo <= totalPage) {
 						if(pageNo == cPage) {
 							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
@@ -939,7 +842,6 @@ tr[data-no] {
 						pageNo++;
 						}
 					
-					// next
 					if(pageNo > totalPage){
 						next += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
 						}
@@ -959,17 +861,15 @@ tr[data-no] {
 			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
-				console.log("data = " + data);
 			}
 	});
 		
 	};
 
+// 페이지바 숫자버튼 선택시, 컨텐츠 리스트 요청
 	function callMainList(arg0){
 		
 		var mainPageNo = $(arg0).text();
-		console.log("mainPageNo = " + mainPageNo);
-		console.log("pageStart = " + pageStart);
 		var start = pageStart;
 		
 		$.ajax({
@@ -981,7 +881,6 @@ tr[data-no] {
 				areaCode : areaCode,
 				sigunguCode : sigunguCode,
 				totalCount : totalCount
-				
 				// cat1 : cat1,
 				// cat2 : cat2,
 				// cat3 : cat3
@@ -991,9 +890,6 @@ tr[data-no] {
 			dataType : 'json',
 			success : function(data) {
 				
-				console.log(data);
-				console.log("Cpage = " + data.CPage);
-				console.log("totalContent = " + data.totalContent);
 				var cPage = data.CPage;
 				var numPerPage = data.numPerPage;
 				var totalcontent = data.totalContent;
@@ -1034,15 +930,6 @@ tr[data-no] {
 					var main = "";
 					var next = "";
 					
-					console.log("pagebarSize = " + pagebarSize);
-					console.log("totalPage = " + totalPage);
-					console.log("pageStart = " + pageStart);
-					console.log("pageEnd = " + pageEnd);
-					console.log("pageNo = " + pageNo);
-					console.log("previous = " + previous);
-					console.log("next = " + next);
-					
-					// previous
 					if(pageNo == 1) {
 						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
@@ -1050,7 +937,6 @@ tr[data-no] {
 						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
 					
-					// pagingbar main
 					while(pageNo <= pageEnd && pageNo <= totalPage) {
 						if(pageNo == cPage) {
 							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
@@ -1060,8 +946,7 @@ tr[data-no] {
 							}
 						pageNo++;
 						}
-					
-					// next
+
 					if(pageNo > totalPage){
 						next += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callNextList(this)" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span> <span class=\"sr-only\">Next</span></a></li>'
 						}
@@ -1081,16 +966,12 @@ tr[data-no] {
 			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
-				console.log("data = " + data);
 			}
 	});
-		
 	};
 		
-	
+// 페이지바 다음버튼 선택시, 컨텐츠 리스트 요청	
 	function callNextList(arg0){
-		
-		console.log("pageStart = " + pageStart);
 		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/widget/callNextList.do',
@@ -1101,7 +982,6 @@ tr[data-no] {
 				areaCode : areaCode,
 				sigunguCode : sigunguCode,
 				totalCount : totalCount
-				
 				// cat1 : cat1,
 				// cat2 : cat2,
 				// cat3 : cat3
@@ -1111,9 +991,6 @@ tr[data-no] {
 			dataType : 'json',
 			success : function(data) {
 				
-				console.log(data);
-				console.log("Cpage = " + data.CPage);
-				console.log("totalContent = " + data.totalContent);
 				var cPage = data.CPage;
 				var numPerPage = data.numPerPage;
 				var totalcontent = data.totalContent;
@@ -1155,15 +1032,6 @@ tr[data-no] {
 					var main = "";
 					var next = "";
 					
-					console.log("pagebarSize = " + pagebarSize);
-					console.log("totalPage = " + totalPage);
-					console.log("pageStart = " + pageStart);
-					console.log("pageEnd = " + pageEnd);
-					console.log("pageNo = " + pageNo);
-					console.log("previous = " + previous);
-					console.log("next = " + next);
-					
-					// previous
 					if(pageNo == 1) {
 						previous += '<li class=\"page-item disabled\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
@@ -1171,7 +1039,6 @@ tr[data-no] {
 						previous += '<li class=\"page-item\"><a class=\"page-link\" href="javascript:void(0)" onclick="callPreviousList(this)" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span><span class=\"sr-only\">Previous</span></a></li>'
 						}
 					
-					// pagingbar main
 					while(pageNo <= pageEnd && pageNo <= totalPage) {
 						if(pageNo == cPage) {
 							main += '<li class=\"page-item active\"><span class=\"page-link\">' + pageNo + '<span class=\"sr-only\">(current)</span></span></li>'
@@ -1202,10 +1069,8 @@ tr[data-no] {
 			error : function(XMLHttpRequest, textStatus, errorThrown, data) {
 				alert("Status : " + textStatus);
 				alert("Error : " + errorThrown);
-				console.log("data = " + data);
 			}
 	});
-		
 	};
 	
 </script>

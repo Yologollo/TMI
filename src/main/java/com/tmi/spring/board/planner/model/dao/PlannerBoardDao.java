@@ -2,6 +2,7 @@ package com.tmi.spring.board.planner.model.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -14,6 +15,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
+import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
@@ -24,6 +26,10 @@ public interface PlannerBoardDao {
 
 	@Select("select count(*) from tmi_planner_board")
 	int selectTotalContent();
+	
+	List<PlannerBoardSearch> selectPlannerBoardSearchList(RowBounds rowBounds, Map<String, String> map);
+
+	int selectSearchTotalContent(Map<String, String> map);
 
 	@Select("select * from tmi_planner_board where pb_no = #{no}")
 	InsertPlannerBoard selectOneReviewBoard(int no);
@@ -67,6 +73,9 @@ public interface PlannerBoardDao {
 
 	@Select("select * from tmi_planner_plan")
 	List<PlannerPlan> findPlansList(List<PlannerBoard> list);
+	
+	@Select("select * from tmi_planner_plan")
+	List<PlannerPlan> findPlansSearchList(List<PlannerBoardSearch> list);
 
 	int savePlanner(Planner planner);
 
@@ -79,5 +88,9 @@ public interface PlannerBoardDao {
 
 	@Insert("insert into tmi_planner_plan values (seq_pp_no.nextval, #{pppNo}, #{ppTime}, #{ppPlaceName}, #{ppMemo}, #{ppX}, #{ppY}, #{ppDate})")
 	void insertPlannerPlan(PlannerPlan pp);
+
+	
+
+	
 
 }
