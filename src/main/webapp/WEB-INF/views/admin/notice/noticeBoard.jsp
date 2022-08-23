@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
-<div id="commonMain">
 	<style>
 tr[data-no] {
 	cursor: pointer;
@@ -41,6 +40,7 @@ window.addEventListener('load', (e) => {
 
 
 
+<div id="commonMain">
 	<section id="container">
 		<div id="menuContainer">
 			<ul>
@@ -61,7 +61,7 @@ window.addEventListener('load', (e) => {
 		</div>
 
 
-	<section id="board-container" class="container">
+	<section id="board-container" <%-- class="container" --%>>
 			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
 			<div id="adminboard-head">
 					<h2>공지사항</h2>
@@ -72,7 +72,7 @@ window.addEventListener('load', (e) => {
 								
 					<colgroup>
 		                <col width="10%">
-		                <col width="">
+		                <col width="10%">
 		                <col width="20%">
 		                <col width="20%">
 		                <col width="10%">
@@ -91,7 +91,7 @@ window.addEventListener('load', (e) => {
 	       		 </thead>
 	       		 
 	         <tbody>
-         <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+        			 <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
 							<tr data-no="${noticeBoard.nb_no}">
 								<td>${noticeBoard.nb_no}</td>
 								<td>${noticeBoard.nb_title}</td>
@@ -106,6 +106,7 @@ window.addEventListener('load', (e) => {
 								<td>${noticeBoard.nb_read_count}</td>
 							</tr>
 						</c:forEach>
+						</tbody>	
 				</table>
 				<nav>${pagebar}</nav>
          

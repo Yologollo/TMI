@@ -12,28 +12,18 @@
 	<jsp:param value="회원관리" name="title" />
 </jsp:include>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberList.css">
+<link rel="stylesheet"href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
 
 <div id="commonMain">
 
-	<div class="top-logo">
-		<span>관리자</span>
-	</div>
+
 	
 	<section id="container">
+	
 		<div id="Tadminboard-submenu" class="submenu">
-			<ul id="sub">
-				<li><a
-					href="${pageContext.request.contextPath}/admin/memberList.do"
-					onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"
-					onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-			</ul>
+			
 		</div>
 		
 		<div id="adminboard">
@@ -91,7 +81,7 @@
 	</section>
 </div>
 
-
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 <script>
 

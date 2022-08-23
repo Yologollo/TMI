@@ -14,7 +14,7 @@
     
     font-family: 'KyoboHand';
     justify-content: center;
-    margin: 300px 130px 0 30px;
+    margin: 150px 10px 0 5px;
   }
 
 
@@ -23,8 +23,8 @@
   border: 1px solid #d3d3d3;
   border-top: none;
   float: left;
-  width: 15%;
-  height: 600px;
+  width: 17%;
+  height: 530px;
   font-size: 30px;
   text-align: center;
   background-color: #F6F6F6;

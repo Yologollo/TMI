@@ -34,13 +34,13 @@
 
 	
 	
-		<section id="board-container" class="container">
+		<section id="board-container" <%-- class="container" --%>>
 				<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
 				<div id="adminboard-head">
 					<h2>회원목록</h2>
-					
 				</div>
-							<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
+				
+					<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
 								<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
 								<button type="submit" id="ac-button.is-solid.is-primary" class="btn">검색</button>
 							</form>
@@ -67,35 +67,28 @@
 				         </thead>
 				        <tbody id="list-content">
 
-						<c:forEach items="${list}" var="adminList" varStatus="vs">
-							<tr>
-								<td>${adminList.m_no}</td>
-								<td>${adminList.m_nickname}</td>
-								<td>${adminList.m_name}</td>
-								<td>${adminList.m_email}</td>
-								<td>${adminList.m_phone}</td>
-								<td>
-									<div id="btn-sort-wrap">
-										<button type="submit" class="btn btn-primary"
-											data-bs-target="#exampleModal"
-											data-member-email=${adminList.m_email
-											}  	id="deleteBtn">회원탈퇴</button>
-									</div>
-								</td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
+							<c:forEach items="${list}" var="adminList" varStatus="vs">
+								<tr>
+									<td>${adminList.m_no}</td>
+									<td>${adminList.m_nickname}</td>
+									<td>${adminList.m_name}</td>
+									<td>${adminList.m_email}</td>
+									<td>${adminList.m_phone}</td>
+									<td>
+										<div id="btn-sort-wrap">
+											<button type="submit" class="btn btn-primary"
+												data-bs-target="#exampleModal"
+												data-member-email=${adminList.m_email
+												}  	id="deleteBtn">회원탈퇴</button>
+										</div>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
 				      </table>
-
-
-				
-						<nav>${pagebar}</nav>
-				
-	
-						
-		</div>
-	</section>
+														<nav>${pagebar}</nav>
+			</div>
+		</section>
 	</section>
 </div>
 

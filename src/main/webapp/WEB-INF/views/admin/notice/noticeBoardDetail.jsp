@@ -14,6 +14,7 @@
 <!-- include libraries(jQuery, bootstrap) -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
 <style>
 	#fb_content {
 		resize : none;
