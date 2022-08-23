@@ -24,13 +24,13 @@
 		 		<h1>비밀번호 찾기</h1>
 		 		<form:form name="findPwFrm" method="POST">
 		 			<div class="form-box" style="margin-top: 50px;">
-		 				<div class="input-box">
-			                <input id="mNickName" type="text" name="mNickName" placeholder="닉네임" required>
-			                <label for="mNickName">닉네임</label>
-			            </div>
 			            <div class="input-box">
 			                <input id="mEmail" type="email" name="mEmail" placeholder="이메일" required>
 			                <label for="mEmail">이메일</label>
+			            </div>
+		 				<div class="input-box">
+			                <input id="mPhone" type="text" name="mPhone" placeholder="01000000000(-없이)" required>
+			                <label for="mPhone">핸드폰</label>
 			            </div>
 			            <input type="submit" value="찾기" id="submitButton">
 			            <div class="sign_up_box">
@@ -44,10 +44,16 @@
  	</div>
 </div>
 <script>
+const mPhoneRex = /^010\d{8}$/;
 $("#submitButton").click(function(){
-	if ($("#mNickName").val() == '') {
-		alert('닉네임을 입력해주세요.');
-		$("#mNickName").select().focus();
+	if ($("#mPhone").val() == '') {
+		alert('핸드폰 번호를 입력해주세요.');
+		$("#mPhone").select().focus();
+		return false;
+	}
+	if (!mPhoneRex.test($("#mPhone").val())){
+		alert('핸드폰 번호를 입력해주세요.');
+		$("#mPhone").select().focus();
 		return false;
 	}
 	if ($("#mEmail").val() == '') {
