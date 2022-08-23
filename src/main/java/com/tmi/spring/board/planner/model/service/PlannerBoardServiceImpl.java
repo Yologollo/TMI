@@ -16,6 +16,7 @@ import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
 import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
+import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.planner.model.dto.Planner;
@@ -169,6 +170,25 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 			plannerBoardDao.insertPlannerPlan(pp);
 		}
 		return null;
+	}
+	
+//	@Override
+//	public List<ReviewBoard> selectBestPlannerBoardList(int cPage, int numPerPage) {
+//		int offset = (cPage -1) * numPerPage;
+//		int limit = numPerPage;
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("searchType", searchType);
+//		map.put("keyword", keyword);
+//		RowBounds rowBounds = new RowBounds(offset, limit);
+//		return plannerBoardDao.selectBestPlannerBoardList(rowBounds);
+//
+//	}
+	@Override
+	public List<PlannerBoard> selectBestPlannerBoardList(int cPage, int numPerPage) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return plannerBoardDao.selectBestPlannerBoardList(rowBounds);
 	}
 
 
