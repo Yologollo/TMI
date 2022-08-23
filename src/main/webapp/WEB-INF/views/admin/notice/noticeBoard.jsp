@@ -13,10 +13,8 @@
 	<jsp:param value="공지사항" name="title" />
 </jsp:include>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberList.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
 <div id="commonMain">
 	<style>
@@ -67,11 +65,11 @@ window.addEventListener('load', (e) => {
 			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
 			<div id="adminboard-head">
 					<h2>공지사항</h2>
+				</div>
 					<sec:authorize access="hasRole('ADMIN')">
 						<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'">글쓰기</button>
 					</sec:authorize>
 								
-				</div>
 					<colgroup>
 		                <col width="10%">
 		                <col width="">
@@ -101,18 +99,17 @@ window.addEventListener('load', (e) => {
 								<td><fmt:parseDate value="${noticeBoard.nb_created_at}"
 										pattern="yyyy-MM-dd'T'HH:mm" var="createdAt" /> <fmt:formatDate
 										value="${createdAt}" pattern="MM-dd HH:mm" /></td>
-								<td><c:if test="${noticeBoard.attachCount gt 0}">
-										<img
-											src="${pageContext.request.contextPath}/resources/images/notice/file.png"
-											width="16px" />
-									</c:if></td>
+								<td>	<c:if test="${noticeBoard.attachCount gt 0}">
+											<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
+										</c:if>
+								</td>
 								<td>${noticeBoard.nb_read_count}</td>
 							</tr>
 						</c:forEach>
 				</table>
 				<nav>${pagebar}</nav>
          
-
+			</div>
 		</section> 
 	</section>
 </div>

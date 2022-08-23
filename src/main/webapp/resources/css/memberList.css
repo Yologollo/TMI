@@ -1,3 +1,15 @@
+/* 전체 box */
+/* #container {
+    
+    font-family: 'KyoboHand';
+    justify-content: center;
+    margin: 300px 130px 0 30px;
+  } */
+
+
+
+
+
 #container {
     
     font-family: 'KyoboHand';
@@ -6,34 +18,41 @@
   }
 
 
- /*사이드바 CSs*/
-  #menuContainer{
-   border: 1px solid #d3d3d3;
-   border-top: none;
-   float: left;
-   width: 15%;
-   height: 600px;
-   font-size: 30px;
-   text-align: center;
-   background-color: #F6F6F6;
+ /*사이드 메뉴*/
+#menuContainer{
+  border: 1px solid #d3d3d3;
+  border-top: none;
+  float: left;
+  width: 15%;
+  height: 600px;
+  font-size: 30px;
+  text-align: center;
+  background-color: #F6F6F6;
 }
 
 #menuContainer > ul, #menuContainer > li {
-   list-style:none;
-   padding-left: 0px;
+  list-style:none;
+  padding-left: 0px;
 }
 
 #menuContainer > li > a {
-   color: white;
+  color: white;
 }
 
 .mypageMenuli {
-   margin-top:20px;
-   color: white;
+  margin-top:20px;
+  color: white;
 }
 
 
-/* 테이블 CSS */
+/* 테이블 캡션 */
+#notice-table-1 caption {
+ text-align: center;
+ font-size: 22px;
+ margin-top: 30px;
+ margin-bottom: 14px;
+}
+/*테이블 설정*/
 #notice-table-1 {
  width: 83%;
  border-top: 1px solid #d0d0d0;
@@ -76,60 +95,13 @@
  border-bottom: 1px solid currentcolor;
 }
 
-
-
-/*   
-  #Tadminboard-submenu {
-    margin-top: 100px;
-    text-align: right;
-    width: 10%;
-  }
-  #Tadminboard-submenu ul {
-    padding: 0;
-  }
-  #Tadminboard-submenu li {
-    list-style: none;
-    margin: 10px 0;
-    font-weight: 700;
-    font-size: 35px;
-  }
- 
-  #Tadminboard-submenu a {
-    color: black; 
-    text-decoration: none;
-  }
-  .current {
-    color: #96d1fa!important;
-  } */
-    /* 여기까지 submenu */
   
-/*   #adminboard{
-    margin: -260px 0px 0px 190px;
-    width: 80%;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 100px;
-  }
-  #adminboard h2 {
-  
-    font-size: 45px;
-    padding: 20px;
-    margin: 25px 4px 0px;
-  }
-  #adminboard table {
-    width: 100%;
-    border-collapse: collapse
-  } */
- 
-  
-  .page { 
+/*   .page { 
     margin: 3px;
     text-decoration: none;
     color: #bbded6;
     font-size: 23px;
-  }
+  } */
   #list-head {
     font-size: medium;
     border-top: 2px solid gray;
@@ -186,7 +158,7 @@
       #adminboard-head {
         display: flex;
        /*  border-bottom: 2px solid gray; */
-        justify-content: space-between;
+       justify-content: space-around;
       }
       #btn-sort-wrap {
         display: flex;
@@ -257,7 +229,9 @@
         border-radius: 0.25rem;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
       }
-      #search-wrap {
+      
+      
+/*       #search-wrap {
         display: flex;
         justify-content: center;
         margin-top: 200px;
@@ -266,8 +240,8 @@
         width: 220px;
         height: 30px;
       }
-
-  #pagebar {
+ */
+/*   #pagebar {
       text-align: center;
       font-size: 20px;
       margin: 100px 0 20px;
@@ -282,7 +256,7 @@
       text-decoration: none;
       color: #5768d7;
       transition: all 0.2s ease-in-out;
-  }
+  } */
   
   #list-content a {
       text-decoration: none;
@@ -293,30 +267,10 @@
   
   /* 게시판 글쓰기 버튼 시작 */
 .ac-button.is-solid.is-primary {
-    border-color: #70B9E9;
+  border-color: #70B9E9;
     font-weight: 700;
     background-color: #70B9E9;
-}
-
-.ac-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    line-height: 1.47;
-    font-weight: 500;
-    cursor: pointer;
-    -webkit-appearance: none;
-    padding: 0 12px;
-    height: 40px;
-    line-height: 1.43;
-    font-size: 14px;
-    letter-spacing: 2px;
-    border: 1px solid;
-    color: #fff;
-    float: right;
-    margin-bottom: 10px;
+    color: white;
 }
 /* 게시판 글쓰기 버튼 끝 */
   
@@ -328,6 +282,52 @@
   
   
   
+
+
+/*   
+  #Tadminboard-submenu {
+    margin-top: 100px;
+    text-align: right;
+    width: 10%;
+  }
+  #Tadminboard-submenu ul {
+    padding: 0;
+  }
+  #Tadminboard-submenu li {
+    list-style: none;
+    margin: 10px 0;
+    font-weight: 700;
+    font-size: 35px;
+  }
+ 
+  #Tadminboard-submenu a {
+    color: black; 
+    text-decoration: none;
+  }
+  .current {
+    color: #96d1fa!important;
+  } */
+    /* 여기까지 submenu */
+  
+/*   #adminboard{
+    margin: -260px 0px 0px 190px;
+    width: 80%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 100px;
+  }
+  #adminboard h2 {
+  
+    font-size: 45px;
+    padding: 20px;
+    margin: 25px 4px 0px;
+  }
+  #adminboard table {
+    width: 100%;
+    border-collapse: collapse
+  } */
   
   
   
