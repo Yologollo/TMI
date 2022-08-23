@@ -15,6 +15,7 @@ import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardLove;
+import com.tmi.spring.board.review.model.dto.ReviewBoardSearch;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
@@ -39,6 +40,26 @@ public class ReviewBoardServiceImpl implements ReviewBoardService  {
 	@Override
 	public int selectTotalContent() {
 		return reviewBoardDao.selectTotalContent();
+	}
+	
+	@Override
+	public List<ReviewBoardSearch> selectReviewBoardSearchList(int cPage, int numPerPage, String searchType,
+			String keyword) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reviewBoardDao.selectReviewBoardSearchList(rowBounds, map);
+	}
+
+	@Override
+	public int selectSearchTotalContent(String searchType, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return reviewBoardDao.selectSearchTotalContent(map);
 	}
 	
 	@Override

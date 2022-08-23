@@ -1,6 +1,7 @@
 package com.tmi.spring.board.review.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,6 +14,7 @@ import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
+import com.tmi.spring.board.review.model.dto.ReviewBoardSearch;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
@@ -23,6 +25,10 @@ public interface ReviewBoardDao {
 
 	@Select("select count(*) from tmi_review_board")
 	int selectTotalContent();
+	
+	List<ReviewBoardSearch> selectReviewBoardSearchList(RowBounds rowBounds, Map<String, String> map);
+
+	int selectSearchTotalContent(Map<String, String> map);
 
 	int insertReviewBoard(InsertReviewBoard insertReviewBoard);
 	
@@ -78,7 +84,5 @@ public interface ReviewBoardDao {
 
 	@Select("select p_leave_date, p_return_date from tmi_review_board rb join tmi_planner p on rb.rb_p_no = p.p_no where rb_no = #{no}")
 	Planner findBoardPlannerByNoModel(int no);
-	
-	
-	
+
 }
