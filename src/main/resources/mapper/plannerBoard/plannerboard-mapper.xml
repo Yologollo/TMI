@@ -132,6 +132,33 @@
 		</if>
 	</sql>
 	
+	<select id="selectBestPlannerBoardList" parameterType="String" resultMap="PlannerBoardMap">
+		select
+		    p.p_no,
+		    p.p_title,
+		    p.p_explan,
+		    p.p_leave_date,
+		    p.p_return_date,
+		    pb.pb_no,
+		    pb.pb_p_no,
+		    m.m_nickname,
+		    pb.pb_title,
+		    pb.pb_content,
+		    pb.pb_created_at,
+		    pb.pb_updated_at,
+		    pb.pb_read_count,
+		    (select count(*) from tmi_planner_board_comment where pbc_pb_no = pb.pb_no) commentCount
+		from
+		    tmi_planner_board pb join tmi_member m
+		        on pb_m_email = m.m_email
+		            join tmi_planner p
+		                on pb_p_no = p.p_no
+		where
+		    (select count(*) from tmi_planner_board_love where pbl_pb_no = pb.pb_no) >= 5
+		order by
+		    pb.pb_no desc
+	</select>
+	
 	
 <!-- 	<insert id="savePlannerPlan" parameterType="java.util.List">
 		insert into tmi_planner_plan (pp_no, pp_p_no, pp_time, pp_place_name, pp_memo, pp_x, pp_y, pp_date)

@@ -21,9 +21,9 @@ public class MainBoardController {
 //		log.info("GET / 요청!");
 //	}
 	
-	@GetMapping("/board/bestplanner/bestPlanner.do")
-	public void bestPlanner() {
-		log.info("GET / 요청!");
-	}
+//	@GetMapping("/board/bestplanner/bestPlanner.do")
+//	public void bestPlanner() {
+//		log.info("GET / 요청!");
+//	}
 	
 }

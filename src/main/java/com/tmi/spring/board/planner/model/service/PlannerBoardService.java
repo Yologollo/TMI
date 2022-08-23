@@ -6,6 +6,7 @@ import java.util.List;
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
+import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
@@ -52,6 +53,9 @@ public interface PlannerBoardService {
 
 	List<PlannerPlan> savePlannerPlan(int i, int saveNo, List<Date> ppTime, List<String> ppPlaceName,
 			List<String> ppMemo, List<String> ppX, List<String> ppY, List<Date> ppDate);
+
+	List<PlannerBoard> selectBestPlannerBoardList(int cPage, int numPerPage);
+
 
 
 }

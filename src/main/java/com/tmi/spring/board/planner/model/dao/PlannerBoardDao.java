@@ -16,6 +16,7 @@ import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
+import com.tmi.spring.board.review.model.dto.ReviewBoard;
 import com.tmi.spring.planner.model.dto.Planner;
 import com.tmi.spring.planner.model.dto.PlannerPlan;
 
@@ -88,6 +89,8 @@ public interface PlannerBoardDao {
 
 	@Insert("insert into tmi_planner_plan values (seq_pp_no.nextval, #{pppNo}, #{ppTime}, #{ppPlaceName}, #{ppMemo}, #{ppX}, #{ppY}, #{ppDate})")
 	void insertPlannerPlan(PlannerPlan pp);
+
+	List<PlannerBoard> selectBestPlannerBoardList(RowBounds rowBounds);
 
 	
 
