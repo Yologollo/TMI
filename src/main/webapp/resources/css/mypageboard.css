@@ -18,7 +18,7 @@ tr[data-no] {
 	height: 15vh;
 	margin-bottom: 5vh;
 	text-align: center;
-	padding-top: 43px;
+	padding-top: 5vh;
 }
 
 h1 {
@@ -31,3 +31,13 @@ h1 {
 	width: 85%;
 }
 
+#board-container {
+	height: 400px;
+}
+
+.btn {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
+}

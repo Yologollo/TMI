@@ -17,8 +17,8 @@
 <div id="createPlannerMain">
 	<div id=topBar>
 		<div id="topBarBtnWrapper">
-			<button type="button" class="btn btn-primary btn-lg" id="btnPlannerSave" data-no="${planner.PNo}" onclick="location.href='${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}'">저장</button>
-			<button type="button" class="btn btn-danger btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
+			<button type="button" class="btn btn-lg" id="btnPlannerSave" data-no="${planner.PNo}" onclick="location.href='${pageContext.request.contextPath}/planner/detailPlanner.do?pNo=${planner.PNo}'">저장</button>
+			<button type="button" class="btn btn-lg" id="btnPlannerClose" data-no="${planner.PNo}">닫기</button>
 			<input type="hidden" id="planner-No" value="${planner.PNo}"/>
 				
 		</div>
@@ -66,7 +66,7 @@
 						<div id="plannerDetailPlaceFirstIdWrapper">
 							<form onsubmit="searchPlaces(); return false;">
 								<input type="text" class="form-control" value="KH정보교육원" id="keyword">
-								<button type="submit" id="keywordSearchBtn" class="btn btn-primary">검색</button>
+								<button type="submit" id="keywordSearchBtn" class="btn">검색</button>
 							</form>
 						</div>
 					</div>
@@ -363,7 +363,7 @@ function getListItem(index, places) {
       itemStr += '  <span class="tel">' + places.phone  + '</span>' +
                 '</div>';   
                 
-	  itemStr += '<div class="placelistDiv"><button class="btn btn-primary placelistDivBtn" onclick="planInsert(\'' + places.place_name + '\',\'' + places.y + '\',\'' + places.x +  '\')">+</button></div>';
+	  itemStr += '<div class="placelistDiv"><button class="btn placelistDivBtn" onclick="planInsert(\'' + places.place_name + '\',\'' + places.y + '\',\'' + places.x +  '\')">+</button></div>';
 
     el.innerHTML = itemStr;
     el.className = 'item';

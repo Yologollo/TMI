@@ -340,3 +340,10 @@
 	position: relative; 
 	overflow: hidden;
 }
+
+.btn {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
+}
