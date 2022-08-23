@@ -164,6 +164,14 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return plannerBoardDao.selectBestPlannerBoardList(rowBounds);
 	}
+	
+	@Override
+	public List<PlannerBoard> selectMainPlannerBoardList(int cPage, int numPerPage2) {
+		int offset = (cPage -1) * numPerPage2;
+		int limit = numPerPage2;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return plannerBoardDao.selectMainPlannerBoardList(rowBounds);
+	}
 
 
 }

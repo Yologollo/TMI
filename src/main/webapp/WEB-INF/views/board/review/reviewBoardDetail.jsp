@@ -95,6 +95,7 @@ const email = document.getElementById("loginMemberEmail").value;
 			
 			<c:if test="${planner.PNo ne 0}">
 			<div id="plannerContainerWrapper">
+			<div>
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
 					<div id="plannerDetailCardWrapper">
@@ -262,7 +263,9 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:if>
 		</c:forEach>
-		
+		</div>
+	</div>
+<hr />
 		<div style="width:100%;">
 	  		${insertReviewBoard.rbContent} <!-- summernote 출력 -->
 		</div>
@@ -270,9 +273,19 @@ const email = document.getElementById("loginMemberEmail").value;
          <form
 			 action="${pageContext.request.contextPath}/board/review/reviewBoardLove.do" method="get" name="reviewBoardLoveFrm">
              <input type="hidden" name="loNo" value="${insertReviewBoard.rbNo}" />
-             <button type="submit" class="btn btn-primary btn-lg" id="love">추천${loveCount}</button>
-            
+             <p>${loveCount}</p>
+             <c:if test="${empty loginMember}">
+				<span>로그인 하셔야 추천이 가능합니다.</span>
+			</c:if>
+			<c:if test="${not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)}">
+             	<span>본인 글은 추천할 수 없습니다.</span>
+            </c:if>
+			<c:if test="${not empty loginMember && (loginMember.MEmail ne insertReviewBoard.rbMEmail)}">
+             	<button type="submit" class="btn btn-primary btn-lg" id="love">추천</button>
+            </c:if>
          </form>
+         <hr />
+
 		
 		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
 		<c:if test="${not empty loginMember}">

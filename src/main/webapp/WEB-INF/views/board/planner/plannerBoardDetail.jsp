@@ -93,13 +93,8 @@ const email = document.getElementById("loginMemberEmail").value;
 			</c:if>
 			
 			<c:if test="${planner.PNo ne 0}">
- 			<input type="text" value="${planner.PNo}"/>
-			<input type="text" value="${planner.PTitle}"/>
-			<input type="text" value="${planner.PExplan}"/>
-			<input type="text" value="${planner.PLeaveDate}"/>
-			<input type="text" value="${planner.PReturnDate}"/>
-			<input type="text" value="${planner.PWriteDate}"/><!-- sysdate -->
 			<div id="plannerContainerWrapper">
+			<div>
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
 					<div id="plannerDetailCardWrapper">
@@ -267,17 +262,28 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:if>
 		</c:forEach>
+		</div>
+		</div>
+		<hr />
 		
 		<div style="width:100%;">
 	  		${insertPlannerBoard.pbContent} <!-- summernote 출력 -->
 		</div>
-		
          <form
 			 action="${pageContext.request.contextPath}/board/planner/plannerBoardLove.do" method="get" name="plannerBoardLoveFrm">
              <input type="hidden" name="loNo" value="${insertPlannerBoard.pbNo}" />
-             <button type="submit" class="btn btn-primary btn-lg" id="love">추천${loveCount}</button>
-            
+             <p>${loveCount}</p>
+             <c:if test="${empty loginMember}">
+				<span>로그인 하셔야 추천이 가능합니다.</span>
+			</c:if>
+			<c:if test="${not empty loginMember && (loginMember.MEmail eq insertPlannerBoard.pbMEmail)}">
+             	<span>본인 글은 추천할 수 없습니다.</span>
+            </c:if>
+			<c:if test="${not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail)}">
+             	<button type="submit" class="btn btn-primary btn-lg" id="love">추천</button>
+            </c:if>
          </form>
+		<hr />
 		
 		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
 		<c:if test="${not empty loginMember}">
