@@ -19,8 +19,8 @@
 
 
 <div id="commonMain">
-	<%-- <section id="container">
-		<div id="Tadminboard-submenu" class="submenu">
+	
+		<%-- <div id="Tadminboard-submenu" class="submenu">
 			<ul id="sub">
 				<li><a
 					href="${pageContext.request.contextPath}/admin/memberList.do"
@@ -29,9 +29,9 @@
 					href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"
 					onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
 			</ul>
-		</div>
+		</div> --%>
 		
- --%>
+
 
 
 	<section id="container">
@@ -45,8 +45,7 @@
 		</div>
 		 -->
 		
-		
-		
+			
 		<div id="menuContainer">
    <ul>
       <li class="mypageMenuli">
@@ -66,7 +65,7 @@
 </div>
 
 	
-		<div id="adminboard">
+		<!-- <div id="adminboard"> -->
 		
 				<div id="adminboard-head">
 					<h2>회원목록</h2>
