@@ -23,6 +23,47 @@
 		    rb.rb_no desc
 	</select>
 	
+	<select id="selectReviewBoardSearchList" parameterType="String" resultMap="ReviewBoardMap">
+		select
+		    rb.rb_no,
+		    rb.rb_p_no,
+		    m.m_nickname,
+		    rb.rb_title,
+		    rb.rb_content,
+		    rb.rb_created_at,
+		    rb.rb_updated_at,
+		    rb.rb_read_count,
+		    (select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    (select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount
+		from
+		    tmi_review_board rb join tmi_member m
+		        on rb_m_email = m.m_email
+		<include refid="search"></include>
+		order by
+		    rb.rb_no desc
+	</select>
+	
+	<select id="selectSearchTotalContent" parameterType="map" resultType="int">
+		select
+			count(*)
+		from (
+			select
+				rb.rb_no,
+		    	rb.rb_p_no,
+		    	m.m_nickname,
+		    	rb.rb_title,
+		    	rb.rb_content,
+		    	rb.rb_created_at,
+		    	rb.rb_updated_at,
+		    	rb.rb_read_count,
+		    	(select count(*) from tmi_review_board_attachment where rba_rb_no = rb.rb_no) attachCount,
+		    	(select count(*) from tmi_review_board_comment where rbc_rb_no = rb.rb_no) commentCount
+		    from	
+		    	tmi_review_board rb join tmi_member m
+		        	on rb_m_email = m.m_email
+		    <include refid="search"></include>)
+	</select>
+	
 	<insert id="insertReviewBoard">
 		insert into 
 			tmi_review_board 
@@ -103,6 +144,16 @@
 		order by
 		    loveCount desc
 	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">where rb.rb_title LIKE '%${keyword}%'</if>
+			<if test="searchType == 'c'.toString()">where rb.rb_content LIKE '%${keyword}%'</if>
+			<if test="searchType == 'w'.toString()">where m.m_nickname LIKE '%${keyword}%'</if>
+			<if test="searchType == 'tc'.toString()">where (rb.rb_title LIKE '%${keyword}%') or (rb.rb_content LIKE '%${keyword}%')</if>
+		</if>
+	</sql>
+	
 	
 	<resultMap id="ReviewBoardMap" type="reviewBoard">
 		<result column="rb_no" property="rb_no"/>

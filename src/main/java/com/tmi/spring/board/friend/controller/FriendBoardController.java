@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tmi.spring.board.friend.model.dto.FriendBoard;
 import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.board.friend.model.dto.FriendBoardComment;
+import com.tmi.spring.board.friend.model.dto.FriendBoardSearch;
 import com.tmi.spring.board.friend.model.dto.InsertFriendBoard;
 import com.tmi.spring.board.friend.model.service.FriendBoardService;
 import com.tmi.spring.common.HelloSpringUtils;
@@ -80,6 +81,32 @@ public class FriendBoardController {
 			String url = request.getRequestURI();
 
 			log.debug("totalContent = {}", totalContent);
+			log.debug("url = {}", url);
+			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			log.debug("pagebar = {}", pagebar);
+			mav.addObject("pagebar", pagebar);
+			
+			mav.setViewName("board/friend/friendBoard");
+		} catch (Exception e) {
+			log.error("게시글 목록 조회 오류",e);
+			throw e;
+		}
+		return mav;
+	}
+	
+	@GetMapping("/board/friend/friendBoardSearch.do")
+	public ModelAndView FriendBoardSearch(@RequestParam(defaultValue = "1") int cPage, ModelAndView mav, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, HttpServletRequest request) {
+		try {
+			int numPerPage = 5;
+			List<FriendBoardSearch> list = friendBoardService.selectFriendBoardSearchList(cPage, numPerPage, searchType, keyword);
+			log.debug("list = {}", list);
+			mav.addObject("list", list);
+			
+			int totalContent = friendBoardService.selectSearchTotalContent(searchType, keyword);
+			String url = request.getRequestURI();
+			
+			log.debug("totalContent = {}", totalContent);
+			log.debug("url = {}", url); 
 			String pagebar = HelloSpringUtils.getPagebar(cPage, numPerPage, totalContent, url);
 			log.debug("pagebar = {}", pagebar);
 			mav.addObject("pagebar", pagebar);
