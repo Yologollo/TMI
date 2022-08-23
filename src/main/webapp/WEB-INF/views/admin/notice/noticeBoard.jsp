@@ -1,27 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
 
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"> 
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="공지사항" name="title" />
 </jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css"> 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
-<div id="commonMain"> 
-<style>
-	tr[data-no] {
-		cursor: pointer;
-	}
+<div id="commonMain">
+	<style>
+tr[data-no] {
+	cursor: pointer;
+}
 </style>
-<script>
+	<script>
 window.addEventListener('load', (e) => {
 	document.querySelectorAll("tr[data-no]").forEach((tr) => {
 		tr.addEventListener('click', (e) => {
@@ -40,65 +43,168 @@ window.addEventListener('load', (e) => {
 
 
 
-<section id="container">
-  <div id="Tadminboard-submenu" class="submenu">
-  			<sec:authorize access="hasRole('ADMIN')">
-	      		<li><a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)" >회원목록</a></li>
-	       </sec:authorize>     
-	      <li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
-	    </ul>
-</div>
-    
-  <div id="adminboard">
-    <div>
-      <div id="adminboard-head">
-      	<h2>공지사항</h2>
-		    <sec:authorize access="hasRole('ADMIN')">
-      				<div id="btn-sort-wrap">
-          				<input type="button" value="글쓰기" id="btn-add" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'"/>
-        			</div>
-        	 </sec:authorize>    
-      		
-      </div>
-      
-      <table>
-        <thead id="list-head">
-          <tr>
-	          	<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>첨부파일</th>
-				<th>조회수</th>
-          </tr>
-        </thead>
-         <tbody id="list-content">
-        <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
-        <tr data-no="${noticeBoard.nb_no}">
-					<td>${noticeBoard.nb_no}</td>
-					<td>${noticeBoard.nb_title}</td>
-					<td>${noticeBoard.m_nickname}</td>
-					<td>
-						<fmt:parseDate value="${noticeBoard.nb_created_at}" pattern="yyyy-MM-dd'T'HH:mm" var="createdAt"/>
-						<fmt:formatDate value="${createdAt}" pattern="MM-dd HH:mm"/>
-					</td>
-					<td>
-						<c:if test="${noticeBoard.attachCount gt 0}">
-							<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
-						</c:if>
-					</td>
-					<td>${noticeBoard.nb_read_count}</td>
-				</tr>
-			</c:forEach>
-      	</table>
-		<nav>${pagebar}</nav>
-  </section>
-		<br><br><br><br><br><br>
-		<br><br><br><br><br><br>
-		
+	<section id="container">
+
+
+		<div id="menuContainer">
+			<ul>
+				<li class="mypageMenuli"><sec:authorize
+						access="hasRole('ADMIN')">
+						<li><a
+							href="${pageContext.request.contextPath}/admin/memberList.do"
+							onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a></li>
+					</sec:authorize></li>
+				<hr />
+				<li class="mypageMenuli"><a
+					href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"
+					onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a></li>
+				<hr />
+
+
+			</ul>
+		</div>
+
+<%-- <div id="adminboard-head">
+					<h2>공지사항</h2>
+					<sec:authorize access="hasRole('ADMIN')">
+						<div id="btn-sort-wrap">
+							<input type="button" value="글쓰기" id="btn-add"
+								class="btn btn-primary btn-lg"
+								onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'" />
+						</div>
+					</sec:authorize>
+
+				</div> --%>
+<section id="board-container" class="container">
+<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+<div id="adminboard-head">
+					<h2>공지사항</h2>
+					<sec:authorize access="hasRole('ADMIN')">
+						<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'">글쓰기</button>
+					</sec:authorize>
+					
+					<%-- <sec:authorize access="hasRole('ADMIN')">
+						<div id="btn-sort-wrap">
+							<input type="button" value="글쓰기" id="btn-add"
+								class="btn btn-primary btn-lg"
+								onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'" />
+						</div>
+					</sec:authorize> --%>
+
+				</div>
+				<colgroup>
+                <col width="10%">
+                <col width="">
+                <col width="20%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+          </colgroup>
+         <thead>
+            <tr>
+            <th scope="col" lang="en">No</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">등록일</th>
+            <th scope="col">첨부파일</th>
+            <th scope="col">조회수</th>
+            </tr>
+         </thead>
+         <tbody>
+         <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+							<tr data-no="${noticeBoard.nb_no}">
+								<td>${noticeBoard.nb_no}</td>
+								<td>${noticeBoard.nb_title}</td>
+								<td>${noticeBoard.m_nickname}</td>
+								<td><fmt:parseDate value="${noticeBoard.nb_created_at}"
+										pattern="yyyy-MM-dd'T'HH:mm" var="createdAt" /> <fmt:formatDate
+										value="${createdAt}" pattern="MM-dd HH:mm" /></td>
+								<td><c:if test="${noticeBoard.attachCount gt 0}">
+										<img
+											src="${pageContext.request.contextPath}/resources/images/notice/file.png"
+											width="16px" />
+									</c:if></td>
+								<td>${noticeBoard.nb_read_count}</td>
+							</tr>
+						</c:forEach>
+				</table>
+				<nav>${pagebar}</nav>
+         
+               <!-- <tr>
+                  <td></td>
+                  <td>
+              <span style="color:red;">[댓글개수]</span>
+            </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+               </tr> -->
+         </tbody>
+      </table>
+</section> 
+
+
+
+
+
+
+
+
+
+	<%-- 	<div id="adminboard">
+			<div>
+				<div id="adminboard-head">
+			
+						<c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+							<tr data-no="${noticeBoard.nb_no}">
+								<td>${noticeBoard.nb_no}</td>
+								<td>${noticeBoard.nb_title}</td>
+								<td>${noticeBoard.m_nickname}</td>
+								<td><fmt:parseDate value="${noticeBoard.nb_created_at}"
+										pattern="yyyy-MM-dd'T'HH:mm" var="createdAt" /> <fmt:formatDate
+										value="$		<h2>공지사항</h2>
+					<sec:authorize access="hasRole('ADMIN')">
+						<div id="btn-sort-wrap">
+							<input type="button" value="글쓰기" id="btn-add"
+								class="btn btn-primary btn-lg"
+								onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'" />
+						</div>
+					</sec:authorize>
+
+				</div>
+
+				<table>
+					<thead id="list-head">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>첨부파일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody id="list-content">{createdAt}" pattern="MM-dd HH:mm" /></td>
+								<td><c:if test="${noticeBoard.attachCount gt 0}">
+										<img
+											src="${pageContext.request.contextPath}/resources/images/notice/file.png"
+											width="16px" />
+									</c:if></td>
+								<td>${noticeBoard.nb_read_count}</td>
+							</tr>
+						</c:forEach>
+				</table>
+				<nav>${pagebar}</nav> --%>
+ 
+	</section>
+	
+
 
 </div>
-<script>
+
+
+<!-- <script> -->
 
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
