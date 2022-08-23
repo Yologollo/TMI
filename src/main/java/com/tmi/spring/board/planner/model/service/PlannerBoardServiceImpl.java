@@ -1,7 +1,9 @@
 package com.tmi.spring.board.planner.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.tmi.spring.board.planner.model.dao.PlannerBoardDao;
 import com.tmi.spring.board.planner.model.dto.InsertPlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoard;
 import com.tmi.spring.board.planner.model.dto.PlannerBoardComment;
+import com.tmi.spring.board.planner.model.dto.PlannerBoardSearch;
 import com.tmi.spring.board.review.model.dto.InsertReviewBoard;
 import com.tmi.spring.board.review.model.dto.ReviewBoardAttachment;
 import com.tmi.spring.board.review.model.dto.ReviewBoardComment;
@@ -39,6 +42,26 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	public int selectTotalContent() {
 		return plannerBoardDao.selectTotalContent();
 	}
+	
+	@Override
+	public List<PlannerBoardSearch> selectPlannerBoardSearchList(int cPage, int numPerPage, String searchType,
+			String keyword) {
+		int offset = (cPage -1) * numPerPage;
+		int limit = numPerPage;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return plannerBoardDao.selectPlannerBoardSearchList(rowBounds, map);
+	}
+	@Override
+	public int selectSearchTotalContent(String searchType, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return plannerBoardDao.selectSearchTotalContent(map);
+	}
+
 	
 	@Override
 	public InsertPlannerBoard selectOnePlannerBoard(int no) {
@@ -115,6 +138,11 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	}
 	
 	@Override
+	public List<PlannerPlan> findPlansSearchList(List<PlannerBoardSearch> list) {
+		return plannerBoardDao.findPlansSearchList(list);
+	}
+	
+	@Override
 	public int savePlanner(Planner planner) {
 		return plannerBoardDao.savePlanner(planner);
 	}
@@ -142,6 +170,7 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 		}
 		return null;
 	}
+
 
 }
 
