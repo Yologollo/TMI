@@ -25,10 +25,4 @@ public interface AdminListDao {
 	@Select("select * from tmi_member where m_name like '%'||#{memberName}||'%'")
 	List<Member> memberListSearch(String memberName);
 
-//	@Select("select * from tmi_member where m_name like '%'||#{memberName}||'%'")
-//	Member memberListSearch(@Param("memberName")String memberName);
-
-
-	
-	
 }

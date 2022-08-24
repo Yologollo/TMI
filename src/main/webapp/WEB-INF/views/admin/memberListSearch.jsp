@@ -34,70 +34,54 @@
 
 	
 	<section id="board-container">
-		<h1>회원목록</h1>
-		<div id="Tadminboard-submenu" class="submenu">
-			
-		</div>
-		
-					
+		<h1>회원목록</h1>	
 		<div id="adminboard">
-		
-				<div id="adminboard-head">
-				</div>
+			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+				<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
+					<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
+					<button type="submit" id="ac-button.is-solid.is-primary" class="btn">검색</button>
+				</form>
+				<colgroup>
+		                <col width="10%">
+		                <col width="">
+		                <col width="20%">
+		                <col width="20%">
+		                <col width="10%">
+		                <col width="10%">
+		          </colgroup>
+				
+				<thead>
+					<tr>
+						<th scope="col" lang="en">No</th>
+			            <th scope="col">닉네임</th>
+			            <th scope="col">회원 이름</th>
+			            <th scope="col">회원 이메일</th>
+			            <th scope="col">회원 핸드폰번호</th>
+			            <th scope="col">탈퇴여부</th>
+					</tr>
+				</thead>
 
-				<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
-					<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
-						<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
-						<button type="submit" id="ac-button.is-solid.is-primary" class="btn">검색</button>
-					</form>
-					<colgroup>
-			                <col width="10%">
-			                <col width="">
-			                <col width="20%">
-			                <col width="20%">
-			                <col width="10%">
-			                <col width="10%">
-			          </colgroup>
-					
-					<thead>
-						<tr>
-							<th scope="col" lang="en">No</th>
-				            <th scope="col">닉네임</th>
-				            <th scope="col">회원 이름</th>
-				            <th scope="col">회원 이메일</th>
-				            <th scope="col">회원 핸드폰번호</th>
-				            <th scope="col">탈퇴여부</th>
-						</tr>
-					</thead>
-
-					<tbody id="list-content">
-					<c:forEach items="${searchMember}" var="adminList" varStatus="vs">
-						<tr>
-							<td>${adminList.MNo}</td>
-							<td>${adminList.MNickName}</td>
-							<td>${adminList.MName}</td>
-							<td>${adminList.MEmail}</td>
-							<td>${adminList.MPhone}</td>
-							<td>
-								<div id="btn-sort-wrap">
-									<button type="submit" class="btn btn-primary"
-										data-bs-target="#exampleModal"
-										data-member-email=${adminList.MEmail}
-										id="deleteBtn">회원탈퇴</button>
-								</div>
-							</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-						
-					<div id="pagebar">
-						<nav>${pagebar}</nav>
-					</div>
-	
-						<div id="search-wrap">
-							
-						</div>
+				<tbody id="list-content">
+				<c:forEach items="${searchMember}" var="adminList" varStatus="vs">
+					<tr>
+						<td>${adminList.MNo}</td>
+						<td>${adminList.MNickName}</td>
+						<td>${adminList.MName}</td>
+						<td>${adminList.MEmail}</td>
+						<td>${adminList.MPhone}</td>
+						<td>
+							<div id="btn-sort-wrap">
+								<button type="submit" class="btn btn-primary"
+									data-bs-target="#exampleModal"
+									data-member-email=${adminList.MEmail}
+									id="deleteBtn">회원탈퇴</button>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			<nav>${pagebar}</nav>
 		</div>
 	</section>
 </div>
