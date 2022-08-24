@@ -4,8 +4,9 @@
 	position: absolute;
 	width: 90px;
 	top: 50%;
-	margin-top: -50px;
+	margin-top: -60px;
 	right: 20px;
+	display: none
 }
 
 .quickmenuUl {
@@ -13,7 +14,7 @@
 
 .quickmenuLi {
 	text-align:center;
-	margin-bottom : 30px;
+	margin-bottom : 40px;
 	width : 40px;
 	height : 40px;
 }
