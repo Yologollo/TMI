@@ -79,15 +79,6 @@ const email = document.getElementById("loginMemberEmail").value;
 		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
 		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" required readonly>
  		<input type="text" class="form-control" name="pbMEmail" value="${insertPlannerBoard.pbMEmail}" readonly required>
-		
-<%--  		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
-		<c:if test="${not empty insertReviewBoard.attachments}">
-			<c:forEach items="${insertReviewBoard.attachments}" var="attach">
-				<div class="btn-group-toggle pb-1" data-toggle="buttons">
-					<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.rbaNo}">${attach.rbaOriginalFilename}</button>
-				</div>
-			</c:forEach>
-		</c:if>  --%>
  	 	<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
@@ -332,6 +323,9 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
 		
+		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		<br /><br /><br />
+		
 	<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
 		<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
 			<input type="hidden"  name="ppTime"  value="${plan.ppTime}" required>
@@ -359,9 +353,6 @@ const email = document.getElementById("loginMemberEmail").value;
 				</c:if>
 		</c:forEach>
 	</form>
-		
-		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
-		<br /><br /><br />
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
