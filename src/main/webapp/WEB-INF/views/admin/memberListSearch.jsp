@@ -71,21 +71,23 @@
 					</thead>
 
 					<tbody id="list-content">
+					<c:forEach items="${searchMember}" var="adminList" varStatus="vs">
 						<tr>
-							<td>${searchMember.MNo}</td>
-							<td>${searchMember.MNickName}</td>
-							<td>${searchMember.MName}</td>
-							<td>${searchMember.MEmail}</td>
-							<td>${searchMember.MPhone}</td>
+							<td>${adminList.MNo}</td>
+							<td>${adminList.MNickName}</td>
+							<td>${adminList.MName}</td>
+							<td>${adminList.MEmail}</td>
+							<td>${adminList.MPhone}</td>
 							<td>
 								<div id="btn-sort-wrap">
 									<button type="submit" class="btn btn-primary"
 										data-bs-target="#exampleModal"
-										data-member-email=${searchMember.MEmail}
+										data-member-email=${adminList.MEmail}
 										id="deleteBtn">회원탈퇴</button>
 								</div>
 							</td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 						
