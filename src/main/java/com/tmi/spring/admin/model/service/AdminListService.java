@@ -14,7 +14,7 @@ public interface AdminListService {
 
 	int memeberDelete(String memberEmail);
 
-	Member memberListSearch(String memberName);
+	List<Member> memberListSearch(String memberName);
 
 	
 

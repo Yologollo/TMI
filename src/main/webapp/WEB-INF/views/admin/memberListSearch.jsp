@@ -17,52 +17,77 @@
 
 
 <div id="commonMain">
+	<div id="menuContainer">
+		<ul>
+			<li class="mypageMenuli">
+				<a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a>
+			</li>
+			<hr />
+
+			<li class="mypageMenuli">
+				<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
+			</li>
+			<hr />
+		</ul>
+	</div>
 
 
 	
-	<section id="container">
-	
+	<section id="board-container">
+		<h1>회원목록</h1>
 		<div id="Tadminboard-submenu" class="submenu">
 			
 		</div>
 		
+					
 		<div id="adminboard">
 		
 				<div id="adminboard-head">
-					<h2>회원목록</h2>
 				</div>
 
-				<table>
-					<thead id="list-head">
+				<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
+					<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
+						<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
+						<button type="submit" id="ac-button.is-solid.is-primary" class="btn">검색</button>
+					</form>
+					<colgroup>
+			                <col width="10%">
+			                <col width="">
+			                <col width="20%">
+			                <col width="20%">
+			                <col width="10%">
+			                <col width="10%">
+			          </colgroup>
+					
+					<thead>
 						<tr>
-							<th>회원번호</th>
-							<th>닉네임</th>
-							<th>회원 이름</th>
-							<th>회원 이메일</th>
-							<th>회원 핸드폰번호</th>
-							<th>탈퇴 여부</th>
+							<th scope="col" lang="en">No</th>
+				            <th scope="col">닉네임</th>
+				            <th scope="col">회원 이름</th>
+				            <th scope="col">회원 이메일</th>
+				            <th scope="col">회원 핸드폰번호</th>
+				            <th scope="col">탈퇴여부</th>
 						</tr>
 					</thead>
 
 					<tbody id="list-content">
-
-						
-							<tr>
-								<td>${searchMember.MNo}</td>
-								<td>${searchMember.MNickName}</td>
-								<td>${searchMember.MName}</td>
-								<td>${searchMember.MEmail}</td>
-								<td>${searchMember.MPhone}</td>
-								<td>
-									<div id="btn-sort-wrap">
-										<button type="submit" class="btn btn-primary"
-											data-bs-target="#exampleModal"
-											data-member-email=${searchMember.MEmail}
-											id="deleteBtn">회원탈퇴</button>
-									</div>
-								</td>
-							</tr>
-
+					<c:forEach items="${searchMember}" var="adminList" varStatus="vs">
+						<tr>
+							<td>${adminList.MNo}</td>
+							<td>${adminList.MNickName}</td>
+							<td>${adminList.MName}</td>
+							<td>${adminList.MEmail}</td>
+							<td>${adminList.MPhone}</td>
+							<td>
+								<div id="btn-sort-wrap">
+									<button type="submit" class="btn btn-primary"
+										data-bs-target="#exampleModal"
+										data-member-email=${adminList.MEmail}
+										id="deleteBtn">회원탈퇴</button>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 						
@@ -71,17 +96,11 @@
 					</div>
 	
 						<div id="search-wrap">
-							<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
-								<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
-								<button type="submit" id="memberSearchBtn" class="btn">검색</button>
-							</form>
-							<button type="button" id="memberListBtn" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/memberList.do'">전체회원</button>
+							
 						</div>
 		</div>
 	</section>
 </div>
-
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 <script>
 

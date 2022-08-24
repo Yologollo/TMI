@@ -39,7 +39,7 @@ public  class AdminListServiceImpl implements AdminListService {
 	}
 	
 	@Override
-	public Member memberListSearch(String memberName) {
+	public List<Member> memberListSearch(String memberName) {
 		return adminlistDao.memberListSearch(memberName);
 	}
 }
