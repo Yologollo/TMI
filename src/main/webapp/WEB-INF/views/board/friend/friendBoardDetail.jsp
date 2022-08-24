@@ -28,6 +28,33 @@
 	#downloadFile {
 		width : 100%;
 	}
+	
+	#contentMain{
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+	}
+
+    #size {
+    	font-size : 50px;
+    }
+    .comment-writer {
+    	font-size : 20px;
+    }
+    .comment-date  {
+	  	font-size : 10px;
+    }
+    
+    #comment {
+    	border-top: dotted 1px black;
+    	border-bottom: dotted 1px black;
+    }
+    
+    .commentHr {
+    	width : 1350px;
+    }
 </style>
 <script>
 //DAY 1 지도 도출
@@ -66,9 +93,9 @@ $(document).ready(function () {
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain">
+<div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertFriendBoard.fbNo}" required>
-		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" required readonly>
+		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" style="font-size : 50px;" required readonly>
  		<input type="text" class="form-control" name="fbMEmail" value="${insertFriendBoard.fbMEmail}" readonly required>
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
@@ -79,83 +106,82 @@ $(document).ready(function () {
 				</div>
 			</c:forEach>
 		</c:if>
+		<br /><br />
+		<hr />
 		<c:forEach items="${insertFriendBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
 			
-			<c:if test="${planner.PNo ne 0}">
+		<c:if test="${planner.PNo ne 0}">
 			<div id="plannerContainerWrapper">
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
-					<div id="plannerDetailCardWrapper">
-					<div class="plannerDetailCard card">
-						<c:forEach items="${days}" var="day" varStatus="status">
-							<div class="card-header">
-								<span class="plannerDetailCardDay">DAY ${status.count}</span>
-								<span class="plannerDetailCardTime">
-									<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
-									<fmt:formatDate value="${dayformat}" pattern="yyyy.MM.dd E요일" />
-								</span>
-							</div>
-						
-							<% int i = 1;%>
-							<c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="plan_status">
-								<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
-								<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
-	                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
-								<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
-
-                            	<c:if test="${nowDate eq openDate}">
-                            
-								<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
-									<div class="plannerDetailCardBodyInfo">
-										<blockquote class="blockquote mb-0">
-											<div class="plannerDetailCardBodyTimeWrapper">
-												<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
-											</div>
-											<div class="plannerDetailCardBodyPlaceWrapper">
-												<span class="plannerDetailCardBodyPlaceNumber"><%=i%>. </span>
-												<span class="plannerDetailCardBodyPlace">${plan.ppPlaceName}</span>
-											</div>
-											<footer class="blockquote-footer">
-												<span class="plannerDetailCardBodyMemo">${plan.ppMemo}</span>
-											</footer>
-										</blockquote>
+						<div id="plannerDetailCardWrapper">
+							<div class="plannerDetailCard card">
+								<c:forEach items="${days}" var="day" varStatus="status">
+									<div class="card-header">
+										<span class="plannerDetailCardDay">DAY ${status.count}</span>
+										<span class="plannerDetailCardTime">
+										<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${dayformat}" pattern="yyyy.MM.dd E요일" />
+										</span>
 									</div>
-									<div class="plannerDetailCardBodyMap" id="map${status.count}-${plan_status.count}"></div>
-									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
-									<script>
-									    /* 지도 생성 */
-									    var mapContainer = document.getElementById('map${status.count}-${plan_status.count}');
-									    var mapOption = {
-								    		center: new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX}),
-									        level: 3
-									    };
-									    var map = new kakao.maps.Map(mapContainer, mapOption);
-									
-									    /* 마커 생성 */
-									    var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
-									    var marker = new kakao.maps.Marker({
-									        position: markerPosition
-									    });
-									    marker.setMap(map);
-									</script>
-								</div>
-							 <% ++i;%>
-							 	</c:if>
+						
+									<% int i = 1;%>
+									<c:forEach items="${insertFriendBoard.plans}" var="plan" varStatus="plan_status">
+										<fmt:parseDate value="${day}" var="dayformat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${dayformat}" pattern="yyyy-MM-dd" var="nowDate" />
+			                            <fmt:parseDate value="${plan.ppDate}" var="ppDateformat" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${ppDateformat}" pattern="yyyy-MM-dd" var="openDate" />
+
+	                            		<c:if test="${nowDate eq openDate}">
+	                            
+										<div class="plannerDetailCardBody card-body" data-no="${plan.ppNo}">
+											<div class="plannerDetailCardBodyInfo">
+												<blockquote class="blockquote mb-0">
+													<div class="plannerDetailCardBodyTimeWrapper">
+														<span class="plannerDetailCardBodyTime"><fmt:formatDate value="${plan.ppTime}" pattern="a hh:mm"/></span>
+													</div>
+													<div class="plannerDetailCardBodyPlaceWrapper">
+														<span class="plannerDetailCardBodyPlaceNumber"><%=i%>. </span>
+														<span class="plannerDetailCardBodyPlace">${plan.ppPlaceName}</span>
+													</div>
+													<footer class="blockquote-footer">
+														<span class="plannerDetailCardBodyMemo">${plan.ppMemo}</span>
+													</footer>
+												</blockquote>
+											</div>
+											<div class="plannerDetailCardBodyMap" id="map${status.count}-${plan_status.count}"></div>
+											<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
+											<script>
+											    /* 지도 생성 */
+											    var mapContainer = document.getElementById('map${status.count}-${plan_status.count}');
+											    var mapOption = {
+										    		center: new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX}),
+											        level: 3
+											    };
+											    var map = new kakao.maps.Map(mapContainer, mapOption);
+											
+											    /* 마커 생성 */
+											    var markerPosition  = new kakao.maps.LatLng(${plan.ppY}, ${plan.ppX});
+											    var marker = new kakao.maps.Marker({
+											        position: markerPosition
+											    });
+											    marker.setMap(map);
+											</script>
+										</div>
+								 	<% ++i;%>
+								 	</c:if>
+								</c:forEach>
 							</c:forEach>
-						</c:forEach>
-					</div>
+						</div>
 					</div>
 				</div>
 				
-				<div id="plannerAllWrapper">
+				<div id="plannerAllWrapper" style="margin-top : -15px;">
 					<div class="allMap">
-					
 						<c:forEach items="${days}" var="day" varStatus="status">
-						
 							<div class="dayAllMapClass" id="dayAllMap${status.count}"></div>
-							
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
 							<script>
 								var mapContainer = document.getElementById('dayAllMap${status.count}');
@@ -215,6 +241,7 @@ $(document).ready(function () {
 	                			</c:forEach>		    
 							</script>
 						</c:forEach>
+					</div>
 						
 						<div class="dayAllMapSelectWrapper">
                             <select id="dayAllMapSelectId" class="dayAllMapSelectClass" onchange="mapChange()">
@@ -252,26 +279,10 @@ $(document).ready(function () {
 				</div>
 			</c:if>
 		</c:forEach>
-		
-		
-		<div style="width:100%;">
-		  	${insertFriendBoard.fbContent} dsadass<!-- summernote 출력 -->
+		<div id="contentMain">
+		  	${insertFriendBoard.fbContent}<!-- summernote 출력 -->		
 		</div>
-		
-		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
-		<c:if test="${not empty loginMember}">
-			<div class="comment-container">
-		        <div class="comment-editor">
-		            <form
-						action="${pageContext.request.contextPath}/board/friend/friendBoardCommentEnroll.do" method="post" name="friendBoardCommentFrm">
-		                <input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
-		                <input type="hidden" name="fbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
-						<textarea name="fbcContent" cols="100" rows="3"></textarea>
-		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
-		            </form>
-		        </div>
-		    </div>
-		</c:if>
+		<br /><br />
 				<!--table#tbl-comment-->
 				 <c:if test="${insertFriendBoard.comments ne null && not empty insertFriendBoard.comments}">
 					<table id="tbl-comment">
@@ -279,39 +290,60 @@ $(document).ready(function () {
 						<c:forEach items="${insertFriendBoard.comments}" var="comment">
 							<tr class="level1">
 								<td>
+									<hr / class="commentHr">
 									<sub class="comment-writer">${comment.fbcMEmail}</sub>
 									<sub class="comment-date">${comment.fbcCreatedAt}</sub>
-									<br />
-									${comment.fbcContent}
-								</td>
-								<td>
+									<hr / class="commentHr">
+									<div id="size">
+										${comment.fbcContent}
+									</div>
 									<form action="${pageContext.request.contextPath}/board/friend/deleteComment.do" method="get" name="friendBoardCommentDeleteFrm">
 										<input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
 										<input type="hidden" name="fbcNo" value="${comment.fbcNo}" />
 										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.fbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-					                		<button type="submit" id="deleteComment" class="">삭제</button>
+										<div class="d-grid gap-2 col-6 mx-auto">
+					                		<button type="submit" id="deleteComment" class="btn-danger" style="font-size : 25px;">삭제</button>
+					                	</div>
 					                	</c:if>
 									</form>
+								</td>
+								<td>
+
 								</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-				 </c:if> 
+				 </c:if>
+				 
+		<c:if test="${not empty loginMember}">
+			<div class="comment-container">
+		        <div class="comment-editor">
+		            <form
+						action="${pageContext.request.contextPath}/board/friend/friendBoardCommentEnroll.do" method="post" name="friendBoardCommentFrm">
+		                <input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
+		                <input type="hidden" name="fbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
+		                <br />
+						<textarea name="fbcContent" cols="85" rows="3"  style="resize: none;" placeholder="댓글 입력"></textarea>
+		                <button type="submit" class="btn btn-outline-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		            </form>
+		        </div>
+		    </div>
+		</c:if>
 			
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
-		</c:if>
-		
-		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
-		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertFriendBoard.fbMEmail))}">
-			<input type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
+			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
 		</c:if>
 		<br /><br /><br />
-	</div>
+		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
+		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertFriendBoard.fbMEmail))}">
+			<input style="float : right; margin-right : 10px;" type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
+		</c:if>
+		<br /><br /><br />
 </div>
+
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
 		input.addEventListener('change', (e) => {

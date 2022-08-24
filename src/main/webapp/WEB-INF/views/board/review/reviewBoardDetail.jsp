@@ -29,6 +29,32 @@
 	#downloadFile {
 		width : 100%;
 	}
+	#contentMain{
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+	}
+
+    #size {
+    	font-size : 50px;
+    }
+    .comment-writer {
+    	font-size : 20px;
+    }
+    .comment-date  {
+	  	font-size : 10px;
+    }
+    
+    #comment {
+    	border-top: dotted 1px black;
+    	border-bottom: dotted 1px black;
+    }
+    
+    .commentHr {
+    	width : 1350px;
+    }
 </style>
 <script>
 //DAY 1 지도 도출
@@ -78,7 +104,7 @@ const email = document.getElementById("loginMemberEmail").value;
 <div id="commonMain">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
-		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" required readonly>
+		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" style="font-size : 50px;" required readonly>
  		<input type="text" class="form-control" name="rbMEmail" value="${insertReviewBoard.rbMEmail}" readonly required>
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
@@ -89,13 +115,13 @@ const email = document.getElementById("loginMemberEmail").value;
 				</div>
 			</c:forEach>
 		</c:if>
+		
 		<c:forEach items="${insertReviewBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
 			</c:if>
 			
 			<c:if test="${planner.PNo ne 0}">
 			<div id="plannerContainerWrapper">
-			<div>
 				<div id="plannerDetailWrapper">
 					<div id="plannerTitle">${planner.PTitle}</div>
 					<div id="plannerDetailCardWrapper">
@@ -261,14 +287,13 @@ const email = document.getElementById("loginMemberEmail").value;
 	                    </div>
 					</div>
 				</div>
+			</div>
 			</c:if>
 		</c:forEach>
-		</div>
-	</div>
-<hr />
-		<div style="width:100%;">
 	  		${insertReviewBoard.rbContent} <!-- summernote 출력 -->
-		</div>
+
+
+
 		
          <form
 			 action="${pageContext.request.contextPath}/board/review/reviewBoardLove.do" method="get" name="reviewBoardLoveFrm">
@@ -300,6 +325,7 @@ const email = document.getElementById("loginMemberEmail").value;
 		            </form>
 		        </div>
 		</c:if>
+
 		
 				<!--table#tbl-comment-->
 				 <c:if test="${insertReviewBoard.comments ne null && not empty insertReviewBoard.comments}">

@@ -69,6 +69,7 @@
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
+ <br /><br />
  <hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
@@ -80,10 +81,13 @@
     </ul>
     <!-- 메뉴버튼 끝 -->
     <hr />
- 	<div id="bestPlanner">
- 	 	<h1>베스트 오브 베스트</h1>
-				<div id="wrapper" style="border: 1px solid black; ">
-				<div id="plannerContainer" style="border: 1px solid blue;">
+		<br /><br />
+ 	 	<h1>베스트 플래너</h1>
+ 	 	<br />
+ 	 	<div id="infoMain" style="margin-bottom: 3rem;">
+ 	 	<br /><br /><br /><br />
+				<div id="wrapper"">
+				<div id="plannerContainer">
 				<c:forEach items="${plannerList}" var="plannerBoard" varStatus="vs">
 					<div class="card" style="width: 18rem; display:inline-block; box-shadow: 1px 1px 3px 1px #dadce0; margin-right : 10px; margin-bottom : 10px;" data-no="${plannerBoard.PNo}">
 						<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
@@ -139,37 +143,34 @@
 				</c:forEach>
 				</div>
 				</div>
-
+			<br /><br /><br /><br />
+			</div>
  		<%-- <nav>${pagebar2}</nav> --%>
- 	</div>
+	<br /><br />
+ 	<h1>베스트 후기</h1>
+ 	<br />
+ 	    <div id="infoMain">
+ 	    <br /><br /><br /><br />
  	
- 	
- 	
- 	
- 	
- 	
- 	<div id="bestReview">
- 	<h1>베스트 오브 베스트</h1>
-		<section id="board-container" class="container">
-				<article>
 					<c:forEach items="${list3}" var="reviewBoard" varStatus="vs">
 							<div id="contentArea2">
 								<div id="selectContent">
 									<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
-										<span class="thumbNailImage">
-											<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-										</span>
+										<div id="thumbNail">
+											<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
+										</div>
 										<strong class="thumbNailName">
 											${reviewBoard.rb_title}
 										</strong>
+										<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 									</a>
 								</div>
 							</div>
 					</c:forEach>
-				</article>
+
+					<br /><br /><br /><br />
 	 		<%-- <nav>${pagebar}</nav> --%>
-		</section> 
  	</div>
- </div>
+
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
