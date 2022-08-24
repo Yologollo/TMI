@@ -13,6 +13,29 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
 
+<style>
+#infoMain{
+    width:90%; 
+    hegiht:100%; 
+    margin: auto; 
+    margin-bottom:12rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    border-radius: 30px;
+}
+
+#boardMain {
+   /*  border: 1px solid red;  */
+    width:80%; 
+    hegiht:100%; 
+    margin: auto; 
+    margin-top:4.5rem;
+    overflow: hidden;
+    position: relative;
+}
+</style>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
 	<script>
@@ -23,11 +46,12 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain" style="text-align : center;">
+<div id="boardMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
+ <br /><br />
 	<hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
@@ -39,14 +63,17 @@
     </ul>
     <!-- 메뉴버튼 끝 -->
     <hr />
+    <br /><br />
     <h1>후기 게시판</h1>
+    <br />
+    <div id="infoMain">
 			<div id="outerDiv">
 				<div id="innerDiv">
 					<c:if test="${empty loginMember}">
-						<span class="btn">로그인 하셔야 작성 가능합니다.</span>
+						<span class="btn-lg">로그인 하셔야 작성 가능합니다.</span>
 					</c:if>
 					<c:if test="${not empty loginMember}">
-						<button class="btn" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'">글쓰기</button>
+						<button class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'">글쓰기</button>
 					</c:if>
 				</div>
 				<c:forEach items="${list}" var="reviewBoard" varStatus="vs">
@@ -65,7 +92,9 @@
 						</div>
 				</c:forEach>
 			</div>
+			<br /><br />
 			<nav>${pagebar}</nav>
+    </div>
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
