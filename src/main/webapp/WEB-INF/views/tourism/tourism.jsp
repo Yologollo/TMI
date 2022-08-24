@@ -41,22 +41,22 @@
 	</div>
 </div>
 
-<div id="commonMain">
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+
 	<!-- 
 	생성 : 전인찬
 	작업 : 전인찬
  -->
-	<div id="commonMain2">
+<div id="pageTitle">상세 관광 정보</div>	
+<div id="infoMain">
 		<div id="infoBox">
-			<!-- 
-		<p id="info-box title">고사포해수욕장</p>
-		 -->
 			<div id="infoTop">
 				<div id="bigImg"></div>
 				<div id="tourismInfo">
 					<div id="tourismInfoTitle"></div>
 					<div id="tourismInfoBox">
-
 						<table id="contentTable" class="table table-bordered">
 							<tbody>
 								<tr id="zipCodeTr">
@@ -73,18 +73,16 @@
 			</div>
 		<div id="infoBot">
 			<ul>
-				<li><strong>개요</strong>
-					<div id="overview"></div></li>
-			</ul>
+				<li>
+					<div id="infoBotTitle">개요</div>
+					<br />
+					<div id="overview"></div>
+				</li>
+			</ul>			
 		</div>
+			<a class="btn btn-outline-primary btn-lg" id="mainlistButton" href="${pageContext.request.contextPath}">메인화면</a>
 		</div>
-
 	</div>
-	<div id="mainlist">
-		<a id="mainlistButton" href="${pageContext.request.contextPath}">메인
-			화면</a>
-	</div>
-</div>
 
 <script>
 
@@ -124,15 +122,15 @@ $(document).ready(function(){
 				$('#tourismInfoTitle').append(title);
 				
 				var zipCode = "";
-				zipCode += '<th id="contentTableTh">우편번호</th> <td>' + myItem[i].zipcode +'</td>';
+				zipCode += '<th class="titleTh">우편번호</th> <td class="titleTd">' + myItem[i].zipcode +'</td>';
 				$('#zipCodeTr').append(zipCode);
 				
 				var homepageCode = "";
-				homepageCode += '<th>홈페이지</th> <td> <div id="contentTableHomepage">' + myItem[i].homepage + '</div> </td>';
+				homepageCode += '<th class="titleTh">홈페이지</th> <td class="titleTd"> <div id="contentTableHomepage">' + myItem[i].homepage + '</div> </td>';
 				$('#homepageTr').append(homepageCode);
 				
 				var addrCode = "";
-				addrCode += '<th>주소</th> <td> <div>' + myItem[i].addr1 + myItem[i].addr2 + '</div> </td>'
+				addrCode += '<th class="titleTh">주소</th> <td class="titleTd"> <div>' + myItem[i].addr1 + myItem[i].addr2 + '</div> </td>'
 				$('#addrTr').append(addrCode);
 				
 				var overviewCode = "";

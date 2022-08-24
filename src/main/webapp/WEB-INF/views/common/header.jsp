@@ -128,12 +128,20 @@
 		side bar
 	 -->
     
-	<div class="quickmenu" style="position: absolute; right: 10px; top: 50%;">
+	<div class="quickmenu" style="position: absolute; right: 20px; top: 50%; display: none">
 		<ul>
-			<li><a href="#" onclick="window.scrollTo(0,0);">TOP</a></li>
-			<li><a href="https://forms.gle/5uodCWt4YiVenixp7" target="_blank">문의</a></li>
-			<li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do">공지사항</a></li>
-			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">채팅</a></li>
+			<li><a href="#" onclick="window.scrollTo(0,0);">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" id="quickMenuImg"/></a>
+			</li>
+			<li><a href="https://forms.gle/5uodCWt4YiVenixp7" target="_blank">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/inquiry.png" alt="문의" id="quickMenuImg"/></a>
+			</li>
+			<li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/noticeboard.png" alt="공지사항" id="quickMenuImg"/></a>
+			</li>
+			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/chat.png" alt="채팅" id="quickMenuImg"/></a>
+			</li>
 		</ul>
 	</div>
 	
@@ -160,9 +168,10 @@
 	<script>
     
   	//side bar
-  
+  	
 	$(document).ready(function(){
 	  	$(window).scroll(function() {
+	  		$(".quickmenu").show();
 	    	var position = $(window).scrollTop() + 500; 
 	    	$(".quickmenu").stop().animate({"top":position+"px"},400);
 	  	});

@@ -3,26 +3,235 @@
 	작업 : 전인찬
 */
 
-/* 관광정보 css폼 시작 */
-#mainpage_wrap{
-	width:86%;
+/* 관광정보 상세정보 css폼 시작 */
+#infoMain{
+	width:70%; 
+	hegiht:100%; 
+	margin: auto; 
+	margin-bottom:12rem;
+	overflow: hidden;
 	position: relative;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+	border-radius: 30px;
 }
-#mainpage_content{
-	margin-left:14%;
-	border: 2px solid red;
+
+#pageTitle{
+	width:70%;
+	margin-top:8rem;
+	margin-left: 15%;
+	margin-bottom: 1%;
+	font-size : xxx-large;
+	font-weight : bold;
 }
-#commonMain2{
-	border: 2px solid black;
+
+#infoBox{
+	
+	margin: auto;
+	margin-top: 5%;
 	margin-bottom: 5%;
 }
 
-#tourism_title {
-    text-align: center;
-    font-weight: 600;
+#infoTop{
+	margin-top: 5%;
+	margin-bottom: 3%;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#bigImg{
+	width: 30%;
+	float: left;
+	width : 400px;
+	height : 260px;
+	box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
+}
+
+#bigImg2{
+	margin : auto;
+	width : 400px;
+	height : 260px;
+}
+
+#tourismInfo{
+	margin-left: 2%;
+	width: 66%;
+	display: inline-block;
+}
+
+#tourismInfoTitle{
+	font-size : xxx-large;
+	font-weight : bold;
+	line-height : 80%;
+	margin-bottom : 4%;
+}
+
+#tourismInfoBox{
+	width: 100%;
+}
+
+.titleTh{
+	font-size : large;
+	font-weight : bold;
+	width : 11%;
+	text-align : center;
+}
+
+.titleTd{
+	font-size : normal;
+}
+
+#tabContent{
+	clear: both;
+	display:block;
+}
+
+#tabContentTable{
+}
+
+#mapBtn{
+	margin-top : 1%;
+}
+
+#infoBot{
+	display : block;
+	clear: both;
+	margin-top: 7%;
+	margin-right: 3%;
+	margin-bottom: 3%;
+}
+
+#infoBotTitle{
+	font-size : xx-large;
+	font-weight : bold;
+}
+
+#overview{
+	font-size : large;
+	line-height : 150%;
+}
+
+#mainlist{
+	margin-top: 3%;
+}
+
+#mainlistButton{
+	margin-top: 2%;
+	margin-bottom: 3%;
+	margin-right: 3%;
+	float: right;
+	text-align : center;
+}
+
+/* 관광정보 상세정보 css폼 끝 */
+
+
+/* 관광정보 위젯 css폼 시작 */
+
+#widgetMain{
+	margin-top : 6%;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom: 6%;
+	width: 90%;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+}
+
+#searchTable{
+	margin-left : auto;
+	margin-right : auto;
+}
+
+#searchTh{
+	font-size : x-large;
+	font-weight : bold;
+	text-align : center;
+	width : 10%;
+}
+
+#searchTd{
+}
+
+.finalName{
+	font-size : large;
+}
+
+#searchContentBtn{
+	float: right;
+}
+
+#searchServiceBtn{
+	float: right;
+}
+
+#searchAreaBtn{
+	float: right;
+}
+
+.finalName {
+	display: inline-block;
+}
+
+.btn btn-info {
+	display: block;
+}
+
+
+#contentArea {
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 3%;
+}
+
+#contentArea2 {
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 3%;
+}
+
+#selectContent{
+	width : 90%;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+.thumbNailImage{
+	margin : auto;
+}
+
+.thumbNailLink {
+	display: inline-block;
+	margin-top : 20px;
+	margin-left : 55px;
+	margin-right : 20px;
+	margin-bottom : 25px;
+	width : 300px;
+	height : 200px;
+	text-align: center;
+	font-size : large;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+}
+
+.thumbNailName {
+	margin-top : 5px;
+	display : block;
+	width : 300px;
+	height : 65px;
+	text-align: center;
+}
+
+#paging {
+	display : block;
+	margin-top : 3%;
+	margin-bottom : 10px;
+}
+
+#pagebar {
+	margin-bottom : 10px;
 }
 
 .w-btn-outline {
+	height : 20%;
+	margin : 3px;
     position: relative;
     padding: 10px;
     border-radius: 15px;
@@ -31,6 +240,7 @@
     transition: 0.25s;
 }
 .w-btn-blue-outline {
+	margin : 3px;
     border: 2px solid rgba(112, 185, 233, 0.75);
     color: #6e6e6e;
     background-color: #fff;
@@ -45,117 +255,10 @@
     cursor: pointer;
 }
 
-#area {
-    display: block;
-}
-
-#tourism_type {
-    display: block;
-    margin-top: 10px;
-}
-
-#tourism_search_wrap {
-    max-width: 580px;
-    top: 50%;
-    left: 30%;
-    width: 50%;
-    position: relative;
-    margin-bottom: 20px;
-}
+/* 관광정보 위젯 css폼 끝 */
 
 
-/* 관광정보 css폼 끝 */
-
-#infoBox{
-	border: 2px solid black;
-	border-radius: 30px;
-	margin: auto;
-	margin-top: 5%;
-	margin-bottom: 5%;
-}
-
-#infoTop{
-	margin-top: 3%;
-	margin-bottom: 3%;
-	margin-left: 3%;
-	margin-right: 3%;
-}
-
-#bigImg{
-	border: 2px solid black;
-	width: 30%;
-	float: left;
-	width : 400px;
-	height : 300px;
-}
-
-#bigImg2{
-	
-	width : 400px;
-	height : 300px;
-	
-}
-
-#tourismInfo{
-	border: 2px solid black;
-	margin-left: 3%;
-	width: 66%;
-	display: inline-block;
-}
-
-#tourismInfoBox{
-	margin: auto;
-	wifth: 100%;
-}
-
-#tabContent{
-	clear: both;
-	display:block;
-}
-
-#tabContentTable{
-	border: 1px solid black;
-}
-
-#infoBot{
-	border: 2px solid black;
-	clear: both;
-}
-
-#mainlist{
-	margin-top: 3%;
-}
-
-#mainlistButton{
-	float: right;
-	border: 2px solid black;
-	border-radius: 30px;
-	width: 10%;
-	text-align : center;
-}
-
-/* test */
-
-#searchTh{
-	text-align : center;
-	width : 20%;
-}
-
-#searchTd{
-	
-}
-
-#searchContentBtn{
-	float: right;
-}
-
-#searchServiceBtn{
-	float: right;
-}
-
-#searchAreaBtn{
-	float: right;
-}
+/* modal css 모음	 */
 
 .createContentModalForm{
 	width : 100%;
@@ -205,13 +308,6 @@
 	transition: all 1s;
 }
 
-#mapModalBody {
-	width : 700px;
-	height : 600px;
-	
-}
-
-
 
 .show-modal {
 	visibility: visible;
@@ -252,51 +348,18 @@
 	margin: auto 0;
 }
 
-
-
-#title {
-	float: right;
-	width: 70%;
-}
-
 .modal-body {
 	font-size: 25px;
 	padding-left: 20%
 }
 
+#mapModalBody {
+	width : 700px;
+	height : 600px;
+	
+}
+
 .modal-footer {
 	justify-content: center;
 	margin: auto 0;
-}
-
-.finalName {
-	display: inline-block;
-}
-
-.btn btn-info {
-	display: block;
-}
-
-#contentArea2 {
-	margin-left : auto;
-	margin-right : auto;
-}
-
-.thumbNailLink {
-	display: inline-block;
-	margin : 10px;
-	width : 300px;
-	height : 200px;
-	text-align: center;
-}
-
-.thumbNailName {
-	display : inline-block;
-	width : 300px;
-	height : 65px;
-	text-align: center;
-}
-
-#paging {
-	margin-top : 50px;
 }
