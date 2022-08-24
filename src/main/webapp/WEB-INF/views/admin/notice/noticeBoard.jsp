@@ -55,15 +55,14 @@ window.addEventListener('load', (e) => {
 	<section id="board-container">
 			<h1>공지사항</h1>
 			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
-				<div id="adminboard-head">
-				</div>
+				
 				<sec:authorize access="hasRole('ADMIN')">
 					<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'">글쓰기</button>
 				</sec:authorize>
 								
 				<colgroup>
 	                <col width="10%">
-	                <col width="10%">
+	                <col width="20%">
 	                <col width="20%">
 	                <col width="20%">
 	                <col width="10%">
@@ -81,7 +80,8 @@ window.addEventListener('load', (e) => {
            			</tr>
 	       		 </thead>
 	       		 
-	         <tbody>
+	        <tbody id="list-content">
+
 			<c:forEach items="${list}" var="noticeBoard" varStatus="vs">
 				<tr data-no="${noticeBoard.nb_no}">
 					<td>${noticeBoard.nb_no}</td>

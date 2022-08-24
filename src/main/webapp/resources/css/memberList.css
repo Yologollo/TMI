@@ -49,11 +49,11 @@ tr[data-no] {
 	border: 1px solid #d3d3d3;
 	float: left;
 	width: 15%;
-	height: 600px;
+	height: 710px;
 	font-size: 30px;
 	text-align: center;
 	background-color: #F6F6F6;
-	margin-top: 0;
+	margin-top: 170px;
 }
 
 #menuContainer > ul, #menuContainer > li {
@@ -73,12 +73,12 @@ tr[data-no] {
 #memberSearchBtn{
 	width: 25%;
 	/* height:30px; */
-	margin-left: 701px;
+	margin-left:700px;
 }
 
 #board-container > h1 {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 64px;
 }
 /* 테이블 캡션 */
 #notice-table-1 caption {
@@ -153,12 +153,13 @@ tr[data-no] {
   
   
 tbody tr{
-  line-height: 2.3;
+  line-height: 3.3;
 }
 
 #list-content td:first-child{
   width: 1%;
   padding: 0 20px 0 20px;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 #ck {
