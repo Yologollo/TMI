@@ -38,10 +38,7 @@ window.addEventListener('load', (e) => {
 });
 </script>
 
-<div class="intro_top">
-	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
-</div>
-<div id="commonMain" style="margin-top: 0;">
+<div id="commonMain">
 		<div id="menuContainer">
 			<ul>
 				<sec:authorize access="hasRole('ADMIN')">
