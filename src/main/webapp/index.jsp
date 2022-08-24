@@ -72,11 +72,18 @@ tr[data-no] {
 	overflow: hidden;
 	display: inline-block;
 }
+
+#bestReview > h1, #bestPlanner > h1, #tourism_title {
+	color: #4a4a4a;
+	font-family: 'Nanum+Gothic';
+	text-align: center;
+}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">  <!-- 이용방법 게시판 로그인 css겹침 글자색 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplannermain.css?after">  <!-- 이용방법 게시판 로그인 css겹침 글자색 -->
     <div id="video_area">
         <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
     </div>
