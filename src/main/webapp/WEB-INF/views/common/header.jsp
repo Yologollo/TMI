@@ -141,7 +141,7 @@
 				<img src="${pageContext.request.contextPath}/resources/images/sidebar/chat.png" alt="채팅" class="quickMenuImg"/></a>
 			</li>
 			<li>
-				<br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br />
 			</li>
 			<li class="quickmenuLi" id="topLi"><a href="#" onclick="window.scrollTo(0,0);" class="quickmenuA" id="topA">
 				<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" class="quickMenuImg" id="topImg"/></a>
