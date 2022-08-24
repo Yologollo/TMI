@@ -294,12 +294,12 @@ tr[data-no] {
 					</div>
 					<div id="paging">
 					</div>
+					<br />
 				</div>
 			</article>
 		</div>
 	</div>
 </div>
-    
 <!-- 관광정보 위젯 스크립트 -->
 <script>
 
