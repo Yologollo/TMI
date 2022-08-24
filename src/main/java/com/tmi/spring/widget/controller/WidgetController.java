@@ -76,9 +76,7 @@ public class WidgetController {
 
 		PrintWriter out = response.getWriter();
 
-
 		addr = addr + SERVICE_KEY + "&numOfRows=17" + LAST_URL;
-
 
 		URL url = new URL(addr);
 
@@ -97,7 +95,6 @@ public class WidgetController {
 
 		JSONObject json = new JSONObject();
 		json.put("data", s);
-
 	}
 
 	@GetMapping("/widget/callAreaCode.do")
@@ -118,15 +115,12 @@ public class WidgetController {
 			parameter = parameter + LAST_URL;
 
 			addr = addr + SERVICE_KEY + parameter;
-
 		} else {
-
+			
 			parameter = parameter + LAST_URL;
-
+			
 			addr = addr + SERVICE_KEY + parameter;
-
-		}
-		;
+		};
 
 		URL url = new URL(addr);
 
@@ -193,7 +187,6 @@ public class WidgetController {
 
 		String addr = CATEGORYCODE_URL;
 		String parameter = "";
-
 		PrintWriter out = response.getWriter();
 
 		if (!cat1.equals("0")) {
@@ -209,8 +202,7 @@ public class WidgetController {
 
 			addr = addr + SERVICE_KEY + parameter;
 
-		}
-		;
+		};
 
 		URL url = new URL(addr);
 
@@ -241,7 +233,6 @@ public class WidgetController {
 
 		String addr = CATEGORYCODE_URL;
 		String parameter = "";
-
 		PrintWriter out = response.getWriter();
 
 		if (cat2.equals("0")) {
@@ -259,13 +250,10 @@ public class WidgetController {
 
 			addr = addr + SERVICE_KEY + parameter;
 
-		}
-		;
+		};
 
 		URL url = new URL(addr);
-
 		InputStream in = url.openStream();
-
 		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
 		IOUtils.copy(in, bos1);
 		in.close();
