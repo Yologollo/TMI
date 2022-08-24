@@ -12,28 +12,8 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">
-<style>
-	tr[data-no] {
-		cursor: pointer;
-	}
-	.reviewBoard {
-		width : 200px;
-		height : 250px;
-		border: 1px solid red; 
-		margin: auto; 
-		margin-top:4.5rem;
-		overflow: hidden;
-		position: relative;
-	}
-	.imageReviewBoard {
-		width : 200px;
-		height : 180px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-		position: relative;
-	}
-	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
+<style>	
 	.thumbNailLink {
 		display: inline-block;
 		margin : 10px;
@@ -48,13 +28,6 @@
 		height : 65px;
 		text-align: center;
 	}
-	#contentArea2 {
-		width : 280px;
-		height : 330px;
-		border: 1px solid red; 
-		margin: auto; 
-		overflow: hidden;
-	}
 </style>
 
 <sec:authorize access="isAuthenticated()">
@@ -67,11 +40,13 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain">
+<div id="boardMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
+  <br /><br />
+ <hr />
  	 <!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
       <li class="current"><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
@@ -81,21 +56,24 @@
       <li><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
     </ul>
     <!-- 메뉴버튼 끝 -->
- 	
- 	
+    <hr />
+ 	<br /><br />
  	<h1>플래너 게시판</h1>
- 	<section id="board-container" class="container">
- 		<c:if test="${empty loginMember}">
-			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
-		</c:if>
-		<c:if test="${not empty loginMember}">
-			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'">글쓰기</button>
-		</c:if>
-			<article>
-				<div id="wrapper" style="border: 1px solid black; ">
-				<div id="plannerContainer" style="border: 1px solid blue;">
+ 	<br />
+ 	<div id="infoMain">
+			<div id="innerDiv">
+		 		<c:if test="${empty loginMember}">
+					<p class="btn-lg">로그인 하셔야 작성 가능합니다.</p>
+				</c:if>
+				<c:if test="${not empty loginMember}">
+					<button class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardForm.do'">글쓰기</button>
+				</c:if>
+			</div>
+
+				<div id="wrapper">
+				<div id="plannerContainer" >
 				<c:forEach items="${list}" var="plannerBoard" varStatus="vs">
-					<div class="card" style="width: 18rem; display:inline-block" data-no="${plannerBoard.PNo}">
+					<div class="card" style="width: 18rem; display:inline-block; box-shadow: 1px 1px 3px 1px #dadce0; margin-right : 10px; margin-bottom : 10px;" data-no="${plannerBoard.PNo}" >
 						<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
 							<script>
@@ -149,11 +127,9 @@
 				</c:forEach>
 				</div>
 				</div>
-			</article>
+		<br /><br />
  		<nav>${pagebar}</nav>
-	</section> 
- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ </div>
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -13,29 +13,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
 
-<style>
-#infoMain{
-    width:90%; 
-    hegiht:100%; 
-    margin: auto; 
-    margin-bottom:12rem;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 1px 1px 3px 1px #dadce0;
-    border-radius: 30px;
-}
-
-#boardMain {
-   /*  border: 1px solid red;  */
-    width:80%; 
-    hegiht:100%; 
-    margin: auto; 
-    margin-top:4.5rem;
-    overflow: hidden;
-    position: relative;
-}
-</style>
-
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
 	<script>

@@ -23,12 +23,13 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain" style="text-align : center;">
+<div id="boardMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
- <hr />
+ <br /><br />
+	<hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
       <li><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
@@ -39,8 +40,12 @@
     </ul>
     <!-- 메뉴버튼 끝 -->
     <hr />
- 	<h1>베스트 후기 게시판</h1>
- 			<div id="outerDiv">
+    <br /><br />
+    <h1>베스트 후기 게시판</h1>
+    <br />
+    <div id="infoMain">
+    <br /><br /><br /><br />
+			<div id="outerDiv">
 				<c:forEach items="${list2}" var="reviewBoard" varStatus="vs">
 						<div id="contentArea2">
 							<div id="selectContent">
@@ -57,7 +62,9 @@
 						</div>
 				</c:forEach>
 			</div>
+			<br /><br />
 			<nav>${pagebar}</nav>
+    </div>
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
