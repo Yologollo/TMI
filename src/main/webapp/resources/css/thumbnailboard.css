@@ -1,0 +1,44 @@
+	.thumbNailName {
+		display : inline-block;
+		width : 280px;
+		height : 30px;
+		text-align: center;
+	}
+	#contentArea2 {
+		width : 280px;
+		height : 330px;
+		border: 1px solid black; 
+		overflow: hidden;
+		margin-right : 10px;
+		margin-bottom : 10px;
+		box-shadow: 5px 5px 5px gray;
+		display: inline-block;
+	}
+	
+	#thumbNail {
+		width : 280px;
+		height : 250px;
+		border: 1px solid black; 
+		margin: auto; 
+		overflow: hidden;
+		display: inline-block;
+	}	
+	.btn {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
+	#outerDiv {
+		margin-left : 6%;
+		border: 1px solid green;
+		width : 1180px;
+	}
+	
+	#innerDiv {
+		border: 1px solid green; 
+		display: flex; 
+		justify-content: right; 
+		margin-right : 11px; 
+		margin-bottom : 7px;
+	}
