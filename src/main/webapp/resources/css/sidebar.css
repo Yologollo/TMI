@@ -1,51 +1,26 @@
-.menu {
-    display: block;
-    overflow: hidden;
-    width: 60px;
-    background-color: rgb(180, 204, 255);
-    color: #fff;
-    transition: all 0.5s ease;
-    border-radius: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-    position: absolute;
-    top: 1000px;
-    right: 40%;
-    margin-right: -670px;
-}
-.menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.menu a {
-    display: block;
-    height: 25px;
-    padding: 8px;
-    cursor: pointer;
-    text-decoration: none;
+/*==================== SIDE BAR ====================*/
+
+.quickmenu {
+	position: absolute;
+	width: 90px;
+	top: 50%;
+	margin-top: -50px;
+	right: 20px;
 }
 
-.menu a{
-    color: #000;
+.quickmenuUl {
 }
 
-.menu div {
-    position: absolute;
-    right: 10px; 
-    top: 400px;
-    float: right;
-    line-height: 1.5;
+.quickmenuLi {
+	text-align:center;
+	
+	width : 50px;
+	height : 50px;
 }
 
-.menu ::before {
-    font-family: 'Material Icons';
-    font-size: 1.5em;
-    float: right;
-    clear: left;
+.quickmenuA {
 }
-.menu li:nth-child(1) a::before{ content: '\eacf'; }
-.menu li:nth-child(2) a::before{ content: '\ef49'; }
-.menu li:nth-child(3) a::before{ content: '\e8cd'; }
-.menu li:nth-child(4) a::before{ content: '\e675'; }
 
+.quickMenuImg{
+	margin : 5px;
+}

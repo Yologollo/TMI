@@ -30,6 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<!-- 사용자작성 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 </head>
 <script>
 	<c:if test="${!empty msg}">
@@ -129,18 +130,18 @@
 	 -->
     
 	<div class="quickmenu" style="position: absolute; right: 20px; top: 50%; display: none">
-		<ul>
-			<li><a href="#" onclick="window.scrollTo(0,0);">
-				<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" id="quickMenuImg"/></a>
+		<ul class="quickmenuUl">
+			<li class="quickmenuLi"><a href="#" onclick="window.scrollTo(0,0);" class="quickmenuA">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" class="quickMenuImg"/></a>
 			</li>
-			<li><a href="https://forms.gle/5uodCWt4YiVenixp7" target="_blank">
-				<img src="${pageContext.request.contextPath}/resources/images/sidebar/inquiry.png" alt="문의" id="quickMenuImg"/></a>
+			<li class="quickmenuLi"><a href="https://forms.gle/5uodCWt4YiVenixp7" target="_blank" class="quickmenuA">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/inquiry.png" alt="문의" class="quickMenuImg"/></a>
 			</li>
-			<li><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do">
-				<img src="${pageContext.request.contextPath}/resources/images/sidebar/noticeboard.png" alt="공지사항" id="quickMenuImg"/></a>
+			<li class="quickmenuLi"><a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" class="quickmenuA">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/noticeboard.png" alt="공지사항" class="quickMenuImg"/></a>
 			</li>
-			<li><a href="${pageContext.request.contextPath}/chat/chatMainPage.do">
-				<img src="${pageContext.request.contextPath}/resources/images/sidebar/chat.png" alt="채팅" id="quickMenuImg"/></a>
+			<li class="quickmenuLi"><a href="${pageContext.request.contextPath}/chat/chatMainPage.do" class="quickmenuA">
+				<img src="${pageContext.request.contextPath}/resources/images/sidebar/chat.png" alt="채팅" class="quickMenuImg"/></a>
 			</li>
 		</ul>
 	</div>

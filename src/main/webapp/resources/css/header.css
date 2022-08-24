@@ -254,33 +254,6 @@ body{
   background-color: #70B9E9;
 }
 
-/*==================== SIDE BAR ====================*/
-
-.quickmenu {
-	position: absolute;
-	width: 90px;
-	top: 50%;
-	margin-top: -50px;
-	right: 20px;
-}
-
-.quickmenu ul {
-}
-
-.quickmenu ul li {
-	text-align:center;
-}
-
-.quickmenu ul li a {
-}
-
-.quickmenu ul li a img{
-	margin : 5px;
-	width : 50px;
-	height : 50px;
-}
-
-
 /*==================== 화면 사이즈 ====================*/
 @media screen and (max-width: 1800px){
   .nav{
