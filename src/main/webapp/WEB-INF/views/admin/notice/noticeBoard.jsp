@@ -16,12 +16,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
-	<style>
+<style>
 tr[data-no] {
 	cursor: pointer;
 }
 </style>
-	<script>
+<script>
 window.addEventListener('load', (e) => {
 	document.querySelectorAll("tr[data-no]").forEach((tr) => {
 		tr.addEventListener('click', (e) => {
@@ -38,46 +38,45 @@ window.addEventListener('load', (e) => {
 });
 </script>
 
-
-
-<div id="commonMain">
-	<section id="container">
+<div class="intro_top">
+	<img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+<div id="commonMain" style="margin-top: 0;">
 		<div id="menuContainer">
 			<ul>
-				<li class="mypageMenuli">
-					<sec:authorize access="hasRole('ADMIN')">
+				<sec:authorize access="hasRole('ADMIN')">
+					<li class="mypageMenuli">
 						<li>
 							<a href="${pageContext.request.contextPath}/admin/memberList.do"onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a>
 						</li>
-					</sec:authorize>
-				</li>
+					</li>
 				<hr />
-				
-						<li class="mypageMenuli">
-							<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
-						</li>
+				</sec:authorize>
+					<li class="mypageMenuli">
+						<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
+					</li>
 				<hr />
 			</ul>
 		</div>
 
 
 	<section id="board-container" <%-- class="container" --%>>
+			<h1>공지사항</h1>
 			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
-			<div id="adminboard-head">
-					<h2>공지사항</h2>
+				<div id="adminboard-head">
 				</div>
-					<sec:authorize access="hasRole('ADMIN')">
-						<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'">글쓰기</button>
-					</sec:authorize>
+				<sec:authorize access="hasRole('ADMIN')">
+					<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardForm.do'">글쓰기</button>
+				</sec:authorize>
 								
-					<colgroup>
-		                <col width="10%">
-		                <col width="10%">
-		                <col width="20%">
-		                <col width="20%">
-		                <col width="10%">
-		                <col width="10%">
-	          		</colgroup>
+				<colgroup>
+	                <col width="10%">
+	                <col width="10%">
+	                <col width="20%">
+	                <col width="20%">
+	                <col width="10%">
+	                <col width="10%">
+          		</colgroup>
 	          		
          		<thead>
             		<tr>
@@ -111,7 +110,6 @@ window.addEventListener('load', (e) => {
 				<nav>${pagebar}</nav>
          
 			</div>
-		</section> 
 	</section>
 </div>
 

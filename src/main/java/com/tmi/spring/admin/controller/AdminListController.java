@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 				HttpServletRequest request) {
 			try {
 				// 목록조회
-				int numPerPage = 5;
+				int numPerPage = 10;
 				List<AdminList> list = adminListService.selectAdminList(cPage, numPerPage);
 				log.debug("list = {}", list);
 				mav.addObject("list", list);

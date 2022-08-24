@@ -8,43 +8,82 @@
 
 
 
+a {
+	color: black;
+	text-decoration:none;
+}
 
+a:hover {
+	color: black;
+	text-decoration:none;
+}
+
+a:link {
+	color: black;
+	text-decoration:none;
+}
+
+a:visited {
+	color: black;
+	text-decoration:none;
+}
+
+a:active {
+	color: black;
+	text-decoration:none;
+}
+
+.intro_top {
+    width: 100%;
+    height: 600px;
+    background-color: #F4E35F;
+    text-align: center;
+    position: relative;
+    margin-top:4.5rem;
+    overflow: hidden;
+    z-index: -1;
+}
 
 #container {
-    
     font-family: 'KyoboHand';
     justify-content: center;
-    margin: 150px 10px 0 5px;
-  }
+}
 
 
  /*사이드 메뉴*/
 #menuContainer{
-  border: 1px solid #d3d3d3;
-  border-top: none;
-  float: left;
-  width: 17%;
-  height: 530px;
-  font-size: 30px;
-  text-align: center;
-  background-color: #F6F6F6;
+	border: 1px solid #d3d3d3;
+	float: left;
+	width: 15%;
+	height: 600px;
+	font-size: 30px;
+	text-align: center;
+	background-color: #F6F6F6;
+	margin-top: 0;
 }
 
 #menuContainer > ul, #menuContainer > li {
-  list-style:none;
-  padding-left: 0px;
+	list-style:none;
+	padding-left: 0px;
 }
 
 #menuContainer > li > a {
-  color: white;
+	color: white;
 }
 
 .mypageMenuli {
-  margin-top:20px;
-  color: white;
+	margin-top:20px;
+	color: white;
 }
 
+#memberSearchBtn{
+	width: 30%;
+}
 
+#board-container > h1 {
+	text-align: center;
+	margin-top: 50px;
+}
 /* 테이블 캡션 */
 #notice-table-1 caption {
  text-align: center;
@@ -54,7 +93,7 @@
 }
 /*테이블 설정*/
 #notice-table-1 {
- width: 83%;
+ width: 85%;
  border-top: 1px solid #d0d0d0;
  border-collapse: collapse;
  margin-bottom: 20px;
