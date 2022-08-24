@@ -15,6 +15,16 @@
 	border-radius: 30px;
 }
 
+#indexMain{
+	width:80%; 
+	hegiht:100%; 
+	margin: auto; 
+	margin-top:6rem;
+	margin-bottom:12rem;
+	overflow: hidden;
+	position: relative;
+}
+
 #pageTitle{
 	width:70%;
 	margin-top:8rem;
