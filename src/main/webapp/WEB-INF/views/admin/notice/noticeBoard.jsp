@@ -16,11 +16,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberList.css">
 
-<style>
-tr[data-no] {
-	cursor: pointer;
-}
-</style>
 <script>
 window.addEventListener('load', (e) => {
 	document.querySelectorAll("tr[data-no]").forEach((tr) => {
@@ -44,20 +39,20 @@ window.addEventListener('load', (e) => {
 				<sec:authorize access="hasRole('ADMIN')">
 					<li class="mypageMenuli">
 						<li>
-							<a href="${pageContext.request.contextPath}/admin/memberList.do"onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a>
+							<a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a>
 						</li>
 					</li>
 				<hr />
 				</sec:authorize>
 					<li class="mypageMenuli">
-						<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do"onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
+						<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
 					</li>
 				<hr />
 			</ul>
 		</div>
 
 
-	<section id="board-container" <%-- class="container" --%>>
+	<section id="board-container">
 			<h1>공지사항</h1>
 			<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
 				<div id="adminboard-head">
@@ -87,31 +82,27 @@ window.addEventListener('load', (e) => {
 	       		 </thead>
 	       		 
 	         <tbody>
-        			 <c:forEach items="${list}" var="noticeBoard" varStatus="vs">
-							<tr data-no="${noticeBoard.nb_no}">
-								<td>${noticeBoard.nb_no}</td>
-								<td>${noticeBoard.nb_title}</td>
-								<td>${noticeBoard.m_nickname}</td>
-								<td><fmt:parseDate value="${noticeBoard.nb_created_at}"
-										pattern="yyyy-MM-dd'T'HH:mm" var="createdAt" /> <fmt:formatDate
-										value="${createdAt}" pattern="MM-dd HH:mm" /></td>
-								<td>	<c:if test="${noticeBoard.attachCount gt 0}">
-											<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
-										</c:if>
-								</td>
-								<td>${noticeBoard.nb_read_count}</td>
-							</tr>
-						</c:forEach>
-						</tbody>	
-				</table>
-				<nav>${pagebar}</nav>
-         
-			</div>
+			<c:forEach items="${list}" var="noticeBoard" varStatus="vs">
+				<tr data-no="${noticeBoard.nb_no}">
+					<td>${noticeBoard.nb_no}</td>
+					<td>${noticeBoard.nb_title}</td>
+					<td>${noticeBoard.m_nickname}</td>
+					<td><fmt:parseDate value="${noticeBoard.nb_created_at}"
+							pattern="yyyy-MM-dd'T'HH:mm" var="createdAt" /> <fmt:formatDate
+							value="${createdAt}" pattern="MM-dd HH:mm" /></td>
+					<td>	<c:if test="${noticeBoard.attachCount gt 0}">
+								<img src="${pageContext.request.contextPath}/resources/images/notice/file.png" width="16px" />
+							</c:if>
+					</td>
+					<td>${noticeBoard.nb_read_count}</td>
+				</tr>
+			</c:forEach>
+			</tbody>	
+		</table>
+		<nav>${pagebar}</nav>
 	</section>
 </div>
 
-
 <!-- <script> -->
-
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -90,40 +90,15 @@ import lombok.extern.slf4j.Slf4j;
 	  @GetMapping("/memberListSearch.do")
 	  public void memberListSearch(@RequestParam String membername, Model model, RedirectAttributes redirectAttr) {
 		  log.debug("membername = {}", membername);
-		  try { 
+			try { 
 				List<Member> searchMember = adminListService.memberListSearch(membername);
 				log.info("membername = {}", membername);
-				model.addAttribute("searchMember", searchMember);
-				
+				model.addAttribute("searchMember", searchMember);	
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw e;
-				
 			}
-		  
-	
 	  }
-//	  @GetMapping("/memberListSearch.do")
-//	  public void memberListSearch(@RequestParam String membername, Model model, RedirectAttributes redirectAttr) {
-//		  log.debug("membername = {}", membername);
-//		  try { 
-//			  Member searchMember = adminListService.memberListSearch(membername);
-//			  log.info("membername = {}", membername);
-//			  model.addAttribute("searchMember", searchMember);
-//			  
-//		  } catch (Exception e) {
-//			  e.printStackTrace();
-//			  throw e;
-//			  
-//		  }
-//		  
-//		  
-//	  }
-	 
 
-
-	 
-  
-  
-  }
+}
  

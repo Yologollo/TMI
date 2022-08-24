@@ -16,15 +16,4 @@ public interface AdminListService {
 
 	List<Member> memberListSearch(String memberName);
 
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-
 }
