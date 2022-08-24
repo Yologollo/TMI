@@ -166,7 +166,7 @@ tr[data-no] {
 <div style="width:auto; height:100vh; display:flex; margin:auto 0;"></div>
 	    
 	    <!-- 베스트 게시판 파트 -->
-	     
+	<div id="indexMain">   
         <div id="bestPlanner">
 		    <hr><h1 id="tourism_title">베스트 플레너</h1><hr>
 		 	<section id="board-container" class="container">
@@ -307,6 +307,7 @@ tr[data-no] {
 		</div>
 	</div>
 </div>
+</div>  
 <!-- 관광정보 위젯 스크립트 -->
 <script>
 
