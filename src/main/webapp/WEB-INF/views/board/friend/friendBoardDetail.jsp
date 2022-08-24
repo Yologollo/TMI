@@ -307,9 +307,6 @@ $(document).ready(function () {
 					                	</c:if>
 									</form>
 								</td>
-								<td>
-
-								</td>
 							</tr>
 						</c:forEach>
 						</tbody>
