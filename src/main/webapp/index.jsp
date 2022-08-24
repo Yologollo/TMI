@@ -109,8 +109,8 @@ tr[data-no] {
 				<div class="modalInfo" id="sigunguList"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="areaConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary" id="areaCancelBtn" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-outline-primary btn-lg" id="areaConfirmBtn">확인</button>
+				<button type="button" class="btn btn-outline-secondary btn-lg" id="areaCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -128,8 +128,8 @@ tr[data-no] {
 				<div class="modalInfo" id="contentList"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="contentConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary" id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-outline-primary btn-lg" id="contentConfirmBtn">확인</button>
+				<button type="button" class="btn btn-outline-secondary btn-lg" id="contentCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -149,8 +149,8 @@ tr[data-no] {
 				<div class="modalInfo" id="serviceCat3List"></div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="serviceConfirmBtn">확인</button>
-				<button type="button" class="btn btn-secondary" id="serviceCancelBtn" data-bs-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-outline-primary btn-lg" id="serviceConfirmBtn">확인</button>
+				<button type="button" class="btn btn-outline-secondary btn-lg" id="serviceCancelBtn" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -249,66 +249,43 @@ tr[data-no] {
 		    </div>
 
 
-<!-- 관광정보 CSS 작업폼 시작(안에 폼 사용하면 됩니당.)-->
-	    	
-	<hr><h1 id="tourism_title">관광 정보</h1><hr>
-	        <div id="area">
-	            <button class="w-btn-outline w-btn-blue-outline" type="button">
-	                서울
-	            </button>
-	            <button class="w-btn-outline w-btn-blue-outline" type="button">
-	                인천
-	            </button>
-	        </div>
-	        <div id="tourism_type">
-	            <button class="w-btn-outline w-btn-blue-outline" type="button">
-	                전체
-	            </button>
-	            <button class="w-btn-outline w-btn-blue-outline" type="button">
-	                관광지(자연)
-	            </button>
-	        </div>
-<!-- 관광정보 CSS 작업폼 끝-->
-	    	
-	    	
 <!-- 관광정보 위젯 -->
 	    	
 	    	
 <!-- 관광정보 위젯 검색 파트 -->
-		<div id="commonMain2">
-	    	<div id="searchTable">
-				<table class="table table-bordered">
+	<hr><h1 id="tourism_title">관광 정보 검색</h1><hr>
+		<div id="widgetMain">
+				<table class="table table-bordered" id="searchTable">
 					<tbody>
 						<tr>
 							<th class="col" id="searchTh">지역</th>
 							<td>
 								<div class="finalName" id="areaCodeFinal"></div>
-								<button type="button" class="btn btn-info" id="searchAreaBtn">지역선택</button>
+								<button type="button" class="btn btn-outline-dark" id="searchAreaBtn">지역선택</button>
 							</td>
 						</tr>
 						<tr>
 							<th id="searchTh">관광타입</th>
 							<td id="searchTd">
 								<div class="finalName" id="contentCodeFinal"></div>
-								<button type="button" class="btn btn-info" id="searchContentBtn">관광타입선택</button>
+								<button type="button" class="btn btn-outline-dark" id="searchContentBtn">관광타입선택</button>
 							</td>
 						</tr>
 						<tr id="serviceTr" style="display: none">
 							<th id="searchTh">서비스분류</th>
 							<td id="searchTd">
 								<div class="finalName" id="serviceCodeFinal"></div>
-								<button type="button" class="btn btn-info" id="searchServiceBtn">서비스 분류 선택</button>
+								<button type="button" class="btn btn-outline-dark" id="searchServiceBtn">서비스 분류 선택</button>
 							</td>
 						</tr>
 						<tr>
 							<th id="searchTh">검색</th>
 							<td>
-								<button type="button" class="btn btn-info" id="searchDataBtn">검색</button>
+								<button type="button" class="btn btn-outline-dark" id="searchDataBtn">검색</button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
 	
 <!-- 관광정보 위젯 컨텐츠 파트 -->
 			<article id="contentArea">
