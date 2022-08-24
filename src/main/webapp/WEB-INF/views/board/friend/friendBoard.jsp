@@ -43,7 +43,7 @@ window.addEventListener('load', (e) => {
 
 <div id="commonMain">
 <!-- 
-	생성 : 김용민
+	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
  	<!-- 메뉴버튼 시작 -->

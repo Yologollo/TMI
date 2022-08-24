@@ -11,31 +11,8 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<style>
-	.thumbNailName {
-		display : inline-block;
-		width : 280px;
-		height : 30px;
-		text-align: center;
-	}
-	#contentArea2 {
-		width : 280px;
-		height : 330px;
-		border: 1px solid black; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}
-	
-	#thumbNail {
-		width : 280px;
-		height : 250px;
-		border: 1px solid black; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}	
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
 	<script>
@@ -46,12 +23,12 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain">
+<div id="commonMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
-
+	<hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
       <li><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
@@ -61,15 +38,17 @@
       <li><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
     </ul>
     <!-- 메뉴버튼 끝 -->
-    
-		<c:if test="${empty loginMember}">
-			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
-		</c:if>
-		<c:if test="${not empty loginMember}">
-			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'">글쓰기</button>
-		</c:if>
-	<section id="board-container" class="container">	
-			<article style="border: 1px solid green;">
+    <hr />
+    <h1>후기 게시판</h1>
+			<div id="outerDiv">
+				<div id="innerDiv">
+					<c:if test="${empty loginMember}">
+						<span class="btn">로그인 하셔야 작성 가능합니다.</span>
+					</c:if>
+					<c:if test="${not empty loginMember}">
+						<button class="btn" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardForm.do'">글쓰기</button>
+					</c:if>
+				</div>
 				<c:forEach items="${list}" var="reviewBoard" varStatus="vs">
 						<div id="contentArea2">
 							<div id="selectContent">
@@ -85,9 +64,8 @@
 							</div>
 						</div>
 				</c:forEach>
-			</article>
+			</div>
 			<nav>${pagebar}</nav>
-	</section> 
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

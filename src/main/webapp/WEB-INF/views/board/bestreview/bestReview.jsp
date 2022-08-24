@@ -11,52 +11,8 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<style>
-	tr[data-no] {
-		cursor: pointer;
-	}
-	.reviewBoard {
-		width : 200px;
-		height : 250px;
-		border: 1px solid red; 
-		margin: auto; 
-		margin-top:4.5rem;
-		overflow: hidden;
-		position: relative;
-	}
-	.imageReviewBoard {
-		width : 200px;
-		height : 180px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-		position: relative;
-	}
-	
-	.thumbNailLink {
-		display: inline-block;
-		margin : 10px;
-		width : 300px;
-		height : 200px;
-		text-align: center;
-	}
-	
-	.thumbNailName {
-		display : inline-block;
-		width : 300px;
-		height : 65px;
-		text-align: center;
-	}
-	#contentArea2 {
-		width : 280px;
-		height : 330px;
-		border: 1px solid red; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}
-	
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="loginMember" scope="page"/>
 	<script>
@@ -67,26 +23,12 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<script>
-window.addEventListener('load', (e) => {
-	document.querySelectorAll("tr[data-no]").forEach((tr) => {
-		tr.addEventListener('click', (e) => {
-			console.log(e.target);
-			const tr = e.target.parentElement;
-			console.log(tr);
-			if(tr.matches('tr[data-no]')) {
-				const no = tr.dataset.no;
-				location.href = '${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=' + no;
-			}
-		});
-	});
-});
-</script>
-<div id="commonMain">
+<div id="commonMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
+ <hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
       <li><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
@@ -96,26 +38,26 @@ window.addEventListener('load', (e) => {
       <li><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
     </ul>
     <!-- 메뉴버튼 끝 -->
+    <hr />
  	<h1>베스트 후기 게시판</h1>
-	<section id="board-container" class="container">
-			<article>
+ 			<div id="outerDiv">
 				<c:forEach items="${list2}" var="reviewBoard" varStatus="vs">
 						<div id="contentArea2">
 							<div id="selectContent">
 								<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
-									<span class="thumbNailImage">
-										<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-									</span>
+									<div id="thumbNail">
+										<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
+									</div>
 									<strong class="thumbNailName">
 										${reviewBoard.rb_title}
 									</strong>
+									<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 								</a>
 							</div>
 						</div>
 				</c:forEach>
-			</article>
- 		<nav>${pagebar}</nav>
-	</section> 
+			</div>
+			<nav>${pagebar}</nav>
  </div>
  <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
