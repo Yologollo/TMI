@@ -37,11 +37,21 @@
 	 	 
 	  #noticeFrmbt{
 	  text-align: center;
-	   margin-top: 450px;
+	   margin-top: 550px;
 	  }
 	 #commonMain no {
 	  text-align: center;
 	  }
+	  
+	  .btn {
+    	border-color: #70B9E9;
+    	font-weight: 700;
+    	background-color: #70B9E9;
+    	color: white;
+	}
+
+	  
+	  
 	 
 </style>
 
@@ -55,7 +65,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain">
+<div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
 		<input type="text" class="form-control" name="nbTitle" id="title" style="font-size : 40px" value="${insertNoticeBoard.nbTitle}" required readonly>
  		<input type="text" class="form-control" name="nbMEmail" value="${insertNoticeBoard.nbMEmail}" readonly required>
@@ -70,7 +80,6 @@
 			</c:if>
 		
 	  	${insertNoticeBoard.nbContent} 
-		<br /><br />
 		<hr />
 		
 		
@@ -87,8 +96,9 @@
 		</c:if>
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoard.do'">
+		<br /><br />
 		
-		<br /><br /><br /><br /><br /><br />
+		
 		
 	</div> 	
 </div>
