@@ -29,6 +29,7 @@ h1 {
 #notice-table {
 	float:right; 
 	width: 85%;
+	text-align: center;
 }
 
 #board-container {
