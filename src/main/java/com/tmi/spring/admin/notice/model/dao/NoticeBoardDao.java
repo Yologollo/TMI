@@ -11,7 +11,12 @@ import org.apache.ibatis.session.RowBounds;
 import com.tmi.spring.admin.notice.model.dto.InsertNoticeBoard;
 import com.tmi.spring.admin.notice.model.dto.NoticeBoard;
 import com.tmi.spring.admin.notice.model.dto.NoticeBoardAttachment;
-
+/**
+ * 
+ * 생성 권민지
+ * 작업 권민지
+ *
+ */
 
 @Mapper
 public interface NoticeBoardDao {

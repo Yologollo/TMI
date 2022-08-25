@@ -10,7 +10,12 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.tmi.spring.admin.model.dto.AdminList;
 import com.tmi.spring.member.model.dto.Member;
-
+/**
+ * 
+ * 생성 : 권민지
+ * 작업 : 권민지
+ *
+ */
 @Mapper
 public interface AdminListDao {
 

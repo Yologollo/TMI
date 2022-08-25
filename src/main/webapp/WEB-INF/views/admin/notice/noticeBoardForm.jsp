@@ -6,47 +6,46 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 	
+	생성 : 권민지
+	작업 : 권민지
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="공지사항등록" name="title" />
 </jsp:include>
 
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-
 <style>
 	#content {
 		resize : none;
-		
 	}
+	
 	#save {
 		margin-left :45%;
-		
 	}
+	
 	.btn-lg {
 	    border-color: #70B9E9;
 	    font-weight: 700;
 	    background-color: #70B9E9;
 	    color: white;
-	    }
-	    
+	}
 	 #commonMain{
-    overflow: hidden;
-    position: relative;
-  box-shadow: 1px 1px 3px 1px #dadce0; 
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-
-	    }
-
+	    overflow: hidden;
+	    position: relative;
+		box-shadow: 1px 1px 3px 1px #dadce0; 
+	    border-bottom-right-radius: 30px;
+	    border-bottom-left-radius: 30px;
+	 }
 </style>
-<div id="commonMain">
+
+<div id="commonMain" >
 	 <h1>공지사항 작성</h1>
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
 		<input type="text" class="form-control"  name="nbTitle" id="title" placeholder="제목을 입력해주세요." required>
 		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
-		<div class="input-group mb-3">
+		<div class="input-group mb-3" >
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
 		</div>

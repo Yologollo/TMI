@@ -5,7 +5,12 @@ import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
+/**
+ * 
+ * 생성 권민지
+ * 작업 권민지
+ *
+ */
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true) 

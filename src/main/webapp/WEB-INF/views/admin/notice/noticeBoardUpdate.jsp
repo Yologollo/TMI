@@ -6,12 +6,13 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 	
+	생성 : 권민지
+	작업 : 권민지
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="공지사항 수정" name="title" />
 </jsp:include>
-<!-- include libraries(jQuery, bootstrap) -->
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -41,8 +42,9 @@
 
     }
      h1{
-     border : none;}
-    
+     border : none;
+     }
+     
 </style>
 <div id="commonMain" >
 	<h1>공지사항 수정</h1>
@@ -71,18 +73,14 @@
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupFile01">Upload</label>
 		  <input type="file" name="upFile" class="form-control" id="inputGroupFile01" multiple>
-		  
 		</div>
 		
-		<textarea id="summernote" name="nbContent">${insertNoticeBoard.nbContent}</textarea>
-	  	  	
-	  	
-	  	
-		<br /><br />
-		<input type="hidden" name="nbNo" value="${insertNoticeBoard.nbNo}" />
-		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
-		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noitceBoard.do'">
-		<br /><br /><br />
+			<textarea id="summernote" name="nbContent">${insertNoticeBoard.nbContent}</textarea>
+			<br /><br />
+			<input type="hidden" name="nbNo" value="${insertNoticeBoard.nbNo}" />
+			<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
+			<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noitceBoard.do'">
+			<br /><br /><br />
 	</form:form>
 </div>
 </div>
@@ -111,13 +109,6 @@
 			['view', ['fullscreen', 'codeview', 'help']]
 		]
 	});
-	
-
-	</script>
+</script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
-
-
-
-

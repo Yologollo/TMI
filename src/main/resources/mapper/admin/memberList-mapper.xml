@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmi.spring.admin.model.dao.AdminListDao">
+<!-- 	
+	생성 : 권민지
+	작업 : 권민지
+ -->
 
  <select id="selectAdminList" parameterType="String" resultMap ="AdminListMap">
 	select

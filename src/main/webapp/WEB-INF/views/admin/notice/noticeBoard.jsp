@@ -7,8 +7,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
-
-
+<!-- 	
+	생성 : 권민지
+	작업 : 권민지
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="공지사항" name="title" />
 </jsp:include>
@@ -41,16 +43,14 @@ window.addEventListener('load', (e) => {
 						<li>
 							<a href="${pageContext.request.contextPath}/admin/memberList.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">회원목록</a>
 						</li>
-					</li>
-				<hr />
+					<hr />
 				</sec:authorize>
 					<li class="mypageMenuli">
 						<a href="${pageContext.request.contextPath}/admin/notice/noticeBoard.do" onmouseover="mousein(this);" onmouseout="mouseout(this)">공지사항</a>
 					</li>
-				<hr />
+					<hr />
 			</ul>
 		</div>
-
 
 	<section id="board-container">
 			<h1>공지사항</h1>

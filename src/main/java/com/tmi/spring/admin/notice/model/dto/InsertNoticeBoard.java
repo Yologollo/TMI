@@ -8,7 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-
+/**
+ * 
+ * 생성 권민지
+ * 작업 권민지
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
