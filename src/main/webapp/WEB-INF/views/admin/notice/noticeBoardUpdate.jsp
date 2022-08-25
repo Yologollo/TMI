@@ -31,7 +31,8 @@
 	    color: white;
     }
 </style>
-<div id="commonMain">
+<div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+	<h1>공지사항 수정</h1>
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardUpdate.do" method="POST" enctype="multipart/form-data">
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
 		<input type="text" class="form-control"  name="nbTitle" id="title" value="${insertNoticeBoard.nbTitle}" required > 

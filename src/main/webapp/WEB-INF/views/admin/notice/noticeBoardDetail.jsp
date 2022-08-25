@@ -73,6 +73,7 @@
 </sec:authorize>
 
 <div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+ 		<h1>공지사항</h1>
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
 		<input type="text" class="form-control" name="nbTitle" id="title" style="font-size : 40px" value="${insertNoticeBoard.nbTitle}" required readonly>
  		<input type="text" class="form-control" name="nbMEmail" value="${insertNoticeBoard.nbMEmail}" readonly required>
