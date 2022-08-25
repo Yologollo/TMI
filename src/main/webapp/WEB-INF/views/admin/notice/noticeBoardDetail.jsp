@@ -49,7 +49,7 @@
     	background-color: #70B9E9;
     	color: white;
 	}
-		#contentMain{
+		#commonMain{
 	    overflow: hidden;
 	    position: relative;
 	    box-shadow: 1px 1px 3px 1px #dadce0;
@@ -72,7 +72,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+<div id="commonMain">
  		<h1>공지사항</h1>
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
 		<input type="text" class="form-control" name="nbTitle" id="title" style="font-size : 40px" value="${insertNoticeBoard.nbTitle}" required readonly>
