@@ -117,16 +117,17 @@ window.addEventListener('load', (e) => {
 		
 		<form action="${pageContext.request.contextPath}/board/friend/friendBoardSearch.do" method="get">
 		<div class="search">
-    		<select name="searchType">
+    		<select name="searchType" id="searchType">
       			<option value="n"<c:out value="${friendBoardSearch.searchType == null ? 'selected' : ''}"/>>-----</option>
       			<option value="t"<c:out value="${friendBoardSearch.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
       			<option value="c"<c:out value="${friendBoardSearch.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
       			<option value="w"<c:out value="${friendBoardSearch.searchType eq 'e' ? 'selected' : ''}"/>>작성자</option>
       			<option value="tc"<c:out value="${friendBoardSearch.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
     		</select>
-    		<input type="text" name="keyword" id="keywordInput" value="${friendBoardSearch.keyword}"/>
-    	
-    		<button class="btn-lg" type="submit">검색</button>
+    		<div id="keywordInput_wrap">
+    		<input type="text" name="keyword" id="keywordInput" placeholder="검색" value="${friendBoardSearch.keyword}"/>
+    		</div>
+    		<button type="submit" id="searchBtn"><img src="${pageContext.request.contextPath}/resources/images/search1.png"/></button>
   		</div> 
   		</form>
 
