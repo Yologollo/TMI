@@ -11,7 +11,12 @@ import com.tmi.spring.admin.model.dto.AdminList;
 import com.tmi.spring.member.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * 
+ * 생성 권민지
+ * 작업 권민지
+ *
+ */
 @Service
 @Slf4j
 public  class AdminListServiceImpl implements AdminListService {

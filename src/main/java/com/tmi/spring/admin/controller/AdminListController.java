@@ -30,7 +30,12 @@ import com.tmi.spring.common.HelloSpringUtils;
 import com.tmi.spring.member.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
-  
+/**
+ * 
+ * @생성 권민지
+ * @작업 권민지
+ *
+ */
   @Controller
   @RequestMapping("/admin")
   @Slf4j public class AdminListController {

@@ -7,7 +7,12 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data; 
 import lombok.NoArgsConstructor;
-
+/**
+ * 
+ * 생성 권민지
+ * 작업 권민지
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

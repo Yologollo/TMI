@@ -34,9 +34,13 @@ import com.tmi.spring.board.friend.model.dto.FriendBoardAttachment;
 import com.tmi.spring.common.HelloSpringUtils;
 
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * 
+ * @생성 권민지
+ * @작업 권민지
+ *
+ */
 @Controller
-/* @RequestMapping("/notice") */
 @Slf4j
 public class NoticeBoardController {
 
@@ -46,8 +50,6 @@ public class NoticeBoardController {
 	@Autowired
 	ServletContext application;
 	 
-	
-	//파일경로찾아죠!
 	@Autowired
 	ResourceLoader resourceLoader;
 
@@ -78,13 +80,10 @@ public class NoticeBoardController {
 
 		return mav;
 	}
-	// 공지사항 추가폼
-
+	
 	@GetMapping("/admin/notice/noticeBoardForm.do")
 	public void NoticeBoardform() {
 	}
-
-	// input:file[name=upFile] 같아야함
 
 	@PostMapping("/admin/notice/noticeBoardEnroll.do")
 	public String NoticeBoardEnroll(InsertNoticeBoard insertNoticeBoard, //
@@ -185,7 +184,6 @@ public class NoticeBoardController {
 		return "redirect:/admin/notice/noticeBoard.do";
 	}
 
-	// 수정
 	@GetMapping("/admin/notice/noticeBoardUpdate.do")
 	public void friendBoardUpdate(@RequestParam int no, Model model) {
 		try {
@@ -283,15 +281,3 @@ public class NoticeBoardController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-

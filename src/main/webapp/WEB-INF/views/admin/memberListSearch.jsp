@@ -7,14 +7,16 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="utf-8" />
-
+<!-- 	
+	생성 : 권민지
+	작업 : 권민지
+ -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="회원관리" name="title" />
 </jsp:include>
 
 <link rel="stylesheet"href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet"href="${pageContext.request.contextPath}/resources/css/memberList.css">
-
 
 <div id="commonMain">
 	<div id="menuContainer">
@@ -30,8 +32,6 @@
 			<hr />
 		</ul>
 	</div>
-
-
 	
 	<section id="board-container">
 		<h1>회원목록</h1>	
