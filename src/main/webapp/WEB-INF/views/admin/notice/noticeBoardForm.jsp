@@ -28,11 +28,19 @@
 	    font-weight: 700;
 	    background-color: #70B9E9;
 	    color: white;
-	    
-	 
 	    }
+	    
+	 #commonMain{
+    overflow: hidden;
+    position: relative;
+  box-shadow: 1px 1px 3px 1px #dadce0; 
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+	    }
+
 </style>
-<div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+<div id="commonMain">
 	 <h1>공지사항 작성</h1>
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
 		<input type="text" class="form-control"  name="nbTitle" id="title" placeholder="제목을 입력해주세요." required>

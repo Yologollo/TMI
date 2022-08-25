@@ -32,7 +32,7 @@ window.addEventListener('load', (e) => {
 	});
 });
 </script>
-
+<div id="boardMain" style="text-align : center;">
 <div id="commonMain">
 		<div id="menuContainer">
 			<ul>
@@ -102,7 +102,7 @@ window.addEventListener('load', (e) => {
 		<nav>${pagebar}</nav>
 	</section>
 </div>
-
+</div>
 <!-- <script> -->
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

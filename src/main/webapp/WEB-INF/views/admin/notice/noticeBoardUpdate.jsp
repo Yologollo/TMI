@@ -24,8 +24,29 @@
 	#save {
 		margin-left :45%;
 	}
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+    }
+    
+    #commonMain{
+    overflow: hidden;
+    position: relative;
+    
+	 box-shadow: 1px 1px 3px 0 #dadce0; 
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    }
+     h1{
+     border : none;}
+    
 </style>
-<div id="commonMain">
+<div id="commonMain" >
+	<h1>공지사항 수정</h1>
+	<div id="boardMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardUpdate.do" method="POST" enctype="multipart/form-data">
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
 		<input type="text" class="form-control"  name="nbTitle" id="title" value="${insertNoticeBoard.nbTitle}" required > 
@@ -63,6 +84,7 @@
 		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noitceBoard.do'">
 		<br /><br /><br />
 	</form:form>
+</div>
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
