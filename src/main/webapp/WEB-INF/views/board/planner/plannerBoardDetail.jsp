@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/likebutton.css">
 <style>
 	#fb_content {
 		resize : none;
@@ -54,6 +55,12 @@
     .commentHr {
     	width : 1350px;
     }
+    	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
 </style>
 <script>
 //DAY 1 지도 도출
@@ -296,7 +303,7 @@ const email = document.getElementById("loginMemberEmail").value;
              	<span>본인 글은 추천할 수 없습니다.</span>
             </c:if>
 			<c:if test="${not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail)}">
-             	<button type="submit" class="btn btn-primary btn-lg" id="love">추천</button>
+             	<button type="submit" class="likebutton" id="love">추천!</button>
             </c:if>
          </form>
 		<hr />
@@ -340,18 +347,18 @@ const email = document.getElementById("loginMemberEmail").value;
 		                <input type="hidden" name="pbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 		                <br />
 						<textarea name="pbcContent" cols="85" rows="3" style="resize: none;" placeholder="댓글 입력"></textarea>
-		                <button type="submit" class="btn btn-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		                <button type="submit" class="btn btn-primary-success attach" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
 		            </form>
 		        </div>
 		</c:if>
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertPlannerBoard.pbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
-			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
+			<button style="float : right;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
 		
 		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 		
 	<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
@@ -376,7 +383,7 @@ const email = document.getElementById("loginMemberEmail").value;
 						<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
 						<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
 						<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
-						<button style="float : right;" type="submit" class="btn btn-primary btn-lg">플래너 가져오기</button>
+						<button style="float : right;" type="submit" class="btn-lg">플래너 가져오기</button>
 						<br /><br /><br />
 					</c:if>
 				</c:if>

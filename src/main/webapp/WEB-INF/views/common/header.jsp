@@ -140,14 +140,14 @@
 			<li class="quickmenuLi"><a href="${pageContext.request.contextPath}/chat/chatMainPage.do" class="quickmenuA">
 				<img src="${pageContext.request.contextPath}/resources/images/sidebar/chat.png" alt="채팅" class="quickMenuImg"/></a>
 			</li>
-			<li>
-				<br /><br /><br /><br /><br /><br />
-			</li>
-			<li class="quickmenuLi" id="topLi"><a href="#" onclick="window.scrollTo(0,0);" class="quickmenuA" id="topA">
-				<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" class="quickMenuImg" id="topImg"/></a>
-			</li>
 		</ul>
 	</div>
+	
+			
+	<a href="#" onclick="window.scrollTo(0,0);" class="quickmenuA" id="topA">
+		<img src="${pageContext.request.contextPath}/resources/images/sidebar/top.png" alt="TOP" class="quickMenuImg" id="topImg"/>
+	</a>
+		
 	
 	<script>
 	/* 로그아웃 a태그를 submit 폼제출 */
@@ -176,6 +176,7 @@
 	$(document).ready(function(){
 	  	$(window).scroll(function() {
 	  		$(".quickmenu").show();
+	  		$("#topA").show();
 	    	var position = $(window).scrollTop() + 500; 
 	    	$(".quickmenu").stop().animate({"top":position+"px"},400);
 	  	});
