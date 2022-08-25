@@ -36,8 +36,8 @@
 	<section id="board-container">
 		<h1>회원목록</h1>
 		<table id="notice-table-1" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">	
-			<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do">
-				<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" />
+			<form id="memberSearchBtn" action="${pageContext.request.contextPath}/admin/memberListSearch.do"> 
+				<input type="text" id="memberSearchBtn" name="membername" placeholder="회원이름을 검색해보세요!" /> 
 				<button type="submit" id="ac-button.is-solid.is-primary" class="btn">검색</button>
 			</form>
 			

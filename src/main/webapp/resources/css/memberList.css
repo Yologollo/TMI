@@ -49,11 +49,11 @@ tr[data-no] {
 	border: 1px solid #d3d3d3;
 	float: left;
 	width: 15%;
-	height: 600px;
+	height: 735px;
 	font-size: 30px;
 	text-align: center;
 	background-color: #F6F6F6;
-	margin-top: 0;
+	margin-top: 170px;
 }
 
 #menuContainer > ul, #menuContainer > li {
@@ -71,13 +71,15 @@ tr[data-no] {
 }
 
 #memberSearchBtn{
-	width: 30%;
-	height:30px;
+	width: 25%;
+	/* height:30px; */
+	margin-left:700px;
+	margin-bottom: 19px;
 }
 
 #board-container > h1 {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 64px;
 }
 /* 테이블 캡션 */
 #notice-table-1 caption {
@@ -109,13 +111,14 @@ tr[data-no] {
  background: #f4f4f4;
  color: #828282;
  font-weight: normal;
- border-bottom: none;
- text-align: center;
+  border-bottom: 1px solid #d0d0d0;
+ text-align: center; 
 }
 
 #notice-table-1 td:not(:nth-child(2)) {
  text-align: center;
  color: #909090;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 #notice-table-1 a {
@@ -151,12 +154,13 @@ tr[data-no] {
   
   
 tbody tr{
-  line-height: 2.3;
+  line-height: 3.3;
 }
 
 #list-content td:first-child{
   width: 1%;
   padding: 0 20px 0 20px;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 #ck {
@@ -170,15 +174,16 @@ tbody tr{
 
 #list-content td:nth-child(2) {
 	width: 18%;
+	border-bottom: 1px solid #d0d0d0;
 }
 
 .btn {
-	/*  margin-left: 5px; */
+	margin-left: 10px;
 	border: none;
-	border: #88caf9 2px solid;
+	border: #88caf9 4px solid;
 	background-color: #5cb9f7;
 	height: 35px;
-	/* color: white;  */
+	color: white; 
 	border-radius: 10px;
 	
 	padding: 0.1rem 0.5rem 1.3rem 0.55rem;
