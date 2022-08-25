@@ -41,7 +41,9 @@ tr[data-no] {
 #container {
     font-family: 'KyoboHand';
     justify-content: center;
+    
 }
+
 
 
  /*사이드 메뉴*/
@@ -80,6 +82,7 @@ tr[data-no] {
 #board-container > h1 {
 	text-align: center;
 	margin-top: 64px;
+	margin-right: 190px;
 }
 /* 테이블 캡션 */
 #notice-table-1 caption {

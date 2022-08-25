@@ -18,13 +18,16 @@
 <style>
 	#fb_content {
 		resize : none;
-		overflow-y:scroll;
+		/* overflow-y:scroll; */
 	}
 	#save {
 		margin-left :45%;
 	}
 	#downloadFile {
 		width : 100%;
+		
+	
+		
 	}
 </style>
 
