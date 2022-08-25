@@ -34,11 +34,13 @@
 	    background-color: #70B9E9;
 	    color: white;
 	 }
-
+	 	 
 	  #noticeFrmbt{
 	  text-align: center;
 	   margin-top: 450px;
-	  
+	  }
+	 #commonMain no {
+	  text-align: center;
 	  }
 	 
 </style>
@@ -55,7 +57,7 @@
 
 <div id="commonMain">
 		<input type="hidden" class="form-control" name="nbNo" id="no" value="${insertNoticeBoard.nbNo}" required>
-		<input type="text" class="form-control" name="nbTitle" id="title" value="${insertNoticeBoard.nbTitle}" required readonly>
+		<input type="text" class="form-control" name="nbTitle" id="title" style="font-size : 40px" value="${insertNoticeBoard.nbTitle}" required readonly>
  		<input type="text" class="form-control" name="nbMEmail" value="${insertNoticeBoard.nbMEmail}" readonly required>
 		
 		<label class="input-group-text" for="inputGroupFile01">첨부파일</label>
