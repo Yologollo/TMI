@@ -20,7 +20,14 @@
 	}
 	#save {
 		margin-left :45%;
+		
 	}
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	    }
 </style>
 <div id="commonMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">

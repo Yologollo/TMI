@@ -25,10 +25,15 @@
 	}
 	#downloadFile {
 		width : 100%;
-		
 	
-		
 	}
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	 }
+	 
 </style>
 
 <sec:authorize access="isAuthenticated()">
