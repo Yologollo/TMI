@@ -248,28 +248,29 @@ create sequence seq_nba_no;
 
 -- 채팅방
 create table tmi_chat_room (
-    cr_title varchar(2000) not null,
-    cr_m_email varchar(256) not null,
-    cr_fb_no number,
-    cr_created_at date default sysdate,
-    cr_last_check number default 0,
-    cr_deleted_at date,
+    chatroom_id varchar(50) not null,
+    send_email varchar(256) not null,
+    receive_email varchar(256) not null,
+    last_check number default 0,
+    created_at date default sysdate,
+    deleted_at date,
     
-    constraint pk_chat_member primary key(cr_title, cr_m_email),
-    constraint fk_chat_room_m_email foreign key(cr_m_email) references tmi_member(m_email) on delete cascade,
-    constraint fk_chat_room_fb_no foreign key(cr_fb_no) references tmi_friend_board(fb_no) on delete cascade
+    constraint pk_chat_room primary key(chatroom_id),
+    constraint fk_chat_room_send_email foreign key(send_email) references tmi_member(m_email) on delete cascade,
+    constraint fk_chat_room_receive_email foreign key(receive_email) references tmi_member(m_email) on delete cascade
 );
 
 -- 채팅 내용
 create table tmi_chat_content(
-    cc_no number,
-    cc_cr_title varchar2(50),
-    cc_m_email varchar(256) not null,
-    cc_message varchar(2000),
-    cc_created_at date default sysdate,
+    content_no number not null,
+    chatroom_id varchar2(50) not null,
+    send_email varchar(256) not null,
+    receive_email varchar(256) not null,
+    message_content varchar(4000),
+    message_time date default sysdate,
     
-    constraint pk_cc_no primary key(cc_no),
-    constraint fk_chat_content foreign key(cc_cr_title, cc_m_email) references tmi_chat_room(cr_title, cr_m_email)
+    constraint pk_chat_content primary key(content_no),
+    constraint fk_chat_content_chatroom_id foreign key(chatroom_id) references tmi_chat_room(chatroom_id) on delete cascade
 );
 
-create sequence seq_cc_no;
+create sequence seq_content_no;
