@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detailplanner.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/likebutton.css">
 <style>
 	#fb_content {
 		resize : none;
@@ -55,6 +56,12 @@
     .commentHr {
     	width : 1350px;
     }
+    	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
 </style>
 <script>
 //DAY 1 지도 도출
@@ -111,7 +118,7 @@ const email = document.getElementById("loginMemberEmail").value;
 		<c:if test="${not empty insertReviewBoard.attachments}">
 			<c:forEach items="${insertReviewBoard.attachments}" var="attach">
 				<div class="btn-group-toggle pb-1" data-toggle="buttons">
-					<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.rbaNo}">${attach.rbaOriginalFilename}</button>
+					<button type="button" id="downloadFile" class="btn btn-primary-success attach" value="${attach.rbaNo}">${attach.rbaOriginalFilename}</button>
 				</div>
 			</c:forEach>
 		</c:if>
@@ -306,7 +313,7 @@ const email = document.getElementById("loginMemberEmail").value;
              	<span>본인 글은 추천할 수 없습니다.</span>
             </c:if>
 			<c:if test="${not empty loginMember && (loginMember.MEmail ne insertReviewBoard.rbMEmail)}">
-             	<button type="submit" class="btn btn-primary btn-lg" id="love">추천</button>
+             	<button type="submit" class="likebutton" id="love">추천</button>
             </c:if>
          </form>
          <hr />
@@ -352,18 +359,18 @@ const email = document.getElementById("loginMemberEmail").value;
 		                <input type="hidden" name="rbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 		                <br />
 						<textarea name="rbcContent" cols="85" rows="3" style="resize: none;" placeholder="댓글 입력"></textarea>
-		                <button type="submit" class="btn btn-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		                <button type="submit" class="btn btn-primary-success attach" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
 		            </form>
 		        </div>
 		</c:if>
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
-			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
+			<button style="float : right;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
 		</c:if>
 		
 		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
+		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
 		<br /><br /><br />
 </div>
 <script>

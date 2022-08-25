@@ -26,6 +26,33 @@
 	#save {
 		margin-left :45%;
 	}
+	#boardMain{
+	    width:70%; 
+	    hegiht:100%; 
+	    margin: auto; 
+	    margin-bottom:12rem;
+	    overflow: hidden;
+	    position: relative;
+	    box-shadow: 1px 1px 3px 1px #dadce0;
+	    /* border-radius: 30px; */
+	    border-bottom-right-radius: 30px;
+	    border-bottom-left-radius: 30px;
+	
+	}
+	
+	#tourismInfoTitle{
+	    font-size : xxx-large;
+	    font-weight : bold;
+	    line-height : 80%;
+	    margin-left : 15%;
+	}
+	
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
 </style>
 
 <div class="createPlannerModalForm">
@@ -103,13 +130,19 @@
 	</div>
 </div>
 
-<div id="commonMain">
+<div class="intro_top">
+    <img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+		<br /><br /><br />
+ 		<h1 id="tourismInfoTitle">게시글 작성</h1>
+ 		<br />
+<div id="boardMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardEnroll.do" method="POST" enctype="multipart/form-data" onsubmit="return saveCheck()">
 		<input type="text" class="form-control" placeholder="제목을 입력해주세요." name="pbTitle" id="title" required>
 		<input type="text" class="form-control" name="pbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required> 
 		
 		<div class="input-group mb-3">
-		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
+		  <button type="button" id="createPlannerModalbtn" class="btn btn-outline-secondary btn-lg">플래너 불러오기</button>
 		  <input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="" aria-describedby="inputGroup-sizing-default" readonly required>
 		</div>
 		  <input type="hidden" id="modalPlannerNo" name="pbPNo" value="0"/>
@@ -117,8 +150,8 @@
 	  	<textarea id="summernote" name="pbContent"></textarea>
 	  	
 		<br /><br />
-		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장">
-		<input type="button" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		<input type="submit" id="save" class="btn-lg" value="등록하기">
+		<input type="button" class="btn-lg" value="취소하기" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 	</form:form>
 </div>

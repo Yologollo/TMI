@@ -46,6 +46,13 @@
     line-height : 80%;
     margin-left : 15%;
 }
+
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
 </style>
 
 <div class="createPlannerModalForm">
@@ -148,8 +155,8 @@
 	  	<textarea id="summernote" name="fbContent"></textarea>
 	  	
 		<br /><br />
-		<input type="submit" id="save" class="btn btn-outline-primary btn-lg" value="등록하기" >
-		<input type="submit" class="btn btn-outline-secondary btn-lg" value="취소하기" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
+		<input type="submit" id="save" class="btn-lg" value="등록하기" >
+		<input type="submit" class="btn-lg" value="취소하기" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
 		<br /><br /><br />
 	</form:form>
 </div>

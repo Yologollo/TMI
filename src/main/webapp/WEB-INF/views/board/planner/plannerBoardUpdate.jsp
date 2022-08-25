@@ -26,6 +26,31 @@
 	#save {
 		margin-left :45%;
 	}
+	#tourismInfoTitle{
+    font-size : xxx-large;
+    font-weight : bold;
+    line-height : 80%;
+    margin-left : 15%;
+}
+	#boardMain{
+    width:70%; 
+    hegiht:100%; 
+    margin: auto; 
+    margin-bottom:12rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    /* border-radius: 30px; */
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+}
+	.btn-lg {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
+}
 </style>
 
 <div class="createPlannerModalForm">
@@ -103,14 +128,21 @@
 	</div>
 </div>
 
-<div id="commonMain">
+<div class="intro_top">
+    <img src="${pageContext.request.contextPath}/resources/images/planner/plannerBanner.gif"/>
+</div>
+		<br /><br /><br />
+ 		<h1 id="tourismInfoTitle">게시글 수정</h1>
+ 		<br />
+
+<div id="boardMain">
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do" method="POST" enctype="multipart/form-data">
 		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
 		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" required>
 		<input type="text" class="form-control" name="pbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
-		  <button type="button" id="createPlannerModalbtn" class="btn btn-primary">플래너 불러오기</button>
+		  <button type="button" id="createPlannerModalbtn" class="btn btn-outline-secondary btn-lg">플래너 불러오기</button>
 		  <c:forEach items="${insertPlannerBoard.planner}" var="planner" varStatus="plan_status">
  			<input type="text" class="form-control" id="modalPlannerTitle" aria-label="Sizing example input" value="${planner.PTitle}" aria-describedby="inputGroup-sizing-default">
 		  </c:forEach>
@@ -122,8 +154,8 @@
 	  	
 		<br /><br />
 		<input type="hidden" name="pbNo" value="${insertPlannerBoard.pbNo}" />
-		<input type="submit" id="save" class="btn btn-primary btn-lg" value="저장" >
-		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		<input type="submit" id="save" class="btn-lg" value="수정하기" >
+		<input type="submit" class="btn-lg" value="취소하기" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 	</form:form>
 </div>
