@@ -49,6 +49,13 @@
     	background-color: #70B9E9;
     	color: white;
 	}
+	#contentMain{
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+	}
 
 	  
 	  
@@ -78,9 +85,10 @@
 					</div>
 				</c:forEach>
 			</c:if>
-		
+		<div id="contentMain">
 	  	${insertNoticeBoard.nbContent} 
-		<hr />
+	  	</div>
+	
 		
 		
 		<c:if test="${not empty loginMember}">

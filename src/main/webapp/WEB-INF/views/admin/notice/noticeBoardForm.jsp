@@ -28,9 +28,8 @@
 	    font-weight: 700;
 	    background-color: #70B9E9;
 	    color: white;
-	    
-	 
 	    }
+
 </style>
 <div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 	 <h1>공지사항 작성</h1>
