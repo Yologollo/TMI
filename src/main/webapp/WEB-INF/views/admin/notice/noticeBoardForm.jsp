@@ -13,6 +13,7 @@
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
 <style>
 	#content {
 		resize : none;
@@ -27,9 +28,12 @@
 	    font-weight: 700;
 	    background-color: #70B9E9;
 	    color: white;
+	    
+	 
 	    }
 </style>
 <div id="commonMain">
+	
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
 		<input type="text" class="form-control"  name="nbTitle" id="title" required>
 		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
@@ -46,6 +50,7 @@
 		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoard.do'">
 		<br /><br /><br />
 	</form:form>
+	
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {

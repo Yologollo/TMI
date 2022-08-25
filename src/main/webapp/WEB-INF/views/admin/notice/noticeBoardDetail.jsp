@@ -28,11 +28,18 @@
 	
 	}
 	.btn-lg {
+		margin-left :1%;
 	    border-color: #70B9E9;
 	    font-weight: 700;
 	    background-color: #70B9E9;
 	    color: white;
 	 }
+
+	  #noticeFrmbt{
+	  text-align: center;
+	   margin-top: 450px;
+	  
+	  }
 	 
 </style>
 
@@ -71,6 +78,7 @@
 		</c:if>
 					
 					
+	<div id=noticeFrmbt>
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertNoticeBoard.nbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardUpdate.do?no=${insertNoticeBoard.nbNo}';">수정</button>
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoardDelete.do?no=${insertNoticeBoard.nbNo}';">삭제</button>
@@ -78,8 +86,13 @@
 		
 		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoard.do'">
 		
-		<br /><br /><br />
+		<br /><br /><br /><br /><br /><br />
+		
+	</div> 	
 </div>
+
+
+
 <script>
 
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
