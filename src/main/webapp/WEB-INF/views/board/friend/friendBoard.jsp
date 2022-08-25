@@ -11,6 +11,7 @@
 	<jsp:param value="Travel Making Imagine" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
 <style>
 	tr[data-no] {
 		cursor: pointer;
@@ -41,11 +42,13 @@ window.addEventListener('load', (e) => {
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
 
-<div id="commonMain">
+<div id="boardMain" style="text-align : center;">
 <!-- 
 	생성 : 김용민, 이경석
 	작업 : 김용민, 이경석
  -->
+ <br /><br />
+ <hr />
  	<!-- 메뉴버튼 시작 -->
 	<ul class="menuBtn" id="menuBtn">
       <li><a href="${pageContext.request.contextPath}/board/planner/plannerBoard.do" data-hover="플래너 게시판">플래너 게시판</a></li>
@@ -55,15 +58,20 @@ window.addEventListener('load', (e) => {
       <li class="current"><a href="${pageContext.request.contextPath}/board/friend/friendBoard.do" data-hover="여행친구 게시판">여행친구 게시판</a></li>
     </ul>
     <!-- 메뉴버튼 끝 -->
-
+    <hr />
+    <br /><br />
+    <h1>여행친구 게시판</h1>
+    <br />
 	<section id="board-container" class="container">
 		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
-		<c:if test="${empty loginMember}">
-			<p class="ac-button is-md is-solid is-primary search-form__search e-search-posts">로그인 하셔야 작성 가능합니다.</p>
-		</c:if>
-		<c:if test="${not empty loginMember}">
-			<button class="ac-button is-md is-solid is-primary search-form__search e-search-posts" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'">글쓰기</button>
-		</c:if>
+		<div id="innerDiv" style="margin-right : 0;">
+			<c:if test="${empty loginMember}">
+				<span class="btn-lg">로그인 하셔야 작성 가능합니다.</span>
+			</c:if>
+			<c:if test="${not empty loginMember}">
+				<button class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardForm.do'">글쓰기</button>
+			</c:if>
+		</div>
 			<colgroup>
 		          <col width="10%">
 		          <col width="">
@@ -118,7 +126,7 @@ window.addEventListener('load', (e) => {
     		</select>
     		<input type="text" name="keyword" id="keywordInput" value="${friendBoardSearch.keyword}"/>
     	
-    		<button id="searchBtn" type="submit">검색</button>
+    		<button class="btn-lg" type="submit">검색</button>
   		</div> 
   		</form>
 

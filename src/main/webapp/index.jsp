@@ -29,9 +29,7 @@
 	overflow: hidden;
 }
 
-tr[data-no] {
-	cursor: pointer;
-}
+
 
 .reviewBoard {
 	width: 200px;
@@ -83,7 +81,8 @@ tr[data-no] {
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplannermain.css?after">  <!-- 이용방법 게시판 로그인 css겹침 글자색 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplannermain.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
     <div id="video_area">
         <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
     </div>
@@ -167,14 +166,14 @@ tr[data-no] {
 	    
 	    <!-- 베스트 게시판 파트 -->
 	<div id="indexMain">   
-        <div id="bestPlanner">
+        <div id="bestPlanner" style="text-align : center;">
 		    <hr><h1 id="tourism_title">베스트 플레너</h1><hr>
-		 	<section id="board-container" class="container">
-					<article>
-						<div id="wrapper" style="border: 1px solid black; ">
-						<div id="plannerContainer" style="border: 1px solid blue;">
+		    <br />
+		    <div id="infoMain">
+						<div id="wrapper">
+						<div id="plannerContainer">
 						<c:forEach items="${plannerList}" var="plannerBoard" varStatus="vs">
-							<div class="card" style="width: 18rem; display:inline-block" data-no="${plannerBoard.PNo}">
+							<div class="card" style="width: 18rem; display:inline-block; box-shadow: 1px 1px 3px 1px #dadce0; margin-right : 10px; margin-bottom : 10px;" data-no="${plannerBoard.PNo}">
 								<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
 									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
 									<script>
@@ -213,39 +212,40 @@ tr[data-no] {
 									</script>
 				                <a href="${pageContext.request.contextPath}/board/planner/plannerBoardDetail.do?no=${plannerBoard.pb_no}">
 									<div class="card-body">
-										<span class="cardDateSpan">${plannerBoard.PLeaveDate} ~ ${plannerBoard.PReturnDate}</span>
-										<span class="cardDaySpan">
-											<fmt:parseDate value="${plannerBoard.PLeaveDate}" var="leaveDateFormat" pattern="yyyy-MM-dd"/>
+										<span class="cardDateSpan" style="color : black;">${plannerBoard.PLeaveDate} ~ ${plannerBoard.PReturnDate}</span>
+										<span class="cardDaySpan" style="color : black;">
+											<fmt:parseDate  value="${plannerBoard.PLeaveDate}" var="leaveDateFormat" pattern="yyyy-MM-dd" />
 											<fmt:formatDate value="${leaveDateFormat}" pattern="dd" var="leaveDate" />
 											<fmt:parseDate value="${plannerBoard.PReturnDate}" var="returnDateFormat" pattern="yyyy-MM-dd"/>
 											<fmt:formatDate value="${returnDateFormat}" pattern="dd" var="returnDate" />
 											${returnDate - leaveDate} DAY
 										</span><br />
-										<span class="cardTitleSpan">${plannerBoard.pb_title}</span><br />
+										<span class="cardTitleSpan" style="color : black;">${plannerBoard.pb_title}</span><br />
 									</div>
 								</a>
 							</div>
 						</c:forEach>
 						</div>
 						</div>
-					</article>
-		 		<%-- <nav>${pagebar2}</nav> --%>
-			</section> 
-        </div>
+						</div>
+        		</div>
         
         
-	        <div id="bestReview">
+	        <div id="bestReview" style="text-align : center;">
 	        <hr><h1 id="tourism_title">베스트 후기</h1><hr>
+	        <br />
+	        <div id="infoMain">
 	 			<section id="board-container" class="container">
 					<article>
 						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
-								<div id="contentArea3">
+								<div id="contentArea2">
 									<div id="selectContent2">
 										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
-											<span class="thumbNailImage">
-												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'"/>
-											</span>
+											<div id="thumbNail">
+												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
+											</div>
 											<strong class="thumbNailName">${reviewBoard.rb_title}</strong>
+											<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 										</a>
 									</div>
 								</div>
@@ -253,6 +253,7 @@ tr[data-no] {
 					</article>
 		 		<%-- <nav>${pagebar}</nav> --%>
 			</section> 
+		    </div>
 		    </div>
 
 

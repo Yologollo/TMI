@@ -28,6 +28,32 @@
 	#downloadFile {
 		width : 100%;
 	}
+		#contentMain{
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+	}
+
+    #size {
+    	font-size : 50px;
+    }
+    .comment-writer {
+    	font-size : 20px;
+    }
+    .comment-date  {
+	  	font-size : 10px;
+    }
+    
+    #comment {
+    	border-top: dotted 1px black;
+    	border-bottom: dotted 1px black;
+    }
+    
+    .commentHr {
+    	width : 1350px;
+    }
 </style>
 <script>
 //DAY 1 지도 도출
@@ -74,10 +100,10 @@ const email = document.getElementById("loginMemberEmail").value;
 
 
 
-<div id="commonMain">
+<div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
-		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" required readonly>
+		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" style="font-size : 50px;" required readonly>
  		<input type="text" class="form-control" name="pbMEmail" value="${insertPlannerBoard.pbMEmail}" readonly required>
  	 	<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
 			<c:if test="${planner.PNo eq 0}">
@@ -255,15 +281,14 @@ const email = document.getElementById("loginMemberEmail").value;
 		</c:forEach>
 		</div>
 		</div>
-		<hr />
-		
-		<div style="width:100%;">
+		<div id="contentMain">
 	  		${insertPlannerBoard.pbContent} <!-- summernote 출력 -->
 		</div>
+		<br /><br />
          <form
 			 action="${pageContext.request.contextPath}/board/planner/plannerBoardLove.do" method="get" name="plannerBoardLoveFrm">
              <input type="hidden" name="loNo" value="${insertPlannerBoard.pbNo}" />
-             <p>${loveCount}</p>
+             <p style="font-size : 40px;"><img src="${pageContext.request.contextPath}/resources/images/like.png" style="width : 45px; height : 45px; margin-top : -5px;"/>${loveCount}</p>
              <c:if test="${empty loginMember}">
 				<span>로그인 하셔야 추천이 가능합니다.</span>
 			</c:if>
@@ -275,21 +300,6 @@ const email = document.getElementById("loginMemberEmail").value;
             </c:if>
          </form>
 		<hr />
-		
-		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
-		<c:if test="${not empty loginMember}">
-			<div class="comment-container">
-		        <div class="comment-editor">
-		            <form
-						action="${pageContext.request.contextPath}/board/planner/plannerBoardCommentEnroll.do" method="post" name="plannerBoardCommentFrm">
-		                <input type="hidden" name="pbcPbNo" value="${insertPlannerBoard.pbNo}" />
-		                <input type="hidden" name="pbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
-						<textarea name="pbcContent" cols="100" rows="3"></textarea>
-		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
-		            </form>
-		        </div>
-		</c:if>
-		
 				<!--table#tbl-comment-->
 				 <c:if test="${insertPlannerBoard.comments ne null && not empty insertPlannerBoard.comments}">
 					<table id="tbl-comment">
@@ -297,18 +307,21 @@ const email = document.getElementById("loginMemberEmail").value;
 						<c:forEach items="${insertPlannerBoard.comments}" var="comment">
 							<tr class="level1">
 								<td>
+								<hr / class="commentHr">
 									<sub class="comment-writer">${comment.pbcMEmail}</sub>
 									<sub class="comment-date">${comment.pbcCreatedAt}</sub>
+									<hr / class="commentHr">
 									<br />
+									<div id="size">
 									${comment.pbcContent}
-								</td>
-								
-								<td>
+									</div>
 									<form action="${pageContext.request.contextPath}/board/planner/deleteComment.do" method="get" name="plannerBoardCommentDeleteFrm">
 										<input type="hidden" name="pbcPbNo" value="${insertPlannerBoard.pbNo}" />
 										<input type="hidden" name="pbcNo" value="${comment.pbcNo}" />
 										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.pbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-					                		<button type="submit" id="deleteComment" class="">삭제</button>
+										<div class="d-grid gap-2 col-6 mx-auto">
+					                		<button type="submit" id="deleteComment" class="btn-danger" style="font-size : 25px;">삭제</button>
+					                	</div>
 					                	</c:if>
 									</form>
 								</td>
@@ -317,13 +330,28 @@ const email = document.getElementById("loginMemberEmail").value;
 						</tbody>
 					</table>
 				 </c:if> 
-		
-		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertPlannerBoard.pbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
+				 
+		<c:if test="${not empty loginMember}">
+			<div class="comment-container">
+		        <div class="comment-editor">
+		            <form
+						action="${pageContext.request.contextPath}/board/planner/plannerBoardCommentEnroll.do" method="post" name="plannerBoardCommentFrm">
+		                <input type="hidden" name="pbcPbNo" value="${insertPlannerBoard.pbNo}" />
+		                <input type="hidden" name="pbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
+		                <br />
+						<textarea name="pbcContent" cols="85" rows="3" style="resize: none;" placeholder="댓글 입력"></textarea>
+		                <button type="submit" class="btn btn-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		            </form>
+		        </div>
 		</c:if>
 		
-		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertPlannerBoard.pbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
+			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardUpdate.do?no=${insertPlannerBoard.pbNo}';">수정</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
+		</c:if>
+		
+		<br /><br /><br />
+		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
 		<br /><br /><br />
 		
 	<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
@@ -348,7 +376,8 @@ const email = document.getElementById("loginMemberEmail").value;
 						<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
 						<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
 						<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
-						<button type="submit" class="btn btn-primary btn-lg">저장하기</button>
+						<button style="float : right;" type="submit" class="btn btn-primary btn-lg">플래너 가져오기</button>
+						<br /><br /><br />
 					</c:if>
 				</c:if>
 		</c:forEach>

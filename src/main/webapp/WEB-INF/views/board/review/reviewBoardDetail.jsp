@@ -101,7 +101,7 @@ const email = document.getElementById("loginMemberEmail").value;
 
 
 
-<div id="commonMain">
+<div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
 		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" style="font-size : 50px;" required readonly>
@@ -290,15 +290,15 @@ const email = document.getElementById("loginMemberEmail").value;
 			</div>
 			</c:if>
 		</c:forEach>
+		<div id="contentMain">
 	  		${insertReviewBoard.rbContent} <!-- summernote 출력 -->
-
-
-
+	  	</div>
+	  	<br /><br />
 		
          <form
 			 action="${pageContext.request.contextPath}/board/review/reviewBoardLove.do" method="get" name="reviewBoardLoveFrm">
              <input type="hidden" name="loNo" value="${insertReviewBoard.rbNo}" />
-             <p>${loveCount}</p>
+             <p style="font-size : 40px;"><img src="${pageContext.request.contextPath}/resources/images/like.png" style="width : 45px; height : 45px; margin-top : -5px;"/>${loveCount}</p>
              <c:if test="${empty loginMember}">
 				<span>로그인 하셔야 추천이 가능합니다.</span>
 			</c:if>
@@ -311,22 +311,6 @@ const email = document.getElementById("loginMemberEmail").value;
          </form>
          <hr />
 
-		
-		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
-		<c:if test="${not empty loginMember}">
-			<div class="comment-container">
-		        <div class="comment-editor">
-		            <form
-						action="${pageContext.request.contextPath}/board/review/reviewBoardCommentEnroll.do" method="post" name="reviewBoardCommentFrm">
-		                <input type="hidden" name="rbcRbNo" value="${insertReviewBoard.rbNo}" />
-		                <input type="hidden" name="rbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
-						<textarea name="rbcContent" cols="100" rows="3"></textarea>
-		                <button type="submit" class="btn btn-primary btn-lg">등록</button>
-		            </form>
-		        </div>
-		</c:if>
-
-		
 				<!--table#tbl-comment-->
 				 <c:if test="${insertReviewBoard.comments ne null && not empty insertReviewBoard.comments}">
 					<table id="tbl-comment">
@@ -334,18 +318,21 @@ const email = document.getElementById("loginMemberEmail").value;
 						<c:forEach items="${insertReviewBoard.comments}" var="comment">
 							<tr class="level1">
 								<td>
+								<hr / class="commentHr">
 									<sub class="comment-writer">${comment.rbcMEmail}</sub>
 									<sub class="comment-date">${comment.rbcCreatedAt}</sub>
+									<hr / class="commentHr">
 									<br />
+									<div id="size">
 									${comment.rbcContent}
-								</td>
-								
-								<td>
+									</div>
 									<form action="${pageContext.request.contextPath}/board/review/deleteComment.do" method="get" name="reviewBoardCommentDeleteFrm">
 										<input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
 										<input type="hidden" name="rbcNo" value="${comment.rbcNo}" />
 										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.rbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-					                		<button type="submit" id="deleteComment" class="">삭제</button>
+										<div class="d-grid gap-2 col-6 mx-auto">
+					                		<button type="submit" id="deleteComment" class="btn-danger" style="font-size : 25px;">삭제</button>
+					                	</div>
 					                	</c:if>
 									</form>
 								</td>
@@ -354,13 +341,29 @@ const email = document.getElementById("loginMemberEmail").value;
 						</tbody>
 					</table>
 				 </c:if> 
-		
-		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
-			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
+				 
+		<%-- <c:if test="${not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)}"> --%>
+		<c:if test="${not empty loginMember}">
+			<div class="comment-container">
+		        <div class="comment-editor">
+		            <form
+						action="${pageContext.request.contextPath}/board/review/reviewBoardCommentEnroll.do" method="post" name="reviewBoardCommentFrm">
+		                <input type="hidden" name="rbcRbNo" value="${insertReviewBoard.rbNo}" />
+		                <input type="hidden" name="rbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
+		                <br />
+						<textarea name="rbcContent" cols="85" rows="3" style="resize: none;" placeholder="댓글 입력"></textarea>
+		                <button type="submit" class="btn btn-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		            </form>
+		        </div>
 		</c:if>
 		
-		<input type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
+		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertReviewBoard.rbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
+			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
+		</c:if>
+		
+		<br /><br /><br />
+		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
 		<br /><br /><br />
 </div>
 <script>
