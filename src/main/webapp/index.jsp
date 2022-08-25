@@ -167,7 +167,7 @@
 	    <!-- 베스트 게시판 파트 -->
 	<div id="indexMain">   
         <div id="bestPlanner" style="text-align : center;">
-		    <hr><h1 id="tourism_title">베스트 플레너</h1><hr>
+		    <hr><h1 id="tourism_title">베스트 플래너</h1><hr>
 		    <br />
 		    <div id="infoMain">
 						<div id="wrapper">
