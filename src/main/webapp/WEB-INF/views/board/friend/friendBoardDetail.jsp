@@ -55,6 +55,12 @@
     .commentHr {
     	width : 1350px;
     }
+    	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	}
 </style>
 <script>
 //DAY 1 지도 도출
@@ -102,7 +108,7 @@ $(document).ready(function () {
 		<c:if test="${not empty insertFriendBoard.attachments}">
 			<c:forEach items="${insertFriendBoard.attachments}" var="attach">
 				<div class="btn-group-toggle pb-1" data-toggle="buttons">
-					<button type="button" id="downloadFile" class="btn btn-outline-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
+					<button type="button" id="downloadFile" class="btn btn-primary-success attach" value="${attach.fbaNo}">${attach.fbaOriginalFilename}</button>
 				</div>
 			</c:forEach>
 		</c:if>
@@ -322,7 +328,7 @@ $(document).ready(function () {
 		                <input type="hidden" name="fbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 		                <br />
 						<textarea name="fbcContent" cols="85" rows="3"  style="resize: none;" placeholder="댓글 입력"></textarea>
-		                <button type="submit" class="btn btn-outline-primary btn-lg" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		                <button type="submit" class="btn btn-primary-success attach" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
 		            </form>
 		        </div>
 		    </div>
@@ -330,13 +336,13 @@ $(document).ready(function () {
 			
 		
 		<c:if test="${(not empty loginMember && (loginMember.MEmail eq insertFriendBoard.fbMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-			<button style="float : right;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
-			<button style="float : right; margin-right : 10px;" type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
+			<button style="float : right;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardDelete.do?no=${insertFriendBoard.fbNo}';">삭제</button>
+			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
 		</c:if>
 		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn btn-primary btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
+		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
 		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertFriendBoard.fbMEmail))}">
-			<input style="float : right; margin-right : 10px;" type="submit" class="btn btn-primary btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
+			<input style="float : right; margin-right : 10px;" type="submit" class="btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
 		</c:if>
 		<br /><br /><br />
 </div>
