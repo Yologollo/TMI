@@ -13,6 +13,7 @@
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
 <style>
 	#content {
 		resize : none;
@@ -20,11 +21,21 @@
 	}
 	#save {
 		margin-left :45%;
+		
 	}
+	.btn-lg {
+	    border-color: #70B9E9;
+	    font-weight: 700;
+	    background-color: #70B9E9;
+	    color: white;
+	    
+	 
+	    }
 </style>
-<div id="commonMain">
+<div id="commonMain" style="border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+	 <h1>공지사항 작성</h1>
  	<form:form name="boardFrm" action="${pageContext.request.contextPath}/admin/notice/noticeBoardEnroll.do" method="POST" enctype="multipart/form-data">
-		<input type="text" class="form-control"  name="nbTitle" id="title" required>
+		<input type="text" class="form-control"  name="nbTitle" id="title" placeholder="제목을 입력해주세요." required>
 		<input type="text" class="form-control" name="nbMEmail" value="<sec:authentication property="principal.mEmail"/>" readonly required>
 		
 		<div class="input-group mb-3">
@@ -39,6 +50,7 @@
 		<input type="submit" class="btn btn-primary btn-lg" value="취소" onclick="location.href='${pageContext.request.contextPath}/admin/notice/noticeBoard.do'">
 		<br /><br /><br />
 	</form:form>
+	
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
