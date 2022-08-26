@@ -14,21 +14,25 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplanner.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
 <style>
-	#bestPlanner {
-		width:100%;
-		height : 500px;
-		border: 1px solid green; 
-		margin: auto; 
-		overflow: hidden;
-	}
-	
-	#bestReview {
-		width:100%;
-		height : 500px;
-		border: 1px solid blue; 
-		margin: auto; 
-		overflow: hidden;
-	}
+#bestPlanner {
+	width:100%;
+	height : 60%;
+/* 	border: 1px solid green;  */
+	margin: auto; 
+	overflow: hidden;
+}
+
+#bestReview {
+	width:100%;
+	height : 60%;
+	margin: auto; 
+	overflow: hidden;
+}
+#tourism_title {
+	color: #4a4a4a;
+	font-family: 'Nanum+Gothic';
+	text-align: center;
+}
 
 /* 	.thumbNailLink {
 		display: inline-block;
@@ -82,7 +86,8 @@
     <!-- 메뉴버튼 끝 -->
     <hr />
 		<br /><br />
- 	 	<h1>베스트 플래너</h1>
+		<div id="bestReview" style="text-align : center;">
+ 	 	<h1 id="tourism_title">인기 여행일정</h1>
  	 	<br />
  	 	<div id="infoMain" style="margin-bottom: 3rem;">
  	 	<br /><br /><br /><br />
@@ -145,9 +150,10 @@
 				</div>
 			<br /><br /><br /><br />
 			</div>
+		</div>
  		<%-- <nav>${pagebar2}</nav> --%>
 	<br /><br />
- 	<h1>베스트 후기</h1>
+ 	<h1 id="tourism_title">베스트 후기</h1>
  	<br />
  	    <div id="infoMain">
  	    <br /><br /><br /><br />

@@ -40,6 +40,7 @@
     padding: 0 1em;
     position: relative;
     text-decoration: none;
+    font-size: 20px;
 }
 .menuBtn a:after {
     -webkit-transition: all 0.35s linear;
@@ -213,4 +214,35 @@
 	border : 0;
 	outline : 0;
 	background-color:transparent;
+}
+.listBtn{
+	width:70%;  
+	margin: auto; 
+	margin-top:5rem;
+	margin-bottom:10px;
+	overflow: hidden;
+	position: relative;
+}
+.boardDetail{
+	width:70%; 
+	hegiht:85%; 
+	margin: auto; 
+	overflow: hidden;
+	position: relative;
+}
+.deleteBtn{
+	all : unset;
+	color: #ff8e8e;
+}
+#plannerboardDetail{
+	width:70%; 
+	hegiht:100%; 
+	margin: auto; 
+	overflow: hidden;
+	position: relative;
+	text-align : center;
+}
+#plannerBtn_p{
+	width:70%; 
+	margin: 5rem auto 5px auto; 
 }

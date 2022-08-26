@@ -41,7 +41,6 @@
     <!-- 메뉴버튼 끝 -->
     <hr />
     <br /><br />
-    <h1>후기 게시판</h1>
     <br />
     <div id="infoMain">
 			<div id="outerDiv">

@@ -156,6 +156,7 @@
 	font-weight : bold;
 	text-align : center;
 	width : 10%;
+	padding:16px;
 }
 
 #searchTd{
@@ -163,18 +164,26 @@
 
 .finalName{
 	font-size : large;
+	padding: 16px;
 }
 
 #searchContentBtn{
 	float: right;
+	margin:10px;
 }
 
 #searchServiceBtn{
 	float: right;
+	margin:10px;
+}
+#searchDataBtn{
+	float: right;
+	margin:10px;
 }
 
 #searchAreaBtn{
 	float: right;
+	margin:10px;
 }
 
 .finalName {

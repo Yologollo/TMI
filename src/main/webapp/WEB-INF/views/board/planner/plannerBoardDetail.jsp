@@ -36,7 +36,6 @@
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
 	}
-
     #size {
     	font-size : 50px;
     }
@@ -69,7 +68,6 @@ $(document).ready(function () {
 	var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
     var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
     var index = 0;
-
     function show(n){
     	
         for(var i = 0; i < dayAllMapClass.length; i++){
@@ -77,7 +75,6 @@ $(document).ready(function () {
         }
         
         dayAllMapClass[n].style.display = "block";
-
         for(var j = 0; j < dayAllMapInfo.length; j++){
         	dayAllMapInfo[j].style.display = "none";
         }
@@ -104,10 +101,43 @@ $(document).ready(function () {
 const email = document.getElementById("loginMemberEmail").value;
 </script>
 
-
-
-
-<div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+<div id="plannerBtn_p">
+	<div id="plannerBtn_c1">
+		<input style="float : right; margin-left: 10px;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+	</div>
+	
+	<div id="plannerBtn_c2">	
+		<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
+			<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
+				<input type="hidden"  name="ppTime"  value="${plan.ppTime}" required>
+				<input type="hidden"  name="ppPlaceName"  value="${plan.ppPlaceName}" required>
+				<input type="hidden"  name="ppMemo"  value="${plan.ppMemo}" required>
+				<input type="hidden"  name="ppX"  value="${plan.ppX}" required>
+				<input type="hidden"  name="ppY"  value="${plan.ppY}" required>
+				<input type="hidden"  name="ppDate"  value="${plan.ppDate}" required>
+			</c:forEach>
+			
+			
+			<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
+				<c:if test="${planner.PNo eq 0}">
+				</c:if>
+					<c:if test="${planner.PNo ne 0}">
+						<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
+							<input type="hidden"  name="PNo" id="no11" value="${planner.PNo}" required>
+							<input type="hidden"  name="PTitle" id="no2" value="${planner.PTitle}" required>
+							<input type="hidden"  name="PExplan" id="no3" value="${planner.PExplan}" required>
+							<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
+							<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
+							<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
+							<button style="float : right;" type="submit" class="btn-lg">플래너 가져오기</button>
+							<br /><br /><br />
+						</c:if>
+					</c:if>
+			</c:forEach>
+		</form>
+	</div>		
+</div>
+<div id="plannerboardDetail" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
 		<input type="text" class="form-control" name="pbTitle" id="title" value="${insertPlannerBoard.pbTitle}" style="font-size : 50px;" required readonly>
@@ -357,38 +387,8 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoardDelete.do?no=${insertPlannerBoard.pbNo}';">삭제</button>
 		</c:if>
 		
-		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
-		<br /><br /><br />
 		
-	<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
-		<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
-			<input type="hidden"  name="ppTime"  value="${plan.ppTime}" required>
-			<input type="hidden"  name="ppPlaceName"  value="${plan.ppPlaceName}" required>
-			<input type="hidden"  name="ppMemo"  value="${plan.ppMemo}" required>
-			<input type="hidden"  name="ppX"  value="${plan.ppX}" required>
-			<input type="hidden"  name="ppY"  value="${plan.ppY}" required>
-			<input type="hidden"  name="ppDate"  value="${plan.ppDate}" required>
-		</c:forEach>
-		
-		
-		<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
-			<c:if test="${planner.PNo eq 0}">
-			</c:if>
-				<c:if test="${planner.PNo ne 0}">
-					<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
-						<input type="hidden"  name="PNo" id="no11" value="${planner.PNo}" required>
-						<input type="hidden"  name="PTitle" id="no2" value="${planner.PTitle}" required>
-						<input type="hidden"  name="PExplan" id="no3" value="${planner.PExplan}" required>
-						<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
-						<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
-						<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
-						<button style="float : right;" type="submit" class="btn-lg">플래너 가져오기</button>
-						<br /><br /><br />
-					</c:if>
-				</c:if>
-		</c:forEach>
-	</form>
+	
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {
@@ -397,7 +397,6 @@ const email = document.getElementById("loginMemberEmail").value;
 			console.log(file);
 		});
 	});
-
  	$('#summernote').summernote({
 		tabsize: 1, // 줄바꿈 간격
 		height: 700, // 노트 크기
@@ -421,7 +420,6 @@ const email = document.getElementById("loginMemberEmail").value;
  			location.href = `${pageContext.request.contextPath}/board/review/fileDownload.do?no=\${attachNo}`;
  		});
  	});
-
  	document.plannerBoardCommentFrm.onsubmit = (e) => {
  		const contentVal = e.target.fbcContent.value.trim();
  		if(!/^(.|\n)+$/.test(contentVal))
@@ -445,13 +443,11 @@ const email = document.getElementById("loginMemberEmail").value;
   	    var index = dayAllMapSelectId.options[dayAllMapSelectId.selectedIndex].value;
   	    var dayAllMapClass = document.querySelectorAll(".dayAllMapClass");
   	    var dayAllMapInfo = document.querySelectorAll(".dayAllMapInfo");
-
   	    for(var i = 0; i < dayAllMapClass.length; i++){
   	    	dayAllMapClass[i].style.display = "none";
   	    }
   	    
   	    dayAllMapClass[index].style.display = "block";
-
   	    for(var j = 0; j < dayAllMapInfo.length; j++){
   	    	dayAllMapInfo[j].style.display = "none";
   	    }
@@ -461,8 +457,3 @@ const email = document.getElementById("loginMemberEmail").value;
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/headerNavBar.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
-
-
-
-
