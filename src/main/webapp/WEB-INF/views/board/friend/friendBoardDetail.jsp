@@ -98,9 +98,12 @@ $(document).ready(function () {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
-	<div style="float:right">
-		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+	<div id="plannerBtn_p">
+		<div id="plannerBtn_c1">
+			<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+		</div>
 	</div>
+	<br />
 	<div style="float:right">
 		<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
 			<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
@@ -369,7 +372,6 @@ $(document).ready(function () {
 			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoardUpdate.do?no=${insertFriendBoard.fbNo}';">수정</button>
 		</c:if>
 		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/friend/friendBoard.do'">
 		<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertFriendBoard.fbMEmail))}">
 			<input style="float : right; margin-right : 10px;" type="submit" class="btn-lg" value="채팅하기" onclick="location.href='${pageContext.request.contextPath}/chat/chatRoom.do?email=${insertFriendBoard.fbMEmail}';">
 		</c:if>
