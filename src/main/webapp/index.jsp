@@ -64,10 +64,13 @@
 }
 
 #contentArea3 {
-	width: 280px;
-	height: 330px;
-	margin: auto;
+	width : 280px;
+	height : 330px;
+	border: 1px solid black; 
 	overflow: hidden;
+	margin-right : 20px;
+	margin-bottom : 20px;
+	box-shadow: 5px 5px 5px gray;
 	display: inline-block;
 }
 
@@ -77,12 +80,63 @@
 	text-align: center;
 }
 
+#thumbNail {
+	width : 280px;
+	height : 250px;
+	border: 1px solid black; 
+	margin: auto; 
+	overflow: hidden;
+	display: inline-block;
+}	
+
+.thumbNailName2 {
+	display : inline-block;
+	width : 280px;
+	height : 30px;
+	text-align: center;
+}
+
+#plannerContainer{
+	margin-top:2%;
+	margin-bottom:1.5%;
+	padding:0 2% 0 2%;
+}
+#infoMain_planner {
+   width:98%; 
+   hegiht:100%; 
+   margin: 2% 1% 10% 1%; 
+   overflow: hidden;
+   position: relative;
+   box-shadow: 1px 1px 3px 1px #dadce0;
+   border-radius: 30px;
+}
+#board-container{
+	margin-top:2%;
+	margin-bottom:1.5%;
+}
+#infoMain_review{
+	width:98%; 
+	hegiht:100%; 
+	margin: 2% 1% 10% 1%; 
+	overflow: hidden;
+	position: relative;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+	border-radius: 30px;
+}
+.bestSubtile{
+	font-size: 1.1rem;
+	line-height: 1.4;
+	color: #999;
+	font-family: 'Nanum+Gothic';
+	margin-top: 20px;
+}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplannermain.css?after">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css"> --%>
     <div id="video_area">
         <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
     </div>
@@ -240,13 +294,13 @@
 	 			<section id="board-container" class="container">
 					<article>
 						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
-								<div id="contentArea2">
+								<div id="contentArea3">
 									<div id="selectContent2">
 										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 											<div id="thumbNail">
 												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
 											</div>
-											<strong class="thumbNailName">${reviewBoard.rb_title}</strong>
+											<strong class="thumbNailName2">${reviewBoard.rb_title}</strong>
 											<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 										</a>
 									</div>
