@@ -130,13 +130,13 @@ const email = document.getElementById("loginMemberEmail").value;
 							<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
 							<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
 							<button style="float : right;" type="submit" class="btn-lg">플래너 가져오기</button>
-							<br /><br /><br />
 						</c:if>
 					</c:if>
 			</c:forEach>
 		</form>
 	</div>		
 </div>
+<br /><br /><br />
 <div id="plannerboardDetail" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="pbNo" id="no" value="${insertPlannerBoard.pbNo}" required>
