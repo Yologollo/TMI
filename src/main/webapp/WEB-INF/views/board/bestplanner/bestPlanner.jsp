@@ -59,14 +59,13 @@
     <hr />
     
  	<br /><br />
- 	<h1>베스트 플래너 게시판</h1>
  	<br />
  	<div id="infoMain">
  	<br /><br /><br /><br />
 				<div id="wrapper">
 				<div id="plannerContainer" >
 				<c:forEach items="${list2}" var="plannerBoard" varStatus="vs">
-					<div class="card" style="width: 18rem; display:inline-block; box-shadow: 1px 1px 3px 1px #dadce0; margin-right : 10px; margin-bottom : 10px;" data-no="${plannerBoard.PNo}" >
+					<div class="card" style="width: 280px; display:inline-block; box-shadow: 1px 1px 3px 1px #dadce0; margin-right : 20px; margin-bottom : 20px;" data-no="${plannerBoard.PNo}" >
 						<div class="dayAllMapClass" id="dayAllMap${vs.count}"></div>
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3b1f2155fb7376c8e3ce304aebd498b"></script>
 							<script>

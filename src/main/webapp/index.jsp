@@ -17,17 +17,19 @@
 
 #bestPlanner {
 	width: 100%;
-	height: 60%;
+	height: 75%;
 	margin: auto;
 	overflow: hidden;
 }
 
 #bestReview {
 	width: 100%;
-	height: 60%;
+	height: 75%;
 	margin: auto;
 	overflow: hidden;
 }
+
+
 
 .reviewBoard {
 	width: 200px;
@@ -62,13 +64,10 @@
 }
 
 #contentArea3 {
-	width : 280px;
-	height : 330px;
-	border: 1px solid #0000003d; 
+	width: 280px;
+	height: 330px;
+	margin: auto;
 	overflow: hidden;
-	margin-right : 10px;
-	margin-bottom : 10px;
-	box-shadow: 5px 5px 5px gray;
 	display: inline-block;
 }
 
@@ -78,45 +77,12 @@
 	text-align: center;
 }
 
-	.thumbNailName2 {
-		display : inline-block;
-		width : 280px;
-		height : 30px;
-		text-align: center;
-	}
-	
-	#thumbNail {
-		width : 280px;
-		height : 250px;
-		border: 1px solid #0000003d; 
-		margin: auto; 
-		overflow: hidden;
-		display: inline-block;
-	}	
-	.btn-lg {
-	    border-color: #70B9E9;
-	    font-weight: 700;
-	    background-color: #70B9E9;
-	    color: white;
-	}
-	#infoMain{
-    width:90%; 
-    hegiht:100%; 
-	margin: 0 auto;
-    margin-bottom: 0;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 1px 1px 3px 1px #dadce0;
-    border-radius: 30px;
-}
-
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tourism.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myplannermain.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/thumbnailboard.css">
-
     <div id="video_area">
         <video src="${pageContext.request.contextPath}/resources/video/mainPage.mp4" id="background_video" auto autoplay loop muted volume="0"></video>
     </div>
@@ -199,12 +165,12 @@
 <div style="width:auto; height:100vh; display:flex; margin:auto 0;"></div>
 	    
 	    <!-- 베스트 게시판 파트 -->
-	<div id="indexMain">
-	
-        <div id="bestPlanner" style="text-align : center; z-index:20;">
-		    <hr><h1 id="tourism_title">베스트 플래너</h1><hr>
-		    <div id="infoMain" style="z-index:20;">
-		    	<br /><br />
+	<div id="indexMain">   
+        <div id="bestPlanner" style="text-align : center;">
+		    <h1 id="tourism_title">인기 여행일정</h1>
+		    <div class="bestSubtile">이 여행일정이 인기가 많아요😍</div>
+		    <br />
+		    <div id="infoMain_planner">
 						<div id="wrapper">
 						<div id="plannerContainer">
 						<c:forEach items="${plannerList}" var="plannerBoard" varStatus="vs">
@@ -262,26 +228,25 @@
 						</c:forEach>
 						</div>
 						</div>
-						<br /><br />
 						</div>
         		</div>
-        
-        
-	        <div id="bestReview" style="text-align : center;">
-	        <hr><h1 id="tourism_title">베스트 후기</h1><hr>
+              
+            
+            <div id="bestReview" style="text-align : center;">
+	        <h1 id="tourism_title">인기 여행지 후기</h1>
+	        <div class="bestSubtile">다른 사람의 일정을 참고하여 여행했어요😎</div>
 	        <br />
-	        <div id="infoMain">
-	        <br /><br />
+	        <div id="infoMain_review">
 	 			<section id="board-container" class="container">
 					<article>
 						<c:forEach items="${list4}" var="reviewBoard" varStatus="vs">
-								<div id="contentArea3">
+								<div id="contentArea2">
 									<div id="selectContent2">
 										<a href="${pageContext.request.contextPath}/board/review/reviewBoardDetail.do?no=${reviewBoard.rb_no}">
 											<div id="thumbNail">
 												<img src="${reviewBoard.rb_content}" onerror="this.src='${pageContext.request.contextPath}/resources/images/noImage.png'" style="width : 280px; height : 250px;"/>
 											</div>
-											<strong class="thumbNailName2">${reviewBoard.rb_title}</strong>
+											<strong class="thumbNailName">${reviewBoard.rb_title}</strong>
 											<p style="text-align: center;">${reviewBoard.m_nickname}</p>
 										</a>
 									</div>
@@ -290,7 +255,6 @@
 					</article>
 		 		<%-- <nav>${pagebar}</nav> --%>
 			</section> 
-			<br />
 		    </div>
 		    </div>
 
@@ -299,10 +263,9 @@
 	    	
 	    	
 <!-- 관광정보 위젯 검색 파트 -->
-	<div style="height : 50px; z-index : -3;"></div>
 	<hr><h1 id="tourism_title">관광 정보 검색</h1><hr>
 		<div id="widgetMain">
-				<table class="table table-bordered" id="searchTable">
+				<table class="table table-bordered" id="searchTable" height="200px">
 					<tbody>
 						<tr>
 							<th class="col" id="searchTh">지역</th>
@@ -404,7 +367,7 @@
 				for (var i = 0; myItem.length > i; i++) {
 
 					var output = '';
-					output += '<button type="button" class="w-btn-outline w-btn-blue-outlinet" value="'
+					output += '<button type="button" class="w-btn-outline w-btn-blue-outline" value="'
 							+ myItem[i].code
 							+ '" onClick="insertArea(this);">'
 							+ myItem[i].name + '</button>';

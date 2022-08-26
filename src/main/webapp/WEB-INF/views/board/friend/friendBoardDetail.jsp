@@ -38,10 +38,10 @@
 	}
 
     #size {
-    	font-size : 50px;
+    	font-size : 20px;
     }
     .comment-writer {
-    	font-size : 20px;
+    	font-size : 16px;
     }
     .comment-date  {
 	  	font-size : 10px;
@@ -53,13 +53,13 @@
     }
     
     .commentHr {
-    	width : 1350px;
+   	width : 1350px;
     }
-    	.btn-lg {
-	    border-color: #70B9E9;
-	    font-weight: 700;
-	    background-color: #70B9E9;
-	    color: white;
+   	.btn-lg {
+    border-color: #70B9E9;
+    font-weight: 700;
+    background-color: #70B9E9;
+    color: white;
 	}
 </style>
 <script>
@@ -98,7 +98,39 @@ $(document).ready(function () {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/ws.js"></script>
 </sec:authorize>
-
+	<div style="float:right">
+		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/planner/plannerBoard.do'">
+	</div>
+	<div style="float:right">
+		<form name="boardSaveFrm" action="${pageContext.request.contextPath}/board/planner/plannerBoardSave.do" method="POST">
+			<c:forEach items="${insertPlannerBoard.plans}" var="plan" varStatus="plan_status">
+				<input type="hidden"  name="ppTime"  value="${plan.ppTime}" required>
+				<input type="hidden"  name="ppPlaceName"  value="${plan.ppPlaceName}" required>
+				<input type="hidden"  name="ppMemo"  value="${plan.ppMemo}" required>
+				<input type="hidden"  name="ppX"  value="${plan.ppX}" required>
+				<input type="hidden"  name="ppY"  value="${plan.ppY}" required>
+				<input type="hidden"  name="ppDate"  value="${plan.ppDate}" required>
+			</c:forEach>
+			
+			
+			<c:forEach items="${insertPlannerBoard.planner}" var="planner">	
+				<c:if test="${planner.PNo eq 0}">
+				</c:if>
+					<c:if test="${planner.PNo ne 0}">
+						<c:if test="${(not empty loginMember && (loginMember.MEmail ne insertPlannerBoard.pbMEmail))}">
+							<input type="hidden"  name="PNo" id="no11" value="${planner.PNo}" required>
+							<input type="hidden"  name="PTitle" id="no2" value="${planner.PTitle}" required>
+							<input type="hidden"  name="PExplan" id="no3" value="${planner.PExplan}" required>
+							<input type="hidden"  name="PleaveDate" id="no4" value="${planner.PLeaveDate}" required>
+							<input type="hidden"  name="PReturnDate" id="no5" value="${planner.PReturnDate}" required>
+							<input type="hidden"  name="PwriteDate" id="no6" value="${planner.PWriteDate}" required>
+							<button style="float : right;" type="submit" class="btn-lg">플래너 가져오기</button>
+							<br /><br /><br />
+						</c:if>
+					</c:if>
+			</c:forEach>
+		</form>
+	</div>
 <div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
 		<input type="hidden" class="form-control" name="fbNo" id="no" value="${insertFriendBoard.fbNo}" required>
 		<input type="text" class="form-control" name="fbTitle" id="title" value="${insertFriendBoard.fbTitle}" style="font-size : 50px;" required readonly>
@@ -292,24 +324,21 @@ $(document).ready(function () {
 				<!--table#tbl-comment-->
 				 <c:if test="${insertFriendBoard.comments ne null && not empty insertFriendBoard.comments}">
 					<table id="tbl-comment">
-						<tbody>
+						<tbody align="left">
 						<c:forEach items="${insertFriendBoard.comments}" var="comment">
 							<tr class="level1">
 								<td>
 									<hr / class="commentHr">
-									<sub class="comment-writer">${comment.fbcMEmail}</sub>
-									<sub class="comment-date">${comment.fbcCreatedAt}</sub>
-									<hr / class="commentHr">
+									<p class="comment-writer" style="margin-bottom:0px;">${comment.fbcMEmail}</p>
 									<div id="size">
 										${comment.fbcContent}
 									</div>
+									<p class="comment-date" style="margin-bottom:0px;">${comment.fbcCreatedAt}</p>
 									<form action="${pageContext.request.contextPath}/board/friend/deleteComment.do" method="get" name="friendBoardCommentDeleteFrm">
 										<input type="hidden" name="fbcFbNo" value="${insertFriendBoard.fbNo}" />
 										<input type="hidden" name="fbcNo" value="${comment.fbcNo}" />
 										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.fbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
-										<div class="d-grid gap-2 col-6 mx-auto">
-					                		<button type="submit" id="deleteComment" class="btn-danger" style="font-size : 25px;">삭제</button>
-					                	</div>
+										<button type="submit" id="deleteComment" class="deleteBtn">삭제</button>
 					                	</c:if>
 									</form>
 								</td>
@@ -328,7 +357,7 @@ $(document).ready(function () {
 		                <input type="hidden" name="fbcMEmail" value="${loginMember != null ? loginMember.MEmail : ""}" />
 		                <br />
 						<textarea name="fbcContent" cols="85" rows="3"  style="resize: none;" placeholder="댓글 입력"></textarea>
-		                <button type="submit" class="btn btn-primary-success attach" style="width : 75px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
+		                <button type="submit" class="btn btn-primary-success attach" style="width : 70px; height : 75px; margin-bottom : 66px; margin-right : -15px;">등록</button>
 		            </form>
 		        </div>
 		    </div>

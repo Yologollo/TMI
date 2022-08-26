@@ -107,8 +107,12 @@ const email = document.getElementById("loginMemberEmail").value;
 
 
 
-
-<div id="commonMain" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+<div class="listBtn">
+	<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
+</div>		
+<div class="boardDetail" style="text-align : center; border: none; box-shadow: 1px 1px 3px 1px #dadce0;">
+		
+		<div>
 		<input type="hidden" class="form-control" name="loginMemberEmail" id="loginMemberEmail" value="${loginMember.MEmail}" required readonly>
 		<input type="hidden" class="form-control" name="rbNo" id="no" value="${insertReviewBoard.rbNo}" required>
 		<input type="text" class="form-control" name="rbTitle" id="title" value="${insertReviewBoard.rbTitle}" style="font-size : 50px;" required readonly>
@@ -368,10 +372,7 @@ const email = document.getElementById("loginMemberEmail").value;
 			<button style="float : right;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardDelete.do?no=${insertReviewBoard.rbNo}';">삭제</button>
 			<button style="float : right; margin-right : 10px;" type="button" class="btn-lg" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoardUpdate.do?no=${insertReviewBoard.rbNo}';">수정</button>
 		</c:if>
-		
-		<br /><br /><br />
-		<input style="float : right;" type="submit" class="btn-lg" value="목록으로" onclick="location.href='${pageContext.request.contextPath}/board/review/reviewBoard.do'">
-		<br /><br /><br />
+	</div>
 </div>
 <script>
 	document.querySelectorAll("[name=upFile]").forEach((input) => {

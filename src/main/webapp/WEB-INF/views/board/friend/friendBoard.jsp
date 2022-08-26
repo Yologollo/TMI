@@ -59,9 +59,6 @@ window.addEventListener('load', (e) => {
     </ul>
     <!-- 메뉴버튼 끝 -->
     <hr />
-    <br /><br />
-    <h1>여행친구 게시판</h1>
-    <br />
 	<section id="board-container" class="container">
 		<table id="notice-table" class="kakaobank-table" aria-describedby="kakaobank-notice-summary">
 		<div id="innerDiv" style="margin-right : 0;">
