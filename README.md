@@ -12,7 +12,7 @@
 
 ### 단위 업무
 <details>
-<summary>단위 업무</summary>
+<summary>단위 업무 </summary>
 <div markdown="1">
 
 | 구분 | 주요 업무 | 요구사항 정의 | 담당자 |
