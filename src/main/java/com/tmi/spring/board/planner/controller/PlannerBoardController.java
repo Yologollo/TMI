@@ -323,7 +323,7 @@ public class PlannerBoardController {
 		else
 		{
 //			String msg = "이미 좋아요한 글입니다.";
-			redirectAttr.addFlashAttribute("msg", "이미 좋아요한 글입니다.");
+			redirectAttr.addFlashAttribute("msg", "이미 추천한 글입니다.");
 //			return "redirect:/login/findPwUpdate.do";
 		}
 		

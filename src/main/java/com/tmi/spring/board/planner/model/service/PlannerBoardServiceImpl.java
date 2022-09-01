@@ -45,7 +45,7 @@ public class PlannerBoardServiceImpl implements PlannerBoardService {
 	
 	@Override
 	public InsertPlannerBoard selectOnePlannerBoard(int no) {
-		InsertPlannerBoard insertPlannerBoard = plannerBoardDao.selectOneReviewBoard(no);
+		InsertPlannerBoard insertPlannerBoard = plannerBoardDao.selectOnePlannerBoard(no);
 		List<PlannerBoardComment> comments = plannerBoardDao.findBoardCommentByNo(no);
 		List<Planner> planner = plannerBoardDao.findBoardPlannerByNo(no);
 		List<PlannerPlan> plans = plannerBoardDao.findBoardPlanByNo(no);
