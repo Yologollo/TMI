@@ -1,4 +1,7 @@
 # TMI (Travel Making Imagine)
+![30e08b2c894641e1](https://user-images.githubusercontent.com/81818730/187845748-54074547-fe8a-46a3-b4de-3498ffba149c.png)
+
+# Tech🔨
 <div align="center">
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=Windows&logoColor=white">
 <br>
