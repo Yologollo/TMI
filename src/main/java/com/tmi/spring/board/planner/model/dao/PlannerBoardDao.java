@@ -28,7 +28,7 @@ public interface PlannerBoardDao {
 	int selectTotalContent();
 
 	@Select("select * from tmi_planner_board where pb_no = #{no}")
-	InsertPlannerBoard selectOneReviewBoard(int no);
+	InsertPlannerBoard selectOnePlannerBoard(int no);
 
 	@Select("select * from tmi_planner_board_comment where pbc_pb_no = #{no}")
 	List<PlannerBoardComment> findBoardCommentByNo(int no);

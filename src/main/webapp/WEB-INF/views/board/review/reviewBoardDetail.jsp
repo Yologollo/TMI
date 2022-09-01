@@ -338,7 +338,7 @@ const email = document.getElementById("loginMemberEmail").value;
 									${comment.rbcContent}
 									</div>
 									<form action="${pageContext.request.contextPath}/board/review/deleteComment.do" method="get" name="reviewBoardCommentDeleteFrm">
-										<input type="hidden" name="rbcFbNo" value="${insertReviewBoard.rbNo}" />
+										<input type="hidden" name="rbcRbNo" value="${insertReviewBoard.rbNo}" />
 										<input type="hidden" name="rbcNo" value="${comment.rbcNo}" />
 										<c:if test="${(not empty loginMember && (loginMember.MEmail eq comment.rbcMEmail)) || (loginMember.MEmail eq 'admin@naver.com')}">
 										<div class="d-grid gap-2 col-6 mx-auto">
