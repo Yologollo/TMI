@@ -22,3 +22,13 @@
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
 <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white">
 </div>
+
+# 머시기 제목
+- 여행 일정 공유 플랫폼
+- 비회원 / 이용자 / 관리자 Actor로 나누어 구현
+### 비회원
+회원가입, 게시판 조회, 관광 정보 조회, 이용 방법
+### 이용자
+로그인, 로그아웃, 비밀번호 찾기, 아이디 찾기, 마이페이지, 플래너 조회 / 작성 / 상세보기 / 삭제 / 공유 / 공유 받기, 게시판 작성 / 수정 / 삭제 / 첨부파일 / 추천, 댓글 작성 / 수정 / 삭제, 채팅
+### 관리자
+회원 관리, 공지사항, 게시판 관리, 댓글 관리
