@@ -1,6 +1,6 @@
 ![07512b7aec624115](https://user-images.githubusercontent.com/81818730/187848474-aa0640af-6d98-41c9-bfbb-7ef5f5c2ea5d.png)
 
-# Members
+# Members🙋
 |김용민|이경석|최윤서|전인찬|권민지|
 |:---:|:---:|:---:|:---:|:---:|
 |![용민](https://user-images.githubusercontent.com/81818730/187851694-69d08be2-13f1-4adb-adc2-ee27a365cc53.png)|![경석](https://user-images.githubusercontent.com/81818730/187851761-10235d31-d060-4d7a-bf09-4c1b09048213.png)|![윤서](https://user-images.githubusercontent.com/81818730/187851996-dfa3050f-af56-49cd-ad48-ddb94e07c5d1.png)|![인찬](https://user-images.githubusercontent.com/81818730/187851778-2e4550b6-3e7d-413c-abd2-87b3a056afbf.png)|![민지](https://user-images.githubusercontent.com/81818730/187851776-10e60159-31cf-4a18-87c7-26b43ff5ab82.png)|
@@ -92,7 +92,7 @@
 </div>
 </details>
 
-# TMI (Travel Making Imagine)
+# TMI (Travel Making Imagine)✈︎
 - 여행 일정 공유 플랫폼
 - 비회원 / 이용자 / 관리자 Actor로 나누어 구현
 ### 비회원
